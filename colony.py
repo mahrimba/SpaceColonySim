@@ -336,6 +336,10 @@ FLAG_AXIS_NUDGES = {
     "waker_returned": {"power": -5},
     "survivors_charter": {"power": +15, "status": +10},
     "triaged_culture": {"belief": -10, "status": -5},
+    "heard_earth": {"belief": 5},
+    "sealed_earth": {"belief": -5},
+    "let_earth_go": {"nature": -5},
+    "spoke_sister": {"society": -5},
 }
 
 FLAG_COHESION = {

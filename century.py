@@ -34,7 +34,7 @@ EVENT_COOLDOWN = 3
 # Act 1's HAZARD_SCALE, for the century: multiplies authored damage and deaths
 # so difficulty moves with one number instead of twenty content edits.
 # Tuned against colony_sim.py's steward policy.
-COLONY_HAZARD = 1.15
+COLONY_HAZARD = 1.0
 
 # Where routine labour holds a stat on a free world, and how fast a year of it
 # closes the gap. Hostility and crowding pull the first number down.

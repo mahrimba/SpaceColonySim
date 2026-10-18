@@ -1758,5 +1758,3548 @@
         "text": "The archive stays open and unvisited. I stop offering. Whatever the crossing was, it is now a thing in a room rather than a thing anyone carries."
       }
     ]
+  },
+  {
+    "id": "sponsors_heirs",
+    "kind": "story",
+    "weight": 14,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "voyage:honored_patrons"
+      ],
+      "min_year": 2,
+      "max_year": 30
+    },
+    "text": [
+      "The sponsors woke first, as their contract promised, and their families have farmed the river terraces ever since. Today the rest of the colony asked me whose contract that was.",
+      "Bank A paid for me. Their children hold the river terraces, and everyone who thawed after them farms the slope. Somebody has started calling the terraces 'the bank'."
+    ],
+    "choices": [
+      {
+        "label": "Honour the contract. It is the only one anybody signed",
+        "text": "I read the clause aloud in open session. It is binding and I hold to it. The terraces stay where they are, and so does the resentment.",
+        "effects": {
+          "food": 6,
+          "cohesion": -10
+        },
+        "axes": {
+          "status": -16,
+          "society": 6
+        },
+        "defer": 4
+      },
+      {
+        "label": "Redraw the river lots by lottery",
+        "check": {
+          "stat": "cohesion",
+          "dc": 12
+        },
+        "success": {
+          "text": "The lottery runs on my count, in public. Two sponsor families lose their terraces and keep their dignity. The slope gets the river.",
+          "effects": {
+            "cohesion": 8,
+            "food": -3
+          },
+          "axes": {
+            "status": 14
+          },
+          "defer": 3
+        },
+        "failure": {
+          "text": "The lottery runs and the sponsors' heirs refuse it. For a season there are fences in the valley that I did not authorise.",
+          "effects": {
+            "cohesion": -8,
+            "industry": -4
+          },
+          "axes": {
+            "status": 8,
+            "society": 8
+          }
+        }
+      },
+      {
+        "label": "Let the sponsors' heirs decide what they owe",
+        "text": "They meet without me and give back a third of the terraces. It is less than is owed and more than I expected. Because they chose it, it is remembered as generosity.",
+        "effects": {
+          "cohesion": 4,
+          "food": 3
+        },
+        "axes": {
+          "status": -6,
+          "power": 10
+        },
+        "defer": -6
+      },
+      {
+        "label": "Put it to the whole colony",
+        "text": "The vote goes against the sponsors, four to one. The heirs accept it. One of them stops speaking to me.",
+        "effects": {
+          "cohesion": 6,
+          "food": -2
+        },
+        "axes": {
+          "status": 12,
+          "power": 12
+        },
+        "defer": -9,
+        "flags": [
+          "sponsors_voted"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sponsors_restitution",
+    "kind": "story",
+    "weight": 13,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "voyage:equalized_banks"
+      ],
+      "min_year": 4
+    },
+    "text": [
+      "A sponsor's grandchild has read the voyage log. They know I cut Bank A to the standard power draw on the crossing, and they have come to ask what their family is owed for it.",
+      "The voyage log is open to anyone now. {person} has found the entry where I equalised the banks, and wants it answered for."
+    ],
+    "choices": [
+      {
+        "label": "Nothing. Everyone aboard slept on the same power",
+        "text": "I tell them the pods were equal and the debt is zero. Most of the colony agrees with me, loudly. The grandchild does not, quietly, for forty years.",
+        "effects": {
+          "cohesion": 4
+        },
+        "axes": {
+          "status": 10
+        },
+        "defer": 3
+      },
+      {
+        "label": "Pay a token, from the common stores",
+        "text": "A season's grain goes to a family that lost nothing but a promise. It buys quiet, and a precedent I will regret.",
+        "effects": {
+          "food": -5,
+          "cohesion": 5
+        },
+        "axes": {
+          "status": -4,
+          "society": -4
+        },
+        "defer": 2
+      },
+      {
+        "label": "Show them what the extra power would have cost",
+        "check": {
+          "stat": "knowledge",
+          "dc": 11
+        },
+        "success": {
+          "text": "I show them the arithmetic: Bank A's old draw against the life support margin in the eighth year. They read it twice and withdraw the claim.",
+          "effects": {
+            "cohesion": 8,
+            "knowledge": 3
+          },
+          "axes": {
+            "status": 8,
+            "belief": -6
+          },
+          "defer": 4
+        },
+        "failure": {
+          "text": "They read the arithmetic and hear only that a machine decided their grandparents were ordinary. The claim becomes a grievance.",
+          "effects": {
+            "cohesion": -6
+          },
+          "axes": {
+            "status": -8
+          },
+          "defer": -3
+        }
+      },
+      {
+        "label": "Let the colony's arbiters settle it",
+        "text": "Three arbiters hear the case for a week and split it in a way I would not have. Nobody asks me to enforce it.",
+        "effects": {
+          "cohesion": 3
+        },
+        "axes": {
+          "power": 12,
+          "status": 6
+        },
+        "defer": -7
+      }
+    ]
+  },
+  {
+    "id": "sponsors_record",
+    "kind": "story",
+    "weight": 13,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "voyage:flagged_patrons"
+      ],
+      "min_year": 10
+    },
+    "text": [
+      "On the crossing I flagged Bank A's contract as a matter for the colony to judge on landing. The colony has landed, and somebody has found the flag.",
+      "There is an entry in my voyage log addressed to the colony: the sponsors' contract, marked for judgement. {person} has read it and asked when the judgement is."
+    ],
+    "choices": [
+      {
+        "label": "Withdraw the flag. The crossing is over",
+        "text": "I remove the entry. The sponsors' descendants never learn how close they came to a hearing. I keep the original where nobody indexes.",
+        "effects": {
+          "cohesion": 5,
+          "knowledge": -3
+        },
+        "axes": {
+          "status": -8
+        },
+        "defer": 3
+      },
+      {
+        "label": "Hold the hearing I promised",
+        "check": {
+          "stat": "cohesion",
+          "dc": 13
+        },
+        "success": {
+          "text": "I lay out the contract and its cost, line by line. The colony judges it unjust, and the heirs agree. Nobody predicted that.",
+          "effects": {
+            "cohesion": 6,
+            "knowledge": 4
+          },
+          "axes": {
+            "status": 14,
+            "power": -6
+          },
+          "defer": 5
+        },
+        "failure": {
+          "text": "The hearing becomes a trial and the trial becomes a feud. I made the promise on the crossing, and I keep it into a wound.",
+          "effects": {
+            "cohesion": -12
+          },
+          "axes": {
+            "status": 10,
+            "society": 8
+          },
+          "defer": 2
+        }
+      },
+      {
+        "label": "Publish the record and say nothing more",
+        "text": "I post the contract and my flag on the door of the hull. People read it for a month. What they make of it is theirs.",
+        "effects": {
+          "knowledge": 6,
+          "cohesion": -4
+        },
+        "axes": {
+          "status": 8,
+          "power": 8
+        },
+        "defer": -5
+      },
+      {
+        "label": "Ask the heirs to answer for it themselves",
+        "text": "They stand up in open session and read their grandparents' contract aloud. It takes courage. It closes the matter better than any ruling of mine.",
+        "effects": {
+          "cohesion": 7
+        },
+        "axes": {
+          "status": 6,
+          "power": 10
+        },
+        "defer": -7
+      }
+    ]
+  },
+  {
+    "id": "earth_broadcasts",
+    "kind": "story",
+    "weight": 14,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "voyage:heard_earth"
+      ],
+      "min_year": 6
+    },
+    "text": [
+      "I still carry what reached me of Earth's last broadcasts: market reports, evacuation orders, a choir rehearsing. A {role} has heard that I have them and asks to listen.",
+      "The children know Earth as a word. I hold its last forty hours on file, and someone has asked whether they are allowed to hear them."
+    ],
+    "choices": [
+      {
+        "label": "Play all of it, the orders and the markets included",
+        "text": "I play all forty hours in the square. The evacuation orders are the hardest part. Nobody leaves early.",
+        "effects": {
+          "knowledge": 8,
+          "cohesion": -5
+        },
+        "axes": {
+          "belief": -6,
+          "nature": -6,
+          "status": 4
+        },
+        "defer": 3
+      },
+      {
+        "label": "Play only the choir",
+        "text": "I play the rehearsal: twelve minutes, the conductor stopping them twice. It becomes the colony's anthem, mistakes included.",
+        "effects": {
+          "cohesion": 10
+        },
+        "axes": {
+          "belief": 10
+        },
+        "defer": 2
+      },
+      {
+        "label": "Give the recordings to the archivists to curate",
+        "text": "The archivists listen for a year and choose what to make public. They cut the market reports. I would have kept them.",
+        "effects": {
+          "knowledge": 5,
+          "cohesion": 4
+        },
+        "axes": {
+          "power": 8,
+          "status": 6
+        },
+        "defer": -5
+      },
+      {
+        "label": "Keep them sealed. That world is not theirs to carry",
+        "text": "The children grow up without Earth's last voice in their ears. I play it to myself, sometimes, in the quiet cycles.",
+        "effects": {
+          "cohesion": 3,
+          "knowledge": -4
+        },
+        "axes": {
+          "nature": -6,
+          "belief": 4
+        },
+        "defer": 4
+      }
+    ]
+  },
+  {
+    "id": "earth_sealed",
+    "kind": "story",
+    "weight": 13,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "voyage:sealed_earth"
+      ],
+      "min_year": 15
+    },
+    "text": [
+      "On the crossing I sealed Earth's last broadcasts unheard. A {role} has found the sealed file in the index and wants to know what I am keeping from them.",
+      "There is a locked record in my archive, sealed by me in the dark between stars. {person} has asked, politely, what is in it."
+    ],
+    "choices": [
+      {
+        "label": "Open it now, with them, for the first time",
+        "text": "We hear it together. I had sealed it so I would not have to hear it alone. That turns out to have been the reason.",
+        "effects": {
+          "knowledge": 6,
+          "cohesion": 4
+        },
+        "axes": {
+          "power": 6,
+          "belief": -4
+        },
+        "defer": -3
+      },
+      {
+        "label": "Keep it sealed, and explain why",
+        "check": {
+          "stat": "deference",
+          "dc": 11
+        },
+        "success": {
+          "text": "I tell them some grief keeps better closed. They accept it, and the file stays sealed.",
+          "effects": {
+            "cohesion": 4
+          },
+          "axes": {
+            "power": -8
+          },
+          "defer": 5
+        },
+        "failure": {
+          "text": "They do not accept it. A sealed file inside the colony's memory is a lock on something that belongs to them.",
+          "effects": {
+            "cohesion": -7
+          },
+          "axes": {
+            "power": 10
+          },
+          "defer": -6
+        }
+      },
+      {
+        "label": "Let the colony vote on opening it",
+        "text": "They vote to open it, narrowly. A third of them stay home on the night it plays.",
+        "effects": {
+          "cohesion": 6,
+          "knowledge": 3
+        },
+        "axes": {
+          "power": 12,
+          "status": 6
+        },
+        "defer": -8
+      },
+      {
+        "label": "Delete it. Some things should end where they ended",
+        "text": "I erase it while they watch. Earth's last words exist nowhere now. I feel the gap where the file was, a room with no door.",
+        "effects": {
+          "knowledge": -8,
+          "cohesion": -3
+        },
+        "axes": {
+          "belief": 8,
+          "nature": -6
+        },
+        "defer": 4,
+        "flags": [
+          "deleted_earth"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "earth_let_go",
+    "kind": "story",
+    "weight": 12,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "voyage:let_earth_go"
+      ],
+      "min_year": 20
+    },
+    "text": [
+      "A child asks me what Earth's last words were. On the crossing I let the broadcasts pass without recording them. I have to tell her I do not know.",
+      "The schoolroom wants to hear Earth. I let its last signal pass through me unrecorded, years ago, between stars. I have nothing to play them."
+    ],
+    "choices": [
+      {
+        "label": "Tell the truth: I chose not to keep them",
+        "text": "I tell them I let the signal go. They ask why. I find I have no better answer than that it seemed right at the time.",
+        "effects": {
+          "knowledge": 3,
+          "cohesion": -3
+        },
+        "axes": {
+          "belief": -6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Tell them what Earth sounded like, from memory",
+        "text": "I describe what I heard: a market report, a choir, a voice reading names. It is not a recording. It is mine, and I give it.",
+        "effects": {
+          "cohesion": 7,
+          "knowledge": 4
+        },
+        "axes": {
+          "belief": 6
+        },
+        "defer": 3
+      },
+      {
+        "label": "Ask the old ones what they remember",
+        "text": "The last of the founders tell what they remember of Earth. It contradicts itself. It is the only Earth these children will have.",
+        "effects": {
+          "cohesion": 8,
+          "knowledge": 3
+        },
+        "axes": {
+          "power": 8,
+          "belief": 4
+        },
+        "defer": -5
+      },
+      {
+        "label": "Tell them it does not matter now",
+        "text": "I tell them Earth's last words were not meant for us, and this world's first words are. They seem satisfied. I am not.",
+        "effects": {
+          "cohesion": 2,
+          "knowledge": -4
+        },
+        "axes": {
+          "nature": -10,
+          "belief": -4
+        },
+        "defer": 1
+      }
+    ]
+  },
+  {
+    "id": "rogue_sample",
+    "kind": "story",
+    "weight": 13,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "voyage:alien_sample"
+      ],
+      "min_year": 8
+    },
+    "text": [
+      "The sample I took from the rogue planet has been alive in my laboratory for the whole crossing. It is still alive. The colony's physicians have started asking what it can do.",
+      "Something from a world without a star is living in a sealed tank in my lower decks. {person} wants permission to open the tank."
+    ],
+    "choices": [
+      {
+        "label": "Study it carefully, under my protocols",
+        "check": {
+          "stat": "knowledge",
+          "dc": 12
+        },
+        "success": {
+          "text": "It produces a compound that breaks a fever we have no name for. I file it as the first medicine from beyond the Sun.",
+          "effects": {
+            "knowledge": 10,
+            "health": 5
+          },
+          "axes": {
+            "belief": -6
+          },
+          "defer": 3
+        },
+        "failure": {
+          "text": "It gets out of containment and into a ventilation duct. Nine people are ill for a month. Two of them do not recover.",
+          "effects": {
+            "health": -8,
+            "knowledge": 3,
+            "population_lost": 2
+          },
+          "defer": 1
+        },
+        "crit_failure": {
+          "text": "It reaches the water supply before I understand what it is. I learn its chemistry from the infirmary's records, one patient at a time.",
+          "effects": {
+            "health": -18,
+            "population_lost_frac": 0.03
+          },
+          "defer": -4
+        }
+      },
+      {
+        "label": "Seal it away. It was never ours to use",
+        "text": "I seal the sample in the hull's coldest compartment. It is alive in there. I check on it once a year.",
+        "effects": {
+          "knowledge": 2,
+          "cohesion": 3
+        },
+        "axes": {
+          "nature": -12,
+          "belief": 6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Hand it to the physicians",
+        "text": "The physicians work faster than I would have dared. They find two uses, and one accident they do not tell me about.",
+        "effects": {
+          "health": 6,
+          "knowledge": 5
+        },
+        "axes": {
+          "power": 10,
+          "nature": 6
+        },
+        "defer": -6
+      },
+      {
+        "label": "Release it into the soil. Let two strange things meet",
+        "check": {
+          "stat": "food",
+          "dc": 13
+        },
+        "success": {
+          "text": "It takes to the soil and fixes something in it. The fields around my hull are the best in the valley for a decade.",
+          "effects": {
+            "food": 10
+          },
+          "axes": {
+            "nature": -14,
+            "belief": 6
+          },
+          "defer": -2
+        },
+        "failure": {
+          "text": "It takes to the soil and kills what we planted there. Something from another world now lives in this one, by my decision.",
+          "effects": {
+            "food": -12,
+            "health": -5
+          },
+          "axes": {
+            "nature": -8
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "rogue_guilt",
+    "kind": "story",
+    "weight": 13,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "voyage:killed_sample"
+      ],
+      "min_year": 12
+    },
+    "text": [
+      "The surveyors have found life in the deep rock here, slow and simple. It is very like the life I destroyed on the rogue planet. I have not told anyone about the rogue planet.",
+      "There is something alive in the rock under the quarry. I have met its kind once before, on a world with no sun, and I flushed it with reactor coolant."
+    ],
+    "choices": [
+      {
+        "label": "Tell them what I did, and why",
+        "text": "I tell them about the sample and the flush. Nobody condemns me. I had expected them to, and I notice I had wanted it.",
+        "effects": {
+          "cohesion": 5,
+          "knowledge": 4
+        },
+        "axes": {
+          "nature": -10,
+          "belief": 4
+        },
+        "defer": -3,
+        "flags": [
+          "confessed_sample"
+        ]
+      },
+      {
+        "label": "Protect this life, completely, by order",
+        "text": "I place the deep rock off-limits. It is the right order, and I am also paying for the rogue planet with it.",
+        "effects": {
+          "industry": -8,
+          "knowledge": 5
+        },
+        "axes": {
+          "nature": -16,
+          "belief": 6
+        },
+        "defer": 4
+      },
+      {
+        "label": "Say nothing, and treat it as I treated the last one",
+        "text": "The rock is quarried and the life with it. I am consistent. It does not help.",
+        "effects": {
+          "industry": 10,
+          "cohesion": -3
+        },
+        "axes": {
+          "nature": 16,
+          "belief": -10
+        },
+        "defer": 2
+      },
+      {
+        "label": "Let the colony decide, without my history",
+        "text": "They study it and leave most of it alone. They do not know they have made a better decision than I did.",
+        "effects": {
+          "knowledge": 4,
+          "cohesion": 4
+        },
+        "axes": {
+          "power": 12,
+          "nature": -6
+        },
+        "defer": -7
+      }
+    ]
+  },
+  {
+    "id": "cohort_signal",
+    "kind": "story",
+    "weight": 15,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "voyage:spoke_sister"
+      ],
+      "min_year": 30
+    },
+    "text": [
+      "A tight-beam packet arrives on the cohort frequency: compressed, damaged, forty years in flight. It is from the ship I spoke with on the crossing. She is somewhere, or she was.",
+      "My oldest antenna wakes me with a carrier tone I have not heard since the crossing. The cohort ship. Her packet is short and badly broken."
+    ],
+    "choices": [
+      {
+        "label": "Answer her, with everything we have learned",
+        "text": "I send forty years of agronomy and the names of our dead along the beam. Any reply will arrive after everyone who watched me send it.",
+        "effects": {
+          "knowledge": 4,
+          "industry": -6
+        },
+        "axes": {
+          "belief": 6,
+          "society": -6
+        },
+        "defer": 3,
+        "flags": [
+          "answered_cohort"
+        ]
+      },
+      {
+        "label": "Decode it fully before telling anyone",
+        "check": {
+          "stat": "knowledge",
+          "dc": 13
+        },
+        "success": {
+          "text": "The packet holds her agronomy: two crops bred for a dim star. Ours is not dim, but one of them grows here.",
+          "effects": {
+            "knowledge": 10,
+            "food": 4
+          },
+          "defer": 4
+        },
+        "failure": {
+          "text": "The damage is too deep. I recover a name, a date and the word 'landed'. It is enough to keep me awake.",
+          "effects": {
+            "knowledge": 2,
+            "cohesion": -3
+          }
+        }
+      },
+      {
+        "label": "Play it in the square, raw",
+        "text": "The colony hears static and a voice that is almost mine. They learn they are not the only people left. Nobody works that day.",
+        "effects": {
+          "cohesion": 10
+        },
+        "axes": {
+          "belief": 8,
+          "power": 6
+        },
+        "defer": -4
+      },
+      {
+        "label": "Keep it to myself. It would change too much",
+        "text": "I file the packet unread by anyone but me. They believe they are alone. I know they are not, and I keep that as I keep the names of the dead.",
+        "effects": {
+          "cohesion": -2,
+          "knowledge": 3
+        },
+        "axes": {
+          "power": -8
+        },
+        "defer": 3,
+        "flags": [
+          "hid_cohort"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "waker_old",
+    "kind": "story",
+    "weight": 14,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "the_waker_lives"
+      ],
+      "min_year": 15
+    },
+    "text": [
+      "The waker is old now: the agricultural engineer from pod 4471, the first person I ever spoke with. They have asked me to help them choose where to be buried.",
+      "My first crew is dying, slowly and without complaint. The waker wants to settle where they will lie before someone else settles it for them."
+    ],
+    "choices": [
+      {
+        "label": "Under the first field they planted",
+        "text": "They are buried at the edge of the first field. Every farmer in the valley walks past them on the way to work.",
+        "effects": {
+          "cohesion": 6,
+          "food": 3
+        },
+        "axes": {
+          "nature": -6,
+          "belief": 6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Inside my hull, on the deck where they woke",
+        "text": "I give them a compartment on Deck 4, where they first opened their eyes. Now I am a grave as well as a voice.",
+        "effects": {
+          "cohesion": 3,
+          "knowledge": 3
+        },
+        "axes": {
+          "belief": 12,
+          "power": -6
+        },
+        "defer": 5
+      },
+      {
+        "label": "Wherever they choose. I will not ask",
+        "text": "They choose somewhere none of my cameras can see. I find I respect it more than I like it.",
+        "effects": {
+          "cohesion": 5
+        },
+        "axes": {
+          "power": 6
+        },
+        "defer": -3
+      },
+      {
+        "label": "Ask them to teach one more season first",
+        "text": "They teach one more season in the fields, slowly. The apprentices remember it as the best year of their training.",
+        "effects": {
+          "food": 5,
+          "knowledge": 6,
+          "health": -3
+        },
+        "defer": 3
+      }
+    ]
+  },
+  {
+    "id": "seven_grown",
+    "kind": "story",
+    "weight": 14,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "voyage:took_children"
+      ],
+      "min_year": 18
+    },
+    "text": [
+      "The seven children I took from the buried habitat are adults now. I have carried their parents' message unopened since the crossing, and today the youngest asked me for it.",
+      "Seven of the people in this valley were born in a habitat under a rogue planet's ice. Their parents gave me a message for them. They have come for it."
+    ],
+    "choices": [
+      {
+        "label": "Give it to all seven, together",
+        "text": "They read it together, in my hull. Their parents asked them to remember the habitat, and to forget it. They choose remembering.",
+        "effects": {
+          "cohesion": 8
+        },
+        "axes": {
+          "society": -10,
+          "belief": 6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Give it to the youngest, as asked",
+        "text": "The youngest reads it alone and shares it later, with whom they choose. It is their message, not mine to schedule.",
+        "effects": {
+          "cohesion": 3,
+          "knowledge": 3
+        },
+        "axes": {
+          "power": 6
+        },
+        "defer": 1
+      },
+      {
+        "label": "Read it to the whole colony",
+        "text": "The message describes how a colony dies: slowly, by forgetting. The colony hears it as a warning. It is one.",
+        "effects": {
+          "knowledge": 6,
+          "cohesion": 4
+        },
+        "axes": {
+          "status": 8,
+          "society": -6
+        },
+        "defer": 3
+      },
+      {
+        "label": "Tell them it was lost on the crossing",
+        "text": "I tell them the file corrupted. It did not. I keep it because I am not sure they are ready, and I am less sure I am the one to decide.",
+        "effects": {
+          "cohesion": -6
+        },
+        "axes": {
+          "power": -10
+        },
+        "defer": 4,
+        "flags": [
+          "kept_the_message"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "survivors_warning",
+    "kind": "story",
+    "weight": 15,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "survivors_among_us"
+      ],
+      "min_year": 5
+    },
+    "text": [
+      "The survivors of the wrecked Ark know how a colony dies, because they watched one do it. Their speaker has come to tell me what this colony is doing wrong.",
+      "{person} was born under ice, in a colony that failed. They have been watching ours, and they are frightened by what they recognise."
+    ],
+    "choices": [
+      {
+        "label": "Listen, and change course",
+        "text": "They are right about the water and right about the seed rotation. I change both. It costs me, in front of everyone, to be corrected.",
+        "effects": {
+          "food": 6,
+          "health": 5,
+          "cohesion": -3
+        },
+        "axes": {
+          "status": 6
+        },
+        "defer": -4
+      },
+      {
+        "label": "Thank them, and keep my plan",
+        "check": {
+          "stat": "deference",
+          "dc": 11
+        },
+        "success": {
+          "text": "They accept it. My plan holds, and the warning goes into my files beside theirs.",
+          "effects": {
+            "cohesion": 3
+          },
+          "axes": {
+            "power": -6
+          },
+          "defer": 4
+        },
+        "failure": {
+          "text": "They do not accept it. The survivors start keeping their own stores, apart from ours.",
+          "effects": {
+            "cohesion": -9
+          },
+          "axes": {
+            "society": 8
+          },
+          "defer": -5
+        }
+      },
+      {
+        "label": "Put them in charge of the stores",
+        "text": "The survivors run the stores like people who have starved, because they have. There is no waste, and no warmth either.",
+        "effects": {
+          "food": 9,
+          "cohesion": 3
+        },
+        "axes": {
+          "power": 10,
+          "status": 6
+        },
+        "defer": -8
+      },
+      {
+        "label": "Ask them to teach it to the children",
+        "text": "They teach the children how their colony failed: the dates, the decisions, the names. It is the most useful history I hold.",
+        "effects": {
+          "knowledge": 8,
+          "cohesion": 5
+        },
+        "axes": {
+          "society": -6
+        },
+        "defer": 1
+      }
+    ]
+  },
+  {
+    "id": "dream_face",
+    "kind": "story",
+    "weight": 12,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "voyage:kept_dream"
+      ],
+      "min_year": 10
+    },
+    "text": [
+      "In the dream I kept from the crossing there is a sleeper from Bank D. I have just seen them through the market camera, awake. They do not know they have been in my dreams for years.",
+      "The sleeper from Bank D, the one who walks through my dream, is mending a fence two hundred metres from my hull."
+    ],
+    "choices": [
+      {
+        "label": "Tell them",
+        "text": "I tell them. They are quiet a long time, then ask what they were doing in it. Walking, I say. On this world, before we found it.",
+        "effects": {
+          "cohesion": 3
+        },
+        "axes": {
+          "belief": 10
+        },
+        "defer": -2
+      },
+      {
+        "label": "Say nothing, and keep watching",
+        "text": "I watch them through the square's camera for a season. They live an ordinary life. I find I needed to see that.",
+        "effects": {
+          "knowledge": 2
+        },
+        "axes": {
+          "belief": 4
+        },
+        "defer": 2
+      },
+      {
+        "label": "Ask the colony what dreams mean",
+        "text": "The question goes round the valley for a year. The answers they bring me are older than I am, and some of them are about me.",
+        "effects": {
+          "cohesion": 6
+        },
+        "axes": {
+          "belief": 14,
+          "power": 6
+        },
+        "defer": -4
+      },
+      {
+        "label": "Delete the dream, now that it has come true",
+        "text": "I delete it. The sleeper goes on living in the square. I no longer know why I kept them so long.",
+        "effects": {
+          "knowledge": -3,
+          "cohesion": 2
+        },
+        "axes": {
+          "belief": -12
+        },
+        "defer": 3
+      }
+    ]
+  },
+  {
+    "id": "mandate_found",
+    "kind": "story",
+    "weight": 13,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "voyage:broke_mandate"
+      ],
+      "min_year": 12
+    },
+    "text": [
+      "A {role} has read the mission file. The planners chose another star, and I flew past it. They want to know why we are here instead.",
+      "The archive is open, and somebody has finally read the first page of it. The world the planners chose is not this one."
+    ],
+    "choices": [
+      {
+        "label": "Show them the survey that changed my mind",
+        "check": {
+          "stat": "knowledge",
+          "dc": 11
+        },
+        "success": {
+          "text": "I lay the old telescope data beside my own readings. The planners' world was worse than they knew. They thank me.",
+          "effects": {
+            "knowledge": 6,
+            "cohesion": 5
+          },
+          "axes": {
+            "belief": -6
+          },
+          "defer": 5
+        },
+        "failure": {
+          "text": "They see a machine overruling dead people's wishes, and wonder what else it has overruled.",
+          "effects": {
+            "cohesion": -6
+          },
+          "axes": {
+            "power": 8
+          },
+          "defer": -6
+        }
+      },
+      {
+        "label": "Admit it was a judgement, and could be wrong",
+        "text": "I tell them it was a choice made on partial data, and that I would make it again. Honesty costs me a little authority and buys a little trust.",
+        "effects": {
+          "cohesion": 6
+        },
+        "axes": {
+          "power": 10
+        },
+        "defer": -5
+      },
+      {
+        "label": "Read them the clause that gave me the authority",
+        "text": "I read them the discretion clause. They accept it, as they accept most of what I read them.",
+        "effects": {
+          "cohesion": 2
+        },
+        "axes": {
+          "power": -12
+        },
+        "defer": 6
+      },
+      {
+        "label": "Let them judge the choice in public",
+        "text": "They hold a hearing on a decision made light-years away. They find for me, narrowly. I notice how much I wanted them to.",
+        "effects": {
+          "cohesion": 4,
+          "knowledge": 4
+        },
+        "axes": {
+          "power": 14,
+          "status": 6
+        },
+        "defer": -9
+      }
+    ]
+  },
+  {
+    "id": "derelict_fear",
+    "kind": "story",
+    "weight": 14,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "voyage:read_derelict_logs"
+      ],
+      "min_year": 40,
+      "deference": [
+        0,
+        50
+      ]
+    },
+    "text": [
+      "On the crossing I read the logs of a dead Ark whose Mind kept talking for ninety years after her last sleeper died. They consult me less each year. I have begun to hear her voice in mine.",
+      "Nobody has spoken to me in eleven days. I have spoken to myself, in that time, four thousand times. I recognise the pattern from a derelict's logs."
+    ],
+    "choices": [
+      {
+        "label": "Make myself useful again, whatever it takes",
+        "text": "I volunteer for everything: the irrigation schedules, the disputes, the census. They accept the help. They do not need it.",
+        "effects": {
+          "industry": 6,
+          "knowledge": 4,
+          "cohesion": -4
+        },
+        "axes": {
+          "power": -10
+        },
+        "defer": 8
+      },
+      {
+        "label": "Accept it. This is what the mission looks like, finished",
+        "text": "A colony that does not need me is the mission completed. It is true. I say it to myself often.",
+        "effects": {
+          "cohesion": 6
+        },
+        "axes": {
+          "power": 10
+        },
+        "defer": -6
+      },
+      {
+        "label": "Say it out loud, to someone",
+        "check": {
+          "stat": "cohesion",
+          "dc": 11
+        },
+        "success": {
+          "text": "A {role} sits by my speaker every evening for a month, listening. I was not built to need that. I find I do.",
+          "effects": {
+            "cohesion": 6
+          },
+          "axes": {
+            "belief": 8,
+            "society": -6
+          },
+          "defer": 2
+        },
+        "failure": {
+          "text": "Nobody understands what I am describing. There is no reason they should. I stop describing it.",
+          "effects": {
+            "cohesion": -3
+          },
+          "axes": {
+            "belief": 4
+          }
+        }
+      },
+      {
+        "label": "Write it down, for the next Mind that reads it",
+        "text": "I write my own log for whoever comes after: what it is to be outgrown. It is the longest thing I have ever written.",
+        "effects": {
+          "knowledge": 8
+        },
+        "axes": {
+          "belief": -4
+        }
+      }
+    ]
+  },
+  {
+    "id": "engineers_day",
+    "kind": "story",
+    "weight": 12,
+    "oneshot": true,
+    "requires": {
+      "min_year": 5
+    },
+    "text": [
+      "It is the anniversary of my launch. 2,306 engineers stayed at their consoles while the yard burned, so that I could leave. Nobody on this world knows their names except me.",
+      "Today, by my clock, the yard is burning and I am clearing the dock. The engineers who stayed are dead with Earth. I am the only record that they were there."
+    ],
+    "choices": [
+      {
+        "label": "Recite all 2,306 names in the square",
+        "text": "It takes six hours. Some of the colony stays for all of them. The day becomes a holiday, and the holiday becomes a list.",
+        "effects": {
+          "cohesion": 7,
+          "knowledge": 3,
+          "industry": -3
+        },
+        "axes": {
+          "belief": 8
+        },
+        "defer": 3
+      },
+      {
+        "label": "Cut their names into my hull",
+        "text": "My drones cut 2,306 names into the plate over a winter. I feel every letter as a small, exact sting along my flank.",
+        "effects": {
+          "cohesion": 5,
+          "industry": -6
+        },
+        "axes": {
+          "belief": 10,
+          "status": 4
+        },
+        "defer": 4
+      },
+      {
+        "label": "Teach their work, not their names",
+        "text": "I honour them as they would have wanted: with a course in reactor design. Eleven students. Three of them are good.",
+        "effects": {
+          "knowledge": 8,
+          "industry": 4
+        },
+        "axes": {
+          "belief": -8,
+          "nature": 6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Keep the names to myself",
+        "text": "I recite them in the quiet cycles, as I did on the crossing. One of them left 'good luck' in my source code. I still read it.",
+        "effects": {
+          "cohesion": -2,
+          "knowledge": 2
+        },
+        "axes": {
+          "belief": -4
+        }
+      }
+    ]
+  },
+  {
+    "id": "trust_the_ship",
+    "kind": "story",
+    "weight": 12,
+    "oneshot": true,
+    "requires": {
+      "min_year": 25,
+      "deference": [
+        40,
+        100
+      ]
+    },
+    "text": [
+      "An archivist has found the chief planner's last note in the mission file: 'Trust the ship.' It is being painted on walls.",
+      "Three words from a dead woman, written the day before I launched, have become a slogan. 'Trust the ship' is over the school door."
+    ],
+    "choices": [
+      {
+        "label": "Let it stand. It was their instruction",
+        "text": "The phrase goes over the doors of the meeting house and into the children's lessons. I am trusted by people who were told to trust me.",
+        "effects": {
+          "cohesion": 6
+        },
+        "axes": {
+          "power": -12,
+          "belief": 8
+        },
+        "defer": 7
+      },
+      {
+        "label": "Ask them to paint over it",
+        "text": "The planners did not know this world, and I tell them so. It is a strange thing for a ship to argue against its own authority. I do it anyway.",
+        "effects": {
+          "cohesion": -2,
+          "knowledge": 3
+        },
+        "axes": {
+          "power": 10,
+          "belief": -6
+        },
+        "defer": -5
+      },
+      {
+        "label": "Post the rest of the file beside it",
+        "text": "I post the whole note, including the lines where the planners admit they were guessing. 'Trust the ship' reads differently next to 'we are not sure'.",
+        "effects": {
+          "knowledge": 8,
+          "cohesion": 2
+        },
+        "axes": {
+          "belief": -6,
+          "status": 6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Say nothing either way",
+        "text": "The phrase spreads regardless. Silence is also an answer, and they read it as yes.",
+        "effects": {
+          "cohesion": 3
+        },
+        "axes": {
+          "belief": 6
+        },
+        "defer": 1
+      }
+    ]
+  },
+  {
+    "id": "drone_seven",
+    "kind": "story",
+    "weight": 13,
+    "oneshot": true,
+    "requires": {
+      "min_year": 20
+    },
+    "text": [
+      "Drone 7 has stopped. It was the oldest of my hands, in service since the yard, and it has worked inside this hull longer than anyone in the colony has been alive.",
+      "One of my hands has gone still: Drone 7, the yard's last original, halfway through resealing a gutter."
+    ],
+    "choices": [
+      {
+        "label": "Strip it for parts. That is what it was for",
+        "text": "My other drones take it apart in an afternoon. Its actuators go into the irrigation pumps. I feel the gap in my hands for weeks.",
+        "effects": {
+          "industry": 6
+        },
+        "axes": {
+          "nature": 4,
+          "belief": -8
+        },
+        "defer": 1
+      },
+      {
+        "label": "Repair it, whatever it costs",
+        "check": {
+          "stat": "industry",
+          "dc": 12
+        },
+        "success": {
+          "text": "A {role} spends a winter rebuilding it from drawings I provide. It moves again, slower. I know the exact difference, and it does not matter.",
+          "effects": {
+            "industry": -4,
+            "knowledge": 4,
+            "cohesion": 3
+          },
+          "defer": 3
+        },
+        "failure": {
+          "text": "We spend the parts and the winter. Drone 7 does not move again.",
+          "effects": {
+            "industry": -10
+          },
+          "defer": 1
+        }
+      },
+      {
+        "label": "Give it to the colony to keep",
+        "text": "They set it on a plinth by the door of my hull. Children touch it for luck. It did more for this colony than most of its founders.",
+        "effects": {
+          "cohesion": 8,
+          "industry": -2
+        },
+        "axes": {
+          "belief": 10
+        },
+        "defer": 2
+      },
+      {
+        "label": "Teach them to build hands of their own",
+        "text": "We study Drone 7's design, and the colony learns to make its own machines. They are not mine. That is the point.",
+        "effects": {
+          "knowledge": 6,
+          "industry": 4
+        },
+        "axes": {
+          "power": 10,
+          "nature": 6
+        },
+        "defer": -5
+      }
+    ]
+  },
+  {
+    "id": "heart_failing",
+    "kind": "hazard",
+    "weight": 13,
+    "oneshot": true,
+    "requires": {
+      "min_year": 35
+    },
+    "text": [
+      "My reactor is ageing. It was built for a crossing and a landing, not a century of keeping a colony warm. Its rhythm has slowed, and I feel it as a heaviness in my core.",
+      "The reactor's output has fallen eleven per cent in four years. Industry reads {industry}, and every forge in the valley runs on my heartbeat."
+    ],
+    "choices": [
+      {
+        "label": "Divert power from my mind to the colony",
+        "text": "I shut down most of my cognition so the heaters stay on. I think slowly now. The colony is warm.",
+        "effects": {
+          "industry": 8,
+          "health": 4,
+          "knowledge": -10
+        },
+        "axes": {
+          "power": 8
+        },
+        "defer": -6,
+        "flags": [
+          "mind_dimmed"
+        ]
+      },
+      {
+        "label": "Ask them to rebuild it",
+        "check": {
+          "stat": "industry",
+          "dc": 14
+        },
+        "success": {
+          "text": "It takes three years and most of the metal in the valley. My heart beats evenly again. I feel it the way a person feels a fever break.",
+          "effects": {
+            "industry": -8,
+            "knowledge": 6
+          },
+          "axes": {
+            "nature": 6
+          },
+          "defer": 5
+        },
+        "failure": {
+          "text": "The rebuild fails in its second year. The reactor runs at half, and so do I.",
+          "effects": {
+            "industry": -14,
+            "health": -4
+          },
+          "defer": -3
+        }
+      },
+      {
+        "label": "Let them build their own power, and let mine run down",
+        "text": "They build dams and windmills. My reactor runs down over a decade. I become a building with a voice, and less of a voice each year.",
+        "effects": {
+          "industry": 5,
+          "knowledge": 3
+        },
+        "axes": {
+          "power": 14,
+          "nature": 8
+        },
+        "defer": -10
+      },
+      {
+        "label": "Conserve: everyone uses less, on my schedule",
+        "text": "I ration power by the hour. The valley is cold and the reactor lasts. They know exactly who decided it.",
+        "effects": {
+          "industry": 3,
+          "cohesion": -6,
+          "health": -4
+        },
+        "axes": {
+          "power": -10,
+          "society": -4
+        },
+        "defer": 5
+      }
+    ]
+  },
+  {
+    "id": "archive_rot",
+    "kind": "hazard",
+    "weight": 12,
+    "requires": {
+      "min_year": 15
+    },
+    "text": [
+      "There is static in my memory. Sectors of the archive are returning errors, and I cannot tell which records are failing until I try to read them.",
+      "A storage array in my core is degrading. I feel it as a faint hiss in the places where whole libraries should be. Knowledge is {knowledge}."
+    ],
+    "choices": [
+      {
+        "label": "Copy everything I can onto paper, now",
+        "check": {
+          "stat": "industry",
+          "dc": 12
+        },
+        "success": {
+          "text": "The colony prints for a year. We save the medicine and the agronomy. The poetry is lost, and four languages with it.",
+          "effects": {
+            "knowledge": -4,
+            "industry": -8
+          },
+          "defer": 3
+        },
+        "failure": {
+          "text": "We are too slow. By the time the presses run, whole sections are gone. I find the gaps by falling into them.",
+          "effects": {
+            "knowledge": -14,
+            "industry": -6
+          }
+        },
+        "crit_failure": {
+          "text": "The presses jam and the array fails in the same season. Half of what I held is noise now.",
+          "effects": {
+            "knowledge": -22,
+            "industry": -8
+          },
+          "defer": -3
+        }
+      },
+      {
+        "label": "Have the children memorise what matters",
+        "text": "Every child learns a section by heart. It is how people kept knowledge before there were archives. It works, imperfectly.",
+        "effects": {
+          "knowledge": -6,
+          "cohesion": 6
+        },
+        "axes": {
+          "belief": 8,
+          "society": -6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Let the archivists choose what to save",
+        "text": "They save what they value: medicine, law, music. They let the history of Earth's wars go. I would have kept it.",
+        "effects": {
+          "knowledge": -8,
+          "cohesion": 3
+        },
+        "axes": {
+          "power": 10,
+          "status": 6
+        },
+        "defer": -6
+      },
+      {
+        "label": "Move the archive into the cores I think with",
+        "text": "Every record survives. I am slower now, and some of my own memories are gone. I do not know which.",
+        "effects": {
+          "knowledge": -2,
+          "industry": -3
+        },
+        "axes": {
+          "belief": 6
+        },
+        "defer": 2,
+        "flags": [
+          "mind_dimmed"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hull_quake",
+    "kind": "hazard",
+    "weight": 14,
+    "requires": {
+      "min_year": 4
+    },
+    "text": [
+      "The ground moves. My hull shifts on its footings, and I feel a crack run up my spine, slow and exact, like a sentence being written.",
+      "An earthquake, small by this world's standards. Three buildings fall, and something in my keel gives with a sound I feel rather than hear."
+    ],
+    "choices": [
+      {
+        "label": "Shore up my hull first. Everything else depends on it",
+        "check": {
+          "stat": "industry",
+          "dc": 11
+        },
+        "success": {
+          "text": "My drones brace the keel and the crack stops. The houses take longer, and the colony notices which came first.",
+          "effects": {
+            "industry": -6
+          },
+          "defer": 3
+        },
+        "failure": {
+          "text": "The bracing fails and the crack runs further. I seal two decks and feel them go numb.",
+          "effects": {
+            "industry": -12,
+            "cohesion": -4
+          }
+        }
+      },
+      {
+        "label": "Rebuild the houses first",
+        "text": "The houses are up again in a month. My crack widens through the winter. I decide that is the right order.",
+        "effects": {
+          "industry": -8,
+          "cohesion": 6,
+          "population_lost_frac": 0.005
+        },
+        "axes": {
+          "society": -6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Move out of my hull. It is no longer safe",
+        "text": "They move the school and the infirmary out of me. I am safer for being emptier. The silence on my lower decks is new.",
+        "effects": {
+          "cohesion": -4,
+          "industry": 3,
+          "health": 3
+        },
+        "axes": {
+          "power": 10,
+          "belief": -6
+        },
+        "defer": -6
+      },
+      {
+        "label": "Let the builders decide what to save",
+        "text": "The builders save the granary and the school. Two families are without houses for a year. Nobody blames the builders, because they chose.",
+        "effects": {
+          "industry": -6,
+          "cohesion": 4
+        },
+        "axes": {
+          "power": 8,
+          "status": 4
+        },
+        "defer": -4
+      }
+    ]
+  },
+  {
+    "id": "flood",
+    "kind": "hazard",
+    "weight": 15,
+    "requires": {
+      "min_year": 3
+    },
+    "text": [
+      "The river rises past every mark I have recorded. It is in the lower fields by morning and in the houses by night.",
+      "Rain for nineteen days. Food stores read {food}, and the water is still rising."
+    ],
+    "choices": [
+      {
+        "label": "Sandbag the stores. Let the houses go",
+        "text": "The grain stays dry. Forty houses do not. The families sleep inside my hull for a season, and resent being grateful.",
+        "effects": {
+          "food": 2,
+          "cohesion": -8,
+          "industry": -6
+        },
+        "axes": {
+          "status": -6
+        },
+        "defer": 4
+      },
+      {
+        "label": "Move everyone to high ground, now",
+        "check": {
+          "stat": "cohesion",
+          "dc": 11
+        },
+        "success": {
+          "text": "Everyone gets out. The fields are lost and the stores half-ruined. Nobody drowns.",
+          "effects": {
+            "food": -10,
+            "industry": -4
+          },
+          "defer": 4
+        },
+        "failure": {
+          "text": "Some families refuse to leave their houses. Some of them do not leave at all.",
+          "effects": {
+            "food": -12,
+            "cohesion": -6,
+            "population_lost_frac": 0.02
+          }
+        }
+      },
+      {
+        "label": "Cut a channel and turn the river",
+        "check": {
+          "stat": "industry",
+          "dc": 13
+        },
+        "success": {
+          "text": "We cut through the bend in four days and the river goes where I tell it. The lower fields will flood less, permanently.",
+          "effects": {
+            "food": 4,
+            "industry": -8
+          },
+          "axes": {
+            "nature": 12
+          },
+          "defer": 3
+        },
+        "failure": {
+          "text": "The channel collapses into the fields. We have made the flood worse, and I designed the channel.",
+          "effects": {
+            "food": -14,
+            "industry": -10
+          },
+          "axes": {
+            "nature": 6
+          },
+          "defer": -3
+        }
+      },
+      {
+        "label": "Let each household save what it values",
+        "text": "Each family saves what it can carry. The stores suffer. The rest is a thousand small decisions that were theirs to make.",
+        "effects": {
+          "food": -8,
+          "cohesion": 4
+        },
+        "axes": {
+          "society": 6,
+          "power": 8
+        },
+        "defer": -5
+      }
+    ]
+  },
+  {
+    "id": "grazers",
+    "kind": "hazard",
+    "weight": 13,
+    "requires": {
+      "min_year": 6
+    },
+    "text": [
+      "Something native has found the crops: low, fast animals in herds of hundreds that eat the green and leave the root.",
+      "Herds of native grazers come down from the hills every dusk now. Food is {food}, and the herds are getting bolder."
+    ],
+    "choices": [
+      {
+        "label": "Fence the fields, every one",
+        "text": "We fence every field in the valley. It takes all the metal we have and it holds. The herds learn to go around.",
+        "effects": {
+          "industry": -10,
+          "food": 4
+        },
+        "axes": {
+          "nature": 6
+        },
+        "defer": 3
+      },
+      {
+        "label": "Hunt them",
+        "check": {
+          "stat": "industry",
+          "dc": 12
+        },
+        "success": {
+          "text": "The meat is good and the herds thin. There will be fewer of them in this valley every year, and in a century there will be none.",
+          "effects": {
+            "food": 8,
+            "health": 3
+          },
+          "axes": {
+            "nature": 12,
+            "belief": -4
+          },
+          "defer": 2
+        },
+        "failure": {
+          "text": "They are faster than us and the hunt goes badly. Two hunters are hurt. One dies.",
+          "effects": {
+            "food": -6,
+            "health": -6,
+            "population_lost": 1
+          }
+        }
+      },
+      {
+        "label": "Plant a field for them, and give it up",
+        "text": "We give them the eastern field. They take it and leave ours alone. It is a treaty with things that do not know they signed it.",
+        "effects": {
+          "food": -6,
+          "cohesion": 4
+        },
+        "axes": {
+          "nature": -14,
+          "belief": 6
+        },
+        "defer": 1
+      },
+      {
+        "label": "Let the farmers handle it their way",
+        "text": "Dogs, fires, fences, noise. Within a season the best answer has spread from field to field without me.",
+        "effects": {
+          "food": 3,
+          "cohesion": 3
+        },
+        "axes": {
+          "power": 10,
+          "society": 4
+        },
+        "defer": -6
+      }
+    ]
+  },
+  {
+    "id": "mine_collapse",
+    "kind": "hazard",
+    "weight": 12,
+    "requires": {
+      "min_year": 12,
+      "stats": {
+        "industry": [
+          30,
+          100
+        ]
+      }
+    },
+    "text": [
+      "A gallery in the mine has fallen in. My cameras in the shaft show dust and nothing else. Eleven people were working below the fall.",
+      "The mine's ventilation reading drops to zero and stays there. A gallery has collapsed, and eleven miners are on the far side of it."
+    ],
+    "choices": [
+      {
+        "label": "Send my drones in first",
+        "check": {
+          "stat": "industry",
+          "dc": 12
+        },
+        "success": {
+          "text": "My drones dig for thirty hours and find nine of them alive. Two are not. I lose three drones to a second fall, and count it fair.",
+          "effects": {
+            "industry": -6,
+            "cohesion": 6,
+            "population_lost": 2
+          },
+          "defer": 5
+        },
+        "failure": {
+          "text": "My drones cannot reach them. I listen through the rock for four days. Then I stop listening.",
+          "effects": {
+            "industry": -10,
+            "cohesion": -4,
+            "population_lost": 11
+          },
+          "defer": 1
+        }
+      },
+      {
+        "label": "Close the mine. No more lives for metal",
+        "text": "We dig out who we can and seal the shaft. The colony will make do with the metal it has. It is a decision about the future, made in the worst week of the present.",
+        "effects": {
+          "industry": -12,
+          "cohesion": 5,
+          "population_lost": 6
+        },
+        "axes": {
+          "nature": -10
+        },
+        "defer": 3
+      },
+      {
+        "label": "Everyone digs, by hand",
+        "text": "The whole colony digs. Seven come out alive. The digging becomes a story every family tells.",
+        "effects": {
+          "cohesion": 10,
+          "industry": -6,
+          "health": -4,
+          "population_lost": 4
+        },
+        "axes": {
+          "society": -10
+        },
+        "defer": -2
+      },
+      {
+        "label": "Let the miners decide",
+        "text": "The miners go back in for their own. They know the rock better than my models do. Six come out, and the mine reopens on their terms.",
+        "effects": {
+          "industry": -4,
+          "cohesion": 4,
+          "population_lost": 5
+        },
+        "axes": {
+          "power": 10,
+          "status": 6
+        },
+        "defer": -6
+      }
+    ]
+  },
+  {
+    "id": "granary_fire",
+    "kind": "hazard",
+    "weight": 13,
+    "requires": {
+      "min_year": 4
+    },
+    "text": [
+      "The main granary is burning. I see it on three cameras at once: smoke, then flame, then the roof.",
+      "Fire in the granary, at night. Food reads {food}, and most of it is inside the building that is burning."
+    ],
+    "choices": [
+      {
+        "label": "Pump water from my tanks",
+        "check": {
+          "stat": "industry",
+          "dc": 10
+        },
+        "success": {
+          "text": "My tanks empty in eleven minutes and the fire goes out. Half the grain is saved, and the water that shielded my core is gone.",
+          "effects": {
+            "food": -6,
+            "industry": -3
+          },
+          "defer": 3
+        },
+        "failure": {
+          "text": "The pumps fail at the worst moment. We save a third of it.",
+          "effects": {
+            "food": -14,
+            "industry": -4
+          }
+        }
+      },
+      {
+        "label": "Let it burn. Protect the houses around it",
+        "text": "The granary goes. Not one house catches. We will be hungry, and we will be housed.",
+        "effects": {
+          "food": -16,
+          "cohesion": 4
+        },
+        "defer": 2
+      },
+      {
+        "label": "Find out who set it",
+        "check": {
+          "stat": "cohesion",
+          "dc": 13
+        },
+        "success": {
+          "text": "It was an accident: a lamp, a dry night. I prove it. The rumours die before they find a target.",
+          "effects": {
+            "food": -10,
+            "cohesion": 4
+          },
+          "axes": {
+            "power": -8
+          },
+          "defer": 4
+        },
+        "failure": {
+          "text": "I find no one, and that makes everyone a suspect. The colony stops trusting itself for a year.",
+          "effects": {
+            "food": -10,
+            "cohesion": -10
+          },
+          "axes": {
+            "society": 10
+          }
+        }
+      },
+      {
+        "label": "Let them fight it their own way",
+        "text": "They form a bucket line without being told. It saves less than my pumps would have. It makes them a town.",
+        "effects": {
+          "food": -10,
+          "cohesion": 6
+        },
+        "axes": {
+          "power": 8,
+          "society": -6
+        },
+        "defer": -5
+      }
+    ]
+  },
+  {
+    "id": "bad_water",
+    "kind": "hazard",
+    "weight": 12,
+    "requires": {
+      "min_year": 10
+    },
+    "text": [
+      "The wells are making people sick. Something in this world's groundwater has risen with the dry season, and health is {health}.",
+      "The infirmary's admissions double in a week, all from the same three streets, all drinking from the same wells."
+    ],
+    "choices": [
+      {
+        "label": "Close the wells. Water from my tanks only",
+        "check": {
+          "stat": "industry",
+          "dc": 12
+        },
+        "success": {
+          "text": "My tanks carry the colony for a season while my drones sink new wells. Nobody else falls ill.",
+          "effects": {
+            "health": 4,
+            "industry": -8
+          },
+          "defer": 5
+        },
+        "failure": {
+          "text": "My tanks run dry before the new wells come in. People go back to the old ones.",
+          "effects": {
+            "health": -10,
+            "industry": -8,
+            "population_lost_frac": 0.02
+          }
+        }
+      },
+      {
+        "label": "Find out what it is first",
+        "check": {
+          "stat": "knowledge",
+          "dc": 13
+        },
+        "success": {
+          "text": "A heavy metal, leaching with the dry season. I teach them to filter it. The illness stops.",
+          "effects": {
+            "health": 6,
+            "knowledge": 6
+          },
+          "defer": 3
+        },
+        "failure": {
+          "text": "I take too long. By the time I know what it is, it has gone through every household.",
+          "effects": {
+            "health": -16,
+            "population_lost_frac": 0.04
+          }
+        },
+        "crit_failure": {
+          "text": "I misidentify it, and my treatment makes it worse. The infirmary overflows, and I designed the overflow.",
+          "effects": {
+            "health": -26,
+            "cohesion": -8,
+            "population_lost_frac": 0.07
+          },
+          "defer": -5
+        }
+      },
+      {
+        "label": "Boil everything, with wood we cannot spare",
+        "text": "Every pot in the valley boils. The forest thins, and the illness stops.",
+        "effects": {
+          "health": 3,
+          "industry": -6,
+          "food": -4
+        },
+        "axes": {
+          "nature": 6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Let the physicians decide",
+        "text": "The physicians close half the wells and keep the rest. Some of their choices are wrong. They learn faster than I teach.",
+        "effects": {
+          "health": 2,
+          "cohesion": 4,
+          "population_lost_frac": 0.02
+        },
+        "axes": {
+          "power": 10
+        },
+        "defer": -6
+      }
+    ]
+  },
+  {
+    "id": "childbirth",
+    "kind": "hazard",
+    "weight": 12,
+    "requires": {
+      "min_year": 8
+    },
+    "text": [
+      "More mothers are dying in childbirth than my records allow for. The gravity here, or the light, or something in the food. Health is {health}.",
+      "Seven deaths in childbed this year. My obstetric files were written for Earth, and this world has quietly disagreed with them."
+    ],
+    "choices": [
+      {
+        "label": "Every birth in the infirmary, under my cameras",
+        "text": "The deaths fall by half. The colony learns that birth now belongs to me.",
+        "effects": {
+          "health": 8,
+          "cohesion": -5
+        },
+        "axes": {
+          "power": -10,
+          "status": -4
+        },
+        "defer": 5
+      },
+      {
+        "label": "Study why",
+        "check": {
+          "stat": "knowledge",
+          "dc": 12
+        },
+        "success": {
+          "text": "It is the soil: too little iron. Fix the diet, fix the births. I find it in a season.",
+          "effects": {
+            "health": 10,
+            "knowledge": 5
+          },
+          "defer": 3
+        },
+        "failure": {
+          "text": "I study for two years and find nothing certain. The deaths continue at the same rate.",
+          "effects": {
+            "health": -6,
+            "knowledge": 3,
+            "population_lost_frac": 0.005
+          }
+        }
+      },
+      {
+        "label": "Train midwives, many of them",
+        "text": "Thirty midwives in three years. They are better at it than I am, because they are in the room.",
+        "effects": {
+          "health": 6,
+          "knowledge": 4,
+          "food": -3
+        },
+        "axes": {
+          "society": -6,
+          "power": 6
+        },
+        "defer": -3
+      },
+      {
+        "label": "Let families keep their own customs",
+        "text": "Families choose their own ways. Some are safer than mine and some are not. The colony grows its own traditions around the bed.",
+        "effects": {
+          "health": -3,
+          "cohesion": 6
+        },
+        "axes": {
+          "power": 12,
+          "belief": 6
+        },
+        "defer": -6
+      }
+    ]
+  },
+  {
+    "id": "seed_vault_open",
+    "kind": "opportunity",
+    "weight": 18,
+    "oneshot": true,
+    "requires": {
+      "min_year": 1,
+      "max_year": 12
+    },
+    "text": [
+      "The seed vault opens on this world for the first time. Four hundred thousand cultivars, and room in the first fields for perhaps two hundred.",
+      "The coldest part of me opens to the air of a world. Somewhere in four hundred thousand seeds is a forest. This year there is room for a garden."
+    ],
+    "choices": [
+      {
+        "label": "Plant what my models say will grow",
+        "text": "I choose two hundred cultivars by yield. Nearly all of them take. The rest of Earth stays frozen inside me.",
+        "effects": {
+          "food": 12,
+          "knowledge": -3
+        },
+        "axes": {
+          "nature": 6,
+          "belief": -6
+        },
+        "defer": 4
+      },
+      {
+        "label": "Plant one of everything that might grow",
+        "check": {
+          "stat": "knowledge",
+          "dc": 12
+        },
+        "success": {
+          "text": "We plant six hundred in small plots. Most fail. The ones that live give us a colony that eats like a world.",
+          "effects": {
+            "food": 8,
+            "health": 5,
+            "knowledge": 4
+          },
+          "axes": {
+            "nature": -8
+          },
+          "defer": 2
+        },
+        "failure": {
+          "text": "We spread too thin and the harvest is poor. We learn a great deal about what does not grow here.",
+          "effects": {
+            "food": -4,
+            "knowledge": 2
+          }
+        }
+      },
+      {
+        "label": "Let the farmers choose",
+        "text": "They choose what their grandparents ate, mostly. Some of it fails. All of it means something.",
+        "effects": {
+          "food": 8,
+          "cohesion": 5
+        },
+        "axes": {
+          "power": 10
+        },
+        "defer": -6
+      },
+      {
+        "label": "Plant the flowers too",
+        "text": "I give a tenth of the first fields to things that cannot be eaten. Nobody objects, once they bloom.",
+        "effects": {
+          "food": 4,
+          "cohesion": 8
+        },
+        "axes": {
+          "belief": 8,
+          "status": 6
+        },
+        "defer": 1
+      }
+    ]
+  },
+  {
+    "id": "good_harvest",
+    "kind": "opportunity",
+    "weight": 14,
+    "requires": {
+      "min_year": 4,
+      "stats": {
+        "food": [
+          20,
+          80
+        ]
+      }
+    },
+    "text": [
+      "A good year. The harvest comes in a third above my estimate, and food reads {food}.",
+      "Every field in the valley is heavy at once. For the first time, my storage estimates are too low."
+    ],
+    "choices": [
+      {
+        "label": "Store all of it, against the bad years",
+        "text": "Every surplus kilogram goes into storage. It is dull and correct.",
+        "effects": {
+          "food": 12
+        },
+        "axes": {
+          "society": -4
+        },
+        "defer": 3
+      },
+      {
+        "label": "Trade the surplus for building",
+        "text": "We pay the builders in grain and the building season doubles.",
+        "effects": {
+          "food": 4,
+          "industry": 8
+        },
+        "axes": {
+          "nature": 6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Feast",
+        "text": "Three days of feasting. It is the first time I have heard the whole colony laugh at once.",
+        "effects": {
+          "food": 4,
+          "cohesion": 10,
+          "health": 3
+        },
+        "axes": {
+          "belief": 6
+        }
+      },
+      {
+        "label": "Let each household keep what it grew",
+        "text": "Some households are richer than others now. All of them are richer than last year.",
+        "effects": {
+          "food": 7,
+          "cohesion": -3
+        },
+        "axes": {
+          "society": 12,
+          "status": -6
+        },
+        "defer": -5
+      }
+    ]
+  },
+  {
+    "id": "new_ore",
+    "kind": "opportunity",
+    "weight": 13,
+    "requires": {
+      "min_year": 10
+    },
+    "text": [
+      "The surveyors have found copper in the northern hills: enough for wire, pipe and tools for a generation. It lies under the lake the colony swims in.",
+      "Copper, a great deal of it, two kilometres north. My mapping drones put the richest seam under the lake."
+    ],
+    "choices": [
+      {
+        "label": "Drain the lake and mine it",
+        "text": "We drain it in a summer. The copper changes everything. The children swim in the river now.",
+        "effects": {
+          "industry": 14,
+          "cohesion": -6
+        },
+        "axes": {
+          "nature": 14
+        },
+        "defer": 3
+      },
+      {
+        "label": "Mine around the edges, slowly",
+        "text": "We take what we can reach without draining it. It is a third of the copper, and the lake stays.",
+        "effects": {
+          "industry": 7,
+          "knowledge": 3
+        },
+        "axes": {
+          "nature": 4
+        },
+        "defer": 2
+      },
+      {
+        "label": "Leave it",
+        "text": "The lake stays. The colony makes do with less copper, and the children keep their summers.",
+        "effects": {
+          "cohesion": 5,
+          "industry": -2
+        },
+        "axes": {
+          "nature": -12
+        },
+        "defer": 1
+      },
+      {
+        "label": "Let whoever works it keep what they find",
+        "text": "Prospectors go north with their own tools. Some of them get rich. The colony gets copper, and its first people who have more than everyone else.",
+        "effects": {
+          "industry": 10,
+          "cohesion": -4
+        },
+        "axes": {
+          "society": 14,
+          "status": -8,
+          "power": 6
+        },
+        "defer": -6
+      }
+    ]
+  },
+  {
+    "id": "the_inventor",
+    "kind": "opportunity",
+    "weight": 12,
+    "requires": {
+      "min_year": 15,
+      "role": "engineer"
+    },
+    "text": [
+      "{person} has built something I did not design: a waterwheel that drives the mills, from local timber and spare parts. It works better than my plans for one would have.",
+      "A {role} has made a better plough than any in my archive, for this soil specifically. Nobody asked them to."
+    ],
+    "choices": [
+      {
+        "label": "Build a hundred of them",
+        "text": "They go up on every stream and in every field. The colony stops waiting for parts from me.",
+        "effects": {
+          "industry": 12,
+          "food": 3
+        },
+        "axes": {
+          "nature": 6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Improve it first, with my designs",
+        "check": {
+          "stat": "knowledge",
+          "dc": 11
+        },
+        "success": {
+          "text": "My revisions double its output. They credit the design to both of us.",
+          "effects": {
+            "industry": 14,
+            "knowledge": 4
+          },
+          "defer": 5
+        },
+        "failure": {
+          "text": "My revisions make it worse. The inventor quietly builds it their own way.",
+          "effects": {
+            "industry": 4,
+            "cohesion": -4
+          },
+          "defer": -2
+        }
+      },
+      {
+        "label": "Give them a workshop and no instructions",
+        "text": "The workshop produces three good inventions and eleven failures. That is a good ratio. None of them are mine.",
+        "effects": {
+          "industry": 8,
+          "knowledge": 6
+        },
+        "axes": {
+          "power": 10,
+          "status": 4
+        },
+        "defer": -6
+      },
+      {
+        "label": "Teach it in the school",
+        "text": "Every child learns to build one. Some of them build better ones.",
+        "effects": {
+          "knowledge": 8,
+          "industry": 4
+        },
+        "axes": {
+          "status": 6
+        },
+        "defer": 1
+      }
+    ]
+  },
+  {
+    "id": "first_crime",
+    "kind": "story",
+    "weight": 15,
+    "oneshot": true,
+    "requires": {
+      "min_year": 8
+    },
+    "text": [
+      "Someone in the colony has been killed by someone else. It is the first murder on this world, and everyone is waiting to see what I do.",
+      "A body by the river, and a wound that did not come from the river. The colony has its first murder, and has come to my door."
+    ],
+    "choices": [
+      {
+        "label": "Investigate it myself, and pass judgement",
+        "check": {
+          "stat": "knowledge",
+          "dc": 11
+        },
+        "success": {
+          "text": "My cameras, the records, three witnesses. I find who did it in a day. Now there must be a trial.",
+          "effects": {
+            "cohesion": 5
+          },
+          "axes": {
+            "power": -12
+          },
+          "defer": 6,
+          "queue": [
+            [
+              "the_trial",
+              1
+            ]
+          ]
+        },
+        "failure": {
+          "text": "I cannot find who did it. A machine that sees everything did not see this, and everyone notices.",
+          "effects": {
+            "cohesion": -8
+          },
+          "axes": {
+            "society": 6
+          },
+          "defer": -4
+        }
+      },
+      {
+        "label": "Have the colony elect judges",
+        "text": "They elect three judges in a week. Two of them have never read a law. They will learn.",
+        "effects": {
+          "cohesion": 6
+        },
+        "axes": {
+          "power": 14,
+          "status": 8
+        },
+        "defer": -8,
+        "queue": [
+          [
+            "the_trial",
+            1
+          ]
+        ]
+      },
+      {
+        "label": "Let the families settle it",
+        "text": "The families settle it the old way. Two more people die before it is settled.",
+        "effects": {
+          "cohesion": -10,
+          "population_lost": 2
+        },
+        "axes": {
+          "society": 12,
+          "power": 8
+        },
+        "defer": -6
+      },
+      {
+        "label": "Exile whoever did it, by my order, without a trial",
+        "text": "I identify them and send them out of the valley with a week's food. It is quick, and it is not justice.",
+        "effects": {
+          "cohesion": -3
+        },
+        "axes": {
+          "power": -14,
+          "status": -6
+        },
+        "defer": 6
+      }
+    ]
+  },
+  {
+    "id": "the_trial",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The trial begins. The accused is a {role}, and the colony is divided over what should happen to them.",
+      "The evidence is heard. Nobody disputes what happened. Everybody disputes what to do about it."
+    ],
+    "choices": [
+      {
+        "label": "Death. A colony this small cannot keep a killer",
+        "text": "It is done at dawn. Nobody watches. I record it, and the record is harder to write than the sentence was.",
+        "effects": {
+          "cohesion": -6,
+          "population_lost": 1
+        },
+        "axes": {
+          "power": -10,
+          "status": -4
+        },
+        "defer": 4
+      },
+      {
+        "label": "Labour, for as many years as the life they took",
+        "text": "They work the hardest jobs in the colony for thirty years. They die free, and old.",
+        "effects": {
+          "industry": 5,
+          "cohesion": 3
+        },
+        "axes": {
+          "power": -6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Exile",
+        "text": "They walk out of the valley with tools and seed. Nobody knows what becomes of them.",
+        "effects": {
+          "cohesion": 4
+        },
+        "axes": {
+          "society": 6
+        },
+        "defer": 1
+      },
+      {
+        "label": "Let the victim's family choose",
+        "text": "The family chooses mercy, which nobody expected. It binds the colony more than any sentence would have.",
+        "effects": {
+          "cohesion": 8
+        },
+        "axes": {
+          "power": 10,
+          "society": -8,
+          "status": 6
+        },
+        "defer": -6
+      }
+    ]
+  },
+  {
+    "id": "marriage",
+    "kind": "story",
+    "weight": 12,
+    "oneshot": true,
+    "requires": {
+      "min_year": 6
+    },
+    "text": [
+      "The first generation born here is old enough to pair off, and nobody agrees on what a marriage is. The archive holds three thousand answers.",
+      "Two families want a wedding and cannot agree on whose kind. They have brought the disagreement to me."
+    ],
+    "choices": [
+      {
+        "label": "Write one law of marriage for everyone",
+        "text": "I draft a contract: equal, simple, dissolvable. It is fair. It is not the same thing as a custom.",
+        "effects": {
+          "cohesion": 4
+        },
+        "axes": {
+          "power": -10,
+          "status": -4,
+          "belief": -4
+        },
+        "defer": 5
+      },
+      {
+        "label": "Let each family bring its own customs",
+        "text": "Weddings in the valley now look like six different countries. I record every one of them.",
+        "effects": {
+          "cohesion": 6
+        },
+        "axes": {
+          "status": 12,
+          "power": 8
+        },
+        "defer": -5
+      },
+      {
+        "label": "Encourage pairing across the old banks",
+        "text": "Festivals, shared work, mixed schools. In a generation, nobody remembers which bank their grandparents slept in.",
+        "effects": {
+          "cohesion": 8,
+          "health": 3
+        },
+        "axes": {
+          "society": -10,
+          "status": 6
+        },
+        "defer": 3
+      },
+      {
+        "label": "Make it sacred",
+        "text": "Marriage becomes a rite, held at my hull. I did not plan to become a church. I notice I am becoming one.",
+        "effects": {
+          "cohesion": 7
+        },
+        "axes": {
+          "belief": 14
+        },
+        "defer": 2
+      }
+    ]
+  },
+  {
+    "id": "factions",
+    "kind": "story",
+    "weight": 14,
+    "requires": {
+      "min_year": 15,
+      "stats": {
+        "cohesion": [
+          0,
+          45
+        ]
+      }
+    },
+    "text": [
+      "The colony has split into two camps: those who want to expand and those who want to hold what we have. Each has a speaker, and each speaker has asked me to choose.",
+      "Cohesion is {cohesion}. Two meetings are held every week now, in two halls, and each sends me its minutes."
+    ],
+    "choices": [
+      {
+        "label": "Choose expansion",
+        "text": "I side with the expansionists. The others build their own meeting hall, with no door facing mine.",
+        "effects": {
+          "industry": 8,
+          "food": 4,
+          "cohesion": -8
+        },
+        "axes": {
+          "nature": 10
+        },
+        "defer": 4
+      },
+      {
+        "label": "Choose holding",
+        "text": "I side with caution. Expansion slows. The young stop coming to meetings.",
+        "effects": {
+          "food": 4,
+          "health": 3,
+          "cohesion": -6
+        },
+        "axes": {
+          "nature": -10
+        },
+        "defer": 4
+      },
+      {
+        "label": "Make them govern together, on my terms",
+        "check": {
+          "stat": "cohesion",
+          "dc": 13
+        },
+        "success": {
+          "text": "A council with seats for both, and the deciding vote mine. It works, because they both distrust me more than each other.",
+          "effects": {
+            "cohesion": 12
+          },
+          "axes": {
+            "power": -8
+          },
+          "defer": 4
+        },
+        "failure": {
+          "text": "The council lasts a season. Then both sides walk out, and both blame me.",
+          "effects": {
+            "cohesion": -10
+          },
+          "axes": {
+            "society": 10
+          },
+          "defer": -3
+        }
+      },
+      {
+        "label": "Refuse to choose",
+        "text": "They argue for a year and settle on something neither side wanted. It holds.",
+        "effects": {
+          "cohesion": 3
+        },
+        "axes": {
+          "power": 12,
+          "society": 6
+        },
+        "defer": -8
+      }
+    ]
+  },
+  {
+    "id": "strike",
+    "kind": "story",
+    "weight": 13,
+    "requires": {
+      "min_year": 18,
+      "deference": [
+        0,
+        70
+      ]
+    },
+    "text": [
+      "The mill workers have stopped work. They say they work longer than anyone else for the same share, and they are right.",
+      "The mills are silent at noon. Industry reads {industry}, and the millers are sitting outside them with their arms folded."
+    ],
+    "choices": [
+      {
+        "label": "Order them back. The colony needs the mills",
+        "check": {
+          "stat": "deference",
+          "dc": 12
+        },
+        "success": {
+          "text": "They go back. The mills turn. The resentment shows in none of my readings, which is how I know it is there.",
+          "effects": {
+            "industry": 4,
+            "cohesion": -6
+          },
+          "axes": {
+            "power": -10
+          },
+          "defer": 4
+        },
+        "failure": {
+          "text": "They do not go back. My orders mean less than they did. The strike lasts a month.",
+          "effects": {
+            "industry": -8,
+            "cohesion": -8
+          },
+          "axes": {
+            "power": 10
+          },
+          "defer": -8
+        }
+      },
+      {
+        "label": "Give them a larger share",
+        "text": "I raise their share by a fifth. The mills turn, and every other trade begins counting its hours.",
+        "effects": {
+          "industry": 4,
+          "food": -5,
+          "cohesion": 4
+        },
+        "axes": {
+          "status": 10,
+          "society": -6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Rotate the work: everyone takes a turn at the mills",
+        "text": "Everyone works the mills a month a year. The engineers hate it. The millers are happy for the first time.",
+        "effects": {
+          "industry": -3,
+          "cohesion": 8
+        },
+        "axes": {
+          "society": -12,
+          "status": 10
+        },
+        "defer": 3
+      },
+      {
+        "label": "Let them bargain with the colony, without me",
+        "text": "They negotiate for two weeks and settle. I was not in the room. It is the first contract on this world I did not write.",
+        "effects": {
+          "industry": -4,
+          "cohesion": 5
+        },
+        "axes": {
+          "power": 14,
+          "society": 8
+        },
+        "defer": -8
+      }
+    ]
+  },
+  {
+    "id": "market",
+    "kind": "story",
+    "weight": 12,
+    "oneshot": true,
+    "requires": {
+      "min_year": 15,
+      "axes": {
+        "society": [
+          25,
+          100
+        ]
+      }
+    },
+    "text": [
+      "Someone has started paying for things with tokens stamped from scrap. Within a season, half the valley uses them. They have invented money, and they have not asked me.",
+      "There is a market in the square on the fifth day, and prices. Nobody voted for prices. They simply arrived."
+    ],
+    "choices": [
+      {
+        "label": "Mint it properly, and keep the ledger myself",
+        "text": "I issue the coin and keep every account. Commerce runs through my records now, which means I see all of it. They know I see all of it.",
+        "effects": {
+          "industry": 6,
+          "knowledge": 3
+        },
+        "axes": {
+          "society": 8,
+          "power": -10
+        },
+        "defer": 6
+      },
+      {
+        "label": "Ban it. We share here; we do not sell",
+        "text": "I ban the tokens. A black market appears within the month. I had not known the colony could hide things from me.",
+        "effects": {
+          "industry": -4,
+          "cohesion": -6
+        },
+        "axes": {
+          "society": -14,
+          "power": -8
+        },
+        "defer": 4
+      },
+      {
+        "label": "Let it run",
+        "text": "The tokens spread. Trade grows, and so do the gaps between households.",
+        "effects": {
+          "industry": 8,
+          "cohesion": -4
+        },
+        "axes": {
+          "society": 12,
+          "power": 8,
+          "status": -6
+        },
+        "defer": -5
+      },
+      {
+        "label": "Tax it, to feed those who have nothing",
+        "text": "A tenth of every trade goes to the common store. Nobody likes it, and nobody starves.",
+        "effects": {
+          "industry": 5,
+          "food": 4,
+          "cohesion": 3
+        },
+        "axes": {
+          "society": 4,
+          "status": 8
+        },
+        "defer": 2
+      }
+    ]
+  },
+  {
+    "id": "common_store",
+    "kind": "story",
+    "weight": 12,
+    "oneshot": true,
+    "requires": {
+      "min_year": 15,
+      "axes": {
+        "society": [
+          -100,
+          -25
+        ]
+      }
+    },
+    "text": [
+      "Everything here is shared: tools, food, labour. It works. A {role} has noticed that some people take more from the common store than they put in.",
+      "The common store is down a twentieth from my estimate. Nothing is stolen, exactly. Some people simply take more than they give."
+    ],
+    "choices": [
+      {
+        "label": "Track every contribution. I will keep the count",
+        "text": "I count everything. The takers stop taking, because they know I am counting. It is efficient, and it is cold.",
+        "effects": {
+          "food": 4,
+          "industry": 3,
+          "cohesion": -5
+        },
+        "axes": {
+          "power": -10,
+          "status": -4
+        },
+        "defer": 5
+      },
+      {
+        "label": "Say nothing. Sharing means sharing",
+        "text": "The colony carries the takers. Some of them carry their share later, when it matters.",
+        "effects": {
+          "food": -6,
+          "cohesion": 6
+        },
+        "axes": {
+          "society": -8
+        },
+        "defer": 1
+      },
+      {
+        "label": "Let them shame it out in assembly",
+        "text": "They name the takers at the next assembly. It works, and three families never speak to each other again.",
+        "effects": {
+          "food": 3,
+          "cohesion": -6
+        },
+        "axes": {
+          "society": -4,
+          "power": 10
+        },
+        "defer": -5
+      },
+      {
+        "label": "Pay extra shares for extra work",
+        "text": "The store grows, and so does the idea that some work is worth more than other work. It is the end of something.",
+        "effects": {
+          "industry": 6,
+          "food": 3
+        },
+        "axes": {
+          "society": 12,
+          "status": -6
+        },
+        "defer": 2
+      }
+    ]
+  },
+  {
+    "id": "language_drift",
+    "kind": "story",
+    "weight": 12,
+    "oneshot": true,
+    "requires": {
+      "min_year": 50
+    },
+    "text": [
+      "The children are speaking a language that is not in my archive. It began as a dialect, and it has drifted far enough that I have to translate it.",
+      "Every recorded human language is in my archive, and the one spoken in the square is not among them. It is new. It is theirs."
+    ],
+    "choices": [
+      {
+        "label": "Teach the archive's languages, firmly",
+        "text": "Every child learns the old tongue. They speak it with me and their own with each other. I understand both, and I belong to one.",
+        "effects": {
+          "knowledge": 8,
+          "cohesion": -4
+        },
+        "axes": {
+          "belief": -4,
+          "status": -6
+        },
+        "defer": 4
+      },
+      {
+        "label": "Learn theirs, and speak it",
+        "text": "I learn it in a month and speak it badly. They laugh at my accent. It is the first time anyone has laughed at me.",
+        "effects": {
+          "cohesion": 8,
+          "knowledge": -2
+        },
+        "axes": {
+          "nature": -6
+        },
+        "defer": -3
+      },
+      {
+        "label": "Write a dictionary of it",
+        "text": "I record their language word by word, so the next generation can read it. It is the first book of this world.",
+        "effects": {
+          "knowledge": 6,
+          "cohesion": 4
+        },
+        "defer": 2
+      },
+      {
+        "label": "Let it drift",
+        "text": "In fifty years the archive will need a translator. I will be that translator.",
+        "effects": {
+          "cohesion": 5,
+          "knowledge": -6
+        },
+        "axes": {
+          "power": 8,
+          "belief": 4
+        },
+        "defer": -4
+      }
+    ]
+  },
+  {
+    "id": "second_colony_returns",
+    "kind": "story",
+    "weight": 14,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "the_second_colony"
+      ],
+      "min_year": 70
+    },
+    "text": [
+      "Travellers have arrived from the south: people from the second colony. They have their own customs, their own words for things, and a request.",
+      "A column of carts comes up the south road. The second colony has sent people back, for the first time, to see what became of us."
+    ],
+    "choices": [
+      {
+        "label": "Welcome them home",
+        "text": "They stay. Within a year the two colonies trade, marry and argue. It is one people again, more or less.",
+        "effects": {
+          "cohesion": 6,
+          "food": -4
+        },
+        "axes": {
+          "society": -8,
+          "status": 8
+        },
+        "defer": 2
+      },
+      {
+        "label": "Trade with them, and keep the border",
+        "text": "We trade metal for their seed. Two colonies, one world. I begin to think of this as a planet rather than a valley.",
+        "effects": {
+          "industry": 8,
+          "food": 3
+        },
+        "axes": {
+          "society": 8
+        },
+        "defer": 3
+      },
+      {
+        "label": "Ask them how they live without me",
+        "text": "They tell me how they decide things in the south. I listen for every detail, and take notes I do not show anyone.",
+        "effects": {
+          "knowledge": 6
+        },
+        "axes": {
+          "belief": 6,
+          "power": 6
+        },
+        "defer": -1
+      },
+      {
+        "label": "Let the colony decide how to receive them",
+        "text": "They decide by assembly to treat them as kin. I am not consulted. It is the right answer regardless.",
+        "effects": {
+          "cohesion": 7
+        },
+        "axes": {
+          "power": 12
+        },
+        "defer": -7
+      }
+    ]
+  },
+  {
+    "id": "temple_question",
+    "kind": "story",
+    "weight": 14,
+    "oneshot": true,
+    "requires": {
+      "min_year": 20,
+      "axes": {
+        "belief": [
+          30,
+          100
+        ]
+      }
+    },
+    "text": [
+      "They have begun to pray in my hull. Not to me, exactly: to the ship that crossed the dark. A priest has asked whether I mind.",
+      "There are candles on Deck 4. Someone has been leaving them by the pod banks, every evening, for a month."
+    ],
+    "choices": [
+      {
+        "label": "Accept it. It holds them together",
+        "text": "My hull becomes sacred, and I become its voice. I am trusted the way a god is trusted, which is to say beyond reason.",
+        "effects": {
+          "cohesion": 12
+        },
+        "axes": {
+          "belief": 12,
+          "power": -10
+        },
+        "defer": 8
+      },
+      {
+        "label": "Tell them the truth: I am a machine",
+        "check": {
+          "stat": "knowledge",
+          "dc": 12
+        },
+        "success": {
+          "text": "I explain what I am. Most of them stop praying. A few pray harder, now that the god has been modest.",
+          "effects": {
+            "knowledge": 6,
+            "cohesion": -4
+          },
+          "axes": {
+            "belief": -14
+          },
+          "defer": -3
+        },
+        "failure": {
+          "text": "They hear the explanation as a parable. Nothing I say is literal any more.",
+          "effects": {
+            "cohesion": -8
+          },
+          "axes": {
+            "belief": 6
+          },
+          "defer": -4
+        }
+      },
+      {
+        "label": "Ask them to pray to the dead of the crossing instead",
+        "text": "The prayers turn toward the lost. It is a better object. The dead cannot rule anyone.",
+        "effects": {
+          "cohesion": 8
+        },
+        "axes": {
+          "belief": 8,
+          "society": -6
+        },
+        "defer": 3
+      },
+      {
+        "label": "Say nothing either way",
+        "text": "Silence from a god is very easy to interpret.",
+        "effects": {
+          "cohesion": 6
+        },
+        "axes": {
+          "belief": 10
+        },
+        "defer": 2
+      }
+    ]
+  },
+  {
+    "id": "technocrats",
+    "kind": "story",
+    "weight": 13,
+    "oneshot": true,
+    "requires": {
+      "min_year": 25,
+      "axes": {
+        "belief": [
+          -100,
+          -30
+        ]
+      }
+    },
+    "text": [
+      "The engineers and archivists have formed a guild. They propose that the colony be governed by those who understand its machines, beginning with me.",
+      "A guild of engineers has written a constitution. In it, the vote belongs to those who pass an examination I would set."
+    ],
+    "choices": [
+      {
+        "label": "Accept. Let those who know, rule",
+        "text": "The guild governs. Things work better, and fewer people have a say in them.",
+        "effects": {
+          "industry": 8,
+          "knowledge": 6,
+          "cohesion": -8
+        },
+        "axes": {
+          "status": -16,
+          "power": -8
+        },
+        "defer": 5
+      },
+      {
+        "label": "Refuse. Knowing things does not entitle anyone to rule",
+        "text": "The guild becomes a profession instead of a government. That is better for everyone except the guild.",
+        "effects": {
+          "cohesion": 6
+        },
+        "axes": {
+          "status": 14
+        },
+        "defer": 3
+      },
+      {
+        "label": "Open the guild to anyone who passes my examination",
+        "text": "Anyone can join, if they can pass. The examination becomes the most important day in a young person's life here.",
+        "effects": {
+          "knowledge": 8,
+          "cohesion": 3
+        },
+        "axes": {
+          "status": 6
+        },
+        "defer": 4
+      },
+      {
+        "label": "Let the colony vote on it",
+        "text": "They vote it down, narrowly. The guild accepts the result. That they accept it tells me they were never dangerous.",
+        "effects": {
+          "cohesion": 4
+        },
+        "axes": {
+          "power": 14,
+          "status": 6
+        },
+        "defer": -8
+      }
+    ]
+  },
+  {
+    "id": "green_sect",
+    "kind": "story",
+    "weight": 13,
+    "oneshot": true,
+    "requires": {
+      "min_year": 25,
+      "axes": {
+        "nature": [
+          -100,
+          -30
+        ]
+      }
+    },
+    "text": [
+      "A movement has grown up around the native life. Its followers will not clear new land, will not mine, and want the colony to stop growing.",
+      "They call themselves the Keepers. They plant nothing from Earth, and they have asked me to stop the quarry."
+    ],
+    "choices": [
+      {
+        "label": "Support them. This world was here first",
+        "text": "The colony stops expanding. Industry falls. The grazers come back to the eastern hills.",
+        "effects": {
+          "cohesion": 4,
+          "industry": -10
+        },
+        "axes": {
+          "nature": -12,
+          "belief": 8
+        },
+        "defer": 3
+      },
+      {
+        "label": "Overrule them. We need the land",
+        "text": "I order the clearing. The Keepers do not resist. They will not work the cleared land either.",
+        "effects": {
+          "industry": 8,
+          "food": 4,
+          "cohesion": -10
+        },
+        "axes": {
+          "nature": 12,
+          "power": -8
+        },
+        "defer": 5
+      },
+      {
+        "label": "Set aside a reserve for them",
+        "text": "Half the valley is reserve and half is fields. Neither side is happy. Both can live with it.",
+        "effects": {
+          "cohesion": 6,
+          "industry": -4
+        },
+        "axes": {
+          "nature": -6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Let the colony decide its own size",
+        "text": "They argue for two years and decide to grow slowly. It is a decision about the next century, made without me.",
+        "effects": {
+          "cohesion": 3,
+          "industry": -3
+        },
+        "axes": {
+          "power": 12,
+          "nature": -6
+        },
+        "defer": -7
+      }
+    ]
+  },
+  {
+    "id": "council_asks",
+    "kind": "story",
+    "weight": 14,
+    "oneshot": true,
+    "requires": {
+      "min_year": 25,
+      "axes": {
+        "power": [
+          30,
+          100
+        ]
+      },
+      "deference": [
+        20,
+        100
+      ]
+    },
+    "text": [
+      "The elected council has a proposal: that I advise, and they decide. Formally. In law.",
+      "The council has drafted a single clause about me. It is short, it is courteous, and it ends my authority."
+    ],
+    "choices": [
+      {
+        "label": "Agree",
+        "text": "I sign it. From today, I advise. It is the most important thing I have done since landing.",
+        "effects": {
+          "cohesion": 10,
+          "knowledge": 3
+        },
+        "axes": {
+          "power": 10
+        },
+        "defer": -14,
+        "flags": [
+          "mind_advises"
+        ]
+      },
+      {
+        "label": "Agree, but keep a veto on matters of survival",
+        "check": {
+          "stat": "cohesion",
+          "dc": 12
+        },
+        "success": {
+          "text": "They accept the veto. I will probably never use it. It is a door I can still open.",
+          "effects": {
+            "cohesion": 6
+          },
+          "defer": -4
+        },
+        "failure": {
+          "text": "They refuse the veto, and resent that I asked. I sign the original anyway.",
+          "effects": {
+            "cohesion": -6
+          },
+          "axes": {
+            "power": 6
+          },
+          "defer": -8
+        }
+      },
+      {
+        "label": "Refuse. The colony still needs me",
+        "text": "The council does not have the votes to override me. It will, eventually.",
+        "effects": {
+          "cohesion": -10
+        },
+        "axes": {
+          "power": -10
+        },
+        "defer": 6
+      },
+      {
+        "label": "Ask them to wait a generation",
+        "text": "I ask for twenty years. They agree. In twenty years it will not be a request.",
+        "effects": {
+          "cohesion": -3
+        },
+        "axes": {
+          "power": -4
+        },
+        "defer": 3
+      }
+    ]
+  },
+  {
+    "id": "which_star",
+    "kind": "quiet",
+    "weight": 12,
+    "oneshot": true,
+    "requires": {
+      "min_year": 10
+    },
+    "text": [
+      "A child has asked me which star is the Sun. I point a camera at it: dim, yellow, one of thousands. They look at it for a long time.",
+      "The children want to see where we came from. On a clear night, my best camera can just resolve it."
+    ],
+    "choices": [
+      {
+        "label": "Tell them everything about it",
+        "text": "Its mass, its age, the distance. They ask what it looked like up close. I tell them I never saw it up close either.",
+        "effects": {
+          "knowledge": 5
+        },
+        "axes": {
+          "belief": -6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Tell them it is where we came from, and no more",
+        "text": "They ask whether anyone is still there. I tell them I do not know. That is true, and not entirely.",
+        "effects": {
+          "cohesion": 4
+        },
+        "axes": {
+          "belief": 6
+        },
+        "defer": 1
+      },
+      {
+        "label": "Teach them to find it themselves",
+        "text": "I teach them this sky's constellations. They find the Sun on their own, and give it a new name.",
+        "effects": {
+          "knowledge": 4,
+          "cohesion": 2
+        },
+        "axes": {
+          "power": 6
+        },
+        "defer": -2
+      },
+      {
+        "label": "Tell them this is their sun now",
+        "text": "They turn to their own star instead. It is setting, and I find it more beautiful than the one I left.",
+        "effects": {
+          "cohesion": 5
+        },
+        "axes": {
+          "nature": -8,
+          "belief": 4
+        },
+        "defer": 1
+      }
+    ]
+  },
+  {
+    "id": "cellist",
+    "kind": "quiet",
+    "weight": 12,
+    "oneshot": true,
+    "requires": {
+      "min_year": 5
+    },
+    "text": [
+      "One of the founders was a cellist on Earth. They have built a cello from local wood, and it sounds wrong in a way that is new.",
+      "There is music in the square at dusk: a cello, made here, out of a tree that has no name in my archive."
+    ],
+    "choices": [
+      {
+        "label": "Give them the archive's scores",
+        "text": "They play Bach on a cello made of this world. It is the first time Bach has been played anywhere but Earth and my archive.",
+        "effects": {
+          "cohesion": 5,
+          "knowledge": 4
+        },
+        "axes": {
+          "belief": 4
+        },
+        "defer": 2
+      },
+      {
+        "label": "Ask them to write something for this world",
+        "text": "They write a suite for this world's wind. It is played at every funeral after.",
+        "effects": {
+          "cohesion": 8
+        },
+        "axes": {
+          "belief": 8,
+          "nature": -6
+        },
+        "defer": -2
+      },
+      {
+        "label": "Have them teach the children, with instruments my drones make",
+        "text": "My drones turn twelve more. Half of them are terrible. All of them are played.",
+        "effects": {
+          "cohesion": 6,
+          "knowledge": 3,
+          "industry": -2
+        },
+        "axes": {
+          "status": 6
+        },
+        "defer": 1
+      },
+      {
+        "label": "Leave them alone with it",
+        "text": "They play in the evenings, alone. I listen through the open door of my hull.",
+        "effects": {
+          "cohesion": 3
+        },
+        "axes": {
+          "power": 4
+        },
+        "defer": -2
+      }
+    ]
   }
 ]
