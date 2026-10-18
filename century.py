@@ -106,6 +106,12 @@ def _matches(event: dict, state: ColonyState, scheduled: bool = False) -> bool:
         return False
     if repeatable and state.occurrences.get(event["id"], 0) >= MAX_REPEATS:
         return False
+    if repeatable:
+        # A recurring hazard keeps its distance however it arrives, scheduled
+        # or drawn: a storm that already came is not due again in two years.
+        last = state.recent.get(event["id"])
+        if last is not None and len(state.chronicle) - last < REPEAT_COOLDOWN:
+            return False
     if not scheduled:
         if event.get("chain_only"):
             return False
