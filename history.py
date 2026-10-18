@@ -1,20 +1,23 @@
 """The colony's account of its century, written at the end (Q27).
 
-A history, not a log. Three eras, each told from what actually changed: the
-world they met, how many of them there were, what they made of the hull, the
-decisions that marked them, and a few turning points quoted from the Mind's
-own record. The voice is the document form's (a charter, a scripture, a
-museum catalogue, a survival log). Then the Mind's afterword: closure for
-the dead, or a glimpse of what comes next for the living, built from what
-is unfinished at year one hundred.
+A history, not a log. Each era is told the way a historian would tell it:
+the state of things, then the few decisions and events that changed the
+colony for good, as prose, then everything else abstracted into the shape of
+those years (what kind of trouble came, whether the plans held, who made the
+calls, which way the culture drifted). One passage from the Mind's own
+record stands at the front as an epigraph. Then the Mind's afterword:
+closure for the dead, or a glimpse of what comes next for the living.
 
-Prose lives in content/history.json and content/documents.json; this module
-only decides what to say.
+The voice is the document form's (charter, scripture, museum catalogue,
+survival log). Prose lives in content/history.json and documents.json; this
+module only decides what to say.
 """
 
 from __future__ import annotations
 
 import json
+import random
+from collections import Counter
 from pathlib import Path
 
 import colony as C
@@ -24,12 +27,16 @@ CONTENT = Path(__file__).parent / "content"
 HISTORY = json.loads((CONTENT / "history.json").read_text(encoding="utf-8"))
 
 ERAS = ((0, 20), (21, 70), (71, 100))
-TURNING_POINTS = 3          # quoted moments per era
-LEGACY_PER_ERA = 5
+MAJOR_PER_ERA = 3
 FUTURE_LINES = 6
+GRADES = ("crit_success", "success", "failure", "crit_failure")
 
 # Endings in which the colony did not survive the century.
 DEATHS = {"extinct", "starved", "pestilence", "sundered", "derelict", "unlettered"}
+
+# What a hazard is about: the stat it harms most, as the history names it.
+THEME_OF_STAT = {"food": "hunger", "health": "sickness", "industry": "breakdown",
+                 "cohesion": "quarrel", "knowledge": "loss"}
 
 
 def compose(game) -> list[str]:
@@ -42,41 +49,48 @@ def compose(game) -> list[str]:
         form_id = game.ROLE_DOCUMENTS.get(s.ship_role, form_id)
     form = game.documents.get(form_id, game.documents["plain"])
     ctx = SafeDict(_context(s))
+    rng = random.Random(game.seed ^ 0x415)
+    events = {e["id"]: e for e in game.events}
 
     out = [form["title"].format_map(ctx).upper(), ""]
+    out += _epigraph(game, form, events)
     out += [line.format_map(ctx) for line in form["prologue"]]
     for index, (lo, hi) in enumerate(ERAS):
         if lo > s.year:
             break
         out += ["", form["eras"][index].upper(), ""]
-        out += _era(game, form, index, lo, min(hi, s.year))
+        out += _era(s, events, rng, index, lo, min(hi, s.year))
     out += _remembered(s)
     out += [""] + [line.format_map(ctx) for line in form["closing"]]
     out += ["", "AFTERWORD", ""] + _afterword(s)
     return out
 
 
-# --- the eras -------------------------------------------------------------------
+# --- the eras --------------------------------------------------------------------
 
-def _era(game, form: dict, index: int, lo: int, hi: int) -> list[str]:
-    s = game.state
-    entries = [e for e in s.chronicle if lo <= e["year"] <= hi]
-    story: list[str] = []
-    if index == 0:
-        story += _landing(s)
-    story += _population(s, index, entries)
-    story += _roles(s, lo, hi)
-    story += _legacy(s, lo, hi)
-    if index > 0 and entries:
-        story += _character(entries[-1])
+def _era(s, events: dict, rng: random.Random, index: int, lo: int, hi: int) -> list[str]:
+    entries = [e for e in s.chronicle if lo <= e["year"] <= hi and e.get("event")]
 
-    out = [" ".join(story)] if story else []
-    for entry in _turning_points(game, entries):
-        out += ["", form["quote"].format(year=entry["year"], nth=_ordinal(entry["year"])),
-                f"  {_first_sentence(entry['situation'])}",
-                f"  Decision: {entry['choice'].rstrip('.')}.",
-                f"  {entry['outcome']}"]
-    return out
+    # The state of things.
+    setting = _landing(s) if index == 0 else []
+    setting += _population(s, index, entries)
+    setting += _roles(s, lo, hi)
+    setting += _founders_lost(s, lo, hi, index)
+
+    # What changed them for good, as prose, in the order it happened.
+    told = _major(s, entries, rng, lo, hi)
+    told_events = {event_id for event_id, _ in told}
+
+    # Everything else, abstracted.
+    rest = [e for e in entries if e["event"] not in told_events]
+    shape = _shape(rest, events, rng, s, index, lo, hi)
+
+    paragraphs = [" ".join(setting), " ".join(text for _, text in told), " ".join(shape)]
+    out: list[str] = []
+    for paragraph in paragraphs:
+        if paragraph:
+            out += [paragraph, ""]
+    return out[:-1]
 
 
 def _landing(s) -> list[str]:
@@ -87,8 +101,7 @@ def _landing(s) -> list[str]:
     adjectives = [words[t] for t in traits + features if t in words]
     phrases = [HISTORY["feature_phrases"][f] for f in features
                if f in HISTORY["feature_phrases"]]
-    name = planet.get("name", "this world")
-    line = f"They came down on {name}"
+    line = f"They came down on {planet.get('name', 'this world')}"
     if adjectives:
         line += f", a {_join(adjectives)} world"
     if phrases:
@@ -99,6 +112,10 @@ def _landing(s) -> list[str]:
     founders = [p.name for p in s.people if p.born < 0][:3]
     if founders:
         out.append(f"Among the first awake were {_join(founders)}.")
+    if "the_waker_lives" in s.flags:
+        out.append("The waker, the first person the Mind ever spoke with, was one of them.")
+    if "survivors_among_us" in s.flags:
+        out.append("So were survivors of another Ark's failure, who knew how a colony dies.")
     return out
 
 
@@ -130,68 +147,182 @@ def _roles(s, lo: int, hi: int) -> list[str]:
     return [f"They called the hull {_join(parts)}."]
 
 
-def _legacy(s, lo: int, hi: int) -> list[str]:
-    """What they did that stayed done, in the order they did it. Secrets the
-    Mind kept are not the colony's to write; they wait for the afterword."""
-    lines = HISTORY["legacy"]
-    # flag_years keeps insertion order: within a year, the order they happened.
-    marked = sorted(((year, i, flag) for i, (flag, year) in enumerate(s.flag_years.items())
-                     if lo <= year <= hi and flag in lines))
-    marked = [(year, flag) for year, _, flag in marked]
-    if lo == 0:
-        marked = [(0, f) for f in ("the_waker_lives", "survivors_among_us")
-                  if f in s.flags] + marked
-    return [lines[flag] for _, flag in marked[:LEGACY_PER_ERA]]
+def _founders_lost(s, lo: int, hi: int, index: int) -> list[str]:
+    if index == 0:
+        return []
+    gone = [p for p in s.people if p.born < 0 and p.died is not None and lo <= p.died <= hi]
+    if not gone:
+        return []
+    return [HISTORY["founders_lost"].format(count=_count_word(len(gone)).capitalize(),
+                                             name=gone[0].name)]
 
 
-def _character(entry: dict) -> list[str]:
-    poles = []
-    for axis, value in sorted(entry["axes"].items(), key=lambda kv: -abs(kv[1])):
-        if abs(value) < 25:
+def _major(s, entries: list[dict], rng: random.Random, lo: int, hi: int) -> list[tuple]:
+    """The decisions and events that changed them for good: flags they set and
+    memorable events they lived, weighted, at most a few per era. Returns
+    (event id or None, sentence) in the order they happened."""
+    major, memorable = HISTORY["major"], HISTORY["memorable"]
+    candidates = []
+    seen_edit = False
+    for i, (flag, year) in enumerate(s.flag_years.items()):
+        if not (lo <= year <= hi) or flag not in major:
             continue
-        low, high = C.AXES[axis]
-        strength = "deeply " if abs(value) > 60 else ""
-        poles.append(strength + (high if value > 0 else low).lower())
-    if not poles:
-        return [f"By year {entry['year']} they had not yet decided what kind of people they were."]
-    return [f"By year {entry['year']} they were {_join(poles[:3])}."]
+        # Editing for several traits is one story, told once.
+        if flag.startswith("edited_for_"):
+            if seen_edit:
+                continue
+            seen_edit = True
+        candidates.append((major[flag]["weight"], year, i, None, major[flag]["text"]))
+    for i, entry in enumerate(entries):
+        event_id = entry["event"]
+        if event_id in memorable:
+            candidates.append((memorable[event_id]["weight"], entry["year"], 1000 + i,
+                               event_id, memorable[event_id]["text"]))
+    chosen = sorted(candidates, key=lambda c: -c[0])[:MAJOR_PER_ERA]
+    chosen.sort(key=lambda c: (c[1], c[2]))
+    out = []
+    lead_ins = HISTORY["lead_ins"]
+    offset = rng.randrange(len(lead_ins))       # varied, and never twice running
+    for n, (_, year, _, event_id, text) in enumerate(chosen):
+        lead = lead_ins[(offset + n) % len(lead_ins)]
+        sentence = lead.format(year=year, text=text)
+        out.append((event_id, sentence[0].upper() + sentence[1:]))
+    return out
 
 
-def _turning_points(game, entries: list[dict]) -> list[dict]:
-    """The moments that changed the most, with the stories only this colony
-    lived weighted up: chains, world events, signatures."""
+def _shape(rest: list[dict], events: dict, rng: random.Random, s, index: int,
+           lo: int, hi: int) -> list[str]:
+    """The minor decisions, abstracted: what kind of years these were."""
+    themes: Counter[str] = Counter()
+    mind = them = 0
+    held = failed = 0
+    for entry in rest:
+        event = events.get(entry["event"], {})
+        theme = _theme(event)
+        if theme:
+            themes[theme] += 1
+        defer = _defer_of(event, entry)
+        if defer > 0:
+            mind += 1
+        elif defer < 0:
+            them += 1
+        if entry.get("grade") in ("success", "crit_success"):
+            held += 1
+        elif entry.get("grade") in ("failure", "crit_failure"):
+            failed += 1
+
+    out = []
+    if themes:
+        phrases = []
+        for theme, n in themes.most_common(3):
+            options = HISTORY["themes"][theme]
+            phrases.append(options[min(n, 3) - 1])
+        leads = HISTORY["themes_lead"]
+        lead = leads[index % len(leads)]
+        out.append(lead.format(list=_join(phrases)))
+    if held + failed >= 2:
+        ratio = held / (held + failed)
+        out.append(HISTORY["results"]["good" if ratio > 0.65 else
+                                      "bad" if ratio < 0.4 else "mixed"])
+    if mind + them >= 2:
+        if mind > them * 1.8:
+            out.append(HISTORY["deciders"]["mind"])
+        elif them > mind * 1.8:
+            out.append(HISTORY["deciders"]["them"])
+        else:
+            out.append(HISTORY["deciders"]["shared"])
+    out += _drift(s, index, lo, hi)
+    return out
+
+
+def _theme(event: dict) -> str | None:
+    kind = event.get("kind")
+    if kind == "opportunity":
+        return "windfall"
+    if kind == "story":
+        return "question"
+    if kind != "hazard":
+        return None
+    harm: Counter[str] = Counter()
+    for choice in event.get("choices", []):
+        for outcome in [choice[g] for g in GRADES if g in choice] or [choice]:
+            for stat, value in outcome.get("effects", {}).items():
+                if stat in THEME_OF_STAT and isinstance(value, (int, float)) and value < 0:
+                    harm[stat] -= value
+    if not harm:
+        return "question"
+    return THEME_OF_STAT[harm.most_common(1)[0][0]]
+
+
+def _defer_of(event: dict, entry: dict) -> float:
+    """Whose call it was: the deference the chosen answer moved."""
+    choice = next((c for c in event.get("choices", []) if c["label"] == entry.get("choice")), None)
+    if not choice:
+        return 0.0
+    grade = entry.get("grade")
+    outcome = choice.get(grade, choice) if grade else choice
+    return float(outcome.get("defer", 0))
+
+
+def _drift(s, index: int, lo: int, hi: int) -> list[str]:
+    inside = [e for e in s.chronicle if lo <= e["year"] <= hi]
+    if not inside:
+        return []
+    before = [e for e in s.chronicle if e["year"] < lo]
+    start = before[-1]["axes"] if before else {a: 0 for a in C.AXES}
+    end = inside[-1]["axes"]
+    axis = max(C.AXES, key=lambda a: abs(end[a] - start[a]))
+    moved = end[axis] - start[axis]
+    if abs(moved) < 15:
+        return []
+    low, high = C.AXES[axis]
+    return [HISTORY["drift"].format(pole=(high if moved > 0 else low).lower())]
+
+
+def _epigraph(game, form: dict, events: dict) -> list[str]:
+    """One passage from the Mind's own record, from the moment that moved the
+    colony most, as a history might open on a quotation."""
     s = game.state
-    by_id = {e["id"]: e for e in game.events}
-    scored = []
-    for entry in entries:
-        if not entry.get("outcome") or not entry.get("event"):
+    best, best_score = None, -1.0
+    for i, entry in enumerate(s.chronicle):
+        if not entry.get("outcome") or not i:
             continue
-        i = s.chronicle.index(entry)
-        before = s.chronicle[i - 1] if i else None
-        score = 0.0
-        if before:
-            score += sum(abs(entry["stats"][k] - before["stats"][k]) for k in entry["stats"])
-            score += abs(entry["deference"] - before["deference"])
-            score += 0.3 * sum(abs(entry["axes"][k] - before["axes"][k]) for k in entry["axes"])
-            if before["population"]:
-                score += 100 * abs(entry["population"] - before["population"]) / before["population"]
-        event = by_id.get(entry["event"], {})
-        if event.get("chain_only") or event.get("signature") or \
-                event.get("requires", {}).get("flags"):
-            score += 25
-        if entry.get("grade") in ("crit_success", "crit_failure"):
-            score += 10
-        scored.append((score, entry))
-    best = sorted(scored, key=lambda se: -se[0])[:TURNING_POINTS]
-    return sorted((entry for _, entry in best), key=lambda e: e["year"])
+        before = s.chronicle[i - 1]
+        score = sum(abs(entry["stats"][k] - before["stats"][k]) for k in entry["stats"])
+        if before["population"]:
+            score += 100 * abs(entry["population"] - before["population"]) / before["population"]
+        event = events.get(entry["event"], {})
+        if event.get("chain_only") or event.get("signature"):
+            score += 15
+        score += 6 * HISTORY["memorable"].get(entry["event"], {}).get("weight", 0)
+        # The moment behind a lasting decision: a major flag set by this choice.
+        score += 6 * max((HISTORY["major"][f]["weight"]
+                          for f, y in s.flag_years.items()
+                          if y == entry["year"] and f in HISTORY["major"]), default=0)
+        if score > best_score:
+            best, best_score = entry, score
+    if not best:
+        return []
+    quote = form["quote"].format(year=best["year"], nth=_ordinal(best["year"]))
+    return [quote, f"  {_first_sentence(best['situation'])} {best['outcome']}", ""]
 
 
 def _remembered(s) -> list[str]:
     dead = sorted((p for p in s.people if not p.alive), key=lambda p: p.died)
     if not dead:
         return []
-    lines = [f"{p.name}, {p.role}, who died in year {p.died}" for p in dead[:12]]
-    return ["", "REMEMBERED", ""] + [f"  {line}." for line in lines]
+    names = _join([f"the {p.role} {p.name}" for p in dead[:3]])
+    return ["", HISTORY["remembered"].format(count=_count_word(len(dead)), names=names)]
+
+
+def _count_word(n: int) -> str:
+    words = ["no", "one", "two", "three", "four", "five", "six", "seven", "eight",
+             "nine", "ten", "eleven", "twelve"]
+    return words[n] if n < len(words) else str(n)
+
+
+def _article(word: str) -> str:
+    return "an" if word[:1] in "aeiou" else "a"
 
 
 # --- the afterword ---------------------------------------------------------------

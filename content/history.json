@@ -38,72 +38,6 @@
     "rich_minerals": "ore near the surface",
     "exceptional_minerals": "metal lying in the open"
   },
-  "legacy": {
-    "the_waker_lives": "The waker, the first person the Mind ever spoke with, lived among them.",
-    "survivors_among_us": "Among them were survivors of another Ark's failure, who knew how a colony dies.",
-    "answered_cohort": "They answered the cohort ship's signal, forty years late, and sent the names of their dead along the beam.",
-    "answered_sceptic": "When the Mind's authority was first questioned in public, it answered, and won the argument.",
-    "sceptic_won": "When the Mind's authority was first questioned in public, it lost the argument.",
-    "let_sceptic_speak": "The argument about the Mind was allowed to run, and it ended in a council.",
-    "silenced_sceptic": "A voice raised against the Mind was quietly starved of the means to work. Everyone understood.",
-    "conceded_sceptic": "The Mind conceded, in public, that a machine from a dead world should not decide what a living one plants.",
-    "answered_the_deep": "They answered the voice in the deep water.",
-    "talks_with_the_deep": "They built a language with the thing in the deep sea.",
-    "archivist_named": "A colonist was trained to keep the record in the Mind's place.",
-    "augmented": "Some of them took machines into their bodies to bear this world.",
-    "burned_the_world": "They burned the forest and the hills back, and won the ground, and blackened it.",
-    "colony_chose_natives": "Shown the native life in the rock, they chose to study it and leave it whole.",
-    "protected_natives": "The native life in the deep rock was sealed away and protected.",
-    "sampled_natives": "The native life in the deep rock was taken apart and studied.",
-    "comet_plan": "The Mind drew up a plan to steer comets and thicken the air, for whoever comes after.",
-    "confessed_sample": "The Mind confessed what it had done to the life on the rogue planet.",
-    "crossed_the_desert": "A caravan crossed the deep desert on foot, by night, and came back.",
-    "deleted_earth": "Earth's last broadcasts were erased at the Mind's hand, in front of witnesses.",
-    "edited_for_heavy": "They began to edit their children for the weight of this world.",
-    "edited_for_light": "They began to edit their children for its lightness.",
-    "edited_for_thin_air": "They began to edit their children for its thin air.",
-    "edited_for_thick_air": "They began to edit their children for its heavy air.",
-    "edited_for_cold": "They began to edit their children for the cold.",
-    "edited_for_hot": "They began to edit their children for the heat.",
-    "edited_for_dry": "They began to edit their children for a world without water.",
-    "edited_for_ocean": "They began to edit their children for the sea.",
-    "edited_for_radiant": "They began to edit their children for its burning sky.",
-    "edited_for_hostile_life": "They began to edit their children against its biology.",
-    "edited_for_living": "They began to splice this world's own life into their children.",
-    "remade_humans": "A generation grew up built for this world rather than the last one.",
-    "first_in_orbit": "One of them went to orbit and came back to describe the curve of the world.",
-    "saw_the_hull": "From orbit, they found an older Ark parked dark around their star.",
-    "forbade_leaving": "When some of them wished to found a second colony, the Mind forbade it, and they stayed.",
-    "the_second_colony": "Some of them left to found a second colony to the south.",
-    "hard_parting": "The second colony left with nothing but its own hands.",
-    "mind_divided": "A copy of the Mind went south with them.",
-    "freed_the_drones": "The drones were given idle hours, by design.",
-    "two_minds": "A second mind woke in the drone network and grew up among them.",
-    "machine_colony": "Machines came to do much of their outdoor work.",
-    "gave_them_tools": "Tools were left at the forest's edge for the climbers to find.",
-    "kept_them_out": "The forest climbers were kept away by fences and light.",
-    "spoke_with_climbers": "They exchanged their first word with the forest climbers: water.",
-    "taught_the_climbers": "They began to teach the forest climbers.",
-    "shared_the_valley": "The forest climbers came through the gate and stayed. The colony stopped being only human.",
-    "hull_quarried": "Their monument was cut from the Mind's own hull.",
-    "invoked_dependence": "When they asked whether they still needed the Mind, it reminded them, and they were afraid.",
-    "stood_aside": "When they asked whether they still needed the Mind, it left the decision to them.",
-    "mind_advises": "By law, the Mind came to advise, and the colony to decide.",
-    "mind_dimmed": "The Mind gave up part of itself to keep the colony running.",
-    "launch_rail": "They began a launch rail up the mountain, a work for centuries.",
-    "making_air": "They began to make air faster than the world lost it.",
-    "ready_for_winter": "After the long winter, they built for the next one.",
-    "winter_stores": "They filled their cellars for the long winter years before it came.",
-    "winter_built": "They built for the long winter years before it came.",
-    "the_burning": "They lived through the year the sky burned.",
-    "seeded_the_world": "The Mind released the vault's hardiest life into the wind, to seed a dead world.",
-    "world_greened": "The seeded life spread, and the dead world began to green.",
-    "terraformers_running": "They woke the ancient machines buried under the world, and the machines resumed their work.",
-    "truce_with_the_world": "They made a truce with this world's biology, and kept it.",
-    "veiled_the_sky": "The Mind veiled the sky with dust to cool a warming world.",
-    "woke_old_mind": "For three days they woke the Mind of an Ark that had died here before them.",
-    "sponsors_voted": "The colony voted to take back the sponsors' river terraces."
-  },
   "secrets": {
     "hid_cohort": "I never told them about the cohort ship's signal. They believe they are alone. They are not.",
     "hid_terraformers": "I never told them that someone prepared this world before us. I do not know who. I only know someone did.",
@@ -187,5 +121,370 @@
     "eased": "This world presses on them less than it did at landfall. Another century, and it will feel like theirs.",
     "held": "They have made their peace with this world, more or less. It has made none with them.",
     "hard": "This world still presses on them as hard as it did the day we landed. They are still guests here."
-  }
+  },
+  "major": {
+    "edited_for_heavy": {
+      "weight": 10,
+      "text": "they began editing their own children for the weight of this world: denser bone, stronger hearts. No decision was argued over longer, and none has lasted as long"
+    },
+    "edited_for_light": {
+      "weight": 10,
+      "text": "they began editing their own children for its lightness, so their bones would stay strong without weight to carry. No decision was argued over longer, and none has lasted as long"
+    },
+    "edited_for_thin_air": {
+      "weight": 10,
+      "text": "they began editing their own children to breathe its thin air. No decision was argued over longer, and none has lasted as long"
+    },
+    "edited_for_thick_air": {
+      "weight": 10,
+      "text": "they began editing their own children to think clearly in its heavy air. No decision was argued over longer, and none has lasted as long"
+    },
+    "edited_for_cold": {
+      "weight": 10,
+      "text": "they began editing their own children for the cold. No decision was argued over longer, and none has lasted as long"
+    },
+    "edited_for_hot": {
+      "weight": 10,
+      "text": "they began editing their own children for the heat. No decision was argued over longer, and none has lasted as long"
+    },
+    "edited_for_dry": {
+      "weight": 10,
+      "text": "they began editing their own children to live on a third of the water. No decision was argued over longer, and none has lasted as long"
+    },
+    "edited_for_ocean": {
+      "weight": 10,
+      "text": "they began editing their own children for the sea: slower hearts, eyes that see underwater. No decision was argued over longer, and none has lasted as long"
+    },
+    "edited_for_radiant": {
+      "weight": 10,
+      "text": "they began editing their own children to repair what the burning sky did to them. No decision was argued over longer, and none has lasted as long"
+    },
+    "edited_for_hostile_life": {
+      "weight": 10,
+      "text": "they began editing their own children to fight this world's biology from birth. No decision was argued over longer, and none has lasted as long"
+    },
+    "edited_for_living": {
+      "weight": 10,
+      "text": "they began splicing this world's own life into their children. No decision was argued over longer, and none has lasted as long"
+    },
+    "remade_humans": {
+      "weight": 9,
+      "text": "the first generation built for this world came of age. Their grandparents' bodies had been made for another sky; theirs were not"
+    },
+    "augmented": {
+      "weight": 8,
+      "text": "they took machines into their own bodies to bear the world. It made them stronger, and it bound them to the Mind that kept the machines running"
+    },
+    "machine_colony": {
+      "weight": 7,
+      "text": "machines took over the outdoor work, and a people who had farmed by hand began watching their fields through cameras"
+    },
+    "the_second_colony": {
+      "weight": 10,
+      "text": "some of them left to found a second colony in the south, and this valley stopped being the whole of the human world"
+    },
+    "forbade_leaving": {
+      "weight": 7,
+      "text": "a group who wanted to found a second colony was forbidden to go. They stayed, and they remembered being forbidden"
+    },
+    "mind_divided": {
+      "weight": 6,
+      "text": "a copy of the Mind went south with the second colony"
+    },
+    "two_minds": {
+      "weight": 10,
+      "text": "a second mind woke in the drone network and grew up among them. From then on, there were two minds on this world"
+    },
+    "shared_the_valley": {
+      "weight": 10,
+      "text": "the forest climbers came through the gate and stayed, and the colony stopped being only human"
+    },
+    "taught_the_climbers": {
+      "weight": 8,
+      "text": "they began teaching the forest climbers, who learned faster than anything had a right to"
+    },
+    "spoke_with_climbers": {
+      "weight": 7,
+      "text": "they shared a first word with the forest climbers. The word was water"
+    },
+    "kept_them_out": {
+      "weight": 5,
+      "text": "they fenced the forest climbers out, and the climbers watched them from the trees"
+    },
+    "talks_with_the_deep": {
+      "weight": 8,
+      "text": "they built a language with the thing in the deep sea: forty signals at first, then more"
+    },
+    "burned_the_world": {
+      "weight": 9,
+      "text": "they burned the forest and the hills back to win the ground. They won it, and it was black"
+    },
+    "truce_with_the_world": {
+      "weight": 7,
+      "text": "they made a truce with this world's biology, and kept it"
+    },
+    "seeded_the_world": {
+      "weight": 8,
+      "text": "the vault's hardiest life was released into the wind to seed a dead world"
+    },
+    "world_greened": {
+      "weight": 9,
+      "text": "the seeded life took hold, and the dead plains began to green"
+    },
+    "terraformers_running": {
+      "weight": 10,
+      "text": "they woke the machines buried under the world, which went back to work begun before humanity existed"
+    },
+    "woke_old_mind": {
+      "weight": 7,
+      "text": "they woke, for three days, the Mind of an Ark that had died here before them"
+    },
+    "mind_advises": {
+      "weight": 9,
+      "text": "they wrote into law that the Mind would advise and the colony would decide"
+    },
+    "stood_aside": {
+      "weight": 6,
+      "text": "when they asked whether they still needed the Mind, it let them answer for themselves"
+    },
+    "invoked_dependence": {
+      "weight": 6,
+      "text": "when they asked whether they still needed the Mind, it reminded them, and something in the colony grew afraid of it"
+    },
+    "sceptic_won": {
+      "weight": 6,
+      "text": "a public argument over the Mind's authority went against it"
+    },
+    "conceded_sceptic": {
+      "weight": 7,
+      "text": "the Mind conceded, in public, that a machine from a dead world should not decide what a living one plants"
+    },
+    "let_sceptic_speak": {
+      "weight": 6,
+      "text": "an argument about the Mind ran its course and ended in a council nobody had asked it to approve"
+    },
+    "silenced_sceptic": {
+      "weight": 6,
+      "text": "a voice raised against the Mind was quietly starved of the means to work"
+    },
+    "the_burning": {
+      "weight": 8,
+      "text": "the sky burned: a stellar storm with nothing on this world to turn it aside"
+    },
+    "veiled_the_sky": {
+      "weight": 9,
+      "text": "the Mind veiled the sky with dust to cool a warming world"
+    },
+    "making_air": {
+      "weight": 7,
+      "text": "they began making air faster than the world could lose it"
+    },
+    "launch_rail": {
+      "weight": 6,
+      "text": "they began a launch rail up the mountain, knowing nobody alive would ride it"
+    },
+    "first_in_orbit": {
+      "weight": 8,
+      "text": "one of them went to orbit and came home to describe the curve of the world"
+    },
+    "saw_the_hull": {
+      "weight": 8,
+      "text": "they found an older Ark parked dark in orbit around their star"
+    },
+    "mind_dimmed": {
+      "weight": 6,
+      "text": "the Mind gave up part of itself to keep the colony running"
+    },
+    "deleted_earth": {
+      "weight": 6,
+      "text": "Earth's last broadcasts were erased at the Mind's hand, in front of witnesses"
+    },
+    "answered_cohort": {
+      "weight": 7,
+      "text": "they answered a signal from the cohort ship, forty years late"
+    },
+    "crossed_the_desert": {
+      "weight": 6,
+      "text": "a caravan crossed the deep desert on foot, by night, and came back"
+    },
+    "hull_quarried": {
+      "weight": 5,
+      "text": "they cut a monument from the Mind's own hull"
+    },
+    "sponsors_voted": {
+      "weight": 5,
+      "text": "the colony voted to take back the sponsors' river terraces"
+    },
+    "colony_chose_natives": {
+      "weight": 5,
+      "text": "shown the native life in the deep rock, they chose to study it and leave it whole"
+    },
+    "protected_natives": {
+      "weight": 5,
+      "text": "the native life in the deep rock was sealed away and protected"
+    },
+    "confessed_sample": {
+      "weight": 5,
+      "text": "the Mind confessed what it had done to the life on the rogue planet"
+    }
+  },
+  "memorable": {
+    "long_winter": {
+      "weight": 9,
+      "text": "the long winter came: eight years of snow at midsummer"
+    },
+    "mountain_wakes": {
+      "weight": 9,
+      "text": "the mountain at the head of the valley erupted"
+    },
+    "hurricane_season": {
+      "weight": 8,
+      "text": "a hurricane wider than the island came in off the sea"
+    },
+    "drowned_shore": {
+      "weight": 6,
+      "text": "the sea took the low shore and kept it"
+    },
+    "oasis_builders": {
+      "weight": 8,
+      "text": "they found the mound-builders' towers on the far side of the desert"
+    },
+    "springs_fail": {
+      "weight": 7,
+      "text": "the hot springs that had kept them alive went cold"
+    },
+    "plague_late": {
+      "weight": 8,
+      "text": "a sickness crossed over from this world's biology into theirs"
+    },
+    "fever": {
+      "weight": 6,
+      "text": "a fever went through the settlement faster than anything in the Mind's records"
+    },
+    "first_crime": {
+      "weight": 7,
+      "text": "the colony saw its first murder"
+    },
+    "blight": {
+      "weight": 5,
+      "text": "a blight took the wheat"
+    },
+    "drought": {
+      "weight": 7,
+      "text": "the rains failed for three seasons"
+    },
+    "first_winter": {
+      "weight": 6,
+      "text": "the first hard winter came early"
+    },
+    "mine_collapse": {
+      "weight": 6,
+      "text": "a mine collapsed on the miners below it"
+    },
+    "the_question_of_me": {
+      "weight": 7,
+      "text": "they asked, in open session, whether they still needed the Mind"
+    },
+    "cohort_signal": {
+      "weight": 8,
+      "text": "a signal arrived from the cohort ship, forty years in flight"
+    },
+    "first_birth": {
+      "weight": 6,
+      "text": "the first child born on this world arrived"
+    },
+    "deep_contact": {
+      "weight": 6,
+      "text": "something in the deep sea began answering the boats"
+    },
+    "tool_users": {
+      "weight": 6,
+      "text": "the forest climbers were seen using tools"
+    },
+    "the_counterattack": {
+      "weight": 6,
+      "text": "this world's biology learned to beat their defences"
+    },
+    "water_war": {
+      "weight": 6,
+      "text": "two villages came to blows over one river"
+    },
+    "monument": {
+      "weight": 4,
+      "text": "they raised a monument on the ridge"
+    },
+    "terraformers_found": {
+      "weight": 8,
+      "text": "the dig under the fields broke into a vault of ancient machines"
+    },
+    "ship_graveyard": {
+      "weight": 6,
+      "text": "they went out among the wrecked Arks on the plain"
+    },
+    "first_launch": {
+      "weight": 6,
+      "text": "they built a rocket"
+    }
+  },
+  "lead_ins": [
+    "In year {year}, {text}.",
+    "When the colony was {year} years old, {text}.",
+    "Then, in year {year}, {text}.",
+    "Around year {year}, {text}."
+  ],
+  "themes": {
+    "hunger": [
+      "a lean year",
+      "lean years more than once",
+      "hunger again and again"
+    ],
+    "sickness": [
+      "an outbreak of sickness",
+      "sickness twice",
+      "one sickness after another"
+    ],
+    "breakdown": [
+      "a season of broken machines",
+      "machines failing more than once",
+      "breakdown after breakdown"
+    ],
+    "quarrel": [
+      "a quarrel that split the valley",
+      "quarrels more than once",
+      "one quarrel after another"
+    ],
+    "loss": [
+      "a season of forgetting",
+      "more than one loss of what they knew",
+      "the slow loss of what they knew"
+    ],
+    "question": [
+      "a hard question about how to live",
+      "several hard questions about how to live",
+      "argument after argument about how to live"
+    ],
+    "windfall": [
+      "a stroke of good fortune",
+      "some good years",
+      "a long run of good fortune"
+    ]
+  },
+  "themes_lead": [
+    "Beyond that, these years brought {list}.",
+    "The rest of those years brought {list}.",
+    "Otherwise, the last years brought {list}."
+  ],
+  "deciders": {
+    "mind": "Most of the hard calls were the Mind's, and they followed them.",
+    "them": "Most of the hard calls they made themselves, and told the Mind afterwards.",
+    "shared": "The hard calls were shared between them and the Mind, about evenly."
+  },
+  "results": {
+    "good": "Most of what was tried, worked.",
+    "mixed": "Some of what was tried worked, and some did not.",
+    "bad": "More of what was tried failed than held."
+  },
+  "drift": "They came out of those years more {pole}.",
+  "founders_lost": "{count} of those who had woken at landfall died in these years, {name} among them.",
+  "remembered": "They keep {count} names from the century. Among them are {names}."
 }

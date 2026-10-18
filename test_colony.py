@@ -186,8 +186,10 @@ def test_documents_render_without_holes() -> None:
         assert "{" not in body, f"seed {seed}: unfilled slot in the document"
         assert game.state.outcome_reason in body, "the verdict is missing"
         # A history, not a list of every decision taken.
-        decisions = body.count("Decision: ")
-        assert decisions <= 9, f"seed {seed}: {decisions} decisions quoted"
+        # Minor decisions are summarised, not listed: no choice labels at all.
+        labels = [e["choice"] for e in game.state.chronicle if e.get("choice")]
+        listed = sum(1 for label in labels if label in body)
+        assert listed == 0, f"seed {seed}: {listed} decision labels in the history"
         assert "AFTERWORD" in lines, f"seed {seed}: no afterword"
         after = lines[lines.index("AFTERWORD") + 2:]
         assert len(after) >= 2, f"seed {seed}: the afterword says nothing"
