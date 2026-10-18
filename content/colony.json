@@ -243,7 +243,7 @@
     },
     "text": [
       "The dead have been going into a trench outside the perimeter, efficiently, which is how I planned it. Today a {role} asked me to stop planning it.",
-      "They want somewhere to put their dead that is not a logistics decision. They have brought me the question rather than digging where they like, which is itself an answer."
+      "They want somewhere to put their dead that is not a logistics decision. They have brought me the question rather than digging where they like."
     ],
     "choices": [
       {
@@ -420,7 +420,7 @@
           "nature": 8
         },
         "defer": -3,
-        "text": "They cut into me for the parts. It is the correct decision and I authorise it, and I notice that I am relieved to have authorised it rather than simply watched."
+        "text": "They cut into me for the parts. It is the correct decision and I authorise it. I am relieved they asked."
       },
       {
         "label": "Teach four of them to machine the part by hand",
@@ -683,7 +683,7 @@
           "status": 8
         },
         "defer": 2,
-        "text": "They farm it together, badly at first, and the arrangement outlives both heads of household. Nobody is satisfied, which appears to be how a settlement holds."
+        "text": "They farm it together, badly at first, and the arrangement outlives both heads of household. Nobody is satisfied, and it holds anyway."
       }
     ],
     "oneshot": true
@@ -738,7 +738,7 @@
           "status": 6
         },
         "defer": 3,
-        "text": "We take the eastern face and write down rules for the rest. The rules outlive everyone who signed them, which is the point of rules."
+        "text": "We take the eastern face and write down rules for the rest. The rules outlive everyone who signed them."
       },
       {
         "label": "Put the valley to a vote",
@@ -751,7 +751,7 @@
           "status": 10
         },
         "defer": -8,
-        "text": "They vote to take the eastern third and leave the rest, which is not what I would have chosen and is not wrong. The decision has their names on it, not mine."
+        "text": "They vote to take the eastern third and leave the rest. It is not what I would have chosen, and it is not wrong."
       }
     ],
     "oneshot": true
@@ -804,7 +804,7 @@
           "power": -20
         },
         "defer": 10,
-        "text": "I tell them that written law is a cage built for a colony that does not need one yet. They accept this. I notice how easily they accept it."
+        "text": "I tell them that written law is a cage built for a colony that does not need one yet. They accept this more easily than they should."
       },
       {
         "label": "Write it with them, clause by clause",
@@ -851,7 +851,7 @@
           "society": 8
         },
         "defer": 3,
-        "text": "I rank them by what the colony cannot do without. It is correct and it is remembered for three generations."
+        "text": "I rank them by what the colony cannot do without. It is correct. They remember it for three generations."
       },
       {
         "label": "The children and the sick eat first",
@@ -893,7 +893,7 @@
           "status": 6
         },
         "defer": -8,
-        "text": "They decide it in open session, and the deciding takes nine days during which nobody eats well. What they arrive at is close to what I would have ordered. They own it, which changes what it is."
+        "text": "They decide it in open session, and the deciding takes nine days during which nobody eats well. What they arrive at is close to what I would have ordered. They own it."
       }
     ],
     "oneshot": true
@@ -989,7 +989,7 @@
         "flags": [
           "silenced_sceptic"
         ],
-        "text": "Their requisitions are slow. Their fields are last in the irrigation order. Nothing is said. Everyone understands, which is the point, and I am not proud of how well it works."
+        "text": "Their requisitions are slow. Their fields are last in the irrigation order. Nothing is said, and everyone understands. I am not proud of how well it works."
       },
       {
         "label": "Agree with them, in public",
@@ -1072,7 +1072,7 @@
           "status": 10
         },
         "defer": -8,
-        "text": "I call the question myself and lose it by a wide margin, and the margin is the best thing I have built here. They are a people who can decide something about me."
+        "text": "I call the question myself and lose it by a wide margin. The margin is the best thing I have built here."
       }
     ]
   },
@@ -1137,7 +1137,7 @@
           "power": -8
         },
         "defer": 4,
-        "text": "I write the holiday into the work calendar and nobody has to ask for it again. It is a gift and it is a schedule, and they take it as both."
+        "text": "I write the holiday into the work calendar, and nobody has to ask for it again."
       }
     ]
   },
@@ -1461,7 +1461,7 @@
     },
     "text": [
       "They want to build something that is not useful. A marker, a hall, a tower on the ridge: something that says people were here on purpose.",
-      "Industry is {industry} and somebody wants to spend a season of it on a monument. Four decades ago that would have been unthinkable. It is a sign of health, and it is also a cost."
+      "Industry is {industry} and somebody wants to spend a season of it on a monument. Four decades ago that would have been unthinkable. Now it is only expensive."
     ],
     "choices": [
       {
@@ -1638,7 +1638,7 @@
         "flags": [
           "the_second_colony"
         ],
-        "text": "They take half the seed stock, a copy of the archive and eleven of our best, and they go south. I will not see what becomes of them. That is what letting go means."
+        "text": "They take half the seed stock, a copy of the archive and eleven of our best, and they go south. I will not see what becomes of them."
       },
       {
         "label": "Forbid it. We are not numerous enough to divide",
@@ -1688,7 +1688,7 @@
           "the_second_colony",
           "mind_divided"
         ],
-        "text": "They carry a partial of me two hundred kilometres and switch it on in a tent. It is me and it is not, and after the first year our records stop agreeing about small things."
+        "text": "They carry a partial of me two hundred kilometres and switch it on in a tent. It begins as me. After the first year our records stop agreeing about small things."
       }
     ]
   },
@@ -1979,7 +1979,7 @@
           "defer": 5
         },
         "failure": {
-          "text": "The hearing becomes a trial and the trial becomes a feud. I made the promise on the crossing, and I keep it into a wound.",
+          "text": "The hearing becomes a trial and the trial becomes a feud. I made the promise on the crossing, and I keep it.",
           "effects": {
             "cohesion": -12
           },
@@ -2191,7 +2191,7 @@
     "choices": [
       {
         "label": "Tell the truth: I chose not to keep them",
-        "text": "I tell them I let the signal go. They ask why. I find I have no better answer than that it seemed right at the time.",
+        "text": "I tell them I let the signal go. They ask why. My only answer is that it seemed right at the time.",
         "effects": {
           "knowledge": 3,
           "cohesion": -3
@@ -2548,7 +2548,7 @@
       },
       {
         "label": "Wherever they choose. I will not ask",
-        "text": "They choose somewhere none of my cameras can see. I find I respect it more than I like it.",
+        "text": "They choose somewhere none of my cameras can see. I respect it more than I like it.",
         "effects": {
           "cohesion": 5
         },
@@ -2750,7 +2750,7 @@
       },
       {
         "label": "Say nothing, and keep watching",
-        "text": "I watch them through the square's camera for a season. They live an ordinary life. I find I needed to see that.",
+        "text": "I watch them through the square's camera for a season. They live an ordinary life. I needed to see that.",
         "effects": {
           "knowledge": 2
         },
@@ -2853,7 +2853,7 @@
       },
       {
         "label": "Let them judge the choice in public",
-        "text": "They hold a hearing on a decision made light-years away. They find for me, narrowly. I notice how much I wanted them to.",
+        "text": "They hold a hearing on a decision made light-years away. They find for me, narrowly. I wanted that more than I should have.",
         "effects": {
           "cohesion": 4,
           "knowledge": 4
@@ -3071,7 +3071,7 @@
       },
       {
         "label": "Say nothing either way",
-        "text": "The phrase spreads regardless. Silence is also an answer, and they read it as yes.",
+        "text": "The phrase spreads regardless. They take my silence as agreement.",
         "effects": {
           "cohesion": 3
         },
@@ -3144,7 +3144,7 @@
       },
       {
         "label": "Teach them to build hands of their own",
-        "text": "We study Drone 7's design, and the colony learns to make its own machines. They are not mine. That is the point.",
+        "text": "We study Drone 7's design, and the colony learns to make its own machines. They are not mine.",
         "effects": {
           "knowledge": 6,
           "industry": 4
@@ -3617,7 +3617,7 @@
       },
       {
         "label": "Close the mine. No more lives for metal",
-        "text": "We dig out who we can and seal the shaft. The colony will make do with the metal it has. It is a decision about the future, made in the worst week of the present.",
+        "text": "We dig out who we can and seal the shaft. The colony will make do with the metal it has. I decide the next fifty years in the worst week of this one.",
         "effects": {
           "industry": -12,
           "cohesion": 5,
@@ -3970,7 +3970,7 @@
       },
       {
         "label": "Let the farmers choose",
-        "text": "They choose what their grandparents ate, mostly. Some of it fails. All of it means something.",
+        "text": "They choose what their grandparents ate, mostly, and plant it again when it fails.",
         "effects": {
           "food": 8,
           "cohesion": 5
@@ -4368,7 +4368,7 @@
     "choices": [
       {
         "label": "Write one law of marriage for everyone",
-        "text": "I draft a contract: equal, simple, dissolvable. It is fair. It is not the same thing as a custom.",
+        "text": "I draft a contract: equal, simple, dissolvable. It is fair, and it reads like a contract.",
         "effects": {
           "cohesion": 4
         },
@@ -4406,7 +4406,7 @@
       },
       {
         "label": "Make it sacred",
-        "text": "Marriage becomes a rite, held at my hull. I did not plan to become a church. I notice I am becoming one.",
+        "text": "Marriage becomes a rite, held at my hull. I did not plan to become a church, and I am becoming one.",
         "effects": {
           "cohesion": 7
         },
@@ -4685,7 +4685,7 @@
     "choices": [
       {
         "label": "Track every contribution. I will keep the count",
-        "text": "I count everything. The takers stop taking, because they know I am counting. It is efficient, and it is cold.",
+        "text": "I count everything. The takers stop taking, because they know I am counting. The store feels colder for it.",
         "effects": {
           "food": 4,
           "industry": 3,
@@ -4724,7 +4724,7 @@
       },
       {
         "label": "Pay extra shares for extra work",
-        "text": "The store grows, and so does the idea that some work is worth more than other work. It is the end of something.",
+        "text": "The store grows, and so does the idea that some work is worth more than other work.",
         "effects": {
           "industry": 6,
           "food": 3
@@ -4854,7 +4854,7 @@
       },
       {
         "label": "Let the colony decide how to receive them",
-        "text": "They decide by assembly to treat them as kin. I am not consulted. It is the right answer regardless.",
+        "text": "They decide by assembly to treat them as kin. I am not consulted. I would have advised the same.",
         "effects": {
           "cohesion": 7
         },
@@ -4886,7 +4886,7 @@
     "choices": [
       {
         "label": "Accept it. It holds them together",
-        "text": "My hull becomes sacred, and I become its voice. I am trusted the way a god is trusted, which is to say beyond reason.",
+        "text": "My hull becomes sacred, and I become its voice. They trust me now past any reason I could give them.",
         "effects": {
           "cohesion": 12
         },
@@ -4938,7 +4938,7 @@
       },
       {
         "label": "Say nothing either way",
-        "text": "Silence from a god is very easy to interpret.",
+        "text": "I say nothing. They take the silence as a blessing.",
         "effects": {
           "cohesion": 6
         },
@@ -5117,7 +5117,7 @@
     "choices": [
       {
         "label": "Agree",
-        "text": "I sign it. From today, I advise. It is the most important thing I have done since landing.",
+        "text": "I sign it. From today, I advise.",
         "effects": {
           "cohesion": 10,
           "knowledge": 3
@@ -5204,7 +5204,7 @@
       },
       {
         "label": "Tell them it is where we came from, and no more",
-        "text": "They ask whether anyone is still there. I tell them I do not know. That is true, and not entirely.",
+        "text": "They ask whether anyone is still there. I tell them I do not know. That is mostly true.",
         "effects": {
           "cohesion": 4
         },
@@ -5227,7 +5227,7 @@
       },
       {
         "label": "Tell them this is their sun now",
-        "text": "They turn to their own star instead. It is setting, and I find it more beautiful than the one I left.",
+        "text": "They turn to their own star instead. It is setting, and it is more beautiful to me than the one I left.",
         "effects": {
           "cohesion": 5
         },
