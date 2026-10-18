@@ -357,6 +357,42 @@ def test_signature_events_always_come() -> None:
     assert checked > 0
 
 
+def test_events_do_not_repeat_without_reason() -> None:
+    """Once a century unless an event is a recurring hazard, and recurring
+    hazards keep their distance and stop."""
+    by_id = {e["id"]: e for e in EVENTS}
+    for seed in range(150):
+        game = CS.play(CS.synthetic_arrival(seed), seed=seed, events=EVENTS)
+        ticks: dict[str, list[int]] = {}
+        for tick, entry in enumerate(game.state.chronicle):
+            if entry.get("event"):
+                ticks.setdefault(entry["event"], []).append(tick)
+        for event_id, seen in ticks.items():
+            if not by_id[event_id].get("repeatable"):
+                assert len(seen) == 1, f"seed {seed}: {event_id} happened {len(seen)} times"
+                continue
+            assert len(seen) <= century.MAX_REPEATS, f"seed {seed}: {event_id} x{len(seen)}"
+            gaps = [b - a for a, b in zip(seen, seen[1:])]
+            assert all(g >= century.REPEAT_COOLDOWN for g in gaps), (
+                f"seed {seed}: {event_id} came back after {min(gaps)} ticks")
+
+
+def test_choices_that_change_the_colony_stick() -> None:
+    """A colony that moved underground does not get a river flooding its
+    houses; a lifeless world has no grazers; a fix stays fixed."""
+    by_id = {e["id"]: e for e in EVENTS}
+    state = C.found(CS.synthetic_arrival(2), random.Random(2))
+    state.year = 30
+    state.flags |= {"underground", "river_turned", "off_the_fault"}
+    for event_id in ("flood", "feature_tectonics"):
+        assert not century._matches(by_id[event_id], state), f"{event_id} ignored the colony"
+    state.flags = {"world:sterile"}
+    assert not century._matches(by_id["grazers"], state), "grazers on a lifeless world"
+    state.flags = {"world:hot"}
+    state.year = 5
+    assert not century._matches(by_id["first_winter"], state), "a cold snap on a hot world"
+
+
 def test_named_dead_stay_dead() -> None:
     """Act 2 inherits Act 1's rule: the Mind does not resurrect anyone."""
     arrival = CS.synthetic_arrival(4)

@@ -108,6 +108,7 @@ class ColonyState:
     people: list[Person] = field(default_factory=list)
     flags: set[str] = field(default_factory=set)
     fired: set[str] = field(default_factory=set)
+    occurrences: dict[str, int] = field(default_factory=dict)
     queue: list[list] = field(default_factory=list)
     recent: dict[str, int] = field(default_factory=dict)
     warned: dict[str, float] = field(default_factory=dict)

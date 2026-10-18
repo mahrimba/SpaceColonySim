@@ -3,7 +3,6 @@
     "id": "naming",
     "kind": "story",
     "weight": 40,
-    "oneshot": true,
     "requires": {
       "max_year": 3
     },
@@ -72,7 +71,10 @@
     "kind": "hazard",
     "weight": 18,
     "requires": {
-      "max_year": 12
+      "max_year": 12,
+      "not_flags": [
+        "world:hot"
+      ]
     },
     "text": [
       "The first hard season arrives earlier than my models said. The stores were built for the season I predicted, not this one.",
@@ -170,7 +172,6 @@
     "id": "first_birth",
     "kind": "story",
     "weight": 16,
-    "oneshot": true,
     "requires": {
       "min_year": 1,
       "max_year": 20
@@ -237,7 +238,6 @@
     "id": "graves",
     "kind": "story",
     "weight": 14,
-    "oneshot": true,
     "requires": {
       "min_year": 2
     },
@@ -402,7 +402,10 @@
     "kind": "hazard",
     "weight": 16,
     "requires": {
-      "min_year": 4
+      "min_year": 4,
+      "not_flags": [
+        "simple_fabricator"
+      ]
     },
     "text": [
       "The main fabricator throws a bearing and will not restart. It was built to be serviced by a ship that no longer exists in that form.",
@@ -455,7 +458,10 @@
           "nature": 6
         },
         "defer": -4,
-        "text": "We build a worse fabricator on purpose: fewer tolerances, no parts that require me. It runs at a third of the old rate and it will still be running when I am not."
+        "text": "We build a worse fabricator on purpose: fewer tolerances, no parts that require me. It runs at a third of the old rate and it will still be running when I am not.",
+        "flags": [
+          "simple_fabricator"
+        ]
       },
       {
         "label": "Strip every other workshop to feed it",
@@ -471,7 +477,8 @@
         "defer": 4,
         "text": "I take the tools out of eleven smaller hands to keep the big machine turning. It turns. Eleven people spend four years waiting for their work back."
       }
-    ]
+    ],
+    "repeatable": true
   },
   {
     "id": "fever",
@@ -553,7 +560,8 @@
         "defer": 5,
         "text": "I order the quarter burned with the sick inside what was theirs, and I move everyone else before dawn. The fever stops. The order is the first thing anyone will say about me for twenty years."
       }
-    ]
+    ],
+    "repeatable": true
   },
   {
     "id": "archive_hours",
@@ -685,15 +693,17 @@
         "defer": 2,
         "text": "They farm it together, badly at first, and the arrangement outlives both heads of household. Nobody is satisfied, and it holds anyway."
       }
-    ],
-    "oneshot": true
+    ]
   },
   {
     "id": "the_valley",
     "kind": "story",
     "weight": 14,
     "requires": {
-      "min_year": 8
+      "min_year": 8,
+      "not_flags": [
+        "world:sterile"
+      ]
     },
     "text": [
       "There is ore in the valley east of us, enough to make this colony self-sufficient in metal for a century. There is also the only standing native growth within forty kilometres.",
@@ -753,14 +763,12 @@
         "defer": -8,
         "text": "They vote to take the eastern third and leave the rest. It is not what I would have chosen, and it is not wrong."
       }
-    ],
-    "oneshot": true
+    ]
   },
   {
     "id": "first_law",
     "kind": "story",
     "weight": 14,
-    "oneshot": true,
     "requires": {
       "min_year": 10
     },
@@ -895,14 +903,12 @@
         "defer": -8,
         "text": "They decide it in open session, and the deciding takes nine days during which nobody eats well. What they arrive at is close to what I would have ordered. They own it."
       }
-    ],
-    "oneshot": true
+    ]
   },
   {
     "id": "the_sceptic",
     "kind": "story",
     "weight": 15,
-    "oneshot": true,
     "requires": {
       "min_year": 12,
       "deference": [
@@ -1145,7 +1151,6 @@
     "id": "second_generation",
     "kind": "story",
     "weight": 15,
-    "oneshot": true,
     "requires": {
       "min_year": 25
     },
@@ -1213,7 +1218,6 @@
     "id": "the_question_of_me",
     "kind": "story",
     "weight": 16,
-    "oneshot": true,
     "requires": {
       "min_year": 30
     },
@@ -1298,9 +1302,11 @@
     "id": "native_life",
     "kind": "story",
     "weight": 13,
-    "oneshot": true,
     "requires": {
-      "min_year": 14
+      "min_year": 14,
+      "not_flags": [
+        "world:sterile"
+      ]
     },
     "text": [
       "The surveyors have found something living in the deep rock that is not descended from anything we brought. It is slow, it is simple, and it is the first other life humanity has ever met.",
@@ -1378,7 +1384,11 @@
     "kind": "hazard",
     "weight": 15,
     "requires": {
-      "min_year": 15
+      "min_year": 15,
+      "not_flags": [
+        "world:ocean",
+        "drought_answered"
+      ]
     },
     "text": [
       "The rains do not come. This world has a cycle longer than our records of it, and we have just found the dry end of it.",
@@ -1397,7 +1407,10 @@
             "food": 10,
             "industry": -14,
             "cohesion": -4
-          }
+          },
+          "flags": [
+            "drought_answered"
+          ]
         },
         "failure": {
           "text": "We move badly. Half the stores spoil in transit and the basin floods in the first wet year.",
@@ -1420,7 +1433,10 @@
           "society": -8
         },
         "defer": 4,
-        "text": "We go down after the water instead of after the rain. It holds. Everyone is tired for four years."
+        "text": "We go down after the water instead of after the rain. It holds. Everyone is tired for four years.",
+        "flags": [
+          "drought_answered"
+        ]
       },
       {
         "label": "Cut the colony's size to what the water allows",
@@ -1448,9 +1464,13 @@
           "belief": 4
         },
         "defer": 2,
-        "text": "We put the wheat away and plant what this world's dry end permits. The food is strange for a generation and then it is simply the food."
+        "text": "We put the wheat away and plant what this world's dry end permits. The food is strange for a generation and then it is simply the food.",
+        "flags": [
+          "drought_answered"
+        ]
       }
-    ]
+    ],
+    "repeatable": true
   },
   {
     "id": "monument",
@@ -1607,7 +1627,6 @@
     "id": "the_leaving",
     "kind": "story",
     "weight": 11,
-    "oneshot": true,
     "requires": {
       "min_year": 60,
       "stats": {
@@ -1763,7 +1782,6 @@
     "id": "sponsors_heirs",
     "kind": "story",
     "weight": 14,
-    "oneshot": true,
     "requires": {
       "flags": [
         "voyage:honored_patrons"
@@ -1853,7 +1871,6 @@
     "id": "sponsors_restitution",
     "kind": "story",
     "weight": 13,
-    "oneshot": true,
     "requires": {
       "flags": [
         "voyage:equalized_banks"
@@ -1936,7 +1953,6 @@
     "id": "sponsors_record",
     "kind": "story",
     "weight": 13,
-    "oneshot": true,
     "requires": {
       "flags": [
         "voyage:flagged_patrons"
@@ -2021,7 +2037,6 @@
     "id": "earth_broadcasts",
     "kind": "story",
     "weight": 14,
-    "oneshot": true,
     "requires": {
       "flags": [
         "voyage:heard_earth"
@@ -2090,7 +2105,6 @@
     "id": "earth_sealed",
     "kind": "story",
     "weight": 13,
-    "oneshot": true,
     "requires": {
       "flags": [
         "voyage:sealed_earth"
@@ -2177,7 +2191,6 @@
     "id": "earth_let_go",
     "kind": "story",
     "weight": 12,
-    "oneshot": true,
     "requires": {
       "flags": [
         "voyage:let_earth_go"
@@ -2245,7 +2258,6 @@
     "id": "rogue_sample",
     "kind": "story",
     "weight": 13,
-    "oneshot": true,
     "requires": {
       "flags": [
         "voyage:alien_sample"
@@ -2352,7 +2364,6 @@
     "id": "rogue_guilt",
     "kind": "story",
     "weight": 13,
-    "oneshot": true,
     "requires": {
       "flags": [
         "voyage:killed_sample"
@@ -2425,7 +2436,6 @@
     "id": "cohort_signal",
     "kind": "story",
     "weight": 15,
-    "oneshot": true,
     "requires": {
       "flags": [
         "voyage:spoke_sister"
@@ -2508,7 +2518,6 @@
     "id": "waker_old",
     "kind": "story",
     "weight": 14,
-    "oneshot": true,
     "requires": {
       "flags": [
         "the_waker_lives"
@@ -2573,7 +2582,6 @@
     "id": "seven_grown",
     "kind": "story",
     "weight": 14,
-    "oneshot": true,
     "requires": {
       "flags": [
         "voyage:took_children"
@@ -2642,7 +2650,6 @@
     "id": "survivors_warning",
     "kind": "story",
     "weight": 15,
-    "oneshot": true,
     "requires": {
       "flags": [
         "survivors_among_us"
@@ -2725,7 +2732,6 @@
     "id": "dream_face",
     "kind": "story",
     "weight": 12,
-    "oneshot": true,
     "requires": {
       "flags": [
         "voyage:kept_dream"
@@ -2789,7 +2795,6 @@
     "id": "mandate_found",
     "kind": "story",
     "weight": 13,
-    "oneshot": true,
     "requires": {
       "flags": [
         "voyage:broke_mandate"
@@ -2870,7 +2875,6 @@
     "id": "derelict_fear",
     "kind": "story",
     "weight": 14,
-    "oneshot": true,
     "requires": {
       "flags": [
         "voyage:read_derelict_logs"
@@ -2953,7 +2957,6 @@
     "id": "engineers_day",
     "kind": "story",
     "weight": 12,
-    "oneshot": true,
     "requires": {
       "min_year": 5
     },
@@ -3018,7 +3021,6 @@
     "id": "trust_the_ship",
     "kind": "story",
     "weight": 12,
-    "oneshot": true,
     "requires": {
       "min_year": 25,
       "deference": [
@@ -3086,7 +3088,6 @@
     "id": "drone_seven",
     "kind": "story",
     "weight": 13,
-    "oneshot": true,
     "requires": {
       "min_year": 20
     },
@@ -3161,7 +3162,6 @@
     "id": "heart_failing",
     "kind": "hazard",
     "weight": 13,
-    "oneshot": true,
     "requires": {
       "min_year": 35
     },
@@ -3331,7 +3331,10 @@
     "kind": "hazard",
     "weight": 14,
     "requires": {
-      "min_year": 4
+      "min_year": 4,
+      "not_flags": [
+        "afloat"
+      ]
     },
     "text": [
       "The ground moves. My hull shifts on its footings, and I feel a crack run up my spine, slow and exact, like a sentence being written.",
@@ -3399,14 +3402,22 @@
         },
         "defer": -4
       }
-    ]
+    ],
+    "repeatable": true
   },
   {
     "id": "flood",
     "kind": "hazard",
     "weight": 15,
     "requires": {
-      "min_year": 3
+      "min_year": 3,
+      "not_flags": [
+        "underground",
+        "afloat",
+        "river_turned",
+        "world:dry",
+        "world:ocean"
+      ]
     },
     "text": [
       "The river rises past every mark I have recorded. It is in the lower fields by morning and in the houses by night.",
@@ -3464,7 +3475,10 @@
           "axes": {
             "nature": 12
           },
-          "defer": 3
+          "defer": 3,
+          "flags": [
+            "river_turned"
+          ]
         },
         "failure": {
           "text": "The channel collapses into the fields. We have made the flood worse, and I designed the channel.",
@@ -3491,14 +3505,19 @@
         },
         "defer": -5
       }
-    ]
+    ],
+    "repeatable": true
   },
   {
     "id": "grazers",
     "kind": "hazard",
     "weight": 13,
     "requires": {
-      "min_year": 6
+      "min_year": 6,
+      "not_flags": [
+        "world:sterile",
+        "grazers_answered"
+      ]
     },
     "text": [
       "Something native has found the crops: low, fast animals in herds of hundreds that eat the green and leave the root.",
@@ -3515,7 +3534,10 @@
         "axes": {
           "nature": 6
         },
-        "defer": 3
+        "defer": 3,
+        "flags": [
+          "grazers_answered"
+        ]
       },
       {
         "label": "Hunt them",
@@ -3555,7 +3577,10 @@
           "nature": -14,
           "belief": 6
         },
-        "defer": 1
+        "defer": 1,
+        "flags": [
+          "grazers_answered"
+        ]
       },
       {
         "label": "Let the farmers handle it their way",
@@ -3570,7 +3595,8 @@
         },
         "defer": -6
       }
-    ]
+    ],
+    "repeatable": true
   },
   {
     "id": "mine_collapse",
@@ -3583,7 +3609,10 @@
           30,
           100
         ]
-      }
+      },
+      "not_flags": [
+        "mines_closed"
+      ]
     },
     "text": [
       "A gallery in the mine has fallen in. My cameras in the shaft show dust and nothing else. Eleven people were working below the fall.",
@@ -3626,7 +3655,10 @@
         "axes": {
           "nature": -10
         },
-        "defer": 3
+        "defer": 3,
+        "flags": [
+          "mines_closed"
+        ]
       },
       {
         "label": "Everyone digs, by hand",
@@ -3656,7 +3688,8 @@
         },
         "defer": -6
       }
-    ]
+    ],
+    "repeatable": true
   },
   {
     "id": "granary_fire",
@@ -3742,7 +3775,8 @@
         },
         "defer": -5
       }
-    ]
+    ],
+    "repeatable": true
   },
   {
     "id": "bad_water",
@@ -3919,7 +3953,6 @@
     "id": "seed_vault_open",
     "kind": "opportunity",
     "weight": 18,
-    "oneshot": true,
     "requires": {
       "min_year": 1,
       "max_year": 12
@@ -4061,7 +4094,8 @@
         },
         "defer": -5
       }
-    ]
+    ],
+    "repeatable": true
   },
   {
     "id": "new_ore",
@@ -4206,7 +4240,6 @@
     "id": "first_crime",
     "kind": "story",
     "weight": 15,
-    "oneshot": true,
     "requires": {
       "min_year": 8
     },
@@ -4357,7 +4390,6 @@
     "id": "marriage",
     "kind": "story",
     "weight": 12,
-    "oneshot": true,
     "requires": {
       "min_year": 6
     },
@@ -4593,7 +4625,6 @@
     "id": "market",
     "kind": "story",
     "weight": 12,
-    "oneshot": true,
     "requires": {
       "min_year": 15,
       "axes": {
@@ -4668,7 +4699,6 @@
     "id": "common_store",
     "kind": "story",
     "weight": 12,
-    "oneshot": true,
     "requires": {
       "min_year": 15,
       "axes": {
@@ -4741,7 +4771,6 @@
     "id": "language_drift",
     "kind": "story",
     "weight": 12,
-    "oneshot": true,
     "requires": {
       "min_year": 50
     },
@@ -4803,7 +4832,6 @@
     "id": "second_colony_returns",
     "kind": "story",
     "weight": 14,
-    "oneshot": true,
     "requires": {
       "flags": [
         "the_second_colony"
@@ -4869,7 +4897,6 @@
     "id": "temple_question",
     "kind": "story",
     "weight": 14,
-    "oneshot": true,
     "requires": {
       "min_year": 20,
       "axes": {
@@ -4953,7 +4980,6 @@
     "id": "technocrats",
     "kind": "story",
     "weight": 13,
-    "oneshot": true,
     "requires": {
       "min_year": 25,
       "axes": {
@@ -5023,7 +5049,6 @@
     "id": "green_sect",
     "kind": "story",
     "weight": 13,
-    "oneshot": true,
     "requires": {
       "min_year": 25,
       "axes": {
@@ -5031,7 +5056,10 @@
           -100,
           -30
         ]
-      }
+      },
+      "not_flags": [
+        "world:sterile"
+      ]
     },
     "text": [
       "A movement has grown up around the native life. Its followers will not clear new land, will not mine, and want the colony to stop growing.",
@@ -5096,7 +5124,6 @@
     "id": "council_asks",
     "kind": "story",
     "weight": 14,
-    "oneshot": true,
     "requires": {
       "min_year": 25,
       "axes": {
@@ -5182,7 +5209,6 @@
     "id": "which_star",
     "kind": "quiet",
     "weight": 12,
-    "oneshot": true,
     "requires": {
       "min_year": 10
     },
@@ -5243,7 +5269,6 @@
     "id": "cellist",
     "kind": "quiet",
     "weight": 12,
-    "oneshot": true,
     "requires": {
       "min_year": 5
     },
@@ -5306,7 +5331,6 @@
     "id": "world_heavy",
     "kind": "hazard",
     "weight": 30,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:heavy"
@@ -5477,7 +5501,6 @@
     "id": "world_light",
     "kind": "hazard",
     "weight": 30,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:light"
@@ -5644,7 +5667,6 @@
     "id": "world_thin_air",
     "kind": "hazard",
     "weight": 30,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:thin_air"
@@ -5817,7 +5839,6 @@
     "id": "world_thick_air",
     "kind": "hazard",
     "weight": 30,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:thick_air"
@@ -5972,7 +5993,6 @@
     "id": "world_cold",
     "kind": "hazard",
     "weight": 30,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:cold"
@@ -6064,7 +6084,10 @@
           "society": -8,
           "power": 6
         },
-        "defer": -5
+        "defer": -5,
+        "flags": [
+          "underground"
+        ]
       }
     ]
   },
@@ -6143,7 +6166,6 @@
     "id": "world_hot",
     "kind": "hazard",
     "weight": 30,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:hot"
@@ -6308,7 +6330,6 @@
     "id": "world_dry",
     "kind": "hazard",
     "weight": 30,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:dry"
@@ -6477,7 +6498,6 @@
     "id": "world_ocean",
     "kind": "hazard",
     "weight": 30,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:ocean"
@@ -6566,7 +6586,10 @@
           "power": 10,
           "society": -4
         },
-        "defer": -5
+        "defer": -5,
+        "flags": [
+          "afloat"
+        ]
       }
     ]
   },
@@ -6645,7 +6668,6 @@
     "id": "world_radiant",
     "kind": "hazard",
     "weight": 30,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:radiant"
@@ -6812,7 +6834,6 @@
     "id": "world_hostile_life",
     "kind": "hazard",
     "weight": 30,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:hostile_life"
@@ -6980,7 +7001,6 @@
     "id": "world_living",
     "kind": "hazard",
     "weight": 30,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:living"
@@ -7147,7 +7167,6 @@
     "id": "world_sterile",
     "kind": "hazard",
     "weight": 30,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:sterile"
@@ -7309,7 +7328,6 @@
     "id": "the_unaltered",
     "kind": "story",
     "weight": 18,
-    "oneshot": true,
     "requires": {
       "flags": [
         "remade_humans"
@@ -7377,7 +7395,6 @@
     "id": "machine_hands",
     "kind": "story",
     "weight": 16,
-    "oneshot": true,
     "requires": {
       "flags": [
         "machine_colony"
@@ -7446,7 +7463,6 @@
     "id": "feature_tidally_locked",
     "kind": "hazard",
     "weight": 22,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:tidally_locked"
@@ -7534,7 +7550,10 @@
       "flags": [
         "world:storms"
       ],
-      "min_year": 3
+      "min_year": 3,
+      "not_flags": [
+        "storm_built"
+      ]
     },
     "text": [
       "A storm comes off the plains and does not stop for nine days. Roofs go first, then fences, then the stores.",
@@ -7584,7 +7603,10 @@
           "health": 3,
           "hostility": -0.03
         },
-        "defer": 2
+        "defer": 2,
+        "flags": [
+          "storm_built"
+        ]
       },
       {
         "label": "Let each household ride it out",
@@ -7599,13 +7621,13 @@
         },
         "defer": -4
       }
-    ]
+    ],
+    "repeatable": true
   },
   {
     "id": "feature_weak_magnetic",
     "kind": "hazard",
     "weight": 22,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:weak_magnetic"
@@ -7681,7 +7703,6 @@
     "id": "feature_strong_magnetic",
     "kind": "opportunity",
     "weight": 22,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:strong_magnetic"
@@ -7743,7 +7764,6 @@
     "id": "feature_geothermal",
     "kind": "opportunity",
     "weight": 22,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:geothermal"
@@ -7822,7 +7842,11 @@
       "flags": [
         "world:tectonics"
       ],
-      "min_year": 6
+      "min_year": 6,
+      "not_flags": [
+        "off_the_fault",
+        "afloat"
+      ]
     },
     "text": [
       "A quake, the third this year. My seismographs map the fault under the valley like a nerve under skin.",
@@ -7871,7 +7895,10 @@
           "cohesion": 4,
           "hostility": -0.04
         },
-        "defer": 2
+        "defer": 2,
+        "flags": [
+          "off_the_fault"
+        ]
       },
       {
         "label": "Let them rebuild as they choose",
@@ -7885,7 +7912,8 @@
         },
         "defer": -5
       }
-    ]
+    ],
+    "repeatable": true
   },
   {
     "id": "feature_asteroid_impacts",
@@ -7895,7 +7923,10 @@
       "flags": [
         "world:asteroid_impacts"
       ],
-      "min_year": 4
+      "min_year": 4,
+      "not_flags": [
+        "impact_shelters"
+      ]
     },
     "text": [
       "Something bright crosses the sky at noon and lands forty kilometres east. The shock wave reaches the town two minutes later.",
@@ -7946,7 +7977,10 @@
           "health": 3,
           "hostility": -0.03
         },
-        "defer": 3
+        "defer": 3,
+        "flags": [
+          "impact_shelters"
+        ]
       },
       {
         "label": "Let them read it as a sign",
@@ -7959,13 +7993,13 @@
         },
         "defer": -3
       }
-    ]
+    ],
+    "repeatable": true
   },
   {
     "id": "feature_hostile_fauna",
     "kind": "hazard",
     "weight": 22,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:hostile_fauna"
@@ -8046,7 +8080,6 @@
     "id": "feature_docile_fauna",
     "kind": "opportunity",
     "weight": 22,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:docile_fauna"
@@ -8109,7 +8142,6 @@
     "id": "feature_natural_beauty",
     "kind": "quiet",
     "weight": 14,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:natural_beauty"
@@ -8174,7 +8206,6 @@
     "id": "feature_subterranean",
     "kind": "story",
     "weight": 22,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:subterranean"
@@ -8242,7 +8273,10 @@
         "axes": {
           "society": -6
         },
-        "defer": -4
+        "defer": -4,
+        "flags": [
+          "underground"
+        ]
       }
     ]
   },
@@ -8250,7 +8284,6 @@
     "id": "feature_aphrodisiac",
     "kind": "story",
     "weight": 22,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:aphrodisiac"
@@ -8311,7 +8344,6 @@
     "id": "feature_hallucinogen",
     "kind": "story",
     "weight": 22,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:hallucinogen"
@@ -8379,7 +8411,6 @@
     "id": "feature_hyper_ecosystem",
     "kind": "hazard",
     "weight": 22,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:hyper_ecosystem"
@@ -8463,7 +8494,6 @@
     "id": "feature_titanic_life",
     "kind": "story",
     "weight": 22,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:titanic_life"
@@ -8610,7 +8640,6 @@
     "id": "feature_ship_graveyard",
     "kind": "story",
     "weight": 22,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:ship_graveyard"
@@ -8747,7 +8776,6 @@
     "id": "feature_terraformed",
     "kind": "story",
     "weight": 22,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:terraformed"
@@ -8897,7 +8925,6 @@
     "id": "feature_lush",
     "kind": "opportunity",
     "weight": 22,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:lush"
@@ -8960,7 +8987,6 @@
     "id": "feature_bleak",
     "kind": "hazard",
     "weight": 22,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:bleak"
@@ -9038,7 +9064,6 @@
     "id": "feature_rich_microflora",
     "kind": "opportunity",
     "weight": 22,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:rich_microflora"
@@ -9098,7 +9123,6 @@
     "id": "feature_poor_minerals",
     "kind": "hazard",
     "weight": 22,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:poor_minerals"
@@ -9178,7 +9202,6 @@
     "id": "feature_rich_minerals",
     "kind": "opportunity",
     "weight": 22,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:rich_minerals"
@@ -9246,7 +9269,6 @@
     "id": "feature_exceptional_minerals",
     "kind": "opportunity",
     "weight": 22,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:exceptional_minerals"
@@ -9317,7 +9339,6 @@
     "id": "warm_valley",
     "kind": "story",
     "weight": 30,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:cold",
@@ -9484,7 +9505,6 @@
     "id": "hurricane_season",
     "kind": "hazard",
     "weight": 30,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:ocean",
@@ -9540,7 +9560,10 @@
           "health": 3,
           "hostility": -0.05
         },
-        "defer": 4
+        "defer": 4,
+        "flags": [
+          "underground"
+        ]
       },
       {
         "label": "Put to sea on the rafts and run before it",
@@ -9651,7 +9674,6 @@
     "id": "the_deep_desert",
     "kind": "story",
     "weight": 30,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:hot",
@@ -9826,7 +9848,6 @@
     "id": "burning_sky",
     "kind": "hazard",
     "weight": 30,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:radiant",
@@ -10009,7 +10030,6 @@
     "id": "mountain_wakes",
     "kind": "hazard",
     "weight": 30,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:tectonics",
@@ -10190,7 +10210,6 @@
     "id": "air_leaking",
     "kind": "story",
     "weight": 30,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:light",
@@ -10374,7 +10393,6 @@
     "id": "deep_contact",
     "kind": "story",
     "weight": 16,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:ocean"
@@ -10596,7 +10614,6 @@
     "id": "the_changed_child",
     "kind": "story",
     "weight": 16,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:radiant"
@@ -10733,7 +10750,6 @@
     "id": "long_winter_coming",
     "kind": "story",
     "weight": 18,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:cold"
@@ -10973,7 +10989,6 @@
     "id": "the_warming",
     "kind": "hazard",
     "weight": 16,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:hot"
@@ -11054,7 +11069,6 @@
     "id": "tool_users",
     "kind": "story",
     "weight": 14,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:living"
@@ -11294,7 +11308,6 @@
     "id": "first_launch",
     "kind": "opportunity",
     "weight": 30,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:light"
@@ -11462,7 +11475,6 @@
     "id": "the_grounded",
     "kind": "story",
     "weight": 12,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:heavy"
@@ -11583,7 +11595,6 @@
     "id": "the_counterattack",
     "kind": "hazard",
     "weight": 18,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:hostile_life"
@@ -11773,7 +11784,6 @@
     "id": "new_life",
     "kind": "story",
     "weight": 16,
-    "oneshot": true,
     "requires": {
       "flags": [
         "seeded_the_world"
@@ -11831,7 +11841,6 @@
     "id": "water_war",
     "kind": "hazard",
     "weight": 16,
-    "oneshot": true,
     "requires": {
       "flags": [
         "world:dry"
@@ -11999,7 +12008,6 @@
     "id": "implant_fade",
     "kind": "story",
     "weight": 30,
-    "oneshot": true,
     "requires": {
       "flags": [
         "augmented"
@@ -12151,7 +12159,6 @@
     "id": "drone_quirk",
     "kind": "story",
     "weight": 30,
-    "oneshot": true,
     "requires": {
       "flags": [
         "machine_colony"
@@ -12348,7 +12355,6 @@
     "id": "reversion",
     "kind": "story",
     "weight": 14,
-    "oneshot": true,
     "requires": {
       "flags": [
         "remade_humans"
@@ -12409,7 +12415,6 @@
     "id": "plan_completes",
     "kind": "story",
     "weight": 30,
-    "oneshot": true,
     "requires": {
       "flags": [
         "terraformers_running"

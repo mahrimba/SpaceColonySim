@@ -32,6 +32,12 @@ DONE = "done"
 CENTURY = 100
 EVENT_COOLDOWN = 3
 
+# Events happen once a century unless marked "repeatable", and even those
+# (fires, floods, quakes) need a gap and stop after a few: the same disaster
+# every third year reads as a broken record, not a hard world.
+REPEAT_COOLDOWN = 8
+MAX_REPEATS = 3
+
 # Act 1's HAZARD_SCALE, for the century: multiplies authored damage and deaths
 # so difficulty moves with one number instead of twenty content edits.
 # Tuned against colony_sim.py's steward policy.
@@ -95,14 +101,18 @@ def load(name: str) -> list | dict:
 def _matches(event: dict, state: ColonyState, scheduled: bool = False) -> bool:
     req = event.get("requires", {})
 
+    repeatable = event.get("repeatable", False)
+    if event["id"] in state.fired and not repeatable:
+        return False
+    if repeatable and state.occurrences.get(event["id"], 0) >= MAX_REPEATS:
+        return False
     if not scheduled:
         if event.get("chain_only"):
             return False
         last = state.recent.get(event["id"])
-        if last is not None and len(state.chronicle) - last < EVENT_COOLDOWN:
+        gap = REPEAT_COOLDOWN if repeatable else EVENT_COOLDOWN
+        if last is not None and len(state.chronicle) - last < gap:
             return False
-    if event.get("oneshot") and event["id"] in state.fired:
-        return False
     if state.year < req.get("min_year", 0) or state.year > req.get("max_year", 999):
         return False
     for flag in req.get("flags", []):
@@ -381,8 +391,8 @@ class Century:
         choice = self.current["choices"][index]
         lines = [f"{CHOICE} {choice['label']}"]
 
-        if self.current.get("oneshot"):
-            s.fired.add(self.current["id"])
+        s.fired.add(self.current["id"])
+        s.occurrences[self.current["id"]] = s.occurrences.get(self.current["id"], 0) + 1
 
         check = choice.get("check")
         if check:
@@ -597,6 +607,8 @@ class Century:
             self._drift()
             event = draw(self.events, s, self.rng)
             if event is not None:
+                s.fired.add(event["id"])
+                s.occurrences[event["id"]] = s.occurrences.get(event["id"], 0) + 1
                 choice = self.rng.choice(event["choices"])
                 outcome = choice.get(SUCCESS, choice) if choice.get("check") else choice
                 self._apply(outcome)
