@@ -21,7 +21,8 @@ MAX_LEGS = 60  # a run must terminate; tripping this is a bug, not a result
 
 def competent_policy(game: Game) -> dict:
     """A reasonable player: patch the worst system, keep your mind, settle
-    before the tanks run dry. The baseline Q33's 60% target is measured against.
+    before the tanks run dry. The baseline the 75% arrival target is measured
+    against.
     """
     s = game.state
     richest = max(K.HOLDS, key=lambda h: s.stats[h])
@@ -117,7 +118,7 @@ def survey_runs(n: int, profile: str) -> None:
     print(f"profile {profile}: {n} runs")
     for outcome, count in outcomes.most_common():
         print(f"  {outcome:<12} {count/n:6.1%}")
-    print(f"  arrival rate  {arrived:6.1%}   (target ~60%)")
+    print(f"  arrival rate  {arrived:6.1%}   (target ~75%)")
     print(f"  median legs   {sorted(legs)[n//2]}")
     if alive:
         print(f"  median alive  {sorted(alive)[len(alive)//2]:,} "

@@ -102,10 +102,11 @@ LINGER_FLAVOUR_CHANCE = 0.45   # otherwise, odds of just an observation
 MINOR_HAZARD_DAMAGE = (3.0, 9.0)
 
 # Global severity knob: multiplies authored damage, so difficulty can be moved
-# with one number instead of 28 content edits. Content now carries its real
-# values (tuned to a 60% arrival rate against sim.py), so this sits at 1.0.
-# Raise it to make a voyage crueller without touching voyage.json.
-HAZARD_SCALE = 1.35
+# with one number instead of 28 content edits. Raise it to make a voyage
+# crueller without touching voyage.json; the curve is steep around here, so
+# 1.35 gives roughly 60% arrival and 0.9 gives roughly 89%.
+# Tuned against sim.py to a 75% arrival rate under competent play.
+HAZARD_SCALE = 1.15
 
 # --- d20 resolution (Q16) ----------------------------------------------------
 

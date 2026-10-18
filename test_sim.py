@@ -185,10 +185,10 @@ def test_habitability_is_demanding() -> None:
 
 
 def test_arrival_rate_near_target() -> None:
-    """Q33: ~60% of competent runs should reach a world alive."""
+    """~75% of competent runs should reach a world alive."""
     arrived = sum(sim.play(seed, events=EVENTS).state.outcome == "colonized"
                   for seed in range(250)) / 250
-    assert 0.45 <= arrived <= 0.75, f"arrival rate is {arrived:.1%}, retune constants"
+    assert 0.62 <= arrived <= 0.88, f"arrival rate is {arrived:.1%}, retune constants"
 
 
 def test_events_do_not_repeat_inside_the_cooldown() -> None:
