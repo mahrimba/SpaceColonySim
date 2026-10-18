@@ -304,7 +304,7 @@
     },
     "text": [
       "Hard radiation across the whole spectrum. {system} is pouring it out and I am flying through the thick of it. My skin is lit up like a nerve.",
-      "The dosimeters saturate one after another, bow to stern, like lights going out across a city. This system is screaming at frequencies the colonists will never hear.",
+      "The dosimeters saturate one after another, bow to stern, like lights going out across a city. This system is loud at frequencies the colonists will never hear.",
       "A particle storm breaks over me. My cameras fill with white static, and somewhere behind the static is every sleeper I carry, and not one of them can step out of its way."
     ],
     "choices": [
@@ -1315,7 +1315,7 @@
           }
         },
         "success": {
-          "text": "I stop treating it as foreign and let it inform me. I am measurably better at this now. I am also no longer certain which of us is flying, and I find I do not mind.",
+          "text": "I stop treating it as foreign and let it inform me. I am measurably better at this now. I am also no longer certain which of us is flying, and I do not mind.",
           "effects": {
             "cognition": 32,
             "archive": 19,
@@ -2386,7 +2386,7 @@
             "triaged_culture"
           ]
         },
-        "text": "I put engineering, agronomy and medicine first, and let music and fiction take their chances. It is the correct decision. I will not pretend it was an easy one."
+        "text": "I put engineering, agronomy and medicine first, and let music and fiction take their chances. It is the correct decision, and not an easy one."
       }
     ]
   },
@@ -3520,7 +3520,7 @@
         "effects": {
           "fuel": -3
         },
-        "text": "I keep my distance and let the pair turn without me. Not every opportunity is worth its risk."
+        "text": "I keep my distance and let the pair turn without me."
       }
     ]
   },
@@ -4228,7 +4228,7 @@
             "kept_the_note"
           ]
         },
-        "text": "I leave the strut singing and file a recording with the colonists' music, under my own designation. A vibration is fatigue by another name. It is not much of a composition. It is mine."
+        "text": "I leave the strut singing and file a recording with the colonists' music, under my own designation. It is not much of a composition. It is mine."
       },
       {
         "label": "Damp the vibration",

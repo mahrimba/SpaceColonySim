@@ -15,7 +15,7 @@
     ]
   },
   "scripture": {
-    "title": "THE BOOK OF THE CROSSING — read aloud at {ship}, year {year}",
+    "title": "THE BOOK OF THE CROSSING, read aloud at {ship} in year {year}",
     "prologue": [
       "In the beginning there was a dying world, and a vessel was made to carry us out of it.",
       "",
@@ -30,7 +30,7 @@
     ]
   },
   "catalogue": {
-    "title": "{colony} MUNICIPAL COLLECTION — permanent exhibition, year {year}",
+    "title": "{colony} MUNICIPAL COLLECTION: permanent exhibition, year {year}",
     "prologue": [
       "Hall One: The Crossing.",
       "",
@@ -45,7 +45,7 @@
     ]
   },
   "survival_log": {
-    "title": "{colony} — RECORD KEPT AT {ship}, YEAR {year}",
+    "title": "{colony}: RECORD KEPT AT {ship}, YEAR {year}",
     "prologue": [
       "Written because somebody should.",
       "",
@@ -60,7 +60,7 @@
     ]
   },
   "absent": {
-    "title": "{colony} — AN ACCOUNT OF THE FIRST HUNDRED YEARS",
+    "title": "{colony}: AN ACCOUNT OF THE FIRST HUNDRED YEARS",
     "prologue": [
       "Assembled from what could be found.",
       "",
