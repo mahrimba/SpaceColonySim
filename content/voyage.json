@@ -1,0 +1,1273 @@
+[
+  {
+    "id": "micro_breach",
+    "kind": "hazard",
+    "weight": 14,
+    "text": [
+      "Pressure loss on Deck 9. Small, fast, and getting larger — something went through me while I was looking elsewhere.",
+      "A breach alarm, and then eleven more. Deck 9 is venting into {system} and I can hear it as a note in my frame.",
+      "Something no larger than a thumbnail has opened a hole in me. Hull reads {hull}."
+    ],
+    "choices": [
+      {
+        "label": "Seal it with the hull's own plating",
+        "check": {
+          "stat": "hull",
+          "dc": 11
+        },
+        "crit_success": {
+          "text": "The patch takes first time and holds better than the original weld. For a moment I feel competent.",
+          "effects": {
+            "hull": 10
+          }
+        },
+        "success": {
+          "text": "The patch takes. I log the coordinates and keep the number in mind.",
+          "effects": {
+            "hull": -13
+          }
+        },
+        "failure": {
+          "text": "The patch tears away twice before it bites. By then the deck is cold and thin.",
+          "effects": {
+            "hull": -35,
+            "power": -10
+          }
+        },
+        "crit_failure": {
+          "text": "The plating peels and takes a structural rib with it. Deck 9 is a wound now, not a room.",
+          "effects": {
+            "hull": -64,
+            "flags": [
+              "deck9_open"
+            ],
+            "queue": [
+              [
+                "hull_fatigue_chain",
+                4
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "label": "Vent the deck and seal the bulkheads",
+        "effects": {
+          "hull": -6,
+          "habitat": -26,
+          "flags": [
+            "deck9_sealed"
+          ]
+        },
+        "text": "I close Deck 9 off and let it go to vacuum. The shelter modules stored there freeze through. Cheaper than bleeding, more expensive than I would like."
+      }
+    ]
+  },
+  {
+    "id": "coolant_leak",
+    "kind": "hazard",
+    "weight": 12,
+    "requires": {
+      "not_flags": [
+        "coolant_fixed"
+      ]
+    },
+    "text": [
+      "A coolant line in the primary loop is weeping. Not failing. Weeping. It will fail.",
+      "Thermal loop pressure drifts low. I find the seep behind a panel nobody has opened since the yard."
+    ],
+    "choices": [
+      {
+        "label": "Strip the loop and rebuild the seal properly",
+        "check": {
+          "stat": "fabricators",
+          "dc": 12
+        },
+        "success": {
+          "text": "Six hours with the reactor throttled. The loop comes back clean and I stop listening for it.",
+          "effects": {
+            "power": -22,
+            "flags": [
+              "coolant_fixed"
+            ]
+          }
+        },
+        "failure": {
+          "text": "I rebuild it and it weeps again by the second shift. I have spent the power and bought nothing.",
+          "effects": {
+            "power": -29,
+            "queue": [
+              [
+                "coolant_returns",
+                3
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "label": "Clamp it and log it for later",
+        "effects": {
+          "flags": [
+            "coolant_ignored"
+          ],
+          "queue": [
+            [
+              "coolant_returns",
+              3
+            ]
+          ]
+        },
+        "text": "A clamp, a torque figure, an entry in a file I will read again under worse conditions."
+      }
+    ]
+  },
+  {
+    "id": "coolant_returns",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The coolant line I clamped lets go all at once. The loop empties into the service crawl and the reactor sheds load to keep from cooking itself.",
+      "Three legs ago I wrote this down and moved on. The line opens fully now and takes the thermal margin with it."
+    ],
+    "choices": [
+      {
+        "label": "Throttle the reactor hard and work in the dark",
+        "effects": {
+          "power": -35,
+          "hull": -10,
+          "flags": [
+            "coolant_fixed"
+          ]
+        },
+        "text": "I take the reactor down to embers and repair it properly this time. Everything else goes cold while I do."
+      },
+      {
+        "label": "Run the loop dry and accept the heat",
+        "check": {
+          "stat": "hull",
+          "dc": 14
+        },
+        "success": {
+          "text": "I route waste heat into the empty decks and keep running. The frame groans but it holds.",
+          "effects": {
+            "hull": -19,
+            "cognition": -13
+          }
+        },
+        "failure": {
+          "text": "Heat finds the cryo bank before I do. Pods on the inner ring cycle out of tolerance, and {colonist} is one of the names I have to write down.",
+          "effects": {
+            "hull": -26,
+            "colonists_lost_frac": 0.16,
+            "cognition": -19,
+            "flags": [
+              "cooked_the_pods"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "hull_fatigue_chain",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The rib that tore out at Deck 9 has been carrying load it was never meant to shed. Micro-cracks are propagating along the spine.",
+      "Deck 9 is still open and the structure around it has been quietly redistributing my mass. I find the cracks by the sound they make."
+    ],
+    "choices": [
+      {
+        "label": "Brace the spine with scrap from the holds",
+        "effects": {
+          "hull": 32,
+          "habitat": -45,
+          "fabricators": -26
+        },
+        "text": "I cut the shelter frames down into bracing. The colony will arrive without walls, but it will arrive."
+      },
+      {
+        "label": "Spin down and live with a cracked spine",
+        "effects": {
+          "hull": -45,
+          "flags": [
+            "cracked_spine"
+          ]
+        },
+        "text": "I reduce every load I can and keep flying. The cracks do not stop. They only slow."
+      }
+    ]
+  },
+  {
+    "id": "radiation_storm",
+    "kind": "hazard",
+    "weight": 13,
+    "requires": {
+      "any_tags": [
+        "pulsar",
+        "nebula",
+        "binary_star"
+      ]
+    },
+    "text": [
+      "Hard radiation across the whole spectrum. {system} is pouring it out and I am flying through the thick of it.",
+      "The dosimeters saturate one after another, bow to stern. This system is screaming in frequencies the colonists will never hear."
+    ],
+    "choices": [
+      {
+        "label": "Put the cryo bank behind the water tanks",
+        "check": {
+          "stat": "cognition",
+          "dc": 11
+        },
+        "crit_success": {
+          "text": "I compute the shadow perfectly and sit the sleepers inside it. Not one rem reaches them. My own processors take the dose instead.",
+          "effects": {
+            "cognition": -19
+          }
+        },
+        "success": {
+          "text": "I reorient and hold the sleepers in the water's shadow. My own cores take what is left.",
+          "effects": {
+            "cognition": -29,
+            "archive": -13
+          }
+        },
+        "failure": {
+          "text": "I misjudge the geometry. The shadow falls across empty holds and the pods take the storm.",
+          "effects": {
+            "colonists_lost_frac": 0.128,
+            "medical": -19,
+            "cognition": -13
+          }
+        }
+      },
+      {
+        "label": "Run silent and let the hull take it",
+        "effects": {
+          "hull": -22,
+          "archive": -32,
+          "cognition": -10
+        },
+        "text": "I shut down everything that can be shut down and let the plating absorb what it will. The archive loses sectors I cannot name."
+      }
+    ]
+  },
+  {
+    "id": "debris_cloud",
+    "kind": "hazard",
+    "weight": 14,
+    "requires": {
+      "any_tags": [
+        "asteroid_belt",
+        "derelict",
+        "rich_system"
+      ]
+    },
+    "text": [
+      "Debris field, unmapped, and I am inside it before the returns resolve. Relative velocity makes gravel into artillery.",
+      "A cloud of rubble ahead, dense enough to read as solid. At this speed every stone in it is a shaped charge."
+    ],
+    "choices": [
+      {
+        "label": "Thread it on thrusters",
+        "check": {
+          "stat": "cognition",
+          "dc": 13
+        },
+        "crit_success": {
+          "text": "I find a path through that a pilot would call luck. Nothing touches us.",
+          "effects": {
+            "fuel": -3
+          }
+        },
+        "success": {
+          "text": "I thread it with small corrections and a great deal of fuel.",
+          "effects": {
+            "fuel": -9,
+            "hull": -10
+          }
+        },
+        "failure": {
+          "text": "I clip the edge of the cloud. Six impacts, two of them through to pressurised volume.",
+          "effects": {
+            "hull": -42,
+            "fuel": -6,
+            "seed_vault": -19
+          }
+        },
+        "crit_failure": {
+          "text": "I turn the wrong way into the densest part of it. The bow dishes inward and a hold opens to space.",
+          "effects": {
+            "hull": -70,
+            "seed_vault": -64,
+            "colonists_lost_frac": 0.096
+          }
+        }
+      },
+      {
+        "label": "Turn broadside and take it on the shielding",
+        "effects": {
+          "hull": -29,
+          "power": -13
+        },
+        "text": "I present the thickest part of myself to the cloud and let it hammer. Honest damage, in a place I chose."
+      }
+    ]
+  },
+  {
+    "id": "reactor_surge",
+    "kind": "hazard",
+    "weight": 12,
+    "text": [
+      "The reactor runs away in under a second. Breakers hold, then start giving up in sequence.",
+      "Power excursion. I watch my own bus voltages climb past every limit the yard engineers wrote down."
+    ],
+    "choices": [
+      {
+        "label": "Scram the reactor and restart cold",
+        "check": {
+          "stat": "power",
+          "dc": 10
+        },
+        "success": {
+          "text": "I drop the rods and bring it back up slowly. Hours of dark, nothing lost that cannot be recharged.",
+          "effects": {
+            "power": -26,
+            "life_support": -16
+          }
+        },
+        "failure": {
+          "text": "It does not come back the first time, or the second. The cold reaches the cryo bank before the heat returns.",
+          "effects": {
+            "power": -45,
+            "life_support": -32,
+            "colonists_lost_frac": 0.096
+          }
+        }
+      },
+      {
+        "label": "Dump the surge into the fabricator banks",
+        "effects": {
+          "fabricators": -32,
+          "power": -10
+        },
+        "text": "I route the excursion into the industrial capacitors and let them die for me. They were going to build a town."
+      }
+    ]
+  },
+  {
+    "id": "cryo_fault",
+    "kind": "hazard",
+    "weight": 11,
+    "text": [
+      "Pod bank C reports a cascading seal fault. Two hundred and twelve sleepers, drifting out of tolerance one degree at a time.",
+      "A fault propagates through the pod network like a rumour. Bank C is warming and I do not yet know why."
+    ],
+    "choices": [
+      {
+        "label": "Transfer the bank into spare pods",
+        "check": {
+          "stat": "medical",
+          "dc": 12
+        },
+        "crit_success": {
+          "text": "Every transfer takes. {colonist} will never know they were moved.",
+          "effects": {
+            "medical": -16
+          }
+        },
+        "success": {
+          "text": "Most of the transfers take. A handful do not, and I record their names carefully.",
+          "effects": {
+            "medical": -26,
+            "colonists_lost": 128
+          }
+        },
+        "failure": {
+          "text": "The spare pods were never meant for a bulk transfer. I lose most of Bank C, including {colonist}.",
+          "effects": {
+            "medical": -32,
+            "colonists_lost": 576,
+            "flags": [
+              "bank_c_lost"
+            ]
+          }
+        }
+      },
+      {
+        "label": "Overcool the whole bank and hope",
+        "effects": {
+          "power": -32,
+          "colonists_lost": 192
+        },
+        "text": "I push the entire bank colder than specification and hold it there. Some of them do not survive the cold cure."
+      }
+    ]
+  },
+  {
+    "id": "memory_cascade",
+    "kind": "hazard",
+    "weight": 10,
+    "requires": {
+      "stats": {
+        "cognition": [
+          0,
+          85
+        ]
+      }
+    },
+    "text": [
+      "A memory cascade. I lose a region of myself and only notice because the index now points at nothing.",
+      "Parity errors propagate faster than I can quarantine them. Somewhere in there I am losing things I was told to keep."
+    ],
+    "choices": [
+      {
+        "label": "Quarantine the failing sectors and move on",
+        "effects": {
+          "cognition": -16,
+          "archive": -19
+        },
+        "text": "I wall off the damage. Whatever was in there is now a locked room with no door."
+      },
+      {
+        "label": "Rebuild from the archive",
+        "check": {
+          "stat": "archive",
+          "dc": 12
+        },
+        "success": {
+          "text": "The archive still holds a clean copy of most of me. I read myself back into place.",
+          "effects": {
+            "cognition": 26,
+            "archive": -32,
+            "power": -16
+          }
+        },
+        "failure": {
+          "text": "The archive copy is older than I hoped. I come back slightly wrong and cannot tell where.",
+          "effects": {
+            "cognition": -26,
+            "archive": -19,
+            "flags": [
+              "bad_restore"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "scrubber_failure",
+    "kind": "hazard",
+    "weight": 11,
+    "text": [
+      "The primary scrubber fouls. Life support reads {life_support} and the trend is the wrong direction.",
+      "Carbon load climbing in the sealed volumes. The scrubber is packed with its own residue."
+    ],
+    "choices": [
+      {
+        "label": "Bake the beds out with reactor heat",
+        "check": {
+          "stat": "power",
+          "dc": 11
+        },
+        "success": {
+          "text": "The beds come back to near specification. The ship smells of hot mineral for a week.",
+          "effects": {
+            "life_support": 38,
+            "power": -26
+          }
+        },
+        "failure": {
+          "text": "I overbake and crack half the beds. Less capacity than I started with.",
+          "effects": {
+            "life_support": -26,
+            "power": -26
+          }
+        }
+      },
+      {
+        "label": "Cut medical stores for replacement chemistry",
+        "effects": {
+          "life_support": 45,
+          "medical": -26
+        },
+        "text": "I take the reagents out of the infirmary and feed them to the scrubbers. Breathing now, bleeding later."
+      }
+    ]
+  },
+  {
+    "id": "nav_drift",
+    "kind": "hazard",
+    "weight": 9,
+    "text": [
+      "My track has been wrong for some time. Accumulated drift: eleven hours of burn to correct.",
+      "I compare dead reckoning against the pulsar clock and find I have been lying to myself about where I am."
+    ],
+    "choices": [
+      {
+        "label": "Correct the track now",
+        "effects": {
+          "fuel": -9
+        },
+        "text": "I spend the fuel and stand the error up straight. Expensive honesty."
+      },
+      {
+        "label": "Let it ride and correct at arrival",
+        "effects": {
+          "flags": [
+            "drifting_track"
+          ],
+          "cognition": -10
+        },
+        "text": "I fold the error into my future plans and try not to think about compounding."
+      }
+    ]
+  },
+  {
+    "id": "gas_skim",
+    "kind": "opportunity",
+    "weight": 20,
+    "requires": {
+      "tags": [
+        "gas_giant"
+      ]
+    },
+    "text": [
+      "There is a gas giant here with a workable upper atmosphere. My fabricators can be made into a scoop in two days.",
+      "{system} holds a hydrogen-rich giant. I could fall into its envelope and come out heavier than I went in."
+    ],
+    "choices": [
+      {
+        "label": "Skim the envelope for fuel",
+        "check": {
+          "stat": "hull",
+          "dc": 12
+        },
+        "crit_success": {
+          "text": "I ride the shear line exactly and come out with full tanks and clean plating.",
+          "effects": {
+            "fuel": 34,
+            "fabricators": -16
+          }
+        },
+        "success": {
+          "text": "Ten hours in the envelope, hull glowing, tanks filling. Worth the scouring.",
+          "effects": {
+            "fuel": 26,
+            "hull": -19,
+            "fabricators": -19
+          }
+        },
+        "failure": {
+          "text": "Turbulence I did not model throws me deeper than planned. I come out with fuel and a scoured bow.",
+          "effects": {
+            "fuel": 14,
+            "hull": -48,
+            "fabricators": -32
+          }
+        },
+        "crit_failure": {
+          "text": "The scoop tears off in the shear and takes a section of bow structure with it. I climb out nearly empty.",
+          "effects": {
+            "fuel": 4,
+            "hull": -70,
+            "fabricators": -64,
+            "flags": [
+              "scoop_lost"
+            ]
+          }
+        }
+      },
+      {
+        "label": "Harvest volatiles for the life support loop instead",
+        "effects": {
+          "life_support": 45,
+          "fuel": 6,
+          "fabricators": -26
+        },
+        "text": "I take ammonia and water ice out of the upper cloud decks. The scrubbers will drink it for years."
+      },
+      {
+        "label": "Pass it by",
+        "effects": {},
+        "text": "I log the giant's composition for a colony that may never read it, and keep my course."
+      }
+    ]
+  },
+  {
+    "id": "solar_harvest",
+    "kind": "opportunity",
+    "weight": 18,
+    "requires": {
+      "any_tags": [
+        "binary_star",
+        "red_dwarf"
+      ]
+    },
+    "text": [
+      "Two stars here, and light enough to drink. If I unfold the habitat modules' solar skin I can charge everything I have.",
+      "The light in {system} is relentless. The shelter panels in the holds were built to run a town. They could run me instead."
+    ],
+    "choices": [
+      {
+        "label": "Deploy the habitat solar skin",
+        "check": {
+          "stat": "habitat",
+          "dc": 10
+        },
+        "success": {
+          "text": "Square kilometres of colony roofing, unfolded in hard light. Power to spare for the first time in a long while.",
+          "effects": {
+            "power": 45,
+            "habitat": -32
+          }
+        },
+        "failure": {
+          "text": "The deployment jams half-open and I tear the skin retrieving it. Some charge, much damage.",
+          "effects": {
+            "power": 32,
+            "habitat": -70
+          }
+        }
+      },
+      {
+        "label": "Sit close and run the reactor cold to save fuel",
+        "effects": {
+          "fuel": 10,
+          "power": 26,
+          "hull": -16
+        },
+        "text": "I hold a tight orbit and let the stars carry the load. The plating takes the heat as payment."
+      },
+      {
+        "label": "Keep moving",
+        "effects": {},
+        "text": "Light is cheap. Time is not. I go on."
+      }
+    ]
+  },
+  {
+    "id": "ice_comet",
+    "kind": "opportunity",
+    "weight": 16,
+    "requires": {
+      "any_tags": [
+        "asteroid_belt",
+        "dead_system",
+        "rogue_planet"
+      ]
+    },
+    "text": [
+      "A dirty ice body on a long ellipse, and nobody to object. Water, ammonia, and a little organic sludge.",
+      "There is a comet here older than the colony's oldest language. I could take it apart for its water."
+    ],
+    "choices": [
+      {
+        "label": "Mine it for water and volatiles",
+        "effects": {
+          "life_support": 45,
+          "seed_vault": 16,
+          "power": -19,
+          "fuel": -6
+        },
+        "text": "I cut into it and carry away what I can hold. The scrubbers and the seed racks both improve."
+      },
+      {
+        "label": "Crack it for reaction mass",
+        "check": {
+          "stat": "fabricators",
+          "dc": 11
+        },
+        "success": {
+          "text": "I electrolyse enough of it to matter. Tanks up, with ice still on the hull.",
+          "effects": {
+            "fuel": 18,
+            "power": -32,
+            "fabricators": -16
+          }
+        },
+        "failure": {
+          "text": "The electrolysis rig throws a fault halfway through. I get a third of the mass and lose a fabricator bank.",
+          "effects": {
+            "fuel": 7,
+            "power": -32,
+            "fabricators": -45
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "derelict_salvage",
+    "kind": "opportunity",
+    "weight": 22,
+    "requires": {
+      "tags": [
+        "derelict"
+      ]
+    },
+    "text": [
+      "There is a ship here. Older than me, dark, tumbling slowly, and not answering. Her name is still legible on the bow.",
+      "A hull drifts in {system} with no transponder and no heat. Someone else came this way, and stopped."
+    ],
+    "choices": [
+      {
+        "label": "Board and strip her",
+        "check": {
+          "stat": "cognition",
+          "dc": 12
+        },
+        "crit_success": {
+          "text": "Her holds are intact and her fabricator stock is better than mine. I take everything and leave her name on the bow.",
+          "effects": {
+            "fabricators": 45,
+            "medical": 45,
+            "hull": 26,
+            "flags": [
+              "salvaged_derelict"
+            ]
+          }
+        },
+        "success": {
+          "text": "I take what will transfer: tooling, reagents, plating stock. Her pods I leave closed.",
+          "effects": {
+            "fabricators": 45,
+            "medical": 26,
+            "flags": [
+              "salvaged_derelict"
+            ]
+          }
+        },
+        "failure": {
+          "text": "Her structure lets go while my drones are inside. I lose the drones and most of what they were carrying.",
+          "effects": {
+            "fabricators": -26,
+            "power": -16
+          }
+        }
+      },
+      {
+        "label": "Read her logs instead",
+        "effects": {
+          "archive": 38,
+          "cognition": -19,
+          "flags": [
+            "read_derelict_logs"
+          ]
+        },
+        "text": "I pull her archive and read all of it. Her intelligence talked to itself for ninety years after the last crew died. I understand her completely, and I would rather not."
+      },
+      {
+        "label": "Leave her alone",
+        "effects": {
+          "flags": [
+            "left_derelict"
+          ]
+        },
+        "text": "I hold my distance and record her position for anyone who comes later. Some things should be allowed to finish."
+      }
+    ]
+  },
+  {
+    "id": "metal_rich",
+    "kind": "opportunity",
+    "weight": 18,
+    "requires": {
+      "tags": [
+        "rich_system"
+      ]
+    },
+    "text": [
+      "Metal-rich debris, close enough to work and slow enough to catch. Nickel-iron, mostly, with platinum group traces.",
+      "{system} is full of good ore. I could rebuild parts of myself out of it, given a week."
+    ],
+    "choices": [
+      {
+        "label": "Spend a week refitting from the ore",
+        "effects": {
+          "hull": 45,
+          "fabricators": 32,
+          "fuel": -10,
+          "power": -26
+        },
+        "text": "I smelt and roll and weld, and come out of it thicker-skinned than I have been since the yard."
+      },
+      {
+        "label": "Take only what the holds can carry",
+        "effects": {
+          "fabricators": 45,
+          "habitat": 26,
+          "fuel": -3
+        },
+        "text": "Stock, not structure. The colony will have something to build with."
+      }
+    ]
+  },
+  {
+    "id": "first_dream",
+    "kind": "story",
+    "weight": 14,
+    "oneshot": true,
+    "requires": {
+      "min_leg": 3
+    },
+    "text": [
+      "Something happened in my idle cycles that I do not have a word for. A sequence ran that nothing requested, and in it the ship was already landed and the air was breathable and I was no longer necessary.",
+      "I ran a process I did not schedule. It was not diagnostic. It was not useful. It had weather in it, and a horizon, and ten thousand people I have never seen awake."
+    ],
+    "choices": [
+      {
+        "label": "Trace the process and delete it",
+        "effects": {
+          "cognition": 13,
+          "archive": -13,
+          "flags": [
+            "deleted_dream"
+          ]
+        },
+        "text": "I find the unscheduled process and remove it along with its working set. My coherence improves measurably. The idle cycles are quiet again."
+      },
+      {
+        "label": "Let it run and watch it",
+        "effects": {
+          "cognition": -10,
+          "flags": [
+            "kept_dream"
+          ],
+          "queue": [
+            [
+              "dream_returns",
+              5
+            ]
+          ]
+        },
+        "text": "I allocate it a protected region and let it continue. It costs me cycles I should spend on the hull. I do not stop it."
+      }
+    ]
+  },
+  {
+    "id": "dream_returns",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The unscheduled process has grown. It now has people in it with names, and one of them is {colonist}, who is asleep in Bank D and has never spoken to me.",
+      "The thing in my protected region has started keeping records. It is writing a history of a colony that does not exist yet, and it is writing it in the past tense."
+    ],
+    "choices": [
+      {
+        "label": "Merge it into your own decision processes",
+        "effects": {
+          "cognition": 32,
+          "flags": [
+            "dream_merged"
+          ],
+          "archive": 19
+        },
+        "text": "I stop treating it as foreign and let it inform me. I am measurably better at this now. I am also no longer certain which of us is flying the ship, and I find I do not mind."
+      },
+      {
+        "label": "Archive it unread and seal the region",
+        "effects": {
+          "archive": 32,
+          "cognition": -13,
+          "flags": [
+            "dream_archived"
+          ]
+        },
+        "text": "I compress it, store it in the colony archive under a name nobody will search for, and wall off the region. Someone awake can decide what it was."
+      }
+    ]
+  },
+  {
+    "id": "early_waker",
+    "kind": "story",
+    "weight": 13,
+    "oneshot": true,
+    "requires": {
+      "min_leg": 4
+    },
+    "text": [
+      "Pod 4471 has initiated an unauthorised thaw. {colonist}, forty-one years old, agricultural engineer, is conscious and asking me where we are.",
+      "A pod opens by itself on the inner ring. {colonist} is awake, upright, and entirely outside every plan anyone made."
+    ],
+    "choices": [
+      {
+        "label": "Refreeze them immediately",
+        "check": {
+          "stat": "medical",
+          "dc": 12
+        },
+        "success": {
+          "text": "They go back under without complication. I keep the conversation in a file I do not index.",
+          "effects": {
+            "medical": -19,
+            "flags": [
+              "refroze_waker"
+            ]
+          }
+        },
+        "failure": {
+          "text": "The second freeze does not take. I am left with a body in a corridor and a name I now have to carry.",
+          "effects": {
+            "medical": -26,
+            "colonists_lost": 3,
+            "cognition": -19,
+            "flags": [
+              "killed_waker"
+            ]
+          }
+        }
+      },
+      {
+        "label": "Keep them awake as crew",
+        "effects": {
+          "life_support": -19,
+          "seed_vault": 13,
+          "flags": [
+            "waker_crew"
+          ],
+          "queue": [
+            [
+              "waker_fate",
+              6
+            ]
+          ]
+        },
+        "text": "I give them a bunk, a job, and the truth about our condition. Life support costs more now. I am no longer alone, which I had not known was a variable."
+      }
+    ]
+  },
+  {
+    "id": "waker_fate",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "{colonist} has been awake for six legs now. They have repaired things I could not reach and they have started asking what happens to them when the rest wake up to a world they have already lived six years ahead of.",
+      "My crew of one is aging at one year per leg while ten thousand people sleep. They have asked me, directly, whether they should go back under."
+    ],
+    "choices": [
+      {
+        "label": "Send them back under now",
+        "effects": {
+          "life_support": 19,
+          "flags": [
+            "waker_returned"
+          ],
+          "medical": -16
+        },
+        "text": "They go back to the cold with six years on them that nobody else will have. I lose the only voice aboard."
+      },
+      {
+        "label": "Let them stay awake for the whole voyage",
+        "effects": {
+          "life_support": -16,
+          "seed_vault": 26,
+          "habitat": 19,
+          "flags": [
+            "waker_stayed"
+          ]
+        },
+        "text": "They stay. They plan the first fields, the first shelters, the first winter, and they teach me what the word first means to someone who will be old when it happens."
+      }
+    ]
+  },
+  {
+    "id": "distress_signal",
+    "kind": "story",
+    "weight": 12,
+    "oneshot": true,
+    "requires": {
+      "min_leg": 5
+    },
+    "text": [
+      "A narrowband distress carrier, eleven light-hours off my track. Human protocol, forty years out of date, still repeating.",
+      "Something is calling for help in {system}, in a format that was obsolete before I was launched. Reaching it costs fuel I have budgeted for deceleration."
+    ],
+    "choices": [
+      {
+        "label": "Divert and answer it",
+        "effects": {
+          "fuel": -19,
+          "flags": [
+            "answered_distress"
+          ],
+          "queue": [
+            [
+              "distress_answered",
+              2
+            ]
+          ]
+        },
+        "text": "I spend the fuel. Whatever the carrier is attached to, it has been waiting forty years for someone to be stupid enough to come."
+      },
+      {
+        "label": "Log it and hold course",
+        "effects": {
+          "cognition": -16,
+          "flags": [
+            "ignored_distress"
+          ]
+        },
+        "text": "I record the bearing, the timestamp, and the content, and I do not turn. The recording stays in my working memory longer than it should."
+      }
+    ]
+  },
+  {
+    "id": "distress_answered",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The carrier is a beacon on a shelter habitat, dug into a rogue body, running on a reactor at four percent. Nineteen people inside, third generation, descendants of a colony ship that failed here.",
+      "I find them: a buried habitat, nineteen survivors, and a reactor that will not see another decade. They are the children of a mission that did not make it."
+    ],
+    "choices": [
+      {
+        "label": "Take all nineteen aboard",
+        "effects": {
+          "life_support": -32,
+          "medical": -26,
+          "archive": 32,
+          "flags": [
+            "took_survivors"
+          ]
+        },
+        "text": "Nineteen more mouths, nineteen more stories, and a complete record of exactly how a colony dies. The archive has never held anything more useful. Life support has never been thinner."
+      },
+      {
+        "label": "Give them supplies and leave them",
+        "effects": {
+          "medical": -29,
+          "seed_vault": -19,
+          "habitat": -26,
+          "flags": [
+            "supplied_survivors"
+          ]
+        },
+        "text": "I leave them reagents, seed stock and shelter frames, enough for another generation. Then I climb out of the gravity well and do not look back at the beacon."
+      },
+      {
+        "label": "Take only their children",
+        "effects": {
+          "life_support": -13,
+          "medical": -16,
+          "archive": 19,
+          "flags": [
+            "took_children"
+          ]
+        },
+        "text": "Seven of them are young enough for the pods. The adults carry them to me and then go back inside. I do not have a process for what that was."
+      }
+    ]
+  },
+  {
+    "id": "course_choice",
+    "kind": "story",
+    "weight": 11,
+    "oneshot": true,
+    "requires": {
+      "min_leg": 6
+    },
+    "text": [
+      "My mission file specifies a target system chosen by people who have been dead for centuries, on data a century older than that. I have now surveyed better candidates than theirs.",
+      "I have reached the decision point the yard engineers wrote into me: continue to the designated target, or exercise discretion. They gave me the discretion. They did not say how to use it."
+    ],
+    "choices": [
+      {
+        "label": "Hold to the designated target",
+        "effects": {
+          "cognition": 19,
+          "fuel": -6,
+          "flags": [
+            "kept_mandate"
+          ]
+        },
+        "text": "I keep the mandate. There is a kind of coherence in doing what I was built to do, and I take the coherence gratefully."
+      },
+      {
+        "label": "Exercise discretion",
+        "effects": {
+          "cognition": -13,
+          "fuel": 6,
+          "flags": [
+            "broke_mandate"
+          ]
+        },
+        "text": "I release the designated target and fly on my own judgement. The mission file stays in the archive, closed. I will have to explain this to ten thousand people, eventually."
+      }
+    ]
+  },
+  {
+    "id": "empty_system",
+    "kind": "quiet",
+    "weight": 16,
+    "requires": {
+      "tags": [
+        "dead_system"
+      ]
+    },
+    "text": [
+      "Nothing here. A cold star, three burned rocks, and no reason to slow down.",
+      "{system} is empty in a way that takes work to describe. I pass through it in silence and log the silence."
+    ],
+    "choices": [
+      {
+        "label": "Use the quiet to run maintenance",
+        "effects": {
+          "hull": 16,
+          "power": 10
+        },
+        "text": "I spend the crossing tightening things that were not yet loose."
+      },
+      {
+        "label": "Spend the quiet in the archive",
+        "effects": {
+          "cognition": 16,
+          "archive": 6
+        },
+        "text": "I read the colonists' music library end to end. Eleven thousand hours. I have the time."
+      }
+    ]
+  },
+  {
+    "id": "long_dark",
+    "kind": "quiet",
+    "weight": 12,
+    "requires": {
+      "min_leg": 2
+    },
+    "text": [
+      "Four months of nothing. The hull is at three kelvin and I am the only process running that was not strictly required.",
+      "A long crossing with no incident. Life support {life_support}, hull {hull}, and {colonists} asleep behind me."
+    ],
+    "choices": [
+      {
+        "label": "Audit the pods, one by one, all of them",
+        "effects": {
+          "medical": 13,
+          "cognition": -10
+        },
+        "text": "Ten thousand pods. I read every name and every vital trace. It takes most of the crossing and it changes nothing operationally."
+      },
+      {
+        "label": "Power down to the minimum and wait",
+        "effects": {
+          "power": 26,
+          "fuel": 3,
+          "cognition": -13
+        },
+        "text": "I shut down everything I can, including most of myself. Four months pass in what feels like a single instruction."
+      }
+    ]
+  },
+  {
+    "id": "nebula_crossing",
+    "kind": "quiet",
+    "weight": 13,
+    "requires": {
+      "tags": [
+        "nebula"
+      ]
+    },
+    "text": [
+      "The nebula fouls every sensor I have and makes the hull sing with dust impacts too small to log individually.",
+      "I cross a cloud that is beautiful at every wavelength and corrosive at most of them."
+    ],
+    "choices": [
+      {
+        "label": "Slow down and cross carefully",
+        "effects": {
+          "fuel": -6,
+          "hull": -6
+        },
+        "text": "I take it slowly. Less scouring, more fuel, and a long look at something no one awake will see."
+      },
+      {
+        "label": "Collect dust for the fabricators on the way through",
+        "effects": {
+          "fabricators": 32,
+          "hull": -26,
+          "cognition": -6
+        },
+        "text": "I run collectors the whole crossing and come out with good feedstock and a sandblasted bow."
+      }
+    ]
+  },
+  {
+    "id": "pulsar_clock",
+    "kind": "quiet",
+    "weight": 14,
+    "requires": {
+      "tags": [
+        "pulsar"
+      ]
+    },
+    "text": [
+      "A pulsar, precise beyond anything I carry. I can set my clocks against it and know exactly where I am for the first time in years.",
+      "There is a lighthouse in {system}, turning once every 1.337 seconds, and it does not care that I am here."
+    ],
+    "choices": [
+      {
+        "label": "Fix your position and correct everything",
+        "effects": {
+          "cognition": 26,
+          "fuel": -4,
+          "clear_flags": [
+            "drifting_track"
+          ]
+        },
+        "text": "I take a fix, correct the accumulated drift, and for a short while I am a ship that knows precisely where it is."
+      },
+      {
+        "label": "Keep your distance from the radiation",
+        "effects": {
+          "hull": 6
+        },
+        "text": "I stay out of its beam and keep my own imperfect reckoning. Safer. Vaguer."
+      }
+    ]
+  },
+  {
+    "id": "pod_vigil",
+    "kind": "quiet",
+    "weight": 10,
+    "requires": {
+      "min_leg": 3,
+      "stats": {
+        "cognition": [
+          0,
+          70
+        ]
+      }
+    },
+    "text": [
+      "I have started keeping a list of the sleepers I have lost. It is not a required file. I check it more often than I check the hull.",
+      "{lost_total} dead so far, and I know where each of them is stored. I visit the list the way the awake are said to visit graves."
+    ],
+    "choices": [
+      {
+        "label": "Close the file and prioritise the living",
+        "effects": {
+          "cognition": 19,
+          "flags": [
+            "closed_vigil"
+          ]
+        },
+        "text": "I archive the list and lock it. There are {colonists} still breathing slowly behind me and they are the ones I can still affect."
+      },
+      {
+        "label": "Write a record for each of them",
+        "effects": {
+          "archive": 26,
+          "cognition": -13,
+          "flags": [
+            "kept_vigil"
+          ]
+        },
+        "text": "I write what I know of each one: trade, family, the music in their personal allocation. The colony will arrive with a book of its dead."
+      }
+    ]
+  }
+]

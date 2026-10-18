@@ -1,0 +1,283 @@
+"""Textual front end. A view onto resolve.Game — no rules live here.
+
+    python app.py            # a new voyage
+    python app.py --seed 42  # replay a specific one
+"""
+
+from __future__ import annotations
+
+import argparse
+
+from textual.app import App, ComposeResult
+from textual.containers import Vertical, VerticalScroll
+from textual.widgets import Static
+
+import constants as K
+import resolve
+from resolve import DONE, EVENT, MAINTENANCE, Game
+
+KEYS = "123456789abcdefghij"  # option index -> keycap
+
+
+class Panel(Static):
+    """Persistent telemetry. Precision is the ship's problem, not the UI's."""
+
+    last = ""  # plain text of the most recent render, for the smoke test
+
+    def render_state(self, game: Game | None) -> None:
+        if game is None:
+            self.last = "No ship underway."
+            self.update("[dim]No ship underway.[/dim]")
+            return
+        s = game.state
+        rows = [f"[b]{s.name}[/b]", f"[dim]seed {game.seed}[/dim]", ""]
+        rows.append(f"Leg [b]{s.leg}[/b]")
+        if s.system_name:
+            tags = ", ".join(sorted(t.replace("_", " ") for t in s.system_tags))
+            rows.append(f"{s.system_name}")
+            rows.append(f"[dim]{tags}[/dim]")
+        rows.append("")
+        for stat in K.SYSTEMS:
+            rows.append(f"{K.LABELS[stat]:<13}{self._bar(s, stat)}")
+        rows.append("")
+        rows.append("[dim]HOLDS[/dim]")
+        for hold in K.HOLDS:
+            rows.append(f"{K.LABELS[hold]:<13}{self._bar(s, hold)}")
+        rows.append("")
+        rows.append(f"Sleepers     {s.say_count(s.colonists_alive)}")
+        if s.colonists_lost:
+            rows.append(f"[red]Lost         {s.say_count(s.colonists_lost)}[/red]")
+        rows.append("")
+        rows.append(f"Range        {s.legs_of_fuel():.0f} legs")
+        rows.append(f"Candidates   {len(s.candidates)}")
+        self.last = "\n".join(rows)
+        self.update(self.last)
+
+    def _bar(self, state, stat: str) -> str:
+        value = state.stats[stat]
+        colour = "green" if value > 60 else ("yellow" if value > 30 else "red")
+        return f"[{colour}]{state.say(stat)}[/{colour}]"
+
+
+class Voyage(App):
+    CSS = """
+    Screen { layout: horizontal; }
+    #panel { width: 32; padding: 1 2; border-right: solid $accent; }
+    /* The log is a plain Static inside a scroller, not a RichLog: RichLog
+       renders each line at the width it had when written, so earlier lines
+       crop mid-sentence once the scrollbar appears. A Static re-wraps. */
+    #logbox { height: 1fr; }
+    #log { padding: 1 2; }
+    #choices { padding: 1 2; height: auto; max-height: 50%;
+               border-top: solid $accent; }
+    """
+    BINDINGS = [("q", "quit", "Quit"), ("p", "planets", "Planet dossiers"),
+                ("m", "back", "Back")]
+
+    def __init__(self, seed: int | None = None):
+        super().__init__()
+        self.seed = seed
+        self.game: Game | None = None
+        self.options: list[dict] = []
+        self.lines: list[str] = []
+
+    # -- layout ---------------------------------------------------------------
+
+    def compose(self) -> ComposeResult:
+        yield Panel(id="panel")
+        with Vertical():
+            with VerticalScroll(id="logbox"):
+                yield Static(id="log", markup=True)
+            yield Static(id="choices")
+
+    def on_mount(self) -> None:
+        self.title = "Space Colony Sim"
+        self.show("[b]COLONY MISSION — INTELLIGENCE ONLINE[/b]",
+                  "",
+                  "Ten thousand people are asleep behind me. I am the only thing "
+                  "awake, and the only thing that decides.",
+                  "",
+                  "[dim]Number keys choose. p reads the surveyed worlds. "
+                  "m steps back. q quits.[/dim]")
+        self.offer_profiles()
+
+    # -- option plumbing ------------------------------------------------------
+
+    def show(self, *lines: str) -> None:
+        self.lines.extend(lines)
+        self.lines.append("")
+        self.query_one("#log", Static).update("\n".join(self.lines))
+        self.call_after_refresh(
+            self.query_one("#logbox", VerticalScroll).scroll_end, animate=False)
+
+    def set_options(self, options: list[dict], prompt: str = "") -> None:
+        self.options = options
+        body = [f"[b]{prompt}[/b]"] if prompt else []
+        for i, opt in enumerate(options):
+            body.append(f"[b cyan]{KEYS[i]}) [/b cyan]{opt['label']}")
+        self.query_one("#choices", Static).update("\n".join(body))
+        self.query_one("#panel", Panel).render_state(self.game)
+
+    def on_key(self, event) -> None:
+        if event.key not in KEYS:
+            return
+        index = KEYS.index(event.key)
+        if index < len(self.options):
+            event.stop()
+            self.options[index]["do"]()
+
+    # -- launch ---------------------------------------------------------------
+
+    def offer_profiles(self) -> None:
+        options = []
+        for key, spec in K.PROFILES.items():
+            options.append({
+                "label": f"{spec['name']} — {spec['blurb']}",
+                "do": (lambda k=key: self.launch(k)),
+            })
+        self.set_options(options, "Which hull am I?")
+
+    def launch(self, profile: str) -> None:
+        self.game = Game(profile=profile, seed=self.seed)
+        self.show(f"[b]{self.game.state.name}[/b] underway. "
+                  f"[dim]Seed {self.game.seed}.[/dim]")
+        self.show(*self.game.state.log[1:])
+        self.refresh_phase()
+
+    # -- the loop -------------------------------------------------------------
+
+    def refresh_phase(self) -> None:
+        game = self.game
+        assert game
+        if game.phase == DONE:
+            self.finish()
+        elif game.phase == MAINTENANCE:
+            self.offer_maintenance()
+        elif game.phase == EVENT:
+            self.offer_event_choices()
+
+    def offer_maintenance(self) -> None:
+        game = self.game
+        assert game
+        options: list[dict] = []
+        for opt in game.maintenance_options():
+            if opt["action"] == "repair":
+                continue
+            if opt["action"] == "cannibalize":
+                continue
+            options.append({"label": opt["label"],
+                            "do": (lambda o=opt: self.act(**{
+                                k: v for k, v in o.items() if k != "label"}))})
+        options.append({"label": "Repair a system…", "do": self.offer_repairs})
+        options.append({"label": "Strip a hold for parts…",
+                        "do": self.offer_cannibalize})
+        if game.can_commit():
+            options.append({"label": "[b]Decelerate and commit to a world…[/b]",
+                            "do": self.offer_commit})
+        elif game.state.candidates:
+            options.append({"label": f"[dim]Commit (needs "
+                                     f"{K.DECEL_FUEL_COST:.0f} fuel to "
+                                     f"decelerate)[/dim]",
+                            "do": lambda: self.show(
+                                "Not enough reaction mass left to stop. I would "
+                                "fly straight past it.")})
+        self.set_options(options, f"Leg {game.state.leg} — one action before "
+                                  "whatever is out here finds me.")
+
+    def offer_repairs(self) -> None:
+        game = self.game
+        assert game
+        options = [{"label": f"{K.LABELS[stat]} ({game.state.say(stat)})",
+                    "do": (lambda st=stat: self.act("repair", target=st))}
+                   for stat in resolve.REPAIRABLE]
+        options.append({"label": "[dim]back[/dim]", "do": self.offer_maintenance})
+        self.set_options(options, "Repair what?")
+
+    def offer_cannibalize(self) -> None:
+        options = [{"label": f"Strip {K.LABELS[hold].lower()}",
+                    "do": (lambda h=hold: self.offer_scrap_target(h))}
+                   for hold in K.HOLDS]
+        options.append({"label": "[dim]back[/dim]", "do": self.offer_maintenance})
+        self.set_options(options, "Take apart which hold?")
+
+    def offer_scrap_target(self, hold: str) -> None:
+        options = [{"label": f"Into {K.LABELS[stat].lower()}",
+                    "do": (lambda st=stat: self.act(
+                        "cannibalize", hold=hold, target=st))}
+                   for stat in resolve.SCRAP_TARGETS]
+        options.append({"label": "[dim]back[/dim]", "do": self.offer_cannibalize})
+        self.set_options(options, f"Feed {K.LABELS[hold].lower()} into what?")
+
+    def offer_commit(self) -> None:
+        game = self.game
+        assert game
+        options = []
+        for planet in game.state.candidates:
+            summary = ", ".join(f"{k.lower()} {v}" for k, v in planet.dossier()[:3])
+            options.append({"label": f"{planet.name} — {summary}",
+                            "do": (lambda p=planet: self.commit(p))})
+        options.append({"label": "[dim]back[/dim]", "do": self.offer_maintenance})
+        self.set_options(options, "Commit to which world? This ends the voyage.")
+
+    def act(self, action: str, **kwargs) -> None:
+        game = self.game
+        assert game
+        self.show(*game.do_maintenance(action, **kwargs))
+        self.refresh_phase()
+
+    def offer_event_choices(self) -> None:
+        game = self.game
+        assert game
+        options = [{"label": game.choice_label(choice),
+                    "do": (lambda i=i: self.pick(i))}
+                   for i, choice in enumerate(game.choices())]
+        self.set_options(options, "")
+
+    def pick(self, index: int) -> None:
+        game = self.game
+        assert game
+        self.show(*game.resolve_choice(index))
+        self.refresh_phase()
+
+    def commit(self, planet) -> None:
+        game = self.game
+        assert game
+        self.show(*game.commit(planet))
+        self.refresh_phase()
+
+    # -- endings --------------------------------------------------------------
+
+    def action_planets(self) -> None:
+        game = self.game
+        if not game or not game.state.candidates:
+            self.show("[dim]Nothing surveyed yet.[/dim]")
+            return
+        for planet in game.state.candidates:
+            self.show(f"[b]{planet.name}[/b]",
+                      *(f"  {k}: {v}" for k, v in planet.dossier()))
+
+    def action_back(self) -> None:
+        if self.game and self.game.phase == MAINTENANCE:
+            self.offer_maintenance()
+
+    def finish(self) -> None:
+        game = self.game
+        assert game
+        path = f"arrival_{game.seed}.json"
+        game.state.dump(path)
+        self.show("", "[b]— END OF VOYAGE —[/b]", *game.report(), "",
+                  f"[dim]State written to {path}. Act 2 — the first century of "
+                  "the colony — is not built yet; this file is what it will "
+                  "read.[/dim]")
+        self.set_options([{"label": "Quit", "do": self.exit}], "")
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--seed", type=int)
+    args = ap.parse_args()
+    Voyage(seed=args.seed).run()
+
+
+if __name__ == "__main__":
+    main()
