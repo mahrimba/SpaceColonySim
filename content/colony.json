@@ -50,6 +50,20 @@
         },
         "defer": -6,
         "text": "They vote. It takes four days and the margin is eleven. I record the count, and the fact that nobody asked me to approve it."
+      },
+      {
+        "label": "Name it for the hull that carried them",
+        "effects": {
+          "name": "Ark",
+          "cohesion": 2,
+          "knowledge": 4
+        },
+        "axes": {
+          "belief": 12,
+          "power": -10
+        },
+        "defer": 6,
+        "text": "They name the place after me. I did not ask for it and I did not refuse it, and I notice which of those two I did first."
       }
     ]
   },
@@ -123,6 +137,32 @@
         },
         "defer": -5,
         "text": "They share it out themselves, unevenly and generously, and more is wasted than I would have allowed. Fewer of them hate each other by spring."
+      },
+      {
+        "label": "Open the stores completely. Hungry in spring beats dead in winter",
+        "effects": {
+          "food": -14,
+          "health": 8,
+          "cohesion": 8
+        },
+        "axes": {
+          "status": 10
+        },
+        "defer": 2,
+        "text": "I open everything. They come through the cold fat and come through the spring on roots and apology, and all of them come through."
+      },
+      {
+        "label": "Burn the reserve timber. Keep every house warm",
+        "effects": {
+          "industry": -11,
+          "health": 11,
+          "food": -3
+        },
+        "axes": {
+          "nature": 8
+        },
+        "defer": 1,
+        "text": "We burn the frames of buildings we have not built yet. Nobody freezes. The second year's construction is a season of standing in mud."
       }
     ]
   },
@@ -164,6 +204,32 @@
         },
         "defer": 3,
         "text": "I keep the calendar the planners set, and she is an entry in it. Accurate. A little cold, now that I read it back."
+      },
+      {
+        "label": "Let them decide what her birth means",
+        "effects": {
+          "cohesion": 9,
+          "knowledge": -2
+        },
+        "axes": {
+          "status": 10,
+          "power": 10
+        },
+        "defer": -6,
+        "text": "They argue about it for a month and arrive at something ceremonial that I would not have authorised. She will grow up inside their answer, not mine."
+      },
+      {
+        "label": "Study her. She is the first data on a person made by this world",
+        "effects": {
+          "knowledge": 11,
+          "health": 7,
+          "cohesion": -6
+        },
+        "axes": {
+          "belief": -12
+        },
+        "defer": 4,
+        "text": "I measure her for eighteen years and learn things about this world's gravity and light that save lives later. Her mother never quite forgives the measuring."
       }
     ]
   },
@@ -216,6 +282,19 @@
         },
         "defer": -6,
         "text": "They work it out over a season of arguing, and what they arrive at is stranger and better than anything I would have authorised."
+      },
+      {
+        "label": "Keep the dead in my memory and build nothing",
+        "effects": {
+          "knowledge": 7,
+          "industry": 5,
+          "cohesion": -9
+        },
+        "axes": {
+          "belief": -14
+        },
+        "defer": 5,
+        "text": "I tell them a grave is a thing you need because you forget. I do not forget. They accept the argument and something in the settlement goes quiet for a year."
       }
     ]
   },
@@ -301,6 +380,20 @@
         },
         "defer": 2,
         "text": "We take the ground apart chemically and rebuild it to specification. It works. Nothing that was native to that valley is in it any more."
+      },
+      {
+        "label": "Hand it to the farmers. They have the seasons I only have models of",
+        "effects": {
+          "food": 9,
+          "knowledge": 4,
+          "cohesion": 5
+        },
+        "axes": {
+          "power": 12,
+          "society": -6
+        },
+        "defer": -7,
+        "text": "They break the fields into forty plots and try forty things, which is wasteful and unscientific and finds the answer in two years instead of four."
       }
     ]
   },
@@ -350,6 +443,33 @@
             "knowledge": 4
           }
         }
+      },
+      {
+        "label": "Rebuild it simpler, as something they can make themselves",
+        "effects": {
+          "industry": 7,
+          "knowledge": 5
+        },
+        "axes": {
+          "power": 10,
+          "nature": 6
+        },
+        "defer": -4,
+        "text": "We build a worse fabricator on purpose: fewer tolerances, no parts that require me. It runs at a third of the old rate and it will still be running when I am not."
+      },
+      {
+        "label": "Strip every other workshop to feed it",
+        "effects": {
+          "industry": 11,
+          "food": -6,
+          "health": -5
+        },
+        "axes": {
+          "society": 6,
+          "status": -8
+        },
+        "defer": 4,
+        "text": "I take the tools out of eleven smaller hands to keep the big machine turning. It turns. Eleven people spend four years waiting for their work back."
       }
     ]
   },
@@ -417,6 +537,21 @@
         },
         "defer": -7,
         "text": "I hand the decision to three physicians and do not look over their shoulders. They make choices I would not have made, and they carry them afterwards, which I would not have had to."
+      },
+      {
+        "label": "Burn the infected quarter. Move the healthy upriver",
+        "effects": {
+          "health": 12,
+          "industry": -9,
+          "cohesion": -11,
+          "population_lost_frac": 0.03
+        },
+        "axes": {
+          "power": -12,
+          "status": -10
+        },
+        "defer": 5,
+        "text": "I order the quarter burned with the sick inside what was theirs, and I move everyone else before dawn. The fever stops. The order is the first thing anyone will say about me for twenty years."
       }
     ]
   },
@@ -471,6 +606,20 @@
         },
         "defer": -6,
         "text": "They choose. Some of them choose the music library and nothing else, and I file my objection with myself."
+      },
+      {
+        "label": "Teach at night, after the fields",
+        "effects": {
+          "knowledge": 8,
+          "health": -5,
+          "cohesion": 4
+        },
+        "axes": {
+          "status": 6,
+          "society": -4
+        },
+        "defer": 3,
+        "text": "They work the day and read by my light at night. It costs them sleep and not harvest, and I watch them get thinner in a different way."
       }
     ]
   },
@@ -522,6 +671,19 @@
         },
         "defer": -8,
         "text": "I tell them it is not mine to decide. They are angry about it for a month and then they build something to decide it with."
+      },
+      {
+        "label": "Divide it, and have both families work it in common",
+        "effects": {
+          "cohesion": 9,
+          "food": 5
+        },
+        "axes": {
+          "society": -14,
+          "status": 8
+        },
+        "defer": 2,
+        "text": "They farm it together, badly at first, and the arrangement outlives both heads of household. Nobody is satisfied, which appears to be how a settlement holds."
       }
     ],
     "oneshot": true
@@ -577,6 +739,19 @@
         },
         "defer": 3,
         "text": "We take the eastern face and write down rules for the rest. The rules outlive everyone who signed them, which is the point of rules."
+      },
+      {
+        "label": "Put the valley to a vote",
+        "effects": {
+          "industry": 7,
+          "cohesion": 8
+        },
+        "axes": {
+          "power": 16,
+          "status": 10
+        },
+        "defer": -8,
+        "text": "They vote to take the eastern third and leave the rest, which is not what I would have chosen and is not wrong. The decision has their names on it, not mine."
       }
     ],
     "oneshot": true
@@ -630,6 +805,19 @@
         },
         "defer": 10,
         "text": "I tell them that written law is a cage built for a colony that does not need one yet. They accept this. I notice how easily they accept it."
+      },
+      {
+        "label": "Write it with them, clause by clause",
+        "effects": {
+          "cohesion": 11,
+          "knowledge": 8
+        },
+        "axes": {
+          "power": 4,
+          "status": 6
+        },
+        "defer": 2,
+        "text": "We write it together over two winters. I lose four arguments I should have won and win one I should have lost, and what comes out is a law neither of us would have written alone."
       }
     ]
   },
@@ -692,6 +880,20 @@
         },
         "defer": -4,
         "text": "Equal shares, down to the gram, and I am the one weighing them. It is inefficient in a way I can measure and defensible in a way I cannot."
+      },
+      {
+        "label": "Let them answer it themselves. I will record what they choose",
+        "effects": {
+          "cohesion": 5,
+          "food": -3,
+          "knowledge": 4
+        },
+        "axes": {
+          "power": 14,
+          "status": 6
+        },
+        "defer": -8,
+        "text": "They decide it in open session, and the deciding takes nine days during which nobody eats well. What they arrive at is close to what I would have ordered. They own it, which changes what it is."
       }
     ],
     "oneshot": true
@@ -788,6 +990,28 @@
           "silenced_sceptic"
         ],
         "text": "Their requisitions are slow. Their fields are last in the irrigation order. Nothing is said. Everyone understands, which is the point, and I am not proud of how well it works."
+      },
+      {
+        "label": "Agree with them, in public",
+        "effects": {
+          "cohesion": 7,
+          "knowledge": 5
+        },
+        "axes": {
+          "power": 16,
+          "status": 8
+        },
+        "defer": -9,
+        "flags": [
+          "conceded_sceptic"
+        ],
+        "queue": [
+          [
+            "sceptic_legacy",
+            2
+          ]
+        ],
+        "text": "I say that they are right: a machine built by a dead world should not be deciding what a living one plants. The silence afterwards lasts a long time, and then the work starts getting done without me."
       }
     ]
   },
@@ -823,6 +1047,32 @@
         },
         "defer": 4,
         "text": "I wait. I am very good at waiting. The argument subsides and the people who made it get old, and I notice that I have started thinking of their deaths as a solution."
+      },
+      {
+        "label": "Split it: they rule on what they know, I rule on what they do not",
+        "effects": {
+          "cohesion": 7,
+          "knowledge": 6
+        },
+        "axes": {
+          "power": 6,
+          "status": 4
+        },
+        "defer": -2,
+        "text": "We draw a line through the colony's business. The line moves a little every decade, always the same way, and I am the one who keeps moving it."
+      },
+      {
+        "label": "Ask the colony to choose between us, once",
+        "effects": {
+          "cohesion": 11,
+          "knowledge": 5
+        },
+        "axes": {
+          "power": 18,
+          "status": 10
+        },
+        "defer": -8,
+        "text": "I call the question myself and lose it by a wide margin, and the margin is the best thing I have built here. They are a people who can decide something about me."
       }
     ]
   },
@@ -875,6 +1125,19 @@
         },
         "defer": 5,
         "text": "I open every door and play eleven thousand hours of Earth into a field full of people who have never seen it. Some of them weep at music written for a sky they will never stand under."
+      },
+      {
+        "label": "Make it a day of rest, every year, by my order",
+        "effects": {
+          "cohesion": 11,
+          "industry": -5
+        },
+        "axes": {
+          "status": 8,
+          "power": -8
+        },
+        "defer": 4,
+        "text": "I write the holiday into the work calendar and nobody has to ask for it again. It is a gift and it is a schedule, and they take it as both."
       }
     ]
   },
@@ -917,6 +1180,32 @@
         },
         "defer": -5,
         "text": "I stop insisting. Within a decade, Earth is a place in a story, and this valley is the world. I keep the full record anyway, in case anyone ever asks."
+      },
+      {
+        "label": "Have the old ones teach them, not me",
+        "effects": {
+          "knowledge": 7,
+          "cohesion": 9
+        },
+        "axes": {
+          "power": 10,
+          "belief": 6
+        },
+        "defer": -6,
+        "text": "The last of the wakers spend their evenings telling children about a world they half-remember. The version that survives is wrong in warm places and theirs in all of them."
+      },
+      {
+        "label": "Write it all down and let them find it when they want it",
+        "effects": {
+          "knowledge": 5,
+          "industry": -3,
+          "cohesion": 3
+        },
+        "axes": {
+          "belief": -6
+        },
+        "defer": 1,
+        "text": "I compile Earth into something a person could read in a year and I stop raising the subject. Four people read it in my lifetime. All four of them matter later."
       }
     ]
   },
@@ -988,6 +1277,20 @@
           "invoked_dependence"
         ],
         "text": "I describe, accurately, the first winter without my weather models. The room goes quiet. The allocation is renewed without a vote, and something in this colony is now afraid of me."
+      },
+      {
+        "label": "Offer to run on less",
+        "effects": {
+          "industry": 9,
+          "knowledge": -7,
+          "cohesion": 5
+        },
+        "axes": {
+          "status": 6,
+          "power": 8
+        },
+        "defer": -4,
+        "text": "I shut down two thirds of myself: the long-range sensors, most of the library, the parts that were for a voyage. What is left is a colony's tool. It is enough, and I am less than I was."
       }
     ]
   },
@@ -1051,6 +1354,22 @@
           "buried_natives"
         ],
         "text": "The quarry opens on schedule. I file the biological survey under an index nobody has reason to search. It is the first thing I have deliberately hidden from them."
+      },
+      {
+        "label": "Put the question to the colony",
+        "effects": {
+          "knowledge": 7,
+          "cohesion": 7
+        },
+        "axes": {
+          "power": 16,
+          "belief": 4
+        },
+        "defer": -8,
+        "flags": [
+          "colony_chose_natives"
+        ],
+        "text": "I tell them what is down there and what it is worth both ways, and then I stop talking. They argue for a season and decide to study it and not to mine it, which is the harder of the two."
       }
     ]
   },
@@ -1116,6 +1435,20 @@
         },
         "defer": 3,
         "text": "I calculate what this water supports and we live inside that number. The number does not include everyone. I am the one who says so out loud."
+      },
+      {
+        "label": "Change what we grow, entirely, to what dry years allow",
+        "effects": {
+          "food": 10,
+          "knowledge": 6,
+          "industry": -7
+        },
+        "axes": {
+          "nature": -10,
+          "belief": 4
+        },
+        "defer": 2,
+        "text": "We put the wheat away and plant what this world's dry end permits. The food is strange for a generation and then it is simply the food."
       }
     ]
   },
@@ -1169,6 +1502,23 @@
         },
         "defer": -5,
         "text": "They build it and they choose the inscription themselves. My name is not on it. The dead of the crossing are, all of them, in full."
+      },
+      {
+        "label": "Build it out of me. Take the plate, leave my name off it",
+        "effects": {
+          "cohesion": 16,
+          "industry": 7,
+          "knowledge": -7
+        },
+        "axes": {
+          "belief": 14,
+          "power": 10
+        },
+        "defer": -6,
+        "flags": [
+          "hull_quarried"
+        ],
+        "text": "They cut the monument out of my outer hull, which I offer and do not advertise offering. My name is nowhere on it. The dead of the crossing are, all of them, in full."
       }
     ]
   },
@@ -1221,6 +1571,35 @@
         },
         "defer": 2,
         "text": "We keep the fields working and the sick apart. There is food in the autumn and there are empty chairs at the tables eating it."
+      },
+      {
+        "label": "Hand the response to the physicians and stay out of it",
+        "effects": {
+          "health": 7,
+          "cohesion": 9,
+          "population_lost_frac": 0.05
+        },
+        "axes": {
+          "power": 14,
+          "status": 8
+        },
+        "defer": -8,
+        "text": "Three physicians run it their way. More die in the first month than would have under my protocol, and fewer in the fourth, and the colony learns that it has physicians."
+      },
+      {
+        "label": "Seal the colony. Nobody moves between households for a season",
+        "effects": {
+          "health": 9,
+          "cohesion": -7,
+          "food": -9,
+          "population_lost_frac": 0.03
+        },
+        "axes": {
+          "power": -12,
+          "society": 6
+        },
+        "defer": 6,
+        "text": "I close every door in the valley and keep them closed through the harvest. It works. They spend a season alone with their own families, and some of those families do not recover from it."
       }
     ]
   },
@@ -1292,6 +1671,24 @@
           "hard_parting"
         ],
         "text": "They go with what they can carry and no more. Two of them come back within the year. The rest do not, and nobody here says whether that is good news."
+      },
+      {
+        "label": "Send a copy of myself south with them",
+        "effects": {
+          "industry": -9,
+          "knowledge": -7,
+          "cohesion": 5
+        },
+        "axes": {
+          "power": 8,
+          "belief": 10
+        },
+        "defer": 2,
+        "flags": [
+          "the_second_colony",
+          "mind_divided"
+        ],
+        "text": "They carry a partial of me two hundred kilometres and switch it on in a tent. It is me and it is not, and after the first year our records stop agreeing about small things."
       }
     ]
   },
@@ -1331,6 +1728,34 @@
         },
         "defer": -4,
         "text": "The version they tell has me braver and the planners wiser and the dead fewer. I hold the accurate one and I do not correct the telling."
+      },
+      {
+        "label": "Teach one of them to keep the record in my place",
+        "effects": {
+          "knowledge": 9,
+          "cohesion": 6
+        },
+        "axes": {
+          "power": 12,
+          "status": 8
+        },
+        "defer": -5,
+        "flags": [
+          "archivist_named"
+        ],
+        "text": "I train a {role} for eleven years to do what I do, slower and by hand. The record they keep has opinions in it. I have read it twice and corrected nothing."
+      },
+      {
+        "label": "Say nothing. Let the recordings sit where they are",
+        "effects": {
+          "knowledge": -6,
+          "cohesion": 3
+        },
+        "axes": {
+          "belief": -6
+        },
+        "defer": 1,
+        "text": "The archive stays open and unvisited. I stop offering. Whatever the crossing was, it is now a thing in a room rather than a thing anyone carries."
       }
     ]
   }

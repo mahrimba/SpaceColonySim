@@ -1,0 +1,849 @@
+{
+  "colony": "the colony",
+  "year": 72,
+  "outcome": "sundered",
+  "outcome_reason": "It stopped being one colony. What is in this valley now is factions with a shared water supply, and the first thing they agreed on in years was that none of them would be taking instructions from me.",
+  "population": 6174,
+  "peak_population": 8966,
+  "stats": {
+    "food": 25.26,
+    "industry": 28.56,
+    "health": 41.54,
+    "knowledge": 45.03,
+    "cohesion": 0.0
+  },
+  "deference": 88.0,
+  "axes": {
+    "society": 2.0,
+    "nature": -46.0,
+    "belief": -8.0,
+    "power": -20.0,
+    "status": -26.0
+  },
+  "ship_role": "the bunker",
+  "flags": [
+    "let_sceptic_speak",
+    "stood_aside",
+    "voyage:heard_earth"
+  ],
+  "people": [
+    {
+      "name": "Oyelaran Varga",
+      "origin": "sleeper",
+      "born": -41,
+      "died": 40,
+      "role": "physician",
+      "traits": [
+        "patient",
+        "exacting"
+      ],
+      "stance": 1,
+      "axes": {
+        "society": 0,
+        "nature": -12,
+        "belief": -22,
+        "power": -15,
+        "status": -4
+      }
+    },
+    {
+      "name": "Tomás Tanaka",
+      "origin": "sleeper",
+      "born": -29,
+      "died": 55,
+      "role": "farmer",
+      "traits": [
+        "gentle",
+        "brilliant"
+      ],
+      "stance": 1,
+      "axes": {
+        "society": -10,
+        "nature": -30,
+        "belief": -9,
+        "power": -3,
+        "status": 1
+      }
+    },
+    {
+      "name": "Ingrid Nakamura",
+      "origin": "sleeper",
+      "born": -41,
+      "died": 30,
+      "role": "engineer",
+      "traits": [
+        "brilliant",
+        "generous"
+      ],
+      "stance": 1,
+      "axes": {
+        "society": -35,
+        "nature": 28,
+        "belief": 14,
+        "power": 12,
+        "status": -10
+      }
+    },
+    {
+      "name": "Svea Tanaka",
+      "origin": "sleeper",
+      "born": -35,
+      "died": 45,
+      "role": "farmer",
+      "traits": [
+        "reckless",
+        "bitter"
+      ],
+      "stance": 1,
+      "axes": {
+        "society": 12,
+        "nature": 16,
+        "belief": -11,
+        "power": 6,
+        "status": -14
+      }
+    },
+    {
+      "name": "Keita Dubois",
+      "origin": "sleeper",
+      "born": -44,
+      "died": 30,
+      "role": "archivist",
+      "traits": [
+        "exacting",
+        "ambitious"
+      ],
+      "stance": 1,
+      "axes": {
+        "society": 19,
+        "nature": 36,
+        "belief": -1,
+        "power": -6,
+        "status": -23
+      }
+    },
+    {
+      "name": "Noor Rasmussen",
+      "origin": "colony-born",
+      "born": 0,
+      "died": 69,
+      "role": "farmer",
+      "traits": [
+        "devout",
+        "patient"
+      ],
+      "stance": 1,
+      "axes": {
+        "society": -18,
+        "nature": -2,
+        "belief": -14,
+        "power": 1,
+        "status": -28
+      }
+    },
+    {
+      "name": "Ingrid Lindqvist",
+      "origin": "colony-born",
+      "born": 9,
+      "died": null,
+      "role": "physician",
+      "traits": [
+        "patient",
+        "sceptical"
+      ],
+      "stance": 0,
+      "axes": {
+        "society": -18,
+        "nature": 16,
+        "belief": -28,
+        "power": -33,
+        "status": -16
+      }
+    },
+    {
+      "name": "Dauda Aziz",
+      "origin": "colony-born",
+      "born": 8,
+      "died": 68,
+      "role": "farmer",
+      "traits": [
+        "reckless",
+        "bitter"
+      ],
+      "stance": 2,
+      "axes": {
+        "society": 2,
+        "nature": -11,
+        "belief": -31,
+        "power": 14,
+        "status": -10
+      }
+    },
+    {
+      "name": "Dauda Petrova",
+      "origin": "colony-born",
+      "born": 24,
+      "died": null,
+      "role": "speaker",
+      "traits": [
+        "bitter",
+        "patient"
+      ],
+      "stance": 1,
+      "axes": {
+        "society": 9,
+        "nature": 2,
+        "belief": -33,
+        "power": -27,
+        "status": -10
+      }
+    },
+    {
+      "name": "Keita Ferreira",
+      "origin": "colony-born",
+      "born": 31,
+      "died": null,
+      "role": "engineer",
+      "traits": [
+        "devout",
+        "reckless"
+      ],
+      "stance": 2,
+      "axes": {
+        "society": -12,
+        "nature": -41,
+        "belief": -27,
+        "power": 20,
+        "status": -1
+      }
+    },
+    {
+      "name": "Oyelaran Aziz",
+      "origin": "colony-born",
+      "born": 35,
+      "died": null,
+      "role": "speaker",
+      "traits": [
+        "bitter",
+        "exacting"
+      ],
+      "stance": 2,
+      "axes": {
+        "society": 32,
+        "nature": -54,
+        "belief": -11,
+        "power": -13,
+        "status": -23
+      }
+    }
+  ],
+  "chronicle": [
+    {
+      "year": 10,
+      "span": 10,
+      "event": "first_birth",
+      "choice": "Record her as one more entry, and keep the mission calendar",
+      "population": 8051,
+      "stats": {
+        "food": 54,
+        "industry": 88,
+        "health": 85,
+        "knowledge": 89,
+        "cohesion": 48
+      },
+      "deference": 88,
+      "axes": {
+        "society": 0,
+        "nature": 0,
+        "belief": -8,
+        "power": -5,
+        "status": 0
+      },
+      "ship_role": "the landing site",
+      "dead": []
+    },
+    {
+      "year": 20,
+      "span": 10,
+      "event": "land_dispute",
+      "choice": "Rule: the land belongs to whoever has worked it",
+      "population": 8441,
+      "stats": {
+        "food": 57,
+        "industry": 77,
+        "health": 75,
+        "knowledge": 78,
+        "cohesion": 44
+      },
+      "deference": 91,
+      "axes": {
+        "society": 14,
+        "nature": 0,
+        "belief": -8,
+        "power": -10,
+        "status": -10
+      },
+      "ship_role": "the landing site",
+      "dead": []
+    },
+    {
+      "year": 25,
+      "span": 5,
+      "event": "fever",
+      "choice": "Spend the medical reserve, all of it, now",
+      "population": 8496,
+      "stats": {
+        "food": 54,
+        "industry": 62,
+        "health": 83,
+        "knowledge": 74,
+        "cohesion": 45
+      },
+      "deference": 93,
+      "axes": {
+        "society": 6,
+        "nature": 0,
+        "belief": -8,
+        "power": -12,
+        "status": -10
+      },
+      "ship_role": "the landing site",
+      "dead": []
+    },
+    {
+      "year": 30,
+      "span": 5,
+      "event": "machine_down",
+      "choice": "Teach four of them to machine the part by hand",
+      "population": 8616,
+      "stats": {
+        "food": 52,
+        "industry": 67,
+        "health": 78,
+        "knowledge": 75,
+        "cohesion": 46
+      },
+      "deference": 94,
+      "axes": {
+        "society": 6,
+        "nature": 0,
+        "belief": -8,
+        "power": -15,
+        "status": -10
+      },
+      "ship_role": "the landing site",
+      "dead": [
+        "Ingrid Nakamura",
+        "Keita Dubois"
+      ]
+    },
+    {
+      "year": 35,
+      "span": 5,
+      "event": "blight",
+      "choice": "Let the farmers try the local growth instead",
+      "population": 8728,
+      "stats": {
+        "food": 57,
+        "industry": 64,
+        "health": 69,
+        "knowledge": 71,
+        "cohesion": 47
+      },
+      "deference": 94,
+      "axes": {
+        "society": 6,
+        "nature": -10,
+        "belief": -8,
+        "power": -18,
+        "status": -10
+      },
+      "ship_role": "the landing site",
+      "dead": []
+    },
+    {
+      "year": 40,
+      "span": 5,
+      "event": "drought",
+      "choice": "Dig. Deeper wells, cisterns, every hand on it",
+      "population": 8848,
+      "stats": {
+        "food": 60,
+        "industry": 47,
+        "health": 60,
+        "knowledge": 67,
+        "cohesion": 48
+      },
+      "deference": 98,
+      "axes": {
+        "society": -2,
+        "nature": 0,
+        "belief": -8,
+        "power": -20,
+        "status": -10
+      },
+      "ship_role": "the landing site",
+      "dead": [
+        "Oyelaran Varga"
+      ]
+    },
+    {
+      "year": 45,
+      "span": 5,
+      "event": "the_sceptic",
+      "choice": "Say nothing, and let the argument run",
+      "population": 8916,
+      "stats": {
+        "food": 57,
+        "industry": 47,
+        "health": 57,
+        "knowledge": 63,
+        "cohesion": 44
+      },
+      "deference": 88,
+      "axes": {
+        "society": -2,
+        "nature": 0,
+        "belief": -8,
+        "power": -10,
+        "status": -4
+      },
+      "ship_role": "the landing site",
+      "dead": [
+        "Svea Tanaka"
+      ]
+    },
+    {
+      "year": 50,
+      "span": 5,
+      "event": "fever",
+      "choice": "Spend the medical reserve, all of it, now",
+      "population": 8848,
+      "stats": {
+        "food": 50,
+        "industry": 35,
+        "health": 67,
+        "knowledge": 60,
+        "cohesion": 42
+      },
+      "deference": 90,
+      "axes": {
+        "society": -10,
+        "nature": 0,
+        "belief": -8,
+        "power": -13,
+        "status": -4
+      },
+      "ship_role": "the landing site",
+      "dead": []
+    },
+    {
+      "year": 55,
+      "span": 5,
+      "event": "machine_down",
+      "choice": "Teach four of them to machine the part by hand",
+      "population": 8814,
+      "stats": {
+        "food": 44,
+        "industry": 45,
+        "health": 63,
+        "knowledge": 62,
+        "cohesion": 38
+      },
+      "deference": 91,
+      "axes": {
+        "society": -10,
+        "nature": 0,
+        "belief": -8,
+        "power": -16,
+        "status": -4
+      },
+      "ship_role": "the landing site",
+      "dead": [
+        "Tomás Tanaka"
+      ]
+    },
+    {
+      "year": 57,
+      "span": 2,
+      "event": "sceptic_legacy",
+      "choice": "Outlast it. Positions pass; I do not",
+      "population": 8802,
+      "stats": {
+        "food": 39,
+        "industry": 44,
+        "health": 62,
+        "knowledge": 60,
+        "cohesion": 27
+      },
+      "deference": 95,
+      "axes": {
+        "society": -10,
+        "nature": 0,
+        "belief": -8,
+        "power": -28,
+        "status": -4
+      },
+      "ship_role": "the landing site",
+      "dead": []
+    },
+    {
+      "year": 59,
+      "span": 2,
+      "event": "fever",
+      "choice": "Spend the medical reserve, all of it, now",
+      "population": 8659,
+      "stats": {
+        "food": 35,
+        "industry": 33,
+        "health": 72,
+        "knowledge": 59,
+        "cohesion": 25
+      },
+      "deference": 97,
+      "axes": {
+        "society": -18,
+        "nature": 0,
+        "belief": -8,
+        "power": -30,
+        "status": -4
+      },
+      "ship_role": "the landing site",
+      "dead": []
+    },
+    {
+      "year": 61,
+      "span": 2,
+      "event": "second_generation",
+      "choice": "Let them be from here",
+      "population": 8604,
+      "stats": {
+        "food": 30,
+        "industry": 32,
+        "health": 70,
+        "knowledge": 47,
+        "cohesion": 33
+      },
+      "deference": 92,
+      "axes": {
+        "society": -18,
+        "nature": -10,
+        "belief": -4,
+        "power": -30,
+        "status": -4
+      },
+      "ship_role": "the landing site",
+      "dead": []
+    },
+    {
+      "year": 63,
+      "span": 2,
+      "event": "plague_late",
+      "choice": "Isolate the sick and protect the harvest",
+      "population": 7622,
+      "stats": {
+        "food": 31,
+        "industry": 32,
+        "health": 68,
+        "knowledge": 46,
+        "cohesion": 14
+      },
+      "deference": 94,
+      "axes": {
+        "society": -8,
+        "nature": -10,
+        "belief": -4,
+        "power": -32,
+        "status": -20
+      },
+      "ship_role": "the landing site",
+      "dead": []
+    },
+    {
+      "year": 65,
+      "span": 2,
+      "event": "the_question_of_me",
+      "choice": "Tell them to decide without my input",
+      "population": 7589,
+      "stats": {
+        "food": 27,
+        "industry": 32,
+        "health": 67,
+        "knowledge": 40,
+        "cohesion": 21
+      },
+      "deference": 82,
+      "axes": {
+        "society": -8,
+        "nature": -10,
+        "belief": -4,
+        "power": -16,
+        "status": -10
+      },
+      "ship_role": "the museum",
+      "dead": []
+    },
+    {
+      "year": 67,
+      "span": 2,
+      "event": "blight",
+      "choice": "Let the farmers try the local growth instead",
+      "population": 7450,
+      "stats": {
+        "food": 26,
+        "industry": 31,
+        "health": 55,
+        "knowledge": 39,
+        "cohesion": 19
+      },
+      "deference": 82,
+      "axes": {
+        "society": -8,
+        "nature": -16,
+        "belief": -4,
+        "power": -18,
+        "status": -10
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 68,
+      "span": 1,
+      "event": "the_valley",
+      "choice": "Leave the valley. Make do with less",
+      "population": 7431,
+      "stats": {
+        "food": 22,
+        "industry": 26,
+        "health": 54,
+        "knowledge": 43,
+        "cohesion": 23
+      },
+      "deference": 83,
+      "axes": {
+        "society": -8,
+        "nature": -34,
+        "belief": 4,
+        "power": -18,
+        "status": -10
+      },
+      "ship_role": "the bunker",
+      "dead": [
+        "Dauda Aziz"
+      ]
+    },
+    {
+      "year": 69,
+      "span": 1,
+      "event": "archive_hours",
+      "choice": "Teach only what this world needs",
+      "population": 7084,
+      "stats": {
+        "food": 23,
+        "industry": 29,
+        "health": 53,
+        "knowledge": 46,
+        "cohesion": 20
+      },
+      "deference": 85,
+      "axes": {
+        "society": -8,
+        "nature": -28,
+        "belief": 0,
+        "power": -18,
+        "status": -10
+      },
+      "ship_role": "the bunker",
+      "dead": [
+        "Noor Rasmussen"
+      ]
+    },
+    {
+      "year": 70,
+      "span": 1,
+      "event": "blight",
+      "choice": "Let the farmers try the local growth instead",
+      "population": 6960,
+      "stats": {
+        "food": 22,
+        "industry": 29,
+        "health": 42,
+        "knowledge": 46,
+        "cohesion": 17
+      },
+      "deference": 85,
+      "axes": {
+        "society": -8,
+        "nature": -34,
+        "belief": 0,
+        "power": -19,
+        "status": -10
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 71,
+      "span": 1,
+      "event": "graves",
+      "choice": "Return the dead to the soil the crops use",
+      "population": 6913,
+      "stats": {
+        "food": 25,
+        "industry": 29,
+        "health": 42,
+        "knowledge": 45,
+        "cohesion": 8
+      },
+      "deference": 86,
+      "axes": {
+        "society": -8,
+        "nature": -46,
+        "belief": -8,
+        "power": -20,
+        "status": -10
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 72,
+      "span": 1,
+      "event": "plague_late",
+      "choice": "Isolate the sick and protect the harvest",
+      "population": 6174,
+      "stats": {
+        "food": 25,
+        "industry": 29,
+        "health": 42,
+        "knowledge": 45,
+        "cohesion": 0
+      },
+      "deference": 88,
+      "axes": {
+        "society": 2,
+        "nature": -46,
+        "belief": -8,
+        "power": -20,
+        "status": -26
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    }
+  ],
+  "arrival": {
+    "profile": "survey",
+    "ship": "Survey vessel ANANKE",
+    "legs_flown": 5,
+    "outcome": "colonized",
+    "outcome_reason": "Committed to Kapteyn Indi 2f.",
+    "stats": {
+      "hull": 38.4,
+      "power": 88.8,
+      "life_support": 78.0,
+      "cognition": 70.88,
+      "fuel": 58.28,
+      "seed_vault": 58.72,
+      "fabricators": 100.0,
+      "habitat": 73.28,
+      "medical": 96.61,
+      "archive": 94.18
+    },
+    "colonists_alive": 9570,
+    "colonists_lost": 430,
+    "flags": [
+      "heard_earth"
+    ],
+    "notables": [
+      "Oyelaran Varga",
+      "Tomás Tanaka",
+      "Ingrid Nakamura",
+      "Svea Tanaka",
+      "Keita Dubois"
+    ],
+    "mourned": [],
+    "planet": {
+      "name": "Kapteyn Indi 2f",
+      "gravity": 0.65,
+      "pressure": 0.79,
+      "temperature": -9.2,
+      "water": 0.01,
+      "biosphere": "none",
+      "radiation": 2.1,
+      "surveyed_at_cognition": 100.0,
+      "notes": [],
+      "habitability": 0.078,
+      "verdict": "lethal"
+    },
+    "log": [
+      "Survey vessel ANANKE underway. Seed 397349018.",
+      "— Leg 1. Barnard Octantis: gas giant, rich system.",
+      "I turn the long instruments outward. One world resolves out of the dark.",
+      "│ World          Kapteyn Indi 2f       ",
+      "│ Gravity        0.65 g",
+      "│ Pressure       0.79 atm",
+      "│ Mean surface   -9 C",
+      "│ Hydrosphere    0.01",
+      "│ Radiation      2.10",
+      "│ Biosphere      none",
+      "The giant's rings catch the light edge-on, thin as a blade. Saturn had rings like these. I have the photographs.",
+      "Something no larger than a fingernail has opened me up. Hull integrity reads 100%. The number is abstract. The cold is not.",
+      "» Seal it with the hull's own plating",
+      "› Hull check, DC 10 — rolled 19 +5 = 24. Success.",
+      "The patch takes. I log the coordinates and leave one camera on the spot, the way a person keeps touching a healed cut.",
+      "· 🛡 Hull -15",
+      "— Leg 2. Kepler Hydri: asteroid belt, pulsar.",
+      "I keep my hands still and listen to the hull.",
+      "My stern antenna picks up Earth's last transmissions, finally overtaking me. I know how the story ends. I have not yet heard it told.",
+      "» Listen to all of it",
+      "I listen to every hour. Market reports, a child's birthday call, evacuation orders, a choir rehearsing in a building I know was gone a week later. Then the carrier stops. I keep listening to the silence for some time.",
+      "· 🧠 Cognition -29",
+      "— Leg 3. Omicron Serpentis: asteroid belt, red dwarf.",
+      "I turn the long instruments outward. One world resolves out of the dark.",
+      "│ World          Wolf Indi 7e          ",
+      "│ Gravity        ~0.6 g",
+      "│ Pressure       ~0 atm",
+      "│ Mean surface   ~-56 C",
+      "│ Hydrosphere    ~0",
+      "│ Radiation      ~2",
+      "│ Biosphere      sterile",
+      "Close enough to act on. Not close enough to be sure.",
+      "Bit rot in the archive. A language loses a few of its poems.",
+      "Vibration in the spin assembly, rising. If the ring seizes at speed, it will tear itself off my spine.",
+      "» Spin the ring down and repack the bearing",
+      "› Hull check, DC 11 — rolled 15 +3 = 18. Success.",
+      "I bring the ring to a halt, and my drones repack the bearing in weightlessness. When I spin it up again the tremor is gone, and I feel steady.",
+      "· ⚡ Power -11   🏠 Habitat -7",
+      "— Leg 4. Teegarden Carinae: asteroid belt, dead system.",
+      "A scheduled sweep completes. One world resolves out of the dark.",
+      "│ World          Sabik Eridani 7b      ",
+      "│ Gravity        ~0 g",
+      "│ Pressure       ~0.6 atm",
+      "│ Mean surface   ~28 C",
+      "│ Hydrosphere    ~0.6",
+      "│ Radiation      ~5",
+      "│ Biosphere      sterile",
+      "Close enough to act on. Not close enough to be sure.",
+      "I turn the long instruments outward. 2 worlds resolve out of the dark.",
+      "│ World          Omicron Lyrae 6b      Sabik Indi 5b         ",
+      "│ Gravity        ~0.9 g                ~0.6 g",
+      "│ Pressure       ~1.8 atm              ~0.6 atm",
+      "│ Mean surface   ~28 C                 ~56 C",
+      "│ Hydrosphere    ~0.9                  ~0.4",
+      "│ Radiation      ~6                    ~1",
+      "│ Biosphere      signs of life         signs of life",
+      "Close enough to act on. Not close enough to be sure.",
+      "A refrigerant line weeps. Some ampoules are no longer medicine.",
+      "The returns ahead are fragments: rock, ice, and some pieces too regular to be natural. Whatever broke apart here is still spreading, and I am about to fly through it.",
+      "» Thread it on thrusters",
+      "› Cognition check, DC 14 — rolled 10 +2 = 12. Failed.",
+      "I clip the edge of the cloud. Six impacts, two of them through to pressurised volume, one into the edge of a pod bay. I feel each one land, a sequence of small flinches.",
+      "· 🛡 Hull -47   ⛽ Fuel -7   🌱 Seed vault -21   ☠ Sleepers lost ~500",
+      "⚠ Warning — Hull integrity ~40%. Every patch I lay now goes over another patch.",
+      "— Leg 5. Zeta Indi: red dwarf.",
+      "I turn the ship around and burn against our own momentum. Kapteyn Indi 2f grows in the forward instruments.",
+      "Thaw sequence armed. Whatever this world is, it is ours now."
+    ]
+  }
+}

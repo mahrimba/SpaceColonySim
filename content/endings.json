@@ -9,6 +9,51 @@
     "verdict": "No one is left. The colony lasted less than a century and ended with nobody to write it down."
   },
   {
+    "id": "starved",
+    "priority": 98,
+    "requires": {
+      "outcome": "starved"
+    },
+    "document": "survival_log",
+    "verdict": "The food ran out and did not come back. What is left of them is not a colony and cannot be made into one; they are a few people walking out of a valley that beat them."
+  },
+  {
+    "id": "pestilence",
+    "priority": 98,
+    "requires": {
+      "outcome": "pestilence"
+    },
+    "document": "survival_log",
+    "verdict": "Sickness took the colony apart faster than it could bury anyone. There is no one well enough to keep the fields, and I have run out of medicine and out of answers in the same season."
+  },
+  {
+    "id": "sundered",
+    "priority": 98,
+    "requires": {
+      "outcome": "sundered"
+    },
+    "document": "survival_log",
+    "verdict": "It stopped being one colony. What is in this valley now is factions with a shared water supply, and the first thing they agreed on in years was that none of them would be taking instructions from me."
+  },
+  {
+    "id": "derelict",
+    "priority": 98,
+    "requires": {
+      "outcome": "derelict"
+    },
+    "document": "survival_log",
+    "verdict": "Everything we brought has broken and nothing here can make another. They are working this world with their hands, and the hands are losing."
+  },
+  {
+    "id": "unlettered",
+    "priority": 98,
+    "requires": {
+      "outcome": "unlettered"
+    },
+    "document": "absent",
+    "verdict": "Nobody left alive can read what I hold. I am a building full of medicine and metallurgy and the whole memory of a dead world, and the people outside me have no way in."
+  },
+  {
     "id": "forgotten",
     "priority": 95,
     "requires": {
@@ -45,11 +90,11 @@
     "requires": {
       "ranges": {
         "knowledge": [
-          55,
+          50,
           100
         ],
         "cohesion": [
-          55,
+          50,
           100
         ],
         "population_ratio": [

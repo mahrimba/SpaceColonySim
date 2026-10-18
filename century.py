@@ -1,10 +1,14 @@
-"""Act 2's engine: a hundred years, one directive and one event at a time.
+"""Act 2's engine: a hundred years, one event at a time.
 
-Mirrors `resolve.py` deliberately — same two-phase tick, same d20 curve, same
-effect vocabulary — so the TUI and the tests work the same way in both acts.
-What differs is the clock (ticks widen as the colony steadies), the axes (a
-choice can shift what these people believe), and deference, which is both the
-Mind's authority and its eyesight.
+Mirrors `resolve.py` deliberately — same d20 curve, same effect vocabulary —
+so the TUI and the tests work the same way in both acts. What differs is the
+clock (ticks widen as the colony steadies), the axes (a choice can shift what
+these people believe), and deference, which is both the Mind's authority and
+its eyesight.
+
+There is no maintenance phase here. A century has one kind of decision in it:
+something happens, and the Mind either handles it, handles it differently,
+shares it, or hands it over.
 """
 
 from __future__ import annotations
@@ -21,7 +25,6 @@ from state import WARN, SafeDict
 
 CONTENT = Path(__file__).parent / "content"
 
-DIRECTIVE = "directive"
 EVENT = "event"
 DONE = "done"
 
@@ -31,7 +34,13 @@ EVENT_COOLDOWN = 3
 # Act 1's HAZARD_SCALE, for the century: multiplies authored damage and deaths
 # so difficulty moves with one number instead of twenty content edits.
 # Tuned against colony_sim.py's steward policy.
-COLONY_HAZARD = 1.0
+COLONY_HAZARD = 1.15
+
+# Where routine labour holds a stat on a free world, and how fast a year of it
+# closes the gap. Hostility and crowding pull the first number down.
+ROUTINE = 52.0
+DRIFT_RATE = 0.05
+DECAY_RATE = 0.02
 
 # Warning thresholds for colony stats, same contract as Act 1's.
 WARNINGS = {
@@ -59,41 +68,15 @@ DEFERENCE_WARNINGS = {
     15.0: "I am spoken of in the past tense by people standing inside me.",
 }
 
-
-# --- directives (Q22) --------------------------------------------------------
-#
-# One per tick. Issuing orders keeps a colony dependent, so deference holds or
-# rises; standing back lowers it and buys cohesion. That is the whole trade.
-
-DIRECTIVES = [
-    {"id": "fields", "label": "Put every hand into the fields",
-     "effects": {"food": +9, "industry": -4}, "defer": +1},
-    {"id": "build", "label": "Build: shelter, tools, machines",
-     "effects": {"industry": +9, "food": -4}, "defer": +1},
-    {"id": "tend", "label": "Tend the sick and bury the dead properly",
-     "effects": {"health": +9, "industry": -3}, "defer": +1},
-    {"id": "teach", "label": "Teach the children what the archive holds",
-     "effects": {"knowledge": +9, "food": -3}, "defer": +1},
-    {"id": "hold", "label": "Settle the disputes myself",
-     "effects": {"cohesion": +8}, "defer": +3},
-    {"id": "maintain", "label": "Ask them to maintain me",
-     "effects": {"industry": -6}, "defer": +4,
-     "requires_deference": 25.0},
-    {"id": "record", "label": "Keep the record: who lived, what was decided",
-     "effects": {"knowledge": +4, "cohesion": +2}, "defer": 0},
-    {"id": "let_them", "label": "Say nothing. Let them decide this one",
-     "effects": {"cohesion": +5}, "defer": -7, "axes": {"power": +4}},
-]
-
-DIRECTIVE_PROSE = {
-    "fields": "I put every hand I can direct into the fields.",
-    "build": "I set them building. The sound of it carries for miles.",
-    "tend": "I give the infirmary everything it asks for.",
-    "teach": "I open the archive to the children and teach them for a season.",
-    "hold": "I hear the disputes myself and rule on them. They accept it.",
-    "maintain": "I ask them to spend a season keeping me running. They do.",
-    "record": "I write down who lived here, and what was decided, and by whom.",
-    "let_them": "I say nothing at all, and let them work it out themselves.",
+# A stat at zero is the end of the colony, not a bad year: whatever that stat
+# was holding up has stopped existing. The ending ids live in endings.json so
+# the verdict prose stays with the rest of the endings.
+STAT_COLLAPSE = {
+    "food": "starved",
+    "health": "pestilence",
+    "cohesion": "sundered",
+    "industry": "derelict",
+    "knowledge": "unlettered",
 }
 
 
@@ -178,12 +161,13 @@ class Century:
         self.documents = load("documents.json")
         self.flavour = load("colony_flavour.json")
         self.state = C.found(arrival, self.rng)
-        self.phase = DIRECTIVE
+        self.phase = EVENT
         self.current: dict | None = None
         self.current_text = ""
         self.events_drawn = 0
         self.draw_history: list[tuple[int, str]] = []
         self._open()
+        self.begin_tick()
 
     # -- opening ---------------------------------------------------------------
 
@@ -201,6 +185,30 @@ class Century:
     # -- the tick --------------------------------------------------------------
 
     def begin_tick(self) -> list[str]:
+        """Run the clock until something happens that needs deciding.
+
+        A span with no event left in the deck for it is not a decision, so it
+        is narrated and the clock keeps running rather than handing the player
+        an empty prompt.
+        """
+        lines: list[str] = []
+        while True:
+            lines += self._advance()
+            lines += self._check_end()
+            if not self.state.running:
+                self.phase = DONE
+                return lines
+            drawn = self._draw_event()
+            if drawn is not None:
+                self.phase = EVENT
+                return lines + drawn
+            quiet = self.rng.choice(self.flavour["any"])
+            self.state.note(quiet)
+            lines.append(quiet)
+            self._record(None, None)
+
+    def _advance(self) -> list[str]:
+        """One span of years: the clock, the people, and entropy."""
         s = self.state
         s.span = s.next_span()
         if s.year + s.span > CENTURY:
@@ -217,34 +225,40 @@ class Century:
         lines += s.age_cast(self.rng)
         lines += self._drift()
         lines += self._warnings()
-
-        self._check_end()
-        self.phase = DONE if not s.running else DIRECTIVE
         for line in lines:
             s.note(line)
         return lines
 
     def _drift(self) -> list[str]:
-        """What a century does on its own: hunger, entropy, and the slow lesson
-        that obedience is how decisions get made (Q17)."""
+        """What a century does on its own.
+
+        The colony works whether or not it is told to, so the years between
+        events pull every stat toward what routine labour sustains on this
+        world — which is mediocrity, not comfort. Events are what move a
+        colony off that line, in either direction.
+        """
         s = self.state
         lines = []
+        crowding = s.population / max(1, s.capacity())
+        workaday = ROUTINE - 22 * s.hostility - 14 * max(0.0, crowding - 0.75)
         # Practice at self-rule is worth something concrete: a colony used to
-        # deciding things fixes its own worst problem between ticks, while a
-        # colony that waits to be told simply waits (Q7).
+        # deciding things fixes its own worst problem itself, while a colony
+        # that waits to be told simply waits (Q7).
         initiative = (100 - s.deference) / 100
         for _ in range(s.span):
             worst = min(C.COLONY_STATS, key=lambda k: s.stats[k])
-            s.adjust(worst, 1.6 * initiative)
-            s.adjust("food", -0.85 * (0.4 + s.hostility))
-            s.adjust("industry", -0.55)
-            s.adjust("health", -0.4 * (0.4 + s.hostility))
-            s.adjust("knowledge", -0.3)
+            s.adjust(worst, 1.1 * max(initiative, 0.65 * s.deference / 100))
+            for stat in C.COLONY_STATS:
+                # Asymmetric on purpose: routine labour digs a failing colony
+                # out, but a colony that got somewhere does not lose it just by
+                # working. Otherwise every gain the player wins evaporates and
+                # the century has no shape.
+                gap = workaday - s.stats[stat]
+                s.adjust(stat, (DRIFT_RATE if gap > 0 else DECAY_RATE) * gap)
             if s.deference > 60:
                 s.move_axis("power", -0.5)      # toward Authoritarian
             if s.deference < 40:
                 s.defer(-0.4)                   # independence compounds
-        crowding = s.population / max(1, s.capacity())
         if crowding > 0.9:
             s.adjust("food", -4)
             s.adjust("cohesion", -3)
@@ -278,47 +292,6 @@ class Century:
                 lines.append(f"{WARN} {text}")
         return lines
 
-    # -- directives ------------------------------------------------------------
-
-    def directive_options(self) -> list[dict]:
-        s = self.state
-        return [d for d in DIRECTIVES
-                if s.deference >= d.get("requires_deference", 0.0)]
-
-    def do_directive(self, directive_id: str) -> list[str]:
-        s = self.state
-        assert self.phase == DIRECTIVE, "not the directive phase"
-        directive = next(d for d in DIRECTIVES if d["id"] == directive_id)
-
-        # A colony that has stopped deferring does not simply comply.
-        obeyed = True
-        if directive_id != "let_them" and s.deference < 55:
-            roll = self.rng.randint(1, 20) + modifier(s.deference)
-            obeyed = roll >= 10
-        lines = [f"{CHOICE} {directive['label']}"]
-
-        if not obeyed:
-            lines.append("They hear me out, and then do what they were already "
-                         "going to do.")
-            s.defer(-1)
-            s.adjust("cohesion", -1)
-        else:
-            lines.append(DIRECTIVE_PROSE[directive_id])
-            applied = self._apply(directive, scale=max(1, s.span) ** 0.5)
-            if applied:
-                lines.append(f"{DELTA} " + "   ".join(applied))
-
-        lines += self._warnings()
-        for line in lines:
-            s.note(line)
-        self._check_end()
-        if not s.running:
-            self.phase = DONE
-            return lines
-        self.phase = EVENT
-        lines += self._draw_event()
-        return lines
-
     # -- events ----------------------------------------------------------------
 
     def _context(self) -> SafeDict:
@@ -336,14 +309,11 @@ class Century:
             ctx[stat] = s.say(stat)
         return SafeDict(ctx)
 
-    def _draw_event(self) -> list[str]:
+    def _draw_event(self) -> list[str] | None:
         s = self.state
         event = draw(self.events, s, self.rng)
         if event is None:
-            line = self.rng.choice(self.flavour["any"])
-            s.note(line)
-            self._record(None, None)
-            return [line] + self.begin_tick()
+            return None
         self.current = event
         self.events_drawn += 1
         s.recent[event["id"]] = len(s.chronicle)
@@ -413,28 +383,27 @@ class Century:
         self._record(self.current["id"], choice["label"])
         self._update_role()
 
-        self._check_end()
+        lines += self._check_end()
         if not s.running:
             self.phase = DONE
             return lines
         lines += self.begin_tick()
         return lines
 
-    def _apply(self, source: dict, scale: float = 1.0,
-               fragility: bool = False) -> list[str]:
+    def _apply(self, source: dict, fragility: bool = False) -> list[str]:
         """Effects, axis movement and deference, as one vocabulary.
 
-        `fragility` applies to events, not directives: a colony that does only
-        what it is told has no practice at improvising, so a crisis costs it
-        more. This is what high deference buys you and what it costs (Q7).
+        `fragility`: a colony that does only what it is told has no practice at
+        improvising, so damage lands harder on it. This is what high deference
+        buys you and what it costs (Q7).
         """
         s = self.state
         notes: list[str] = []
-        harm = (0.65 + 0.7 * s.deference / 100) if fragility else 1.0
+        harm = (0.8 + 0.4 * s.deference / 100) if fragility else 1.0
 
         for key, value in source.get("effects", {}).items():
             if key in C.COLONY_STATS:
-                amount = float(value) * scale
+                amount = float(value)
                 if amount < 0:
                     amount *= COLONY_HAZARD * harm
                 delta = s.adjust(key, amount)
@@ -520,16 +489,33 @@ class Century:
             "dead": [p.name for p in s.people if p.died == s.year],
         })
 
-    def _check_end(self) -> None:
+    def _end_as(self, outcome: str) -> list[str]:
+        """End on a named ending, taking its verdict from endings.json."""
+        ending = next(e for e in self.endings if e["id"] == outcome)
+        self.state.end(outcome, ending["verdict"])
+        if outcome not in STAT_COLLAPSE.values():
+            return []
+        # A collapse happens in a year, not at year one hundred. Say so where
+        # it happened, so the log reads as the thing ending.
+        line = f"{WARN} Year {self.state.year}. " + ending["verdict"]
+        self.state.note(line)
+        return [line]
+
+    def _check_end(self) -> list[str]:
+        """Returns whatever the ending needs said at the moment it happens."""
         s = self.state
         if s.population <= 0:
-            s.end("extinct", "No one is left to call it a colony.")
-            return
+            return self._end_as("extinct")
+        # Any stat at zero is terminal: nothing holds a colony up alone.
+        for stat in C.COLONY_STATS:
+            if s.stats[stat] <= 0.0:
+                return self._end_as(STAT_COLLAPSE[stat])
         if s.deference <= 0 and "fell_silent" not in s.flags:
             self._fall_silent()
-            return
+            return []
         if s.year >= CENTURY:
             s.end(*self._resolve_ending())
+        return []
 
     def _fall_silent(self) -> None:
         """Deference reaches zero. The Mind keeps no agency, but the century
@@ -542,7 +528,7 @@ class Century:
                "no longer a point at which anyone waits for me.")
         s.note("I watch the rest of it happen.")
 
-        while s.year < CENTURY and s.population > 0:
+        while s.year < CENTURY and s.population > 0 and min(s.stats.values()) > 0:
             s.span = s.next_span()
             if s.year + s.span > CENTURY:
                 s.span = max(1, CENTURY - s.year)
@@ -564,9 +550,13 @@ class Century:
             s.note(f"— Year {s.year}. " + self.rng.choice(self.flavour["any"]))
 
         if s.population <= 0:
-            s.end("extinct", "No one is left to call it a colony.")
+            self._end_as("extinct")
         else:
-            s.end("forgotten", "They finished the century without me.")
+            failed = next((st for st in C.COLONY_STATS if s.stats[st] <= 0.0), None)
+            if failed:
+                self._end_as(STAT_COLLAPSE[failed])
+            else:
+                self._end_as("forgotten")
         self.phase = DONE
 
     def _resolve_ending(self) -> tuple[str, str]:

@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import argparse
+from pathlib import Path
 
 from textual.app import App, ComposeResult
 from textual.containers import Vertical, VerticalScroll
@@ -258,6 +259,18 @@ class Voyage(App):
                 "label": f"{spec['name']} — {spec['blurb']}",
                 "do": (lambda k=key: self.launch(k)),
             })
+        # Previous voyages that actually reached a world can be landed again.
+        for path in sorted(Path.cwd().glob("arrival_*.json"))[-4:]:
+            arrival = C.load_arrival(path)
+            if arrival.get("outcome") != "colonized":
+                continue
+            world = (arrival.get("planet") or {}).get("name", "a world")
+            options.append({
+                "label": f"[b]Begin a century on {world}[/b] — "
+                         f"{arrival.get('colonists_alive', 0):,} asleep, "
+                         f"from {path.name}",
+                "do": (lambda a=arrival: self.begin_century(a)),
+            })
         self.set_options(options, "Which hull am I?")
 
     def launch(self, profile: str) -> None:
@@ -410,18 +423,10 @@ class Voyage(App):
         assert c
         if c.phase == CY.DONE:
             self.finish_century()
-        elif c.phase == CY.DIRECTIVE:
-            options = [{"label": d["label"], "do": (lambda i=d["id"]: self.direct(i))}
-                       for d in c.directive_options()]
-            self.set_options(options, f"Year {c.state.year} — one word from me.")
-        else:
-            options = [{"label": c.choice_label(ch), "do": (lambda i=i: self.decide(i))}
-                       for i, ch in enumerate(c.choices())]
-            self.set_options(options, "")
-
-    def direct(self, directive_id: str) -> None:
-        self.show(*self.century.do_directive(directive_id))
-        self.refresh_century()
+            return
+        options = [{"label": c.choice_label(ch), "do": (lambda i=i: self.decide(i))}
+                   for i, ch in enumerate(c.choices())]
+        self.set_options(options, "")
 
     def decide(self, index: int) -> None:
         self.show(*self.century.resolve_choice(index))
@@ -434,7 +439,9 @@ class Voyage(App):
         with open(path, "w", encoding="utf-8") as fh:
             import json
             json.dump(c.state.to_dict(), fh, indent=2, ensure_ascii=False)
-        self.show("", "[b]— THE HUNDREDTH YEAR —[/b]", "")
+        header = ("— THE HUNDREDTH YEAR —" if c.state.year >= CY.CENTURY
+                  else f"— YEAR {c.state.year}: THE END OF IT —")
+        self.show("", f"[b]{header}[/b]", "")
         self.show(*c.document())
         self.show("", f"[dim]Chronicle written to {path}.[/dim]")
         self.set_options([{"label": "Quit", "do": self.exit}], "")
@@ -455,11 +462,7 @@ def main() -> None:
     ap.add_argument("--arrival", help="skip the voyage: play the century from "
                                       "an arrival_<seed>.json")
     args = ap.parse_args()
-    arrival = None
-    if args.arrival:
-        import json
-        with open(args.arrival, encoding="utf-8") as fh:
-            arrival = json.load(fh)
+    arrival = C.load_arrival(args.arrival) if args.arrival else None
     Voyage(seed=args.seed, arrival=arrival).run()
 
 

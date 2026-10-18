@@ -204,7 +204,7 @@ class ColonyState:
 
     def next_span(self) -> int:
         s = self.stability()
-        for threshold, years in ((0.58, 10), (0.44, 5), (0.30, 2)):
+        for threshold, years in ((0.46, 10), (0.34, 5), (0.23, 2)):
             if s >= threshold:
                 return years
         return 1

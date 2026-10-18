@@ -20,6 +20,9 @@ ENDINGS = century.load("endings.json")
 DOCUMENTS = century.load("documents.json")
 FLAVOUR = century.load("colony_flavour.json")
 
+# Endings that stop the century early: the colony died of something.
+DEATHS = {"extinct", *century.STAT_COLLAPSE.values()}
+
 
 def test_a_century_always_terminates_legally() -> None:
     """Every century reaches year 100 or a death, in a state we have words for."""
@@ -36,8 +39,26 @@ def test_a_century_always_terminates_legally() -> None:
             assert 0.0 <= value <= 100.0, f"seed {seed}: {stat} = {value}"
         for axis, value in s.axes.items():
             assert -100.0 <= value <= 100.0, f"seed {seed}: {axis} = {value}"
-        assert s.outcome in ("extinct",) or s.year == century.CENTURY, (
+        # Only a death stops the clock early. Everything else reaches year 100.
+        assert s.outcome in DEATHS or s.year == century.CENTURY, (
             f"seed {seed} ended at year {s.year} as {s.outcome}")
+        if s.outcome in century.STAT_COLLAPSE.values():
+            stat = next(k for k, v in century.STAT_COLLAPSE.items()
+                        if v == s.outcome)
+            assert s.stats[stat] <= 0.0, (
+                f"seed {seed}: {s.outcome} with {stat} at {s.stats[stat]}")
+
+
+def test_a_stat_at_zero_ends_it() -> None:
+    """Nothing holds a colony up alone: a stat reaching zero is a game over."""
+    for stat, expected in century.STAT_COLLAPSE.items():
+        game = century.Century(CS.synthetic_arrival(6), seed=6, events=EVENTS)
+        game.state.stats[stat] = 0.0
+        game._check_end()
+        assert game.state.outcome == expected, (
+            f"{stat} at zero gave {game.state.outcome!r}")
+        assert game.state.outcome_reason, f"{expected} has no verdict"
+        assert game.state.year < century.CENTURY, "the century ran on regardless"
 
 
 def test_determinism() -> None:
@@ -62,9 +83,12 @@ def test_every_ending_is_reachable() -> None:
             seen.add(game.state.outcome)
         if len(seen) == len(ENDINGS):
             break
-    missing = {e["id"] for e in ENDINGS} - seen
-    # 'extinct' needs a catastrophic run; the rest must all appear.
-    assert missing <= {"extinct"}, f"unreachable endings: {missing}"
+    # Every ending a surviving colony can earn must appear. Which specific
+    # thing kills a colony depends on what the deck can crater, so the deaths
+    # are only required as a group.
+    missing = {e["id"] for e in ENDINGS} - seen - DEATHS
+    assert not missing, f"unreachable endings: {missing}"
+    assert seen & DEATHS, "no colony ever died"
 
 
 def test_content_is_wired_up() -> None:
@@ -76,6 +100,10 @@ def test_content_is_wired_up() -> None:
 
     for event in EVENTS:
         assert event["text"], f"{event['id']}: no text"
+        # Every tick is an event now, so every event has to carry a full
+        # decision: four ways to answer it.
+        assert len(event["choices"]) == 4, (
+            f"{event['id']}: {len(event['choices'])} choices, want 4")
         req = event.get("requires", {})
         for stat in req.get("stats", {}):
             assert stat in C.COLONY_STATS, f"{event['id']}: unknown stat {stat}"
@@ -205,8 +233,8 @@ def test_the_century_finishes_without_you() -> None:
     game.state.deference = 0.0
     game._check_end()
     assert "fell_silent" in game.state.flags
-    assert game.state.outcome in ("forgotten", "extinct")
-    assert game.state.year == century.CENTURY or game.state.outcome == "extinct", (
+    assert game.state.outcome in DEATHS | {"forgotten"}
+    assert game.state.year == century.CENTURY or game.state.outcome in DEATHS, (
         f"the century stopped at year {game.state.year}")
     assert len(game.state.chronicle) > 0, "nothing was recorded after I went quiet"
 

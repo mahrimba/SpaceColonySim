@@ -59,32 +59,51 @@ def arrival_from_voyage(seed: int) -> dict | None:
 
 
 # -- policy -------------------------------------------------------------------
+#
+# With the directive phase gone, a playstyle is nothing but a way of ranking
+# the four options on the table. Deference is what the two ends of Q7 disagree
+# about, so these sort on it and break ties on whatever helps the worst stat.
 
-FIXES = {"food": "fields", "industry": "build", "health": "tend",
-         "knowledge": "teach", "cohesion": "hold"}
+GRADES = ("crit_success", "success", "failure", "crit_failure")
 
 
-def autocrat(game: century.Century) -> str:
-    """Keeps hold of everything. Patches the worst stat, never stands aside."""
+def _expected(choice: dict, key: str, stat: str | None = None) -> float:
+    """What a choice is worth on average across its outcomes."""
+    outcomes = [choice[g] for g in GRADES if g in choice] or [choice]
+    total = 0.0
+    for outcome in outcomes:
+        total += (float(outcome.get("defer", 0)) if key == "defer"
+                  else float(outcome.get("effects", {}).get(stat, 0)))
+    return total / len(outcomes)
+
+
+def _rank(game: century.Century, sign: int) -> int:
     s = game.state
-    options = {d["id"] for d in game.directive_options()}
-    worst, value = min(((k, s.stats[k]) for k in C.COLONY_STATS), key=lambda kv: kv[1])
-    if value < 60 and FIXES[worst] in options:
-        return FIXES[worst]
-    return "hold" if "hold" in options else "record"
+    worst = min(C.COLONY_STATS, key=lambda k: s.stats[k])
+    choices = game.choices()
+    # A colony about to die of one stat takes the option that feeds it, whoever
+    # is holding the reins.
+    if s.stats[worst] < 25:
+        best = max(range(len(choices)),
+                   key=lambda i: _expected(choices[i], "stat", worst))
+        if _expected(choices[best], "stat", worst) > 0:
+            return best
+    if sign < 0 and s.deference < 35:
+        # A steward keeps a voice. It does not hand itself out of existence.
+        return min(range(len(choices)),
+                   key=lambda i: abs(_expected(choices[i], "defer")))
+    return max(range(len(choices)),
+               key=lambda i: sign * _expected(choices[i], "defer"))
 
 
-def steward(game: century.Century) -> str:
-    """Patches real crises and otherwise hands decisions back, aiming for a
-    colony that can run itself. The baseline the targets are measured against."""
-    s = game.state
-    options = {d["id"] for d in game.directive_options()}
-    worst, value = min(((k, s.stats[k]) for k in C.COLONY_STATS), key=lambda kv: kv[1])
-    if value < 40 and FIXES[worst] in options:
-        return FIXES[worst]
-    if s.deference > 35 and "let_them" in options:
-        return "let_them"
-    return "record" if "record" in options else FIXES[worst]
+def autocrat(game: century.Century) -> int:
+    """Takes every decision it can. The colony never learns to decide."""
+    return _rank(game, +1)
+
+
+def steward(game: century.Century) -> int:
+    """Hands decisions back wherever handing them back is on offer."""
+    return _rank(game, -1)
 
 
 POLICIES = {"steward": steward, "autocrat": autocrat}
@@ -100,12 +119,14 @@ def play(arrival: dict, seed: int = 0, events=None, verbose: bool = False,
     while game.phase != century.DONE:
         guard += 1
         assert guard < 400, "century did not terminate"
-        if game.phase == century.DIRECTIVE:
-            game.do_directive((policy or steward)(game))
-        elif game.phase == century.EVENT:
-            n = len(game.choices())
-            pick = script.pop(0) % n if script else picker.randrange(n)
-            game.resolve_choice(pick)
+        n = len(game.choices())
+        if script:
+            pick = script.pop(0) % n
+        elif policy:
+            pick = policy(game) % n
+        else:
+            pick = picker.randrange(n)
+        game.resolve_choice(pick)
 
     if verbose:
         print("\n".join(game.state.log))

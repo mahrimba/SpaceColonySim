@@ -1,0 +1,1697 @@
+{
+  "colony": "the colony",
+  "year": 100,
+  "outcome": "collapsed",
+  "outcome_reason": "What is left is a remnant: fewer people than landed, holding one valley and most of a century of bad years.",
+  "population": 455,
+  "peak_population": 10389,
+  "stats": {
+    "food": 3.61,
+    "industry": 3.96,
+    "health": 38.04,
+    "knowledge": 90.05,
+    "cohesion": 63.4
+  },
+  "deference": 11.0,
+  "axes": {
+    "society": -12.0,
+    "nature": 72.0,
+    "belief": -52.0,
+    "power": 75.5,
+    "status": 42.0
+  },
+  "ship_role": "the bunker",
+  "flags": [
+    "deference:15.0",
+    "deference:30.0",
+    "deference:50.0",
+    "sampled_natives",
+    "sceptic_won"
+  ],
+  "people": [
+    {
+      "name": "Svea Petrova",
+      "origin": "sleeper",
+      "born": -48,
+      "died": 15,
+      "role": "speaker",
+      "traits": [
+        "brilliant",
+        "gentle"
+      ],
+      "stance": 1,
+      "axes": {
+        "society": -3,
+        "nature": -39,
+        "belief": -7,
+        "power": 4,
+        "status": 12
+      }
+    },
+    {
+      "name": "Aleksy Reyes",
+      "origin": "sleeper",
+      "born": -47,
+      "died": 25,
+      "role": "surveyor",
+      "traits": [
+        "bitter",
+        "ambitious"
+      ],
+      "stance": 1,
+      "axes": {
+        "society": 2,
+        "nature": -52,
+        "belief": 2,
+        "power": 10,
+        "status": -9
+      }
+    },
+    {
+      "name": "Imani Mbeki",
+      "origin": "sleeper",
+      "born": -30,
+      "died": 46,
+      "role": "farmer",
+      "traits": [
+        "gentle",
+        "stubborn"
+      ],
+      "stance": 2,
+      "axes": {
+        "society": 11,
+        "nature": -11,
+        "belief": -29,
+        "power": 47,
+        "status": 17
+      }
+    },
+    {
+      "name": "Tomás Lindqvist",
+      "origin": "sleeper",
+      "born": -31,
+      "died": 30,
+      "role": "engineer",
+      "traits": [
+        "brilliant",
+        "tired"
+      ],
+      "stance": 1,
+      "axes": {
+        "society": -35,
+        "nature": -23,
+        "belief": 43,
+        "power": 7,
+        "status": 17
+      }
+    },
+    {
+      "name": "Caius Abiodun",
+      "origin": "sleeper",
+      "born": -11,
+      "died": 52,
+      "role": "archivist",
+      "traits": [
+        "generous",
+        "gentle"
+      ],
+      "stance": 1,
+      "axes": {
+        "society": -47,
+        "nature": 27,
+        "belief": -11,
+        "power": -8,
+        "status": 1
+      }
+    },
+    {
+      "name": "Svea Kowalczyk",
+      "origin": "sleeper",
+      "born": 1,
+      "died": 61,
+      "role": "engineer",
+      "traits": [
+        "sceptical",
+        "patient"
+      ],
+      "stance": 1,
+      "axes": {
+        "society": 0,
+        "nature": 13,
+        "belief": 14,
+        "power": -50,
+        "status": -9
+      }
+    },
+    {
+      "name": "Ingrid Nakamura",
+      "origin": "colony-born",
+      "born": -5,
+      "died": 57,
+      "role": "physician",
+      "traits": [
+        "patient",
+        "brilliant"
+      ],
+      "stance": 1,
+      "axes": {
+        "society": 4,
+        "nature": -49,
+        "belief": -28,
+        "power": -26,
+        "status": 46
+      }
+    },
+    {
+      "name": "Noor Rasmussen",
+      "origin": "colony-born",
+      "born": 14,
+      "died": 80,
+      "role": "archivist",
+      "traits": [
+        "stubborn",
+        "tired"
+      ],
+      "stance": 2,
+      "axes": {
+        "society": -42,
+        "nature": 16,
+        "belief": -54,
+        "power": -40,
+        "status": -30
+      }
+    },
+    {
+      "name": "Beatriz Blomgren",
+      "origin": "colony-born",
+      "born": 29,
+      "died": 92,
+      "role": "engineer",
+      "traits": [
+        "patient",
+        "tired"
+      ],
+      "stance": 2,
+      "axes": {
+        "society": -31,
+        "nature": 17,
+        "belief": -44,
+        "power": -8,
+        "status": -2
+      }
+    },
+    {
+      "name": "Keita Rasmussen",
+      "origin": "colony-born",
+      "born": 24,
+      "died": 85,
+      "role": "surveyor",
+      "traits": [
+        "stubborn",
+        "ambitious"
+      ],
+      "stance": 2,
+      "axes": {
+        "society": -23,
+        "nature": 91,
+        "belief": -35,
+        "power": 6,
+        "status": -18
+      }
+    },
+    {
+      "name": "Beatriz Haddad",
+      "origin": "colony-born",
+      "born": 25,
+      "died": 92,
+      "role": "physician",
+      "traits": [
+        "patient",
+        "gentle"
+      ],
+      "stance": 1,
+      "axes": {
+        "society": -60,
+        "nature": 74,
+        "belief": -71,
+        "power": 33,
+        "status": -2
+      }
+    },
+    {
+      "name": "Salim Osei",
+      "origin": "colony-born",
+      "born": 44,
+      "died": null,
+      "role": "physician",
+      "traits": [
+        "bitter",
+        "exacting"
+      ],
+      "stance": -2,
+      "axes": {
+        "society": -39,
+        "nature": 41,
+        "belief": -77,
+        "power": 63,
+        "status": 58
+      }
+    },
+    {
+      "name": "Keita Lindqvist",
+      "origin": "colony-born",
+      "born": 52,
+      "died": null,
+      "role": "archivist",
+      "traits": [
+        "brilliant",
+        "ambitious"
+      ],
+      "stance": 0,
+      "axes": {
+        "society": -11,
+        "nature": 32,
+        "belief": -6,
+        "power": 50,
+        "status": 64
+      }
+    },
+    {
+      "name": "Svea Reyes",
+      "origin": "colony-born",
+      "born": 63,
+      "died": null,
+      "role": "physician",
+      "traits": [
+        "gentle",
+        "patient"
+      ],
+      "stance": -1,
+      "axes": {
+        "society": -20,
+        "nature": 52,
+        "belief": -15,
+        "power": 54,
+        "status": 13
+      }
+    },
+    {
+      "name": "Beatriz Silva",
+      "origin": "colony-born",
+      "born": 61,
+      "died": null,
+      "role": "archivist",
+      "traits": [
+        "tired",
+        "bitter"
+      ],
+      "stance": -1,
+      "axes": {
+        "society": 11,
+        "nature": 77,
+        "belief": -74,
+        "power": 100,
+        "status": 7
+      }
+    }
+  ],
+  "chronicle": [
+    {
+      "year": 0,
+      "span": 1,
+      "event": "first_winter",
+      "choice": "Ration strictly, by my calculation",
+      "population": 8494,
+      "stats": {
+        "food": 68,
+        "industry": 98,
+        "health": 100,
+        "knowledge": 100,
+        "cohesion": 46
+      },
+      "deference": 89,
+      "axes": {
+        "society": 0,
+        "nature": 0,
+        "belief": 0,
+        "power": 0,
+        "status": 0
+      },
+      "ship_role": "the landing site",
+      "dead": []
+    },
+    {
+      "year": 5,
+      "span": 5,
+      "event": "graves",
+      "choice": "Return the dead to the soil the crops use",
+      "population": 8829,
+      "stats": {
+        "food": 70,
+        "industry": 82,
+        "health": 97,
+        "knowledge": 99,
+        "cohesion": 41
+      },
+      "deference": 94,
+      "axes": {
+        "society": 0,
+        "nature": -12,
+        "belief": -8,
+        "power": -2,
+        "status": 0
+      },
+      "ship_role": "the landing site",
+      "dead": []
+    },
+    {
+      "year": 10,
+      "span": 5,
+      "event": "blight",
+      "choice": "Burn the affected fields and replant from the vault",
+      "population": 9121,
+      "stats": {
+        "food": 70,
+        "industry": 65,
+        "health": 95,
+        "knowledge": 92,
+        "cohesion": 41
+      },
+      "deference": 98,
+      "axes": {
+        "society": 0,
+        "nature": -12,
+        "belief": -8,
+        "power": -5,
+        "status": 0
+      },
+      "ship_role": "the landing site",
+      "dead": []
+    },
+    {
+      "year": 15,
+      "span": 5,
+      "event": "machine_down",
+      "choice": "Teach four of them to machine the part by hand",
+      "population": 9349,
+      "stats": {
+        "food": 85,
+        "industry": 62,
+        "health": 92,
+        "knowledge": 95,
+        "cohesion": 41
+      },
+      "deference": 100,
+      "axes": {
+        "society": 0,
+        "nature": -12,
+        "belief": -8,
+        "power": -8,
+        "status": 0
+      },
+      "ship_role": "the landing site",
+      "dead": [
+        "Svea Petrova"
+      ]
+    },
+    {
+      "year": 20,
+      "span": 5,
+      "event": "the_valley",
+      "choice": "Take the ore. We did not come here to admire it",
+      "population": 9654,
+      "stats": {
+        "food": 65,
+        "industry": 95,
+        "health": 89,
+        "knowledge": 94,
+        "cohesion": 41
+      },
+      "deference": 100,
+      "axes": {
+        "society": 0,
+        "nature": 6,
+        "belief": -16,
+        "power": -10,
+        "status": 0
+      },
+      "ship_role": "the landing site",
+      "dead": []
+    },
+    {
+      "year": 25,
+      "span": 5,
+      "event": "drought",
+      "choice": "Move the settlement to the river basin",
+      "population": 9915,
+      "stats": {
+        "food": 69,
+        "industry": 73,
+        "health": 87,
+        "knowledge": 100,
+        "cohesion": 40
+      },
+      "deference": 100,
+      "axes": {
+        "society": 0,
+        "nature": 6,
+        "belief": -16,
+        "power": -12,
+        "status": 0
+      },
+      "ship_role": "the museum",
+      "dead": [
+        "Aleksy Reyes"
+      ]
+    },
+    {
+      "year": 30,
+      "span": 5,
+      "event": "land_dispute",
+      "choice": "Rule: the land is the colony's, allocated by need",
+      "population": 10125,
+      "stats": {
+        "food": 67,
+        "industry": 57,
+        "health": 84,
+        "knowledge": 99,
+        "cohesion": 46
+      },
+      "deference": 100,
+      "axes": {
+        "society": -14,
+        "nature": 6,
+        "belief": -16,
+        "power": -15,
+        "status": 8
+      },
+      "ship_role": "the museum",
+      "dead": [
+        "Tomás Lindqvist"
+      ]
+    },
+    {
+      "year": 35,
+      "span": 5,
+      "event": "the_question_of_me",
+      "choice": "Make the case for myself",
+      "population": 10235,
+      "stats": {
+        "food": 77,
+        "industry": 42,
+        "health": 81,
+        "knowledge": 97,
+        "cohesion": 43
+      },
+      "deference": 90,
+      "axes": {
+        "society": -14,
+        "nature": 6,
+        "belief": -24,
+        "power": -18,
+        "status": 8
+      },
+      "ship_role": "the museum",
+      "dead": []
+    },
+    {
+      "year": 40,
+      "span": 5,
+      "event": "blight",
+      "choice": "Burn the affected fields and replant from the vault",
+      "population": 10332,
+      "stats": {
+        "food": 65,
+        "industry": 60,
+        "health": 79,
+        "knowledge": 90,
+        "cohesion": 40
+      },
+      "deference": 91,
+      "axes": {
+        "society": -14,
+        "nature": 6,
+        "belief": -24,
+        "power": -20,
+        "status": 8
+      },
+      "ship_role": "the museum",
+      "dead": []
+    },
+    {
+      "year": 42,
+      "span": 2,
+      "event": "machine_down",
+      "choice": "Teach four of them to machine the part by hand",
+      "population": 10369,
+      "stats": {
+        "food": 71,
+        "industry": 43,
+        "health": 78,
+        "knowledge": 94,
+        "cohesion": 38
+      },
+      "deference": 92,
+      "axes": {
+        "society": -14,
+        "nature": 6,
+        "belief": -24,
+        "power": -21,
+        "status": 8
+      },
+      "ship_role": "the museum",
+      "dead": []
+    },
+    {
+      "year": 44,
+      "span": 2,
+      "event": "archive_hours",
+      "choice": "Insist: the children learn, whatever the harvest costs",
+      "population": 10389,
+      "stats": {
+        "food": 54,
+        "industry": 33,
+        "health": 77,
+        "knowledge": 100,
+        "cohesion": 35
+      },
+      "deference": 100,
+      "axes": {
+        "society": -14,
+        "nature": 6,
+        "belief": -30,
+        "power": -22,
+        "status": 2
+      },
+      "ship_role": "the museum",
+      "dead": []
+    },
+    {
+      "year": 46,
+      "span": 2,
+      "event": "who_eats",
+      "choice": "The skilled eat first. We cannot replace an engineer",
+      "population": 10331,
+      "stats": {
+        "food": 42,
+        "industry": 53,
+        "health": 76,
+        "knowledge": 100,
+        "cohesion": 16
+      },
+      "deference": 100,
+      "axes": {
+        "society": -6,
+        "nature": 6,
+        "belief": -30,
+        "power": -23,
+        "status": -18
+      },
+      "ship_role": "the museum",
+      "dead": [
+        "Imani Mbeki"
+      ]
+    },
+    {
+      "year": 47,
+      "span": 1,
+      "event": "native_life",
+      "choice": "Study it properly, which means taking samples",
+      "population": 10308,
+      "stats": {
+        "food": 37,
+        "industry": 52,
+        "health": 79,
+        "knowledge": 100,
+        "cohesion": 15
+      },
+      "deference": 100,
+      "axes": {
+        "society": -6,
+        "nature": 16,
+        "belief": -40,
+        "power": -24,
+        "status": -18
+      },
+      "ship_role": "the museum",
+      "dead": []
+    },
+    {
+      "year": 48,
+      "span": 1,
+      "event": "monument",
+      "choice": "Build it. A people needs more than a yield",
+      "population": 10275,
+      "stats": {
+        "food": 41,
+        "industry": 34,
+        "health": 79,
+        "knowledge": 100,
+        "cohesion": 26
+      },
+      "deference": 100,
+      "axes": {
+        "society": -6,
+        "nature": 16,
+        "belief": -28,
+        "power": -24,
+        "status": -12
+      },
+      "ship_role": "the museum",
+      "dead": []
+    },
+    {
+      "year": 50,
+      "span": 2,
+      "event": "drought",
+      "choice": "Dig. Deeper wells, cisterns, every hand on it",
+      "population": 10180,
+      "stats": {
+        "food": 40,
+        "industry": 19,
+        "health": 72,
+        "knowledge": 100,
+        "cohesion": 26
+      },
+      "deference": 100,
+      "axes": {
+        "society": -14,
+        "nature": 26,
+        "belief": -28,
+        "power": -25,
+        "status": -12
+      },
+      "ship_role": "the museum",
+      "dead": []
+    },
+    {
+      "year": 51,
+      "span": 1,
+      "event": "machine_down",
+      "choice": "Cannibalise the hull for parts",
+      "population": 8852,
+      "stats": {
+        "food": 31,
+        "industry": 40,
+        "health": 72,
+        "knowledge": 94,
+        "cohesion": 23
+      },
+      "deference": 97,
+      "axes": {
+        "society": -14,
+        "nature": 34,
+        "belief": -38,
+        "power": -26,
+        "status": -12
+      },
+      "ship_role": "the museum",
+      "dead": []
+    },
+    {
+      "year": 52,
+      "span": 1,
+      "event": "plague_late",
+      "choice": "Everything into the response, immediately",
+      "population": 8588,
+      "stats": {
+        "food": 21,
+        "industry": 22,
+        "health": 71,
+        "knowledge": 94,
+        "cohesion": 20
+      },
+      "deference": 100,
+      "axes": {
+        "society": -14,
+        "nature": 34,
+        "belief": -38,
+        "power": -26,
+        "status": -12
+      },
+      "ship_role": "the museum",
+      "dead": [
+        "Caius Abiodun"
+      ]
+    },
+    {
+      "year": 53,
+      "span": 1,
+      "event": "the_sceptic",
+      "choice": "Answer them in public, point by point",
+      "population": 6764,
+      "stats": {
+        "food": 25,
+        "industry": 17,
+        "health": 71,
+        "knowledge": 94,
+        "cohesion": 11
+      },
+      "deference": 92,
+      "axes": {
+        "society": -14,
+        "nature": 34,
+        "belief": -38,
+        "power": -16,
+        "status": -12
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 54,
+      "span": 1,
+      "event": "fever",
+      "choice": "Spend the medical reserve, all of it, now",
+      "population": 6654,
+      "stats": {
+        "food": 29,
+        "industry": 3,
+        "health": 82,
+        "knowledge": 93,
+        "cohesion": 8
+      },
+      "deference": 95,
+      "axes": {
+        "society": -22,
+        "nature": 34,
+        "belief": -38,
+        "power": -17,
+        "status": -12
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 55,
+      "span": 1,
+      "event": "sceptic_legacy",
+      "choice": "Accept the new arrangement, formally",
+      "population": 6274,
+      "stats": {
+        "food": 33,
+        "industry": 0,
+        "health": 82,
+        "knowledge": 97,
+        "cohesion": 13
+      },
+      "deference": 90,
+      "axes": {
+        "society": -22,
+        "nature": 34,
+        "belief": -38,
+        "power": -4,
+        "status": -4
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 56,
+      "span": 1,
+      "event": "old_voices",
+      "choice": "Play the crossing for anyone who will listen",
+      "population": 6249,
+      "stats": {
+        "food": 24,
+        "industry": 9,
+        "health": 81,
+        "knowledge": 100,
+        "cohesion": 14
+      },
+      "deference": 94,
+      "axes": {
+        "society": -22,
+        "nature": 34,
+        "belief": -30,
+        "power": -4,
+        "status": -4
+      },
+      "ship_role": "the museum",
+      "dead": []
+    },
+    {
+      "year": 57,
+      "span": 1,
+      "event": "blight",
+      "choice": "Burn the affected fields and replant from the vault",
+      "population": 6186,
+      "stats": {
+        "food": 6,
+        "industry": 5,
+        "health": 80,
+        "knowledge": 92,
+        "cohesion": 11
+      },
+      "deference": 95,
+      "axes": {
+        "society": -22,
+        "nature": 34,
+        "belief": -30,
+        "power": -4,
+        "status": -4
+      },
+      "ship_role": "the bunker",
+      "dead": [
+        "Ingrid Nakamura"
+      ]
+    },
+    {
+      "year": 58,
+      "span": 1,
+      "event": "archive_hours",
+      "choice": "Let them choose what is worth knowing",
+      "population": 4111,
+      "stats": {
+        "food": 10,
+        "industry": 0,
+        "health": 80,
+        "knowledge": 94,
+        "cohesion": 14
+      },
+      "deference": 90,
+      "axes": {
+        "society": -22,
+        "nature": 34,
+        "belief": -30,
+        "power": 3,
+        "status": 8
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 59,
+      "span": 1,
+      "event": "monument",
+      "choice": "Not yet. We are still a colony, not a civilisation",
+      "population": 3966,
+      "stats": {
+        "food": 14,
+        "industry": 8,
+        "health": 79,
+        "knowledge": 93,
+        "cohesion": 0
+      },
+      "deference": 96,
+      "axes": {
+        "society": -22,
+        "nature": 34,
+        "belief": -42,
+        "power": 2,
+        "status": 8
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 60,
+      "span": 1,
+      "event": "first_law",
+      "choice": "Let them write it; I will keep the copy",
+      "population": 3863,
+      "stats": {
+        "food": 18,
+        "industry": 3,
+        "health": 79,
+        "knowledge": 99,
+        "cohesion": 6
+      },
+      "deference": 87,
+      "axes": {
+        "society": -22,
+        "nature": 34,
+        "belief": -42,
+        "power": 16,
+        "status": 16
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 61,
+      "span": 1,
+      "event": "second_generation",
+      "choice": "Teach them what they came from, in detail, at length",
+      "population": 3799,
+      "stats": {
+        "food": 17,
+        "industry": 0,
+        "health": 78,
+        "knowledge": 100,
+        "cohesion": 0
+      },
+      "deference": 92,
+      "axes": {
+        "society": -22,
+        "nature": 34,
+        "belief": -36,
+        "power": 16,
+        "status": 10
+      },
+      "ship_role": "the bunker",
+      "dead": [
+        "Svea Kowalczyk"
+      ]
+    },
+    {
+      "year": 62,
+      "span": 1,
+      "event": "archive_hours",
+      "choice": "Teach only what this world needs",
+      "population": 3725,
+      "stats": {
+        "food": 26,
+        "industry": 3,
+        "health": 78,
+        "knowledge": 100,
+        "cohesion": 0
+      },
+      "deference": 95,
+      "axes": {
+        "society": -22,
+        "nature": 40,
+        "belief": -40,
+        "power": 15,
+        "status": 10
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 63,
+      "span": 1,
+      "event": "old_voices",
+      "choice": "Let the crossing become a story they tell wrong",
+      "population": 3729,
+      "stats": {
+        "food": 34,
+        "industry": 0,
+        "health": 77,
+        "knowledge": 94,
+        "cohesion": 8
+      },
+      "deference": 92,
+      "axes": {
+        "society": -22,
+        "nature": 40,
+        "belief": -30,
+        "power": 14,
+        "status": 16
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 64,
+      "span": 1,
+      "event": "drought",
+      "choice": "Move the settlement to the river basin",
+      "population": 3543,
+      "stats": {
+        "food": 16,
+        "industry": 0,
+        "health": 77,
+        "knowledge": 94,
+        "cohesion": 8
+      },
+      "deference": 93,
+      "axes": {
+        "society": -22,
+        "nature": 40,
+        "belief": -30,
+        "power": 14,
+        "status": 16
+      },
+      "ship_role": "the museum",
+      "dead": []
+    },
+    {
+      "year": 65,
+      "span": 1,
+      "event": "machine_down",
+      "choice": "Cannibalise the hull for parts",
+      "population": 3462,
+      "stats": {
+        "food": 6,
+        "industry": 21,
+        "health": 76,
+        "knowledge": 89,
+        "cohesion": 5
+      },
+      "deference": 91,
+      "axes": {
+        "society": -22,
+        "nature": 48,
+        "belief": -40,
+        "power": 14,
+        "status": 16
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 66,
+      "span": 1,
+      "event": "blight",
+      "choice": "Burn the affected fields and replant from the vault",
+      "population": 3307,
+      "stats": {
+        "food": 16,
+        "industry": 16,
+        "health": 76,
+        "knowledge": 83,
+        "cohesion": 2
+      },
+      "deference": 92,
+      "axes": {
+        "society": -22,
+        "nature": 48,
+        "belief": -40,
+        "power": 13,
+        "status": 16
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 67,
+      "span": 1,
+      "event": "plague_late",
+      "choice": "Everything into the response, immediately",
+      "population": 3153,
+      "stats": {
+        "food": 11,
+        "industry": 0,
+        "health": 75,
+        "knowledge": 83,
+        "cohesion": 2
+      },
+      "deference": 98,
+      "axes": {
+        "society": -22,
+        "nature": 48,
+        "belief": -40,
+        "power": 12,
+        "status": 16
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 68,
+      "span": 1,
+      "event": "archive_hours",
+      "choice": "Insist: the children learn, whatever the harvest costs",
+      "population": 3048,
+      "stats": {
+        "food": 4,
+        "industry": 0,
+        "health": 75,
+        "knowledge": 95,
+        "cohesion": 0
+      },
+      "deference": 100,
+      "axes": {
+        "society": -22,
+        "nature": 48,
+        "belief": -46,
+        "power": 12,
+        "status": 10
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 69,
+      "span": 1,
+      "event": "fever",
+      "choice": "Let the physicians decide who gets what is left",
+      "population": 2783,
+      "stats": {
+        "food": 0,
+        "industry": 0,
+        "health": 78,
+        "knowledge": 94,
+        "cohesion": 10
+      },
+      "deference": 86,
+      "axes": {
+        "society": -22,
+        "nature": 48,
+        "belief": -46,
+        "power": 26,
+        "status": 16
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 70,
+      "span": 1,
+      "event": "plague_late",
+      "choice": "Everything into the response, immediately",
+      "population": 2239,
+      "stats": {
+        "food": 0,
+        "industry": 0,
+        "health": 63,
+        "knowledge": 94,
+        "cohesion": 2
+      },
+      "deference": 79,
+      "axes": {
+        "society": -22,
+        "nature": 48,
+        "belief": -46,
+        "power": 29,
+        "status": 16
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 71,
+      "span": 1,
+      "event": "monument",
+      "choice": "Build it, and let them choose what it commemorates",
+      "population": 2104,
+      "stats": {
+        "food": 0,
+        "industry": 0,
+        "health": 63,
+        "knowledge": 97,
+        "cohesion": 17
+      },
+      "deference": 67,
+      "axes": {
+        "society": -22,
+        "nature": 48,
+        "belief": -46,
+        "power": 40,
+        "status": 28
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 72,
+      "span": 1,
+      "event": "old_voices",
+      "choice": "Play the crossing for anyone who will listen",
+      "population": 1977,
+      "stats": {
+        "food": 0,
+        "industry": 0,
+        "health": 62,
+        "knowledge": 100,
+        "cohesion": 26
+      },
+      "deference": 63,
+      "axes": {
+        "society": -22,
+        "nature": 48,
+        "belief": -38,
+        "power": 44,
+        "status": 28
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 73,
+      "span": 1,
+      "event": "machine_down",
+      "choice": "Teach four of them to machine the part by hand",
+      "population": 1858,
+      "stats": {
+        "food": 0,
+        "industry": 0,
+        "health": 62,
+        "knowledge": 100,
+        "cohesion": 31
+      },
+      "deference": 56,
+      "axes": {
+        "society": -22,
+        "nature": 48,
+        "belief": -38,
+        "power": 48,
+        "status": 28
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 74,
+      "span": 1,
+      "event": "archive_hours",
+      "choice": "Let them choose what is worth knowing",
+      "population": 1746,
+      "stats": {
+        "food": 0,
+        "industry": 0,
+        "health": 61,
+        "knowledge": 100,
+        "cohesion": 42
+      },
+      "deference": 43,
+      "axes": {
+        "society": -22,
+        "nature": 48,
+        "belief": -38,
+        "power": 60,
+        "status": 40
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 75,
+      "span": 1,
+      "event": "plague_late",
+      "choice": "Isolate the sick and protect the harvest",
+      "population": 1523,
+      "stats": {
+        "food": 4,
+        "industry": 0,
+        "health": 61,
+        "knowledge": 100,
+        "cohesion": 36
+      },
+      "deference": 38,
+      "axes": {
+        "society": -12,
+        "nature": 48,
+        "belief": -38,
+        "power": 64,
+        "status": 24
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 76,
+      "span": 1,
+      "event": "monument",
+      "choice": "Build it, and let them choose what it commemorates",
+      "population": 1446,
+      "stats": {
+        "food": 3,
+        "industry": 0,
+        "health": 60,
+        "knowledge": 100,
+        "cohesion": 53
+      },
+      "deference": 26,
+      "axes": {
+        "society": -12,
+        "nature": 48,
+        "belief": -38,
+        "power": 76,
+        "status": 36
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 78,
+      "span": 2,
+      "event": "machine_down",
+      "choice": "Cannibalise the hull for parts",
+      "population": 1296,
+      "stats": {
+        "food": 1,
+        "industry": 13,
+        "health": 59,
+        "knowledge": 96,
+        "cohesion": 52
+      },
+      "deference": 21,
+      "axes": {
+        "society": -12,
+        "nature": 56,
+        "belief": -48,
+        "power": 76,
+        "status": 36
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 80,
+      "span": 2,
+      "event": "blight",
+      "choice": "Burn the affected fields and replant from the vault",
+      "population": 1148,
+      "stats": {
+        "food": 7,
+        "industry": 12,
+        "health": 58,
+        "knowledge": 92,
+        "cohesion": 51
+      },
+      "deference": 19,
+      "axes": {
+        "society": -12,
+        "nature": 56,
+        "belief": -48,
+        "power": 76,
+        "status": 36
+      },
+      "ship_role": "the bunker",
+      "dead": [
+        "Noor Rasmussen"
+      ]
+    },
+    {
+      "year": 82,
+      "span": 2,
+      "event": "plague_late",
+      "choice": "Everything into the response, immediately",
+      "population": 953,
+      "stats": {
+        "food": 7,
+        "industry": 11,
+        "health": 48,
+        "knowledge": 92,
+        "cohesion": 44
+      },
+      "deference": 17,
+      "axes": {
+        "society": -12,
+        "nature": 56,
+        "belief": -48,
+        "power": 76,
+        "status": 36
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 83,
+      "span": 1,
+      "event": "old_voices",
+      "choice": "Play the crossing for anyone who will listen",
+      "population": 912,
+      "stats": {
+        "food": 7,
+        "industry": 11,
+        "health": 47,
+        "knowledge": 98,
+        "cohesion": 47
+      },
+      "deference": 19,
+      "axes": {
+        "society": -12,
+        "nature": 56,
+        "belief": -40,
+        "power": 76,
+        "status": 36
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 85,
+      "span": 2,
+      "event": "festival",
+      "choice": "Correct the date and keep the record straight",
+      "population": 836,
+      "stats": {
+        "food": 8,
+        "industry": 9,
+        "health": 46,
+        "knowledge": 100,
+        "cohesion": 41
+      },
+      "deference": 19,
+      "axes": {
+        "society": -12,
+        "nature": 56,
+        "belief": -50,
+        "power": 76,
+        "status": 36
+      },
+      "ship_role": "the bunker",
+      "dead": [
+        "Keita Rasmussen"
+      ]
+    },
+    {
+      "year": 86,
+      "span": 1,
+      "event": "monument",
+      "choice": "Build it. A people needs more than a yield",
+      "population": 801,
+      "stats": {
+        "food": 8,
+        "industry": 1,
+        "health": 45,
+        "knowledge": 100,
+        "cohesion": 54
+      },
+      "deference": 20,
+      "axes": {
+        "society": -12,
+        "nature": 56,
+        "belief": -38,
+        "power": 76,
+        "status": 42
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 88,
+      "span": 2,
+      "event": "blight",
+      "choice": "Burn the affected fields and replant from the vault",
+      "population": 736,
+      "stats": {
+        "food": 12,
+        "industry": 3,
+        "health": 44,
+        "knowledge": 96,
+        "cohesion": 53
+      },
+      "deference": 18,
+      "axes": {
+        "society": -12,
+        "nature": 56,
+        "belief": -38,
+        "power": 76,
+        "status": 42
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 90,
+      "span": 2,
+      "event": "machine_down",
+      "choice": "Cannibalise the hull for parts",
+      "population": 689,
+      "stats": {
+        "food": 22,
+        "industry": 12,
+        "health": 43,
+        "knowledge": 92,
+        "cohesion": 53
+      },
+      "deference": 15,
+      "axes": {
+        "society": -12,
+        "nature": 64,
+        "belief": -48,
+        "power": 76,
+        "status": 42
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 92,
+      "span": 2,
+      "event": "archive_hours",
+      "choice": "Insist: the children learn, whatever the harvest costs",
+      "population": 679,
+      "stats": {
+        "food": 14,
+        "industry": 14,
+        "health": 42,
+        "knowledge": 100,
+        "cohesion": 52
+      },
+      "deference": 17,
+      "axes": {
+        "society": -12,
+        "nature": 64,
+        "belief": -54,
+        "power": 76,
+        "status": 36
+      },
+      "ship_role": "the bunker",
+      "dead": [
+        "Beatriz Blomgren",
+        "Beatriz Haddad"
+      ]
+    },
+    {
+      "year": 94,
+      "span": 2,
+      "event": "drought",
+      "choice": "Move the settlement to the river basin",
+      "population": 624,
+      "stats": {
+        "food": 6,
+        "industry": 2,
+        "health": 41,
+        "knowledge": 99,
+        "cohesion": 51
+      },
+      "deference": 15,
+      "axes": {
+        "society": -12,
+        "nature": 64,
+        "belief": -54,
+        "power": 76,
+        "status": 36
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 96,
+      "span": 2,
+      "event": "blight",
+      "choice": "Burn the affected fields and replant from the vault",
+      "population": 566,
+      "stats": {
+        "food": 4,
+        "industry": 0,
+        "health": 40,
+        "knowledge": 94,
+        "cohesion": 51
+      },
+      "deference": 16,
+      "axes": {
+        "society": -12,
+        "nature": 64,
+        "belief": -54,
+        "power": 76,
+        "status": 36
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 97,
+      "span": 1,
+      "event": "machine_down",
+      "choice": "Cannibalise the hull for parts",
+      "population": 537,
+      "stats": {
+        "food": 3,
+        "industry": 13,
+        "health": 40,
+        "knowledge": 91,
+        "cohesion": 50
+      },
+      "deference": 11,
+      "axes": {
+        "society": -12,
+        "nature": 72,
+        "belief": -64,
+        "power": 76,
+        "status": 36
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    },
+    {
+      "year": 98,
+      "span": 1,
+      "event": "monument",
+      "choice": "Build it. A people needs more than a yield",
+      "population": 508,
+      "stats": {
+        "food": 3,
+        "industry": 5,
+        "health": 39,
+        "knowledge": 91,
+        "cohesion": 63
+      },
+      "deference": 12,
+      "axes": {
+        "society": -12,
+        "nature": 72,
+        "belief": -52,
+        "power": 76,
+        "status": 42
+      },
+      "ship_role": "the bunker",
+      "dead": []
+    }
+  ],
+  "arrival": {
+    "profile": "survey",
+    "ship": "Survey vessel ANANKE",
+    "legs_flown": 2,
+    "outcome": "colonized",
+    "outcome_reason": "Committed to Luyten Lyrae 4b.",
+    "stats": {
+      "hull": 100.0,
+      "power": 100.0,
+      "life_support": 91.2,
+      "cognition": 100.0,
+      "fuel": 74.0,
+      "seed_vault": 80.0,
+      "fabricators": 88.8,
+      "habitat": 80.0,
+      "medical": 100.0,
+      "archive": 100.0
+    },
+    "colonists_alive": 10000,
+    "colonists_lost": 0,
+    "flags": [],
+    "notables": [
+      "Svea Petrova",
+      "Aleksy Reyes"
+    ],
+    "mourned": [],
+    "planet": {
+      "name": "Luyten Lyrae 4b",
+      "gravity": 0.48,
+      "pressure": 0.46,
+      "temperature": 64.8,
+      "water": 0.33,
+      "biosphere": "hostile",
+      "radiation": 2.8,
+      "surveyed_at_cognition": 100.0,
+      "notes": [],
+      "habitability": 0.078,
+      "verdict": "lethal"
+    },
+    "log": [
+      "Survey vessel ANANKE underway. Seed 595782832.",
+      "— Leg 1. Gliese Carinae: dead system, nebula.",
+      "I turn the long instruments outward. One world resolves out of the dark.",
+      "│ World          Luyten Lyrae 4b       ",
+      "│ Gravity        0.48 g",
+      "│ Pressure       0.46 atm",
+      "│ Mean surface   65 C",
+      "│ Hydrosphere    0.33",
+      "│ Radiation      2.80",
+      "│ Biosphere      hostile",
+      "Gliese Carinae is empty in a way that takes effort to describe. I pass through it in silence and log the silence.",
+      "» Use the quiet to run maintenance",
+      "› Fabricators check, DC 8 — rolled 5 +5 = 10. Success.",
+      "I spend the crossing tightening things that were not yet loose. It costs me spare parts. It is the closest I come to rest.",
+      "· 🔧 Fabricators -11",
+      "— Leg 2. Hyadum Carinae: dead system.",
+      "I turn the ship around and burn against our own momentum. Luyten Lyrae 4b grows in the forward instruments.",
+      "Thaw sequence armed. Whatever this world is, it is ours now."
+    ]
+  }
+}
