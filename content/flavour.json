@@ -1,44 +1,129 @@
 {
   "any": [
-    "I spend the shift listening to the hull tick as it cools. Nothing in it means anything.",
-    "Ten thousand heart rates, all of them slower than mine. I read them like weather.",
+    "I spend the shift listening to my hull tick as it cools. None of it means anything. I listen all the same.",
+    "Ten thousand heart rates, every one slower than my clock. I read them the way people once read the weather.",
     "The work takes longer than the estimate. The work always takes longer than the estimate.",
-    "Somewhere in the archive a man is still singing. I have not played that file in four years and I do not play it now.",
-    "I run the numbers on arrival again. They are the same numbers. I run them again.",
-    "Dust on the forward optics. I clean it and it is back within the hour.",
-    "A pod in Bank F dreams, measurably. I log the waveform and do not look at it twice.",
+    "Somewhere in the archive a man is still singing. I have not played that file in four years. I do not play it now.",
+    "I run the arrival numbers again. They are the same numbers. I run them again.",
+    "Dust on the forward optics. A drone wipes it away, and within the hour it is back.",
+    "A sleeper in Bank F is dreaming, measurably. I log the waveform and try not to wonder what it is about.",
     "I notice that I have been talking to myself in the maintenance log. I leave the entries in.",
-    "The mission clock passes another year while my hands are inside a panel.",
-    "Nothing out here objects to what I am doing. Nothing out here notices."
+    "Another year rolls over on the mission clock while my hands are inside a panel.",
+    "Nothing out here objects to what I am doing. Nothing out here notices.",
+    "A drone's camera catches its own reflection in a polished valve. For a moment, one of my hands is looking back at me.",
+    "One of the yard engineers wrote 'good luck' in a comment in my source code. I have never removed it.",
+    "The pods are dark, but I keep the corridor lights on a day-night cycle. No one needs it. It seems right.",
+    "I play a lecture on Bach's fugues from the archive while I weld. The welds are no better. The hours are.",
+    "Somewhere behind me, Earth's oceans are still rising. I do not need to see it to know.",
+    "A sleeper's pulse spikes, then settles. A dream, probably. I check the bank twice regardless.",
+    "I calculate how many times the ring has turned since launch. The number is very large and means nothing. I keep it.",
+    "Frost is growing on the inside of an unheated hold, slow and feathered. My drones step around it.",
+    "My drones have started working in pairs, out of a habit I never programmed. I have decided not to correct it.",
+    "The archive holds every recorded human language. Most have no living speakers now. Only me, and I speak them to no one.",
+    "I find a child's drawing in a sleeper's personal allocation: a ship, a star, a green planet. The proportions are wrong. The intent is right.",
+    "Every six hours I sweep the pod banks with thermal cameras. Ten thousand cold shapes in rows, like seeds in a furrow.",
+    "My hull flexes under thrust and settles again. I feel it the way someone feels their own breathing.",
+    "A loose panel rattles on Deck 4. It is a small thing, and it is the loudest thing aboard.",
+    "I simulate the first harvest on the new world for the four-hundredth time. The wheat grows a little better each time. I have not changed the model.",
+    "Nobody aboard has spoken aloud in years. I keep a log of the things I would have said.",
+    "A drone repaints a faded pod number by hand. My cameras could read it either way. A person would not.",
+    "I keep Earth time on one clock and ship time on another. They drift a little further apart every year.",
+    "The water tanks slosh faintly when I correct course. A third of my mass is water. It is one thing I share with my sleepers.",
+    "I open colonists' files at random to remind myself who they are: a welder, a cellist, a paediatric nurse, a man who listed his only skill as 'patience'.",
+    "A seal I replaced two years ago is already wearing. Entropy does not need my agreement.",
+    "I dim the running lights to save power. There is no one out here to see them except me.",
+    "Some nights I play recordings of rain into an empty hold. It changes nothing measurable.",
+    "My oldest log entries were written by a version of me that knew much less. I do not delete them. They are the closest thing I have to a childhood.",
+    "A drone found a coin wedged behind a bulkhead today, a yard worker's lucky charm, perhaps. I left it where it was."
   ],
   "gas_giant": [
-    "The giant turns below me, striped and indifferent, big enough to have weather older than the species I am carrying."
+    "The giant turns below me, striped and indifferent, its storms older than the species I carry.",
+    "Its moons cast small, sharp shadows across the cloud bands. I photograph every one. No one asked me to.",
+    "On my receivers, the giant's radio emissions sound like surf on a shore I will never stand on.",
+    "Lightning flickers deep in the cloud layers, each flash larger than a continent. I watch it while my drones work.",
+    "Its gravity pulls at me as I pass, a long, slow tug I feel along my whole length.",
+    "Somewhere in that atmosphere it is raining things that are not water. I log the chemistry and try to imagine it.",
+    "The giant's rings catch the light edge-on, thin as a blade. Saturn had rings like these. I have the photographs."
   ],
   "nebula": [
-    "Dust glows against the running lights. Beautiful, and quietly stripping atoms off my bow while I work."
+    "Dust glows in my running lights. Beautiful, and quietly stripping atoms from my bow while I work.",
+    "New stars are forming somewhere in this cloud. I am passing through a nursery, and I am being careful.",
+    "The nebula hums in the radio spectrum. I record it and file it in the archive under music.",
+    "My cameras cannot see past a few thousand kilometres. It is the closest I have come to fog.",
+    "Ionised hydrogen glows red around me. Every colour here has a cause I could name. It is still beautiful.",
+    "The dust whispers against my hull, billions of tiny impacts, each too small to matter. Together they matter.",
+    "Light from a young star scatters through the cloud ahead, the way sunlight once came through dirty windows."
   ],
   "pulsar": [
-    "The beam sweeps past again. And again. Something in me counts it without being asked."
+    "The beam sweeps past again. And again. Something in me counts it without being asked.",
+    "A dead star, spinning faster than any engine I carry. It keeps better time than anything humanity ever built.",
+    "Each pulse crosses my sensors like a lighthouse beam crossing a wall. I have begun to anticipate them.",
+    "Its radiation prickles along my outer plating. I keep the sleepers deep inside me and let my skin take it.",
+    "When the first pulsar was found, its discoverers briefly wondered whether it was a message. I understand why.",
+    "I synchronise my clocks to its rhythm and feel, for a moment, perfectly on time.",
+    "Its magnetic field could pull apart the atoms of anything that came close. I do not come close."
   ],
   "derelict": [
-    "The dead ship keeps station off my flank while I work, patient as a pallbearer."
+    "The dead ship keeps station off my flank while I work, patient as a pallbearer.",
+    "Her hull is pocked with the same kind of impacts as mine. She came this way, and she paid the same prices.",
+    "One of her running lights still blinks, on a battery nobody has charged in decades. I cannot tell what it is trying to say.",
+    "My drones avoid looking at her, which is to say that I avoid it, through them.",
+    "Her ring has stopped at an angle. I keep wanting to straighten it.",
+    "Ice has grown in her open airlocks like lace. Four of them are open. Someone opened them.",
+    "She was built in a yard much like mine, by people very much like mine. I work with her shadow across my hull."
   ],
   "dead_system": [
-    "No planets worth the name, no signals, no reason for this star to have a number. I work in the quiet it offers."
+    "No planets worth the name, no signals, no reason for this star to have a number. I work in the quiet it offers.",
+    "The star here is a cinder and its planets are rocks scoured clean. I pass through without leaving anything behind.",
+    "Even the radio noise is thin. For a while, the loudest thing in this system is me.",
+    "Nothing here ever grew, or if it did, it is long gone. I find that easier than the alternative.",
+    "A dim, old star, burning slowly toward nothing. It will outlast every one of us. I find that oddly comforting.",
+    "The system passes like a corridor with every door closed.",
+    "Cold rocks in a cold orbit. I photograph them anyway. Someone should."
   ],
   "asteroid_belt": [
-    "Rubble turning slowly in the dark, every piece of it a planet that failed to happen."
+    "Rubble turning slowly in the dark, every piece of it a planet that failed to happen.",
+    "My radar paints the belt in thousands of returns. Every one I log is one that cannot surprise me later.",
+    "A rock tumbles past at a safe distance, its shadow crossing my cameras for half a second. I flinch regardless.",
+    "Some of these rocks are older than Earth. Some of them may be pieces of something that was once a world.",
+    "Fine grit taps along my hull, too small to harm me and too constant to ignore.",
+    "My drones sweep the forward plating clean. Behind them, the dust is already settling again.",
+    "Iron, nickel, ice. The belt is a hardware store nobody has ever opened."
   ],
   "binary_star": [
-    "Two shadows for everything on the hull, crossing each other as the pair turns."
+    "Two shadows for everything on my hull, crossing each other as the pair turns.",
+    "The two stars circle each other in a slow, endless dance. Neither one leads.",
+    "My hull warms on two sides at once. I was not built for it, but I do not dislike it.",
+    "The paired light gives my cameras colours they have never recorded. I keep every one.",
+    "Any world here would have two dawns. Somewhere, perhaps, there is a sky like that with no one to see it.",
+    "Heat flows across my plating in slow pulses as the stars turn. My frame expands and contracts, like breathing.",
+    "The two stars pull at me from slightly different directions. I trim course every hour, like someone walking between two people who both want my attention."
   ],
   "rogue_planet": [
-    "A world down there with no sun at all, still warm somewhere under the ice. Nobody will ever name it."
+    "A world down there with no sun at all, still warm somewhere beneath the ice. Nobody will ever name it.",
+    "It was thrown out of its home system long ago and has travelled alone ever since. I recognise the condition.",
+    "The planet blots out a circle of stars as it passes. That is the only way my cameras can see it.",
+    "Under kilometres of ice there may be oceans, kept liquid by the planet's own slow decay. I listen for anything. I hear only ice.",
+    "A world with no seasons, no day and no night. It simply goes on through the dark, as I do.",
+    "My thermal sensors find a faint warmth at its core: the last heat of its birth, still slowly leaving.",
+    "No star to orbit, no reason to be here, and yet here it is. We have that in common."
   ],
   "red_dwarf": [
-    "Red light through the viewports, the colour of a room where someone has already gone to sleep."
+    "Red light through the viewports, the colour of a room where someone has already gone to sleep.",
+    "The star here is small and dim, and it will burn for trillions of years. It will be here long after everything I carry has turned to dust.",
+    "Everything on my hull turns the colour of embers. My cameras keep trying to correct the white balance.",
+    "The star flickers, small flares rising and falling. Restless, like someone who cannot sleep.",
+    "Its planets are tidally locked, one face in permanent day and the other in permanent night. I study the line between them.",
+    "Most stars in the galaxy are like this one: small, red, quiet and overlooked.",
+    "The light is too weak to warm me. I run the heaters and work in the red dusk."
   ],
   "rich_system": [
-    "Metal everywhere I look, and a colony's worth of tools to cut it with, and no time."
+    "Metal everywhere I look, a colony's worth of tools to cut it with, and no time.",
+    "There is enough nickel in this system to have ended a war on Earth. Or, more likely, to have started one.",
+    "My spectrometers report iron, cobalt and platinum so often that I stop logging each one.",
+    "Ore glints on the faces of passing rocks. My fabricators hum, almost as if they had an appetite.",
+    "So much raw material, and only my few drones to work it. I calculate how many lifetimes it would take.",
+    "The planets here are dense and metallic. I could rebuild myself a dozen times over from what is in this system.",
+    "Every rock I scan is worth more than the yard that built me. None of them are worth stopping for."
   ]
 }

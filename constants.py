@@ -103,10 +103,11 @@ MINOR_HAZARD_DAMAGE = (3.0, 9.0)
 
 # Global severity knob: multiplies authored damage, so difficulty can be moved
 # with one number instead of 28 content edits. Raise it to make a voyage
-# crueller without touching voyage.json; the curve is steep around here, so
-# 1.35 gives roughly 60% arrival and 0.9 gives roughly 89%.
-# Tuned against sim.py to a 75% arrival rate under competent play.
-HAZARD_SCALE = 1.15
+# crueller without touching voyage.json. Retune it whenever the deck grows:
+# adding gentle events dilutes the damaging ones, so the same number means a
+# different difficulty against a different deck.
+# Tuned against sim.py (64-event deck) to a 75% arrival rate under competent play.
+HAZARD_SCALE = 1.32
 
 # --- d20 resolution (Q16) ----------------------------------------------------
 
