@@ -106,8 +106,9 @@ MINOR_HAZARD_DAMAGE = (3.0, 9.0)
 # crueller without touching voyage.json. Retune it whenever the deck grows:
 # adding gentle events dilutes the damaging ones, so the same number means a
 # different difficulty against a different deck.
-# Tuned against sim.py (64-event deck) to a 75% arrival rate under competent play.
-HAZARD_SCALE = 1.32
+# Tuned against sim.py (64-event deck, after the risk pass) to a 75% arrival
+# rate under competent play.
+HAZARD_SCALE = 1.12
 
 # --- d20 resolution (Q16) ----------------------------------------------------
 

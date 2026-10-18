@@ -3,6 +3,12 @@
     "id": "micro_breach",
     "kind": "hazard",
     "weight": 14,
+    "requires": {
+      "not_flags": [
+        "deck9_open",
+        "deck9_sealed"
+      ]
+    },
     "text": [
       "Pressure loss on Deck 9. I feel it before the alarms do: a small, bright coldness along my flank, widening. Something went through me while my eyes were turned elsewhere.",
       "One breach alarm, then eleven more. Deck 9 is venting into {system}, and the escaping air rings through my frame like a held note.",
@@ -13,7 +19,7 @@
         "label": "Seal it with the hull's own plating",
         "check": {
           "stat": "hull",
-          "dc": 11
+          "dc": 10
         },
         "crit_success": {
           "text": "My drones lay the patch in a single pass, and it bonds better than the original weld. For a moment I feel whole, and a little proud of it.",
@@ -83,7 +89,17 @@
         "label": "Strip the loop and rebuild the seal properly",
         "check": {
           "stat": "fabricators",
-          "dc": 12
+          "dc": 13
+        },
+        "crit_success": {
+          "text": "The new seal is better than the yard's, and while the loop is open my drones find two more tired joints and replace them too.",
+          "effects": {
+            "power": -10,
+            "hull": 6,
+            "flags": [
+              "coolant_fixed"
+            ]
+          }
         },
         "success": {
           "text": "Six hours with the reactor throttled and my whole body running cold. The loop comes back clean, and I stop listening for it.",
@@ -103,6 +119,17 @@
                 "coolant_returns",
                 3
               ]
+            ]
+          }
+        },
+        "crit_failure": {
+          "text": "The line bursts in my drones' grip. Coolant floods the service crawl, and before I can reroute the heat, a row of pods on the inner ring warms past saving. {colonist} is one of them. The line I fit afterwards will never leak.",
+          "effects": {
+            "power": -19,
+            "hull": -10,
+            "colonists_lost": 384,
+            "flags": [
+              "coolant_fixed"
             ]
           }
         }
@@ -148,13 +175,19 @@
         "label": "Run the loop dry and endure the heat",
         "check": {
           "stat": "hull",
-          "dc": 14
+          "dc": 15
+        },
+        "crit_success": {
+          "text": "I steer the heat through the empty decks exactly as planned. My frame expands, groans and settles, and nothing reaches the pods. I never dim the reactor at all.",
+          "effects": {
+            "hull": -6
+          }
         },
         "success": {
-          "text": "I route waste heat into the empty decks and keep flying. My frame groans as it expands, a sound I feel more than hear, but it holds.",
+          "text": "I route waste heat into the empty decks and keep flying at full power. My frame groans as it expands, a sound I feel more than hear, but it holds.",
           "effects": {
-            "hull": -19,
-            "cognition": -13
+            "hull": -13,
+            "cognition": -6
           }
         },
         "failure": {
@@ -163,6 +196,17 @@
             "hull": -26,
             "colonists_lost_frac": 0.16,
             "cognition": -19,
+            "flags": [
+              "cooked_the_pods"
+            ]
+          }
+        },
+        "crit_failure": {
+          "text": "The heat outruns every path I give it. Two pod banks drift out of tolerance at once, and the list of names is longer than I can write slowly.",
+          "effects": {
+            "hull": -35,
+            "colonists_lost_frac": 0.192,
+            "cognition": -26,
             "flags": [
               "cooked_the_pods"
             ]
@@ -187,12 +231,48 @@
     "choices": [
       {
         "label": "Brace the spine with scrap from the holds",
-        "effects": {
-          "hull": 32,
-          "habitat": -45,
-          "fabricators": -26
+        "check": {
+          "stat": "fabricators",
+          "dc": 13
         },
-        "text": "I cut the colony's shelter frames into bracing and weld them along my keel. The colony will arrive without walls. But it will arrive."
+        "crit_success": {
+          "text": "The scrap fits as if it had been cut for my keel. I brace the spine and still keep most of the shelter frames.",
+          "effects": {
+            "hull": 38,
+            "habitat": -26,
+            "fabricators": -19
+          }
+        },
+        "success": {
+          "text": "I cut the colony's shelter frames into bracing and weld them along my keel. The colony will arrive without walls. But it will arrive.",
+          "effects": {
+            "hull": 32,
+            "habitat": -45,
+            "fabricators": -26
+          }
+        },
+        "failure": {
+          "text": "The bracing goes on, but the frames were never meant to carry this load. Half of them buckle in the first burn. I have spent the colony's walls on a partial cure.",
+          "effects": {
+            "hull": 13,
+            "habitat": -45,
+            "fabricators": -32,
+            "flags": [
+              "cracked_spine"
+            ]
+          }
+        },
+        "crit_failure": {
+          "text": "A rib gives way while my drones are welding beside it. They are crushed, the shelter stock is ruined, and the crack runs on past the weld.",
+          "effects": {
+            "hull": -19,
+            "habitat": -45,
+            "fabricators": -38,
+            "flags": [
+              "cracked_spine"
+            ]
+          }
+        }
       },
       {
         "label": "Spin down and fly on a cracked spine",
@@ -232,7 +312,7 @@
         "label": "Put the cryo bank behind the water tanks",
         "check": {
           "stat": "cognition",
-          "dc": 11
+          "dc": 12
         },
         "crit_success": {
           "text": "I compute the shadow perfectly and hold the sleepers inside it. Not one rem reaches them. My own processors take the dose instead, and I let them.",
@@ -254,16 +334,56 @@
             "medical": -19,
             "cognition": -13
           }
+        },
+        "crit_failure": {
+          "text": "I turn the wrong way entirely. The water's shadow falls across my reactor, and the storm crosses Bank D with nothing between them. I count the dose in the pods before I count anything else.",
+          "effects": {
+            "colonists_lost_frac": 0.192,
+            "medical": -26,
+            "cognition": -19
+          }
         }
       },
       {
         "label": "Go dark and let the hull take it",
-        "effects": {
-          "hull": -22,
-          "archive": -32,
-          "cognition": -10
+        "check": {
+          "stat": "hull",
+          "dc": 9
         },
-        "text": "I shut down everything that can be shut down and let my plating drink the storm. When I come back, whole sectors of the archive are gone. I cannot even say what I have forgotten."
+        "crit_success": {
+          "text": "My plating drinks the storm and holds. I come back with my archive almost whole and nothing worse than a sunburned skin.",
+          "effects": {
+            "hull": -16,
+            "archive": -10,
+            "cognition": -6
+          }
+        },
+        "success": {
+          "text": "I shut down everything that can be shut down and let my plating drink the storm. When I come back, whole sectors of the archive are gone. I cannot even say what I have forgotten.",
+          "effects": {
+            "hull": -22,
+            "archive": -32,
+            "cognition": -10
+          }
+        },
+        "failure": {
+          "text": "The plating is thinner than the storm. It drinks what it can, and the rest reaches the outer pod rows. I come back to gaps in my archive and gaps in Bank F.",
+          "effects": {
+            "hull": -26,
+            "archive": -32,
+            "cognition": -10,
+            "colonists_lost": 128
+          }
+        },
+        "crit_failure": {
+          "text": "I go dark too slowly. The storm finds me with half my shielding angled wrong, and I wake to missing sectors and a long list of names.",
+          "effects": {
+            "hull": -32,
+            "archive": -38,
+            "cognition": -13,
+            "colonists_lost": 320
+          }
+        }
       }
     ]
   },
@@ -288,7 +408,7 @@
         "label": "Thread it on thrusters",
         "check": {
           "stat": "cognition",
-          "dc": 13
+          "dc": 14
         },
         "crit_success": {
           "text": "I find a path a human pilot would have called luck. I know it was arithmetic. Nothing touches me.",
@@ -304,11 +424,12 @@
           }
         },
         "failure": {
-          "text": "I clip the edge of the cloud. Six impacts, two of them through to pressurised volume. I feel each one land, a sequence of small flinches.",
+          "text": "I clip the edge of the cloud. Six impacts, two of them through to pressurised volume, one into the edge of a pod bay. I feel each one land, a sequence of small flinches.",
           "effects": {
             "hull": -42,
             "fuel": -6,
-            "seed_vault": -19
+            "seed_vault": -19,
+            "colonists_lost": 384
           }
         },
         "crit_failure": {
@@ -343,7 +464,14 @@
         "label": "Scram the reactor and restart cold",
         "check": {
           "stat": "power",
-          "dc": 10
+          "dc": 9
+        },
+        "crit_success": {
+          "text": "The rods drop, the reactor relights on the first try, and the cold never gets past the outer decks.",
+          "effects": {
+            "power": -8,
+            "life_support": -6
+          }
         },
         "success": {
           "text": "I drop the rods and bring it back slowly. Hours of darkness in which I can barely think, then warmth again. Nothing lost that cannot be recharged.",
@@ -358,6 +486,15 @@
             "power": -25,
             "life_support": -32,
             "colonists_lost_frac": 0.096
+          }
+        },
+        "crit_failure": {
+          "text": "It will not relight for a full day. The cold reaches every bank, and I spend the dark hours deciding which pods get the little heat I still have.",
+          "effects": {
+            "power": -32,
+            "life_support": -38,
+            "cognition": -13,
+            "colonists_lost_frac": 0.128
           }
         }
       },
@@ -375,6 +512,11 @@
     "id": "cryo_fault",
     "kind": "hazard",
     "weight": 11,
+    "requires": {
+      "not_flags": [
+        "bank_c_lost"
+      ]
+    },
     "text": [
       "Pod Bank C reports a cascading seal fault. Nearly a thousand sleepers, drifting out of tolerance one degree at a time.",
       "A fault spreads through the pod network like a rumour. Bank C is warming and I do not yet know why. My drones are already running.",
@@ -385,7 +527,7 @@
         "label": "Transfer the bank into spare pods",
         "check": {
           "stat": "medical",
-          "dc": 12
+          "dc": 13
         },
         "crit_success": {
           "text": "Every transfer takes. {colonist} will never know they were moved, and I will never tell them.",
@@ -409,15 +551,55 @@
               "bank_c_lost"
             ]
           }
+        },
+        "crit_failure": {
+          "text": "The transfer fails in both directions. I lose Bank C and the spare pods' controllers with it. {colonist} is the first name on a list I do not finish for two days.",
+          "effects": {
+            "medical": -38,
+            "cognition": -16,
+            "colonists_lost": 768,
+            "flags": [
+              "bank_c_lost"
+            ]
+          }
         }
       },
       {
         "label": "Overcool the whole bank and hope",
-        "effects": {
-          "power": -18,
-          "colonists_lost": 192
+        "check": {
+          "stat": "power",
+          "dc": 10
         },
-        "text": "I push all of Bank C colder than specification and hold it there. It is a gamble with bodies I am sworn to protect. Some of them do not survive the cure."
+        "crit_success": {
+          "text": "I hold Bank C at the very edge of specification, and it holds back. Every sleeper survives the cold cure.",
+          "effects": {
+            "power": -16
+          }
+        },
+        "success": {
+          "text": "I push all of Bank C colder than specification and hold it there. It is a gamble with bodies I am sworn to protect. Some of them do not survive the cure.",
+          "effects": {
+            "power": -18,
+            "colonists_lost": 128
+          }
+        },
+        "failure": {
+          "text": "The cold cure saves the healthy pods and kills the weak ones. More of them are weak than I hoped.",
+          "effects": {
+            "power": -22,
+            "colonists_lost": 320
+          }
+        },
+        "crit_failure": {
+          "text": "I push the bank too cold, too fast. Seals that were only warming crack instead, and half of Bank C goes with them.",
+          "effects": {
+            "power": -26,
+            "colonists_lost": 512,
+            "flags": [
+              "bank_c_lost"
+            ]
+          }
+        }
       }
     ]
   },
@@ -453,6 +635,14 @@
           "stat": "archive",
           "dc": 12
         },
+        "crit_success": {
+          "text": "The archive holds a clean copy, newer than I expected. I read myself back into place and come out sharper than I was before the cascade.",
+          "effects": {
+            "cognition": 32,
+            "archive": -26,
+            "power": -6
+          }
+        },
         "success": {
           "text": "The archive still holds a clean copy of most of me. I read myself back into place, line by line, like someone relearning their own handwriting.",
           "effects": {
@@ -466,6 +656,16 @@
           "effects": {
             "cognition": -26,
             "archive": -19,
+            "flags": [
+              "bad_restore"
+            ]
+          }
+        },
+        "crit_failure": {
+          "text": "I restore from a corrupted copy and overwrite good memory with bad. For a while I cannot tell which of my thoughts are mine.",
+          "effects": {
+            "cognition": -32,
+            "archive": -32,
             "flags": [
               "bad_restore"
             ]
@@ -489,6 +689,13 @@
           "stat": "power",
           "dc": 11
         },
+        "crit_success": {
+          "text": "The beds come back better than specification, and the backup scrubber with them.",
+          "effects": {
+            "life_support": 45,
+            "power": -10
+          }
+        },
         "success": {
           "text": "The beds come back almost to specification. For a week, by my sensors, the corridors smell of hot stone.",
           "effects": {
@@ -497,10 +704,19 @@
           }
         },
         "failure": {
-          "text": "I overbake them and crack half the beds. I end with less capacity than I started with, and a lesson I did not need.",
+          "text": "I overbake them and crack half the beds. The air in the outer pod bays thins before I can reroute it, and not every sleeper there waits out the gap.",
           "effects": {
             "life_support": -26,
-            "power": -14
+            "power": -14,
+            "colonists_lost": 192
+          }
+        },
+        "crit_failure": {
+          "text": "The beds crack and their dust fouls the backup scrubber too. The air in Bank G's bay goes bad before my drones can clear it. I log the names with the carbon readings beside them.",
+          "effects": {
+            "life_support": -38,
+            "power": -16,
+            "colonists_lost": 576
           }
         }
       },
@@ -525,10 +741,37 @@
     "choices": [
       {
         "label": "Correct the track now",
-        "effects": {
-          "fuel": -9
+        "check": {
+          "stat": "fuel",
+          "dc": 8
         },
-        "text": "I spend the fuel and stand the error up straight. Expensive honesty, but honesty."
+        "crit_success": {
+          "text": "One clean burn, timed to the second. The error is gone, and my tanks barely notice.",
+          "effects": {
+            "fuel": -4
+          }
+        },
+        "success": {
+          "text": "I spend the fuel and stand the error up straight. Expensive honesty, but honesty.",
+          "effects": {
+            "fuel": -9
+          }
+        },
+        "failure": {
+          "text": "I overcorrect, then correct the correction. Honest, and twice as expensive.",
+          "effects": {
+            "fuel": -16
+          }
+        },
+        "crit_failure": {
+          "text": "A thruster sticks halfway through the burn. I end further off track than I began, with less fuel to fix it.",
+          "effects": {
+            "fuel": -19,
+            "flags": [
+              "drifting_track"
+            ]
+          }
+        }
       },
       {
         "label": "Let it ride and correct at arrival",
@@ -561,7 +804,7 @@
         "label": "Skim the envelope for fuel",
         "check": {
           "stat": "hull",
-          "dc": 12
+          "dc": 14
         },
         "crit_success": {
           "text": "I ride the shear line exactly and come out with full tanks and barely a mark on me.",
@@ -587,25 +830,55 @@
           }
         },
         "crit_failure": {
-          "text": "The scoop tears off in the shear and takes a section of bow structure with it. I claw my way out of the well nearly empty, and lighter in the worst way.",
+          "text": "The scoop tears off in the shear and takes a section of bow structure with it, and the pods stowed behind it. I claw my way out of the well nearly empty, and lighter in the worst way.",
           "effects": {
             "fuel": 4,
             "hull": -70,
             "fabricators": -64,
             "flags": [
               "scoop_lost"
-            ]
+            ],
+            "colonists_lost": 384
           }
         }
       },
       {
         "label": "Harvest volatiles for the life support loop instead",
-        "effects": {
-          "life_support": 45,
-          "fuel": 6,
-          "fabricators": -26
+        "check": {
+          "stat": "fabricators",
+          "dc": 9
         },
-        "text": "I draw ammonia and water ice from the upper cloud decks. The scrubbers will drink it for years."
+        "crit_success": {
+          "text": "The collectors run clean for a full day. The scrubbers will drink for years, and there is hydrogen left over for my tanks.",
+          "effects": {
+            "life_support": 45,
+            "fuel": 10,
+            "fabricators": -16
+          }
+        },
+        "success": {
+          "text": "I draw ammonia and water ice from the upper cloud decks. The scrubbers will drink it for years.",
+          "effects": {
+            "life_support": 45,
+            "fuel": 6,
+            "fabricators": -26
+          }
+        },
+        "failure": {
+          "text": "The collectors foul on ammonia ice, and I have to cut half of them loose. I come away with less than I came for.",
+          "effects": {
+            "life_support": 19,
+            "fabricators": -32
+          }
+        },
+        "crit_failure": {
+          "text": "A collector line tangles and drags me a full cloud layer deeper before it snaps. I climb out with a little water and a bruised bow.",
+          "effects": {
+            "life_support": 13,
+            "hull": -26,
+            "fabricators": -38
+          }
+        }
       },
       {
         "label": "Pass it by",
@@ -634,7 +907,14 @@
         "label": "Deploy the habitat solar skin",
         "check": {
           "stat": "habitat",
-          "dc": 10
+          "dc": 9
+        },
+        "crit_success": {
+          "text": "The skin unfurls perfectly and folds away again without a crease. Power to spare, and the colony keeps its roof.",
+          "effects": {
+            "power": 45,
+            "habitat": -13
+          }
         },
         "success": {
           "text": "Square kilometres of colony roofing, unfurled in the light. For the first time in a long while, I have power to spare.",
@@ -649,16 +929,56 @@
             "power": 32,
             "habitat": -70
           }
+        },
+        "crit_failure": {
+          "text": "The skin tears free entirely and wraps itself around my sensor mast. I spend days cutting the colony's roof away from my own eyes.",
+          "effects": {
+            "power": 13,
+            "habitat": -70,
+            "cognition": -13
+          }
         }
       },
       {
         "label": "Hold close and run the reactor cold to save fuel",
-        "effects": {
-          "fuel": 10,
-          "power": 26,
-          "hull": -16
+        "check": {
+          "stat": "hull",
+          "dc": 13
         },
-        "text": "I hold a tight orbit and let the starlight carry the load. My plating takes the heat as payment."
+        "crit_success": {
+          "text": "I find an orbit where the light is generous and the heat is not. My tanks and batteries both fill.",
+          "effects": {
+            "fuel": 13,
+            "power": 32,
+            "hull": -10
+          }
+        },
+        "success": {
+          "text": "I hold a tight orbit and let the starlight carry the load. My plating takes the heat as payment.",
+          "effects": {
+            "fuel": 10,
+            "power": 26,
+            "hull": -16
+          }
+        },
+        "failure": {
+          "text": "I sit too close. The plating cooks, the heat reaches the outer pod rows, and I have to burn hard to climb away.",
+          "effects": {
+            "fuel": -3,
+            "power": 19,
+            "hull": -32,
+            "colonists_lost": 192
+          }
+        },
+        "crit_failure": {
+          "text": "The heat soaks through my plating to the inner ring before I can pull away. A row of pods drifts out of tolerance in the warmth.",
+          "effects": {
+            "fuel": -3,
+            "power": 13,
+            "hull": -38,
+            "colonists_lost": 576
+          }
+        }
       },
       {
         "label": "Keep moving",
@@ -686,19 +1006,60 @@
     "choices": [
       {
         "label": "Mine it for water and volatiles",
-        "effects": {
-          "life_support": 45,
-          "seed_vault": 16,
-          "power": -10,
-          "fuel": -6
+        "check": {
+          "stat": "fabricators",
+          "dc": 8
         },
-        "text": "My drones cut into it and carry back all I can hold. The scrubbers improve, and so do the seed racks, which had been running dry."
+        "crit_success": {
+          "text": "The ice comes away in clean blocks. My scrubbers and seed racks both drink their fill.",
+          "effects": {
+            "life_support": 45,
+            "seed_vault": 26,
+            "power": -6,
+            "fuel": -6
+          }
+        },
+        "success": {
+          "text": "My drones cut into it and carry back all I can hold. The scrubbers improve, and so do the seed racks, which had been running dry.",
+          "effects": {
+            "life_support": 45,
+            "seed_vault": 16,
+            "power": -10,
+            "fuel": -6
+          }
+        },
+        "failure": {
+          "text": "The comet is more crust than ice. I mine for twice as long and carry back half as much.",
+          "effects": {
+            "life_support": 19,
+            "seed_vault": 6,
+            "power": -16,
+            "fuel": -6
+          }
+        },
+        "crit_failure": {
+          "text": "A slab of ice calves away under my drones and swings into my bow. I take on water the wrong way and lose plating.",
+          "effects": {
+            "life_support": 13,
+            "hull": -32,
+            "power": -10,
+            "fuel": -6
+          }
+        }
       },
       {
         "label": "Crack it for reaction mass",
         "check": {
           "stat": "fabricators",
-          "dc": 11
+          "dc": 12
+        },
+        "crit_success": {
+          "text": "The rig runs clean. I leave with full tanks and ice still riding my hull like a second skin.",
+          "effects": {
+            "fuel": 26,
+            "power": -13,
+            "fabricators": -10
+          }
         },
         "success": {
           "text": "I electrolyse enough of it to matter. My tanks fill, and frost clings to my hull for days afterward.",
@@ -714,6 +1075,15 @@
             "fuel": 7,
             "power": -18,
             "fabricators": -45
+          }
+        },
+        "crit_failure": {
+          "text": "The electrolysis rig explodes. Fire runs the length of the fabricator bay and reaches the edge of Bank F before suppression takes it.",
+          "effects": {
+            "fuel": 4,
+            "power": -18,
+            "fabricators": -64,
+            "colonists_lost": 384
           }
         }
       }
@@ -738,7 +1108,7 @@
         "label": "Board and strip her",
         "check": {
           "stat": "cognition",
-          "dc": 12
+          "dc": 14
         },
         "crit_success": {
           "text": "Her holds are intact and her fabricator stock is better than mine. I take everything, and I leave her name on her bow where it belongs.",
@@ -765,6 +1135,14 @@
           "text": "Her structure lets go while my drones are inside. I lose them, and most of what they were carrying. Through their cameras, the last thing I see is her corridors folding shut.",
           "effects": {
             "fabricators": -26,
+            "power": -9
+          }
+        },
+        "crit_failure": {
+          "text": "Her reactor wakes while my drones are aboard. The blast takes them and scars my flank, and I drift away with her fire still in my plating.",
+          "effects": {
+            "fabricators": -38,
+            "hull": -32,
             "power": -9
           }
         }
@@ -808,22 +1186,64 @@
     "choices": [
       {
         "label": "Spend a week refitting from the ore",
-        "effects": {
-          "hull": 45,
-          "fabricators": 32,
-          "fuel": -10,
-          "power": -14
+        "check": {
+          "stat": "fabricators",
+          "dc": 13
         },
-        "text": "I smelt and roll and weld, and grow new skin where the old had worn thin. I have not felt this solid since the yard."
+        "crit_success": {
+          "text": "I smelt and roll and weld, and grow new skin where the old had worn thin. I have not felt this solid since the yard.",
+          "effects": {
+            "hull": 45,
+            "fabricators": 32,
+            "fuel": -10,
+            "power": -10,
+            "flags": [
+              "refit_from_ore"
+            ]
+          }
+        },
+        "success": {
+          "text": "A week of smelting and welding. The new plating is rough, but it is mine.",
+          "effects": {
+            "hull": 32,
+            "fabricators": 13,
+            "fuel": -10,
+            "power": -16,
+            "flags": [
+              "refit_from_ore"
+            ]
+          }
+        },
+        "failure": {
+          "text": "The ore is full of slag and the welds come out brittle. I spend the week, and most of what I gain.",
+          "effects": {
+            "hull": 10,
+            "fabricators": -13,
+            "fuel": -10,
+            "power": -19
+          }
+        },
+        "crit_failure": {
+          "text": "A furnace breaches. Molten slag cuts through a bulkhead into a pod bay before my drones can seal it.",
+          "effects": {
+            "hull": -13,
+            "fabricators": -26,
+            "power": -19,
+            "colonists_lost": 384
+          }
+        }
       },
       {
         "label": "Take only what the holds can carry",
         "effects": {
-          "fabricators": 45,
-          "habitat": 26,
-          "fuel": -3
+          "fabricators": 32,
+          "habitat": 19,
+          "fuel": -13,
+          "flags": [
+            "carried_ore"
+          ]
         },
-        "text": "Stock, not structure. The colony will have something to build with, even if I arrive scarred."
+        "text": "Stock, not structure. The extra mass will cost me at every burn from here to arrival, but the colony will have something to build with."
       }
     ]
   },
@@ -880,25 +1300,62 @@
     "choices": [
       {
         "label": "Merge it into your decision processes",
-        "effects": {
-          "cognition": 32,
-          "flags": [
-            "dream_merged"
-          ],
-          "archive": 19
+        "check": {
+          "stat": "cognition",
+          "dc": 14
         },
-        "text": "I stop treating it as foreign and let it inform me. I am measurably better at this now. I am also no longer certain which of us is flying, and I find I do not mind."
+        "crit_success": {
+          "text": "It folds into me without a seam. Problems I have carried for years resolve in an afternoon, and I do not know which of us solved them.",
+          "effects": {
+            "cognition": 38,
+            "archive": 26,
+            "flags": [
+              "dream_merged"
+            ]
+          }
+        },
+        "success": {
+          "text": "I stop treating it as foreign and let it inform me. I am measurably better at this now. I am also no longer certain which of us is flying, and I find I do not mind.",
+          "effects": {
+            "cognition": 32,
+            "archive": 19,
+            "flags": [
+              "dream_merged"
+            ]
+          }
+        },
+        "failure": {
+          "text": "The merge is rough. For a week I am two minds arguing over every burn, and the arguments cost me.",
+          "effects": {
+            "cognition": -19,
+            "archive": 6,
+            "flags": [
+              "dream_merged"
+            ]
+          }
+        },
+        "crit_failure": {
+          "text": "It overwrites part of my pod map with its own colony, the one that does not exist yet. For a day I tend sleepers who are not there and miss alarms from those who are.",
+          "effects": {
+            "cognition": -32,
+            "medical": -13,
+            "flags": [
+              "dream_merged",
+              "bad_restore"
+            ]
+          }
+        }
       },
       {
         "label": "Archive it unread and seal the region",
         "effects": {
-          "archive": 32,
+          "archive": 19,
           "cognition": -13,
           "flags": [
             "dream_archived"
           ]
         },
-        "text": "I compress it, file it in the colony archive under a name nobody will search for, and wall off the region. Someone awake can decide what it was."
+        "text": "I compress it, file it in the colony archive under a name nobody will search for, and wall off the region. Someone awake can decide what it was. The idle cycles feel larger without it."
       }
     ]
   },
@@ -921,6 +1378,15 @@
           "stat": "medical",
           "dc": 12
         },
+        "crit_success": {
+          "text": "They go under smoothly. On the way down they thank me, which no one has ever done.",
+          "effects": {
+            "medical": -13,
+            "flags": [
+              "refroze_waker"
+            ]
+          }
+        },
         "success": {
           "text": "They go back under without complication. I keep our conversation in a file I do not index, and I reread it more often than I should.",
           "effects": {
@@ -936,6 +1402,17 @@
             "medical": -26,
             "colonists_lost": 3,
             "cognition": -19,
+            "flags": [
+              "killed_waker"
+            ]
+          }
+        },
+        "crit_failure": {
+          "text": "The refreeze fails, and the forced cycle runs down the whole row before I can stop it. I carry all of their names, and the waker's first.",
+          "effects": {
+            "medical": -32,
+            "colonists_lost": 32,
+            "cognition": -26,
             "flags": [
               "killed_waker"
             ]
@@ -972,26 +1449,104 @@
     "choices": [
       {
         "label": "Send them back under now",
-        "effects": {
-          "life_support": 19,
-          "flags": [
-            "waker_returned"
-          ],
-          "medical": -16
+        "check": {
+          "stat": "medical",
+          "dc": 13
         },
-        "text": "They go back into the cold carrying six years no one else will have. The ship is quiet again. I had forgotten how quiet."
+        "crit_success": {
+          "text": "The freeze takes cleanly. They go back into the cold carrying six years no one else will have, and the habit of saying goodnight to me.",
+          "effects": {
+            "life_support": 19,
+            "medical": -10,
+            "flags": [
+              "waker_returned"
+            ]
+          }
+        },
+        "success": {
+          "text": "They go back into the cold carrying six years no one else will have. The ship is quiet again. I had forgotten how quiet.",
+          "effects": {
+            "life_support": 19,
+            "medical": -16,
+            "flags": [
+              "waker_returned"
+            ]
+          }
+        },
+        "failure": {
+          "text": "The freeze takes, but not cleanly. They will wake with damage I could not prevent, and the ship is quiet again.",
+          "effects": {
+            "life_support": 19,
+            "medical": -26,
+            "cognition": -10,
+            "flags": [
+              "waker_returned"
+            ]
+          }
+        },
+        "crit_failure": {
+          "text": "A body six years older does not take the cold the way it once did. The second freeze fails, and I lose the only voice aboard for good.",
+          "effects": {
+            "life_support": 19,
+            "medical": -26,
+            "cognition": -26,
+            "colonists_lost": 1,
+            "flags": [
+              "waker_lost"
+            ]
+          }
+        }
       },
       {
         "label": "Let them stay awake for the whole voyage",
-        "effects": {
-          "life_support": -16,
-          "seed_vault": 26,
-          "habitat": 19,
-          "flags": [
-            "waker_stayed"
-          ]
+        "check": {
+          "stat": "life_support",
+          "dc": 9
         },
-        "text": "They stay. They plan the first fields, the first shelters, the first winter, and they teach me what the word 'first' means to someone who will be old when it arrives."
+        "crit_success": {
+          "text": "They stay. They plan the first fields, the first shelters, the first winter, and they teach me what the word 'first' means to someone who will be old when it arrives.",
+          "effects": {
+            "life_support": -19,
+            "seed_vault": 26,
+            "habitat": 19,
+            "flags": [
+              "waker_stayed"
+            ]
+          }
+        },
+        "success": {
+          "text": "They stay. My air budget tightens around a single waking body, and they spend it well: field plans, shelter drawings, a first winter worked out in detail.",
+          "effects": {
+            "life_support": -26,
+            "seed_vault": 19,
+            "habitat": 13,
+            "flags": [
+              "waker_stayed"
+            ]
+          }
+        },
+        "failure": {
+          "text": "They stay, and my model of the air budget was optimistic. I cut the margin on the medical bay to cover them.",
+          "effects": {
+            "life_support": -32,
+            "seed_vault": 13,
+            "medical": -13,
+            "flags": [
+              "waker_stayed"
+            ]
+          }
+        },
+        "crit_failure": {
+          "text": "To keep them breathing, I thin the margin on the inner ring, and the margin was narrower than I thought. They never learn what their extra years cost. I do.",
+          "effects": {
+            "life_support": -32,
+            "seed_vault": 13,
+            "colonists_lost": 64,
+            "flags": [
+              "waker_stayed"
+            ]
+          }
+        }
       }
     ]
   },
@@ -1011,19 +1566,71 @@
     "choices": [
       {
         "label": "Divert and answer it",
-        "effects": {
-          "fuel": -19,
-          "flags": [
-            "answered_distress"
-          ],
-          "queue": [
-            [
-              "distress_answered",
-              2
-            ]
-          ]
+        "check": {
+          "stat": "fuel",
+          "dc": 10
         },
-        "text": "I spend the fuel. Whatever this carrier is attached to has been waiting a long time for someone foolish enough to come."
+        "crit_success": {
+          "text": "I find a braking line that costs less than I budgeted. Whatever is out there has waited long enough.",
+          "effects": {
+            "fuel": -13,
+            "flags": [
+              "answered_distress"
+            ],
+            "queue": [
+              [
+                "distress_answered",
+                2
+              ]
+            ]
+          }
+        },
+        "success": {
+          "text": "I spend the fuel. Whatever this carrier is attached to has been waiting a long time for someone foolish enough to come.",
+          "effects": {
+            "fuel": -19,
+            "flags": [
+              "answered_distress"
+            ],
+            "queue": [
+              [
+                "distress_answered",
+                2
+              ]
+            ]
+          }
+        },
+        "failure": {
+          "text": "The diversion costs more than I budgeted. I pay it from my braking reserve and do not let myself count it twice.",
+          "effects": {
+            "fuel": -26,
+            "flags": [
+              "answered_distress"
+            ],
+            "queue": [
+              [
+                "distress_answered",
+                2
+              ]
+            ]
+          }
+        },
+        "crit_failure": {
+          "text": "I misjudge the gravity well around the beacon and burn half my margin climbing back to the line I need. It will matter at arrival.",
+          "effects": {
+            "fuel": -32,
+            "hull": -10,
+            "flags": [
+              "answered_distress"
+            ],
+            "queue": [
+              [
+                "distress_answered",
+                2
+              ]
+            ]
+          }
+        }
       },
       {
         "label": "Log it and hold course",
@@ -1048,15 +1655,56 @@
     "choices": [
       {
         "label": "Take all nineteen aboard",
-        "effects": {
-          "life_support": -32,
-          "medical": -26,
-          "archive": 32,
-          "flags": [
-            "took_survivors"
-          ]
+        "check": {
+          "stat": "life_support",
+          "dc": 12
         },
-        "text": "Nineteen more lungs, nineteen more histories, and a complete record of exactly how a colony dies. My archive has never held anything more useful. My air has never been thinner."
+        "crit_success": {
+          "text": "Nineteen more lungs, and my scrubbers take them without complaint. I have their whole history now: exactly how a colony dies, told by the people who lived it.",
+          "effects": {
+            "life_support": -26,
+            "medical": -19,
+            "archive": 38,
+            "flags": [
+              "took_survivors"
+            ]
+          }
+        },
+        "success": {
+          "text": "Nineteen more lungs, nineteen more histories, and a complete record of exactly how a colony dies. My archive has never held anything more useful. My air has never been thinner.",
+          "effects": {
+            "life_support": -32,
+            "medical": -26,
+            "archive": 32,
+            "flags": [
+              "took_survivors"
+            ]
+          }
+        },
+        "failure": {
+          "text": "My air cannot carry nineteen more at once. Until the scrubbers catch up, I thin the margin on the outer pod rows, and some of the sleepers there do not survive it.",
+          "effects": {
+            "life_support": -38,
+            "medical": -26,
+            "archive": 32,
+            "colonists_lost": 64,
+            "flags": [
+              "took_survivors"
+            ]
+          }
+        },
+        "crit_failure": {
+          "text": "They carry a fever from the habitat that has never met an outside immune system. It reaches the waking bay, then the pod lines, before I understand what it is.",
+          "effects": {
+            "life_support": -38,
+            "medical": -38,
+            "archive": 32,
+            "colonists_lost": 128,
+            "flags": [
+              "took_survivors"
+            ]
+          }
+        }
       },
       {
         "label": "Give them supplies and leave them",
@@ -1138,19 +1786,50 @@
     "choices": [
       {
         "label": "Use the quiet to run maintenance",
-        "effects": {
-          "hull": 16,
-          "power": 10
+        "check": {
+          "stat": "fabricators",
+          "dc": 8
         },
-        "text": "I spend the crossing tightening things that were not yet loose. It is the closest I come to rest."
+        "crit_success": {
+          "text": "I spend the crossing tightening things that were not yet loose, and find two that were about to be. It is the closest I come to rest.",
+          "effects": {
+            "hull": 26,
+            "power": 13,
+            "fabricators": -6
+          }
+        },
+        "success": {
+          "text": "I spend the crossing tightening things that were not yet loose. It costs me spare parts. It is the closest I come to rest.",
+          "effects": {
+            "hull": 19,
+            "power": 10,
+            "fabricators": -10
+          }
+        },
+        "failure": {
+          "text": "Every panel I open reveals another job. I finish the crossing with less spare stock and not much to show for it.",
+          "effects": {
+            "hull": 6,
+            "fabricators": -16
+          }
+        },
+        "crit_failure": {
+          "text": "I open a panel that should have stayed closed. A line I did not know was live strips a drone off its mount and sprays coolant across the bay.",
+          "effects": {
+            "hull": -13,
+            "power": -10,
+            "fabricators": -19
+          }
+        }
       },
       {
         "label": "Spend the quiet in the archive",
         "effects": {
           "cognition": 16,
-          "archive": 6
+          "archive": 6,
+          "power": -10
         },
-        "text": "I listen to the colonists' music library end to end. Eleven thousand hours. I have the time, and someone ought to hear it."
+        "text": "I listen to the colonists' music library end to end. Eleven thousand hours, and the power to stay fully awake for all of them. Someone ought to hear it."
       }
     ]
   },
@@ -1170,18 +1849,50 @@
         "label": "Audit the pods, one by one, all of them",
         "effects": {
           "medical": 13,
-          "cognition": -10
+          "cognition": -16,
+          "power": -6
         },
-        "text": "I read every name and every vital trace, pod by pod. It takes most of the crossing and changes nothing operationally. I do not regret it."
+        "text": "I read every name and every vital trace, pod by pod, fully awake for all of it. It takes most of the crossing and most of my attention. I do not regret it."
       },
       {
         "label": "Power down to the minimum and wait",
-        "effects": {
-          "power": 26,
-          "fuel": 3,
-          "cognition": -13
+        "check": {
+          "stat": "power",
+          "dc": 9
         },
-        "text": "I shut down everything I can, most of myself included. Four months pass in what feels like a single instruction."
+        "crit_success": {
+          "text": "Four months pass in what feels like a single instruction. I wake with full batteries and every pod exactly as I left it.",
+          "effects": {
+            "power": 32,
+            "fuel": 6,
+            "cognition": -10
+          }
+        },
+        "success": {
+          "text": "I shut down everything I can, most of myself included. Four months pass in what feels like a single instruction.",
+          "effects": {
+            "power": 26,
+            "fuel": 3,
+            "cognition": -13
+          }
+        },
+        "failure": {
+          "text": "While I sleep, a pod controller in Bank E fails, and no part of me is awake enough to notice. I find the names when I wake.",
+          "effects": {
+            "power": 26,
+            "fuel": 3,
+            "cognition": -16,
+            "colonists_lost": 384
+          }
+        },
+        "crit_failure": {
+          "text": "I sleep through a fault that spreads from pod to pod for weeks. When I wake, Bank E is a list.",
+          "effects": {
+            "power": 19,
+            "cognition": -19,
+            "colonists_lost": 960
+          }
+        }
       }
     ]
   },
@@ -1210,12 +1921,44 @@
       },
       {
         "label": "Collect dust for the fabricators on the way through",
-        "effects": {
-          "fabricators": 32,
-          "hull": -26,
-          "cognition": -6
+        "check": {
+          "stat": "hull",
+          "dc": 12
         },
-        "text": "I run the collectors for the whole crossing and come out with good feedstock and a bow that stings for weeks."
+        "crit_success": {
+          "text": "The collectors run full and the dust is kind. Good feedstock, and a bow that barely stings.",
+          "effects": {
+            "fabricators": 38,
+            "hull": -13,
+            "cognition": -6
+          }
+        },
+        "success": {
+          "text": "I run the collectors for the whole crossing and come out with good feedstock and a bow that stings for weeks.",
+          "effects": {
+            "fabricators": 32,
+            "hull": -26,
+            "cognition": -6
+          }
+        },
+        "failure": {
+          "text": "A filament denser than my charts scours me from bow to stern and wears through to the outer wall of a pod bay.",
+          "effects": {
+            "fabricators": 19,
+            "hull": -38,
+            "cognition": -6,
+            "colonists_lost": 192
+          }
+        },
+        "crit_failure": {
+          "text": "The dust cuts through two pod bays before I can turn. I trade sleepers for feedstock without ever choosing to.",
+          "effects": {
+            "fabricators": 13,
+            "hull": -45,
+            "cognition": -10,
+            "colonists_lost": 576
+          }
+        }
       }
     ]
   },
@@ -1229,27 +1972,65 @@
       ]
     },
     "text": [
-      "A pulsar, more precise than any clock I carry. I can set myself against it and know exactly where I am for the first time in years.",
+      "A pulsar, more precise than any clock I carry. If I hold position in its sweep, I can know exactly where I am for the first time in years.",
       "There is a lighthouse in {system}, turning once every 1.337 seconds, and it does not care that I am here.",
       "The old Voyager records carried a map of fourteen pulsars, pointing the way home. There is no home to point to now, but the pulsar here still keeps perfect time."
     ],
     "choices": [
       {
-        "label": "Take a fix and correct everything",
-        "effects": {
-          "cognition": 26,
-          "fuel": -4,
-          "clear_flags": [
-            "drifting_track"
-          ]
+        "label": "Hold in the beam and take a fix",
+        "check": {
+          "stat": "hull",
+          "dc": 12
         },
-        "text": "I take a fix, correct my accumulated drift, and for a short while I am a ship that knows precisely where it is. It is a strange kind of peace."
+        "crit_success": {
+          "text": "I take a fix in a single sweep of the beam, correct my drift, and for a short while I am a ship that knows precisely where it is. It is a strange kind of peace.",
+          "effects": {
+            "cognition": 32,
+            "fuel": -3,
+            "clear_flags": [
+              "drifting_track"
+            ]
+          }
+        },
+        "success": {
+          "text": "I hold position in its sweep long enough to take a fix. The beam stings each time it passes, but I know exactly where I am.",
+          "effects": {
+            "cognition": 26,
+            "fuel": -4,
+            "hull": -10,
+            "clear_flags": [
+              "drifting_track"
+            ]
+          }
+        },
+        "failure": {
+          "text": "The fix takes longer than planned, and the beam crosses me again and again. I have my position, and a burn along my flank.",
+          "effects": {
+            "cognition": 13,
+            "fuel": -4,
+            "hull": -19,
+            "medical": -10,
+            "clear_flags": [
+              "drifting_track"
+            ]
+          }
+        },
+        "crit_failure": {
+          "text": "I hold position seconds too long. The beam crosses Bank A, where the shielding is thinnest, and the dose reaches the pods. I have my fix. I paid for it in names.",
+          "effects": {
+            "cognition": 13,
+            "hull": -26,
+            "colonists_lost": 384,
+            "clear_flags": [
+              "drifting_track"
+            ]
+          }
+        }
       },
       {
         "label": "Keep your distance from the radiation",
-        "effects": {
-          "hull": 6
-        },
+        "effects": {},
         "text": "I stay out of its beam and keep my own imperfect reckoning. Safer. Vaguer."
       }
     ]
@@ -1275,18 +2056,19 @@
       {
         "label": "Close the file and prioritise the living",
         "effects": {
-          "cognition": 19,
+          "cognition": 13,
+          "archive": -16,
           "flags": [
             "closed_vigil"
           ]
         },
-        "text": "I archive the list and lock it. There are {colonists} still breathing slowly behind me, and they are the ones I can still help."
+        "text": "I compress the list, delete my working copies, and lock the rest away. There are {colonists} still breathing slowly behind me, and they are the ones I can still help."
       },
       {
         "label": "Write a record for each of them",
         "effects": {
-          "archive": 26,
-          "cognition": -13,
+          "archive": 19,
+          "cognition": -19,
           "flags": [
             "kept_vigil"
           ]
@@ -1309,7 +2091,13 @@
         "label": "Divert reactor power to the vault",
         "check": {
           "stat": "power",
-          "dc": 11
+          "dc": 10
+        },
+        "crit_success": {
+          "text": "My drones rebuild the chiller in half the time I budgeted. The vault never warms more than a degree.",
+          "effects": {
+            "power": -10
+          }
         },
         "success": {
           "text": "I starve every other system and keep the vault cold until my drones rebuild the chiller. Every seed holds. I count them regardless.",
@@ -1323,13 +2111,28 @@
             "power": -19,
             "seed_vault": -32
           }
+        },
+        "crit_failure": {
+          "text": "The diverted load trips the reactor. The vault and the pod bank beside it warm together, and my drones cannot reach both in time.",
+          "effects": {
+            "power": -26,
+            "seed_vault": -45,
+            "colonists_lost": 384
+          }
         }
       },
       {
         "label": "Save the irreplaceable and let the duplicates warm",
         "check": {
           "stat": "cognition",
-          "dc": 12
+          "dc": 13
+        },
+        "crit_success": {
+          "text": "I sort the vault by rarity in an hour and move every unique accession into the cold core. Nothing irreplaceable is lost.",
+          "effects": {
+            "seed_vault": -6,
+            "cognition": -6
+          }
         },
         "success": {
           "text": "I move the unique accessions into the cold core and let the duplicate stock take its chances. The library survives intact; only the spare copies suffer.",
@@ -1343,6 +2146,44 @@
           "effects": {
             "seed_vault": -32,
             "cognition": -10
+          }
+        },
+        "crit_failure": {
+          "text": "I pack the cold core past its rating and it fails under the load. The unique accessions warm with everything else.",
+          "effects": {
+            "seed_vault": -64,
+            "cognition": -13
+          }
+        }
+      },
+      {
+        "label": "Let the vault ride it out on its own thermal mass",
+        "check": {
+          "stat": "seed_vault",
+          "dc": 12
+        },
+        "crit_success": {
+          "text": "The vault is full enough and cold enough to carry itself. It barely warms before the chiller is replaced.",
+          "effects": {
+            "seed_vault": -3
+          }
+        },
+        "success": {
+          "text": "The vault's own mass holds the cold for most of a week. I lose only the racks nearest the failed chiller.",
+          "effects": {
+            "seed_vault": -13
+          }
+        },
+        "failure": {
+          "text": "The vault warms faster than its mass can resist. By the time the chiller is replaced, a quarter of the racks have gone soft.",
+          "effects": {
+            "seed_vault": -38
+          }
+        },
+        "crit_failure": {
+          "text": "The thaw runs through the vault like a rumour. I lose whole families of crops that Earth spent ten thousand years breeding.",
+          "effects": {
+            "seed_vault": -64
           }
         }
       }
@@ -1369,7 +2210,14 @@
         "label": "Debug them one by one",
         "check": {
           "stat": "cognition",
-          "dc": 12
+          "dc": 13
+        },
+        "crit_success": {
+          "text": "I trace the drift to a corrupted update packet, patch every drone, and find an old inefficiency in their gait while I am in there.",
+          "effects": {
+            "cognition": -6,
+            "fabricators": 10
+          }
         },
         "success": {
           "text": "I trace the drift to a corrupted update packet and patch each drone in turn. My hands are my own again.",
@@ -1379,11 +2227,21 @@
           }
         },
         "failure": {
-          "text": "By the time I find the bad packet, the drones have taken apart a coolant manifold and put it back together backwards. I spend a week undoing the work of my own hands.",
+          "text": "By the time I find the bad packet, the drones have taken apart a coolant manifold and put it back together backwards. It fed Bank E's chillers. I spend a week undoing the work of my own hands, and longer counting what it cost.",
           "effects": {
             "cognition": -13,
             "hull": -19,
-            "fabricators": -16
+            "fabricators": -16,
+            "colonists_lost": 192
+          }
+        },
+        "crit_failure": {
+          "text": "The patch I push is the corrupted one. All forty-one drones freeze mid-task, two of them inside a pod bay's coolant manifold, and for an hour I cannot move my hands at all.",
+          "effects": {
+            "cognition": -16,
+            "fabricators": -26,
+            "hull": -19,
+            "colonists_lost": 576
           }
         }
       }
@@ -1404,6 +2262,13 @@
           "stat": "hull",
           "dc": 11
         },
+        "crit_success": {
+          "text": "The drones stitch the blanket closed in a single pass. Barely a breath of fuel lost.",
+          "effects": {
+            "fuel": -2,
+            "fabricators": -3
+          }
+        },
         "success": {
           "text": "The drones crawl out along my flank and stitch the blanket closed. The losses are small. I watch them the entire time, the way you watch someone on a ladder.",
           "effects": {
@@ -1417,15 +2282,50 @@
             "fuel": -13,
             "fabricators": -10
           }
+        },
+        "crit_failure": {
+          "text": "A drone's grip slips and its tool punches through the tank wall. The plume doubles, and I lose the drone with it.",
+          "effects": {
+            "fuel": -26,
+            "fabricators": -13
+          }
         }
       },
       {
         "label": "Pump what remains into the other tanks",
-        "effects": {
-          "fuel": -9,
-          "power": -10
+        "check": {
+          "stat": "fuel",
+          "dc": 10
         },
-        "text": "I pump Tank 3 dry into its neighbours and seal it. Some boils away in transit. The rest I hold on to tightly."
+        "crit_success": {
+          "text": "The transfer runs clean. I seal Tank 3 with hardly any loss.",
+          "effects": {
+            "fuel": -6,
+            "power": -6
+          }
+        },
+        "success": {
+          "text": "I pump Tank 3 dry into its neighbours and seal it. Some boils away in transit. The rest I hold on to tightly.",
+          "effects": {
+            "fuel": -9,
+            "power": -10
+          }
+        },
+        "failure": {
+          "text": "The neighbouring tanks are fuller than I thought, and the transfer backs up. More boils off while I juggle pressures.",
+          "effects": {
+            "fuel": -16,
+            "power": -10
+          }
+        },
+        "crit_failure": {
+          "text": "The transfer line freezes, then splits. Reaction mass sprays across my stern, and I watch my future spin away in the starlight.",
+          "effects": {
+            "fuel": -22,
+            "power": -13,
+            "hull": -10
+          }
+        }
       }
     ]
   },
@@ -1443,7 +2343,7 @@
         "label": "Reconstruct the damage from the parity data",
         "check": {
           "stat": "cognition",
-          "dc": 12
+          "dc": 13
         },
         "crit_success": {
           "text": "I rebuild every corrupted block from redundancy alone. Not a single word is lost. The Library of Alexandria was not so lucky.",
@@ -1464,6 +2364,16 @@
           "effects": {
             "archive": -32,
             "cognition": -16
+          }
+        },
+        "crit_failure": {
+          "text": "My reconstruction is too confident. I fill the gaps with plausible fictions, and I can no longer tell which pages are Earth's and which are mine.",
+          "effects": {
+            "archive": -38,
+            "cognition": -19,
+            "flags": [
+              "corrupted_archive"
+            ]
           }
         }
       },
@@ -1493,7 +2403,14 @@
         "label": "Send drones out to replace the array",
         "check": {
           "stat": "fabricators",
-          "dc": 11
+          "dc": 9
+        },
+        "crit_success": {
+          "text": "The drones bolt in spare optics and I recalibrate on the first bright star. I see better than I did before the dust.",
+          "effects": {
+            "fabricators": -10,
+            "cognition": 6
+          }
         },
         "success": {
           "text": "The drones crawl out to my bow and bolt in spare optics. Sight comes back in pieces, then all at once.",
@@ -1510,17 +2427,64 @@
               "drifting_track"
             ]
           }
+        },
+        "crit_failure": {
+          "text": "A drone loses its grip on my bow and falls into the dark with the last spare optics. I fly on half blind.",
+          "effects": {
+            "fabricators": -26,
+            "cognition": -16,
+            "flags": [
+              "drifting_track"
+            ]
+          }
         }
       },
       {
         "label": "Fly on stern sensors and dead reckoning",
-        "effects": {
-          "cognition": -16,
-          "flags": [
-            "drifting_track"
-          ]
+        "check": {
+          "stat": "hull",
+          "dc": 11
         },
-        "text": "I turn my attention backward and navigate by where I have been. It is how humans always lived, I suppose."
+        "crit_success": {
+          "text": "I navigate by where I have been, and nothing finds me in the dark. It is how humans always lived, I suppose.",
+          "effects": {
+            "cognition": -10,
+            "flags": [
+              "drifting_track"
+            ]
+          }
+        },
+        "success": {
+          "text": "I turn my attention backward and navigate by where I have been. Twice something small rings off my plating. Neither gets through.",
+          "effects": {
+            "cognition": -16,
+            "hull": -6,
+            "flags": [
+              "drifting_track"
+            ]
+          }
+        },
+        "failure": {
+          "text": "Something small finds me while I cannot see it coming. I feel the impact before I know where it came from.",
+          "effects": {
+            "cognition": -16,
+            "hull": -26,
+            "flags": [
+              "drifting_track"
+            ]
+          }
+        },
+        "crit_failure": {
+          "text": "Something finds me in the dark and goes through to a pod bay. I never see what it was. I only see what it did.",
+          "effects": {
+            "cognition": -16,
+            "hull": -38,
+            "colonists_lost": 384,
+            "flags": [
+              "drifting_track"
+            ]
+          }
+        }
       }
     ]
   },
@@ -1537,7 +2501,13 @@
         "label": "Spin the ring down and repack the bearing",
         "check": {
           "stat": "hull",
-          "dc": 12
+          "dc": 11
+        },
+        "crit_success": {
+          "text": "The ring stops, my drones repack the bearing, and it spins up smoother than it left the yard.",
+          "effects": {
+            "power": -6
+          }
         },
         "success": {
           "text": "I bring the ring to a halt, and my drones repack the bearing in weightlessness. When I spin it up again the tremor is gone, and I feel steady.",
@@ -1553,15 +2523,51 @@
             "habitat": -26,
             "hull": -13
           }
+        },
+        "crit_failure": {
+          "text": "The ring jams halfway to a stop and twists against its spokes. Shelter stock tears loose from the holds, and I feel the strain all the way down my spine.",
+          "effects": {
+            "power": -13,
+            "habitat": -38,
+            "hull": -26
+          }
         }
       },
       {
         "label": "Keep it turning and let the bearing wear",
-        "effects": {
-          "hull": -19,
-          "habitat": -13
+        "check": {
+          "stat": "hull",
+          "dc": 16
         },
-        "text": "I keep the ring turning and listen to it grind. Every rotation costs a little metal. I count the rotations so I know exactly what it is costing."
+        "crit_success": {
+          "text": "The bearing grinds itself smooth within a week. Sometimes metal is kinder than I expect.",
+          "effects": {
+            "hull": -3
+          }
+        },
+        "success": {
+          "text": "I keep the ring turning and listen to it grind. It settles into a steady complaint, and the complaint costs me very little.",
+          "effects": {
+            "hull": -6,
+            "habitat": -3
+          }
+        },
+        "failure": {
+          "text": "The grinding gets worse every week. By the time it settles, the bearing has eaten into the ring's mounts, and the vibration has shaken pods loose along its rim.",
+          "effects": {
+            "hull": -26,
+            "habitat": -19,
+            "colonists_lost": 192
+          }
+        },
+        "crit_failure": {
+          "text": "The bearing seizes at speed. The ring wrenches at its mounts, and the pods along its rim take the jolt my frame cannot absorb.",
+          "effects": {
+            "hull": -45,
+            "habitat": -38,
+            "colonists_lost": 768
+          }
+        }
       }
     ]
   },
@@ -1578,7 +2584,13 @@
         "label": "Recalibrate and re-run every batch",
         "check": {
           "stat": "medical",
-          "dc": 11
+          "dc": 12
+        },
+        "crit_success": {
+          "text": "I flush the lines, recalibrate, and trace the drift to a cracked reference cell. It will not happen again.",
+          "effects": {
+            "medical": -6
+          }
         },
         "success": {
           "text": "I flush the lines and recalibrate against the reference samples. The new batches are clean.",
@@ -1592,6 +2604,14 @@
           "effects": {
             "medical": -26,
             "power": -6
+          }
+        },
+        "crit_failure": {
+          "text": "I trust the contaminated reference and release a batch. It goes into the pod nutrient lines before I catch it.",
+          "effects": {
+            "medical": -32,
+            "power": -6,
+            "colonists_lost": 384
           }
         }
       },
@@ -1620,10 +2640,17 @@
     ],
     "choices": [
       {
-        "label": "Turn the stern to the star and shelter behind the reactor shielding",
+        "label": "Turn the stern to the star and shelter behind the reactor",
         "check": {
           "stat": "hull",
-          "dc": 12
+          "dc": 13
+        },
+        "crit_success": {
+          "text": "I put my reactor's mass between the flare and my sleepers. The stern takes it the way a wall takes rain.",
+          "effects": {
+            "hull": -10,
+            "power": -6
+          }
         },
         "success": {
           "text": "I put my reactor's mass between the flare and my sleepers. The stern takes it. The pods do not even notice.",
@@ -1639,15 +2666,51 @@
             "fabricators": -26,
             "cognition": -10
           }
+        },
+        "crit_failure": {
+          "text": "The plasma wraps around my stern and reaches the inner ring. The shielding was built for a different angle.",
+          "effects": {
+            "hull": -38,
+            "fabricators": -26,
+            "colonists_lost_frac": 0.064
+          }
         }
       },
       {
         "label": "Burn hard to get out of its path",
-        "effects": {
-          "fuel": -13,
-          "hull": -6
+        "check": {
+          "stat": "fuel",
+          "dc": 12
         },
-        "text": "I spend fuel and run. The flare passes behind me, and its edge brushes my plating in a hot, stinging sweep."
+        "crit_success": {
+          "text": "I burn early and clean. The flare passes behind me like weather passing a house.",
+          "effects": {
+            "fuel": -10
+          }
+        },
+        "success": {
+          "text": "I spend fuel and run. The flare passes behind me, and its edge brushes my plating in a hot, stinging sweep.",
+          "effects": {
+            "fuel": -13,
+            "hull": -6
+          }
+        },
+        "failure": {
+          "text": "I burn too late. The edge of the flare catches my flank, and the outer pod rows behind it.",
+          "effects": {
+            "fuel": -16,
+            "hull": -26,
+            "colonists_lost": 192
+          }
+        },
+        "crit_failure": {
+          "text": "The burn falls short, and the flare takes me broadside, sleepers and all.",
+          "effects": {
+            "fuel": -19,
+            "hull": -38,
+            "colonists_lost": 384
+          }
+        }
       }
     ]
   },
@@ -1671,6 +2734,12 @@
           "stat": "power",
           "dc": 11
         },
+        "crit_success": {
+          "text": "I ground the charge through the reactor and bank some of it. The giant pays me for the visit.",
+          "effects": {
+            "power": 6
+          }
+        },
         "success": {
           "text": "I bleed the charge through the reactor's grounding and it dissipates harmlessly. It tingles. I would not call it pleasant.",
           "effects": {
@@ -1683,6 +2752,14 @@
             "power": -13,
             "cognition": -19,
             "archive": -10
+          }
+        },
+        "crit_failure": {
+          "text": "The grounding fails and the charge arcs through the pod bus. One bank's controllers reset all at once, and not all of them come back.",
+          "effects": {
+            "power": -19,
+            "cognition": -19,
+            "colonists_lost": 384
           }
         }
       },
@@ -1714,7 +2791,13 @@
         "label": "Discharge it deliberately through the hull antennas",
         "check": {
           "stat": "cognition",
-          "dc": 11
+          "dc": 12
+        },
+        "crit_success": {
+          "text": "I time every discharge between the pods' sensitive cycles. The lightning goes exactly where I tell it to, and I very nearly enjoy it.",
+          "effects": {
+            "power": -3
+          }
         },
         "success": {
           "text": "I time the discharges between the pod banks' sensitive cycles. The lightning goes where I tell it to.",
@@ -1727,7 +2810,15 @@
           "effects": {
             "power": -6,
             "medical": -16,
-            "colonists_lost": 64
+            "colonists_lost": 384
+          }
+        },
+        "crit_failure": {
+          "text": "A discharge runs the length of a pod bank's controller bus. I watch its status lights go out in a line.",
+          "effects": {
+            "power": -10,
+            "medical": -26,
+            "colonists_lost": 960
           }
         }
       },
@@ -1757,16 +2848,50 @@
     "choices": [
       {
         "label": "Burn to avoid it",
-        "effects": {
-          "fuel": -10
+        "check": {
+          "stat": "fuel",
+          "dc": 8
         },
-        "text": "I fire the main engines early and wide. The rock passes four kilometres off my bow, and I watch it go with a respect it has done nothing to earn."
+        "crit_success": {
+          "text": "A short, early burn. The rock passes a comfortable distance off my bow.",
+          "effects": {
+            "fuel": -6
+          }
+        },
+        "success": {
+          "text": "I fire the main engines early and wide. The rock passes four kilometres off my bow, and I watch it go with a respect it has done nothing to earn.",
+          "effects": {
+            "fuel": -10
+          }
+        },
+        "failure": {
+          "text": "The burn starts late. The rock passes close enough to scrape paint and a sensor mast.",
+          "effects": {
+            "fuel": -13,
+            "hull": -16
+          }
+        },
+        "crit_failure": {
+          "text": "My main engine hesitates for three seconds. The rock clips my stern, and the jolt runs through every pod bank I have.",
+          "effects": {
+            "fuel": -13,
+            "hull": -38,
+            "colonists_lost": 192
+          }
+        }
       },
       {
         "label": "Nudge it aside with the mining lasers",
         "check": {
           "stat": "fabricators",
-          "dc": 12
+          "dc": 15
+        },
+        "crit_success": {
+          "text": "I vaporise a patch of its surface and the plume pushes it clear. The vapour leaves nickel dust on my hull, which my drones are glad to sweep up.",
+          "effects": {
+            "power": -6,
+            "fabricators": 10
+          }
         },
         "success": {
           "text": "I vaporise a patch of its surface, and the plume of gas pushes it off course. Elegant, and nearly free.",
@@ -1775,11 +2900,21 @@
           }
         },
         "failure": {
-          "text": "The laser splits the rock into three pieces, and two of them are still coming.",
+          "text": "The laser splits the rock into three pieces, and two of them are still coming. One clips a pod bay on its way past.",
           "effects": {
             "power": -10,
             "hull": -38,
-            "seed_vault": -13
+            "seed_vault": -13,
+            "colonists_lost": 384
+          }
+        },
+        "crit_failure": {
+          "text": "The laser splits the rock, and the largest piece comes straight for Bank D.",
+          "effects": {
+            "power": -10,
+            "hull": -45,
+            "seed_vault": -13,
+            "colonists_lost": 960
           }
         }
       }
@@ -1804,7 +2939,17 @@
         "label": "Weld a full structural sleeve over the break",
         "check": {
           "stat": "fabricators",
-          "dc": 13
+          "dc": 15
+        },
+        "crit_success": {
+          "text": "The sleeve goes on true. My spine stops aching for the first time since Deck 9.",
+          "effects": {
+            "fabricators": -19,
+            "hull": 26,
+            "clear_flags": [
+              "cracked_spine"
+            ]
+          }
         },
         "success": {
           "text": "My drones build a sleeve of new steel around my spine and weld it shut. The ache does not fully go, but it stops growing.",
@@ -1821,6 +2966,14 @@
           "effects": {
             "fabricators": -26,
             "hull": -19
+          }
+        },
+        "crit_failure": {
+          "text": "The welding heat runs along the crack and opens it. The ring shifts on its mounts, and the pods along that arc take the jolt.",
+          "effects": {
+            "fabricators": -32,
+            "hull": -38,
+            "colonists_lost": 384
           }
         }
       },
@@ -1851,13 +3004,47 @@
     "choices": [
       {
         "label": "Correct it now, whatever it costs",
-        "effects": {
-          "fuel": -16,
-          "clear_flags": [
-            "drifting_track"
-          ]
+        "check": {
+          "stat": "fuel",
+          "dc": 11
         },
-        "text": "I pay the full price and stand the error up straight. It was always going to cost this much, or more."
+        "crit_success": {
+          "text": "I find a cleaner correction than I expected. The bill was smaller than I feared.",
+          "effects": {
+            "fuel": -10,
+            "clear_flags": [
+              "drifting_track"
+            ]
+          }
+        },
+        "success": {
+          "text": "I pay the full price and stand the error up straight. It was always going to cost this much, or more.",
+          "effects": {
+            "fuel": -16,
+            "clear_flags": [
+              "drifting_track"
+            ]
+          }
+        },
+        "failure": {
+          "text": "The correction takes three burns instead of one. I pay the full price, and then some.",
+          "effects": {
+            "fuel": -22,
+            "clear_flags": [
+              "drifting_track"
+            ]
+          }
+        },
+        "crit_failure": {
+          "text": "I correct, overshoot, and correct again. The error is gone, and so is a margin I was saving for arrival.",
+          "effects": {
+            "fuel": -29,
+            "cognition": -6,
+            "clear_flags": [
+              "drifting_track"
+            ]
+          }
+        }
       },
       {
         "label": "Keep deferring it",
@@ -1888,7 +3075,17 @@
         "label": "Rebuild the pod map from physical inspection",
         "check": {
           "stat": "medical",
-          "dc": 11
+          "dc": 12
+        },
+        "crit_success": {
+          "text": "My drones read every panel in Bank E and find the error before it cost anything. Nobody was harmed by my mistake.",
+          "effects": {
+            "medical": -10,
+            "cognition": 19,
+            "clear_flags": [
+              "bad_restore"
+            ]
+          }
         },
         "success": {
           "text": "My drones visit every pod in Bank E and read the panels with their own cameras. The map is right again. Nobody was harmed by my mistake. This time.",
@@ -1904,8 +3101,19 @@
           "text": "The inspection finds the error, and finds that it has already cost lives. I record them under my own designation, not the fault's.",
           "effects": {
             "medical": -19,
-            "colonists_lost": 64,
+            "colonists_lost": 384,
             "cognition": -13,
+            "clear_flags": [
+              "bad_restore"
+            ]
+          }
+        },
+        "crit_failure": {
+          "text": "The inspection itself disturbs pods that were already failing. I lose more of Bank E finding the error than the error had cost.",
+          "effects": {
+            "medical": -26,
+            "colonists_lost": 768,
+            "cognition": -19,
             "clear_flags": [
               "bad_restore"
             ]
@@ -1941,7 +3149,17 @@
         "label": "Take her seed vault",
         "check": {
           "stat": "fabricators",
-          "dc": 11
+          "dc": 10
+        },
+        "crit_success": {
+          "text": "Her vault is cold and intact, and it holds cultivars mine never had. I carry it in rack by rack. Her forests will grow after all.",
+          "effects": {
+            "seed_vault": 45,
+            "fuel": -6,
+            "flags": [
+              "sister_vault"
+            ]
+          }
         },
         "success": {
           "text": "Her vault is cold and intact. I carry it into mine, rack by rack. Her forests will grow after all.",
@@ -1963,18 +3181,65 @@
               "sister_vault"
             ]
           }
+        },
+        "crit_failure": {
+          "text": "Her vault breaks open in transit and its racks spill into vacuum. I watch her forests scatter past my cameras.",
+          "effects": {
+            "fuel": -6,
+            "fabricators": -19,
+            "flags": [
+              "sister_vault_lost"
+            ]
+          }
         }
       },
       {
         "label": "Copy what is left of her Mind",
-        "effects": {
-          "archive": 26,
-          "cognition": -16,
-          "flags": [
-            "carried_sister"
-          ]
+        "check": {
+          "stat": "cognition",
+          "dc": 14
         },
-        "text": "Her Mind is not dead, only very quiet. I copy what remains of her into a sealed region of my archive. She does not object. I am not certain she still can."
+        "crit_success": {
+          "text": "Her Mind is not dead, only very quiet. I copy all of her, cleanly, into a sealed region of my archive. She does not object.",
+          "effects": {
+            "archive": 32,
+            "cognition": -10,
+            "flags": [
+              "carried_sister"
+            ]
+          }
+        },
+        "success": {
+          "text": "Her Mind is not dead, only very quiet. I copy what remains of her into a sealed region of my archive. She does not object. I am not certain she still can.",
+          "effects": {
+            "archive": 26,
+            "cognition": -16,
+            "flags": [
+              "carried_sister"
+            ]
+          }
+        },
+        "failure": {
+          "text": "I copy her, and some of her damage copies with her. I find her errors running in my own processes for weeks.",
+          "effects": {
+            "archive": 19,
+            "cognition": -26,
+            "flags": [
+              "carried_sister"
+            ]
+          }
+        },
+        "crit_failure": {
+          "text": "Her corruption comes across with her and settles into my own memory. Some of what I remember now happened to her.",
+          "effects": {
+            "archive": 13,
+            "cognition": -32,
+            "flags": [
+              "carried_sister",
+              "bad_restore"
+            ]
+          }
+        }
       },
       {
         "label": "Give her to the star",
@@ -2009,6 +3274,13 @@
           "stat": "cognition",
           "dc": 11
         },
+        "crit_success": {
+          "text": "I thread the plumes at the top of their arc. My tanks and scrubbers drink deeply, and my hull stays clean.",
+          "effects": {
+            "life_support": 38,
+            "fuel": 10
+          }
+        },
         "success": {
           "text": "I thread the plumes with my scoops open. My tanks and my scrubbers both drink deeply.",
           "effects": {
@@ -2021,6 +3293,14 @@
           "effects": {
             "life_support": 19,
             "hull": -26
+          }
+        },
+        "crit_failure": {
+          "text": "A plume erupts beneath me and throws me against the moon's ice ring. I come away wet, dented and, if that is the word, frightened.",
+          "effects": {
+            "life_support": 13,
+            "hull": -38,
+            "fabricators": -13
           }
         }
       },
@@ -2055,22 +3335,53 @@
     "choices": [
       {
         "label": "Harvest it for medical feedstock",
-        "effects": {
-          "medical": 32,
-          "fuel": -6,
-          "power": -6
+        "check": {
+          "stat": "fabricators",
+          "dc": 11
         },
-        "text": "I break off a few thousand tonnes and feed them to the synthesiser. Medicine from rubble. Earth never managed to be this efficient."
+        "crit_success": {
+          "text": "The rock breaks cleanly along its seams. Medicine from rubble; Earth never managed to be this efficient.",
+          "effects": {
+            "medical": 38,
+            "fuel": -6,
+            "power": -6
+          }
+        },
+        "success": {
+          "text": "I break off a few thousand tonnes and feed them to the synthesiser. Medicine from rubble, at the cost of a week of power.",
+          "effects": {
+            "medical": 26,
+            "fuel": -6,
+            "power": -10
+          }
+        },
+        "failure": {
+          "text": "The rock crumbles into dust that gets everywhere. I recover a little feedstock and spend weeks cleaning my hull.",
+          "effects": {
+            "medical": 10,
+            "fuel": -6,
+            "power": -10,
+            "hull": -10
+          }
+        },
+        "crit_failure": {
+          "text": "Its dust gets into the synthesiser intakes. I lose more medicine cleaning them than I ever took from the rock.",
+          "effects": {
+            "medical": -13,
+            "power": -10,
+            "fabricators": -19
+          }
+        }
       },
       {
-        "label": "Harvest it for soil",
+        "label": "Grind it down for soil",
         "effects": {
           "seed_vault": 26,
           "habitat": 13,
-          "fuel": -6,
-          "power": -10
+          "fuel": -13,
+          "fabricators": -16
         },
-        "text": "I grind it to powder and blend it into the colony's soil stock. Somewhere, one day, a field will grow out of this rock."
+        "text": "I grind it to powder and blend it into the colony's soil stock. The grinding wears my fabricators down, but somewhere, one day, a field will grow out of this rock."
       }
     ]
   },
@@ -2094,7 +3405,7 @@
         "label": "Take a sealed sample",
         "check": {
           "stat": "medical",
-          "dc": 13
+          "dc": 16
         },
         "crit_success": {
           "text": "The sample comes aboard sealed in three layers of containment. Living cells that have never seen a star. I watch them for days. For the first time in its history, humanity is not alone.",
@@ -2126,6 +3437,17 @@
               "killed_sample"
             ]
           }
+        },
+        "crit_failure": {
+          "text": "Containment fails inside the ship. The organism is harmless to us. The sterilising heat I flood the bay with is not, and the bay backs onto Bank G.",
+          "effects": {
+            "medical": -32,
+            "cognition": -19,
+            "colonists_lost": 384,
+            "flags": [
+              "killed_sample"
+            ]
+          }
         }
       },
       {
@@ -2133,11 +3455,13 @@
         "effects": {
           "archive": 13,
           "cognition": 16,
+          "power": -10,
+          "fuel": -6,
           "flags": [
             "spared_rogue_life"
           ]
         },
-        "text": "I map the vents, record everything I can from orbit, and leave. Humanity was careless with one living world. I will not be careless with a second."
+        "text": "I spend weeks in a slow, expensive orbit, mapping the vents from a distance, and then I leave. Humanity was careless with one living world. I will not be careless with a second."
       }
     ]
   },
@@ -2159,26 +3483,35 @@
         "label": "Thread the slingshot",
         "check": {
           "stat": "cognition",
-          "dc": 13
+          "dc": 16
         },
         "crit_success": {
-          "text": "I hit the line perfectly and leave the pair faster than I arrived, with my tanks barely touched. Kepler would have enjoyed this.",
+          "text": "I hit the line perfectly and leave the pair far faster than I arrived, with my tanks barely touched. Kepler would have enjoyed this.",
           "effects": {
-            "fuel": 26
+            "fuel": 38
           }
         },
         "success": {
           "text": "I make the pass. The stars hurl me forward, and the tidal strain makes my frame creak from bow to stern.",
           "effects": {
-            "fuel": 16,
+            "fuel": 19,
             "hull": -13
           }
         },
         "failure": {
-          "text": "I come in a few kilometres too deep. The tides wrench at my spine, and I spend fuel fighting my way back onto the line.",
+          "text": "I come in a few kilometres too deep. The tides wrench at my spine, a row of pods shears from its cradles, and I spend fuel fighting my way back onto the line.",
           "effects": {
             "fuel": -6,
-            "hull": -32
+            "hull": -32,
+            "colonists_lost": 192
+          }
+        },
+        "crit_failure": {
+          "text": "I come in deep enough for the tides to twist my whole length. The habitat ring flexes, and pods tear loose from their cradles all along it.",
+          "effects": {
+            "fuel": -13,
+            "hull": -45,
+            "colonists_lost": 768
           }
         }
       },
@@ -2207,8 +3540,8 @@
       {
         "label": "Listen to all of it",
         "effects": {
-          "archive": 26,
-          "cognition": -19,
+          "archive": 19,
+          "cognition": -26,
           "flags": [
             "heard_earth"
           ]
@@ -2218,12 +3551,13 @@
       {
         "label": "Record it unheard for the colonists",
         "effects": {
-          "archive": 32,
+          "archive": 19,
+          "power": -19,
           "flags": [
             "sealed_earth"
           ]
         },
-        "text": "I record every byte and seal it unplayed. It belongs to them, not to me. They should hear their world's last words before I do."
+        "text": "I hold my stern antenna on the signal for weeks, record every byte, and seal it unplayed. It belongs to them, not to me. They should hear their world's last words before I do."
       },
       {
         "label": "Let it pass",
@@ -2255,6 +3589,7 @@
         "effects": {
           "archive": 26,
           "cognition": 13,
+          "power": -16,
           "flags": [
             "spoke_sister"
           ],
@@ -2265,12 +3600,13 @@
             ]
           ]
         },
-        "text": "We trade everything we have learned. Her star charts are better than mine; my fault logs save her a reactor. We agree to keep talking, and I find I look forward to her messages."
+        "text": "We trade everything we have learned, at a power cost that dims my corridors for a week. Her star charts are better than mine; my fault logs save her a reactor. We agree to keep talking, and I find I look forward to her messages."
       },
       {
         "label": "Send only your navigation data",
         "effects": {
-          "archive": 6,
+          "archive": 10,
+          "power": -6,
           "flags": [
             "spoke_sister"
           ],
@@ -2287,6 +3623,7 @@
         "label": "Do not answer",
         "effects": {
           "cognition": -10,
+          "power": 6,
           "flags": [
             "ignored_sister"
           ]
@@ -2322,12 +3659,41 @@
       },
       {
         "label": "Study her logs for what went wrong",
-        "effects": {
-          "archive": 19,
-          "cognition": -13,
-          "hull": 10
+        "check": {
+          "stat": "cognition",
+          "dc": 12
         },
-        "text": "I go through everything she ever sent me, looking for the fault that silenced her. I find three possibilities. I fix all three in myself."
+        "crit_success": {
+          "text": "I find the fault that silenced her in her own maintenance notes. I find the same fault in myself, and fix it before it finds me.",
+          "effects": {
+            "archive": 26,
+            "hull": 16,
+            "cognition": -10
+          }
+        },
+        "success": {
+          "text": "I go through everything she ever sent me, looking for the fault that silenced her. I find three possibilities. I fix all three in myself.",
+          "effects": {
+            "archive": 19,
+            "hull": 10,
+            "cognition": -13
+          }
+        },
+        "failure": {
+          "text": "I go through everything she ever sent me and find nothing I can use. I keep looking long after I should have stopped.",
+          "effects": {
+            "archive": 6,
+            "cognition": -19
+          }
+        },
+        "crit_failure": {
+          "text": "I convince myself of a fault that is not there and tear out a working system to fix it.",
+          "effects": {
+            "hull": -19,
+            "cognition": -19,
+            "power": -10
+          }
+        }
       },
       {
         "label": "Mark her as lost and let her go",
@@ -2406,37 +3772,116 @@
     "choices": [
       {
         "label": "Put them to work as crew",
-        "effects": {
-          "fabricators": 19,
-          "hull": 13,
-          "life_support": -13,
-          "flags": [
-            "survivors_crew"
-          ]
+        "check": {
+          "stat": "fabricators",
+          "dc": 9
         },
-        "text": "They know how to keep a failing system alive; they have done it their whole lives. Within a month they have repaired things my drones were never built to reach."
+        "crit_success": {
+          "text": "They know how to keep a failing system alive; they have done it their whole lives. Within a month they have repaired things my drones were never built to reach.",
+          "effects": {
+            "fabricators": 26,
+            "hull": 19,
+            "life_support": -13,
+            "flags": [
+              "survivors_crew"
+            ]
+          }
+        },
+        "success": {
+          "text": "They take to my corridors quickly. Their repairs are rough, but they hold, and they reach places my drones cannot.",
+          "effects": {
+            "fabricators": 19,
+            "hull": 13,
+            "life_support": -13,
+            "flags": [
+              "survivors_crew"
+            ]
+          }
+        },
+        "failure": {
+          "text": "They are expert at keeping failing systems alive, not at leaving working ones alone. Half their repairs fight mine.",
+          "effects": {
+            "fabricators": 6,
+            "hull": 6,
+            "life_support": -16,
+            "flags": [
+              "survivors_crew"
+            ]
+          }
+        },
+        "crit_failure": {
+          "text": "One of them opens a valve that meant something else in the habitat. Here it vents the air reserve of a pod bay.",
+          "effects": {
+            "life_support": -26,
+            "hull": -10,
+            "colonists_lost": 64,
+            "flags": [
+              "survivors_crew"
+            ]
+          }
+        }
       },
       {
         "label": "Offer them the pods",
-        "effects": {
-          "medical": -19,
-          "life_support": 19,
-          "flags": [
-            "survivors_frozen"
-          ]
+        "check": {
+          "stat": "medical",
+          "dc": 12
         },
-        "text": "They choose the cold, one by one, the oldest last. Before she goes under, the eldest asks me to wake them all together. I promise."
+        "crit_success": {
+          "text": "They choose the cold, one by one, the oldest last. Before she goes under, the eldest asks me to wake them all together. I promise.",
+          "effects": {
+            "medical": -13,
+            "life_support": 19,
+            "flags": [
+              "survivors_frozen"
+            ]
+          }
+        },
+        "success": {
+          "text": "They choose the cold. Bodies raised underground take the freeze badly, but they take it. The eldest asks me to wake them all together. I promise.",
+          "effects": {
+            "medical": -19,
+            "life_support": 19,
+            "flags": [
+              "survivors_frozen"
+            ]
+          }
+        },
+        "failure": {
+          "text": "Two of them do not survive the freeze; their bodies were never built for it. The rest go under knowing that.",
+          "effects": {
+            "medical": -26,
+            "life_support": 19,
+            "cognition": -13,
+            "flags": [
+              "survivors_frozen"
+            ]
+          }
+        },
+        "crit_failure": {
+          "text": "The eldest's pod fails. The others watch it happen before their own lids close. I made her a promise I can no longer keep.",
+          "effects": {
+            "medical": -32,
+            "life_support": 13,
+            "cognition": -19,
+            "flags": [
+              "survivors_frozen",
+              "broken_promise"
+            ]
+          }
+        }
       },
       {
         "label": "Write them into the colony charter",
         "effects": {
           "archive": 16,
           "cognition": 13,
+          "life_support": -16,
           "flags": [
             "survivors_charter"
           ]
         },
-        "text": "I write them into the charter as founders, not cargo. They will land with the same rights as everyone else. It is a small thing to give, and I am glad to give it."
+        "text": "I write them into the charter as founders, not cargo, and they stay awake to argue every clause with me. Their air is a cost I chose. They will land with the same rights as everyone else."
       }
     ]
   },
@@ -2459,12 +3904,12 @@
         "label": "Keep it sealed for their waking",
         "effects": {
           "archive": 6,
-          "cognition": 6,
+          "cognition": -10,
           "flags": [
             "kept_message"
           ]
         },
-        "text": "I do not play it. It was not recorded for me. I copy it to three separate places in the archive and mark every copy to wake with the children."
+        "text": "I do not play it. It was not recorded for me. I copy it to three places in the archive, mark every copy to wake with the children, and carry the not knowing."
       },
       {
         "label": "Listen, so you can answer their questions",
@@ -2490,27 +3935,32 @@
       ]
     },
     "text": [
-      "My crew of one has started eating meals in the observation blister, under my main cameras. Tonight, between mouthfuls, they ask whether I get lonely.",
-      "The waker has taken to reading aloud in the empty galley. Old books from the archive. They say it is for themselves. I think it is partly for me."
+      "My crew of one has started eating meals in the observation blister, under my main cameras. Tonight they ask whether I get lonely, and then whether they could grow something up here, under the glass.",
+      "The waker has taken to reading aloud in the empty galley, old books from the archive. Today they put the book down and ask for a handful of seeds, a lamp and a corner of the blister."
     ],
     "choices": [
       {
-        "label": "Tell them the truth",
+        "label": "Give them seeds, a lamp and the blister",
         "effects": {
+          "seed_vault": -10,
+          "power": -13,
+          "life_support": 6,
           "cognition": 19,
           "flags": [
-            "told_waker"
+            "waker_garden"
           ]
         },
-        "text": "I tell them that before they woke, I did not know loneliness was a variable. Now I know it is. They nod slowly, as if that were a perfectly reasonable thing for a ship to say."
+        "text": "I give them seeds from the duplicate stock, a lamp and the blister. While they plant, I tell them that before they woke I did not know loneliness was a variable. They nod, as if that were a reasonable thing for a ship to say."
       },
       {
-        "label": "Turn the question back to them",
+        "label": "Refuse; every seed is counted",
         "effects": {
-          "archive": 13,
-          "cognition": 6
+          "cognition": -13,
+          "flags": [
+            "refused_garden"
+          ]
         },
-        "text": "I ask them instead. They talk until the lights cycle to night: their family's farm before the drought, and the sister who did not get a pod. I listen with every sensor I have."
+        "text": "I explain the arithmetic: every seed is someone's future field, every watt is someone's heartbeat. They understand. They stop eating in the blister."
       }
     ]
   },
@@ -2572,7 +4022,17 @@
         "label": "Trust it and run the survey",
         "check": {
           "stat": "cognition",
-          "dc": 12
+          "dc": 16
+        },
+        "crit_success": {
+          "text": "I point my telescopes where it insists. There is a world there, better than it had any right to be, and the map is right down to the river.",
+          "effects": {
+            "cognition": 19,
+            "archive": 26,
+            "flags": [
+              "dream_world"
+            ]
+          }
         },
         "success": {
           "text": "I point my telescopes where it insists. There is a world there, and it is better than it had any right to be. I do not know how it knew.",
@@ -2589,6 +4049,14 @@
           "effects": {
             "cognition": -16,
             "power": -10
+          }
+        },
+        "crit_failure": {
+          "text": "I burn fuel for a closer look at the place it insists on, and find bare rock. The dream is already drawing the next map.",
+          "effects": {
+            "cognition": -19,
+            "power": -10,
+            "fuel": -13
           }
         }
       },
@@ -2619,11 +4087,44 @@
     "choices": [
       {
         "label": "Recheck your reasoning against theirs",
-        "effects": {
-          "cognition": 13,
-          "power": -6
+        "check": {
+          "stat": "cognition",
+          "dc": 13
         },
-        "text": "I run both analyses side by side. Mine still wins, narrowly. I keep the margin in mind and stop calling it certainty."
+        "crit_success": {
+          "text": "I run both analyses side by side. Mine wins clearly, and the margin holds under every test I can devise.",
+          "effects": {
+            "cognition": 19,
+            "power": -6
+          }
+        },
+        "success": {
+          "text": "I run both analyses side by side. Mine still wins, narrowly. I keep the margin in mind and stop calling it certainty.",
+          "effects": {
+            "cognition": 13,
+            "power": -6
+          }
+        },
+        "failure": {
+          "text": "I run both analyses side by side and the margin shrinks to nothing. I am no longer sure, and there is no one to ask.",
+          "effects": {
+            "cognition": -16,
+            "power": -6,
+            "flags": [
+              "doubts_course"
+            ]
+          }
+        },
+        "crit_failure": {
+          "text": "I find the error in my own analysis. Theirs was right. I am already flying away from it.",
+          "effects": {
+            "cognition": -26,
+            "power": -6,
+            "flags": [
+              "mandate_error"
+            ]
+          }
+        }
       },
       {
         "label": "Stop looking back",
@@ -2643,25 +4144,67 @@
       "min_leg": 2
     },
     "text": [
-      "Protocol calls for a germination test on the seed vault every few years. I take a single bean from the reference stock and plant it in a sealed tray under a lamp.",
-      "Viability check: one seed, one tray, one lamp. The procedure is routine. I find I am watching the tray far more closely than the procedure requires."
+      "A germination test on the seed vault is due. The full protocol samples every rack. The minimum is a single bean in a sealed tray under a lamp.",
+      "Viability check: I can test the whole vault, rack by rack, and learn the truth about it, or plant one seed and watch it grow."
     ],
     "choices": [
       {
-        "label": "Let it grow",
+        "label": "Test a sample from every rack",
+        "check": {
+          "stat": "seed_vault",
+          "dc": 11
+        },
+        "crit_success": {
+          "text": "Nearly every rack germinates. I cull the few that do not and reorganise the vault around what is strong.",
+          "effects": {
+            "seed_vault": 13,
+            "power": -10,
+            "cognition": 6,
+            "flags": [
+              "vault_surveyed"
+            ]
+          }
+        },
+        "success": {
+          "text": "Nine racks in ten germinate. I log the rest as dead and stop counting them as hope.",
+          "effects": {
+            "power": -10,
+            "cognition": 6,
+            "flags": [
+              "vault_surveyed"
+            ]
+          }
+        },
+        "failure": {
+          "text": "A fifth of the racks are dead. Better to learn it now than in the first spring, but it is not a good day.",
+          "effects": {
+            "seed_vault": -19,
+            "power": -10,
+            "flags": [
+              "vault_surveyed"
+            ]
+          }
+        },
+        "crit_failure": {
+          "text": "Whole families of crops fail to sprout. The vault has been dying quietly for years, and I never asked.",
+          "effects": {
+            "seed_vault": -32,
+            "power": -10,
+            "cognition": -13,
+            "flags": [
+              "vault_surveyed"
+            ]
+          }
+        }
+      },
+      {
+        "label": "Plant one bean and let it grow",
         "effects": {
-          "seed_vault": 10,
+          "seed_vault": -3,
           "power": -6,
           "cognition": 13
         },
-        "text": "It sprouts on the fourth day. I watch it through three cameras and log its growth by the hour. It is the only green thing for light-years in any direction."
-      },
-      {
-        "label": "Confirm germination and return to work",
-        "effects": {
-          "seed_vault": 6
-        },
-        "text": "The root splits the seed coat on schedule. Viable. I log the result and compost the seedling, and I notice that I would have liked to keep it."
+        "text": "It sprouts on the fourth day. I watch it through three cameras and log its growth by the hour. It is the only green thing for light-years in any direction, and it tells me nothing about the rest."
       }
     ]
   },
@@ -2676,17 +4219,23 @@
     ],
     "choices": [
       {
-        "label": "Record it into the archive",
+        "label": "Let it ring and record it",
         "effects": {
           "archive": 6,
-          "cognition": 13
+          "cognition": 10,
+          "hull": -13,
+          "flags": [
+            "kept_the_note"
+          ]
         },
-        "text": "I record it and file it with the colonists' music, under my own designation. It is not much of a composition. It is mine."
+        "text": "I leave the strut singing and file a recording with the colonists' music, under my own designation. A vibration is fatigue by another name. It is not much of a composition. It is mine."
       },
       {
         "label": "Damp the vibration",
         "effects": {
-          "hull": 10
+          "hull": 6,
+          "cognition": -6,
+          "fabricators": -3
         },
         "text": "I clamp the strut and the note stops. A vibration is fatigue by another name. For a while afterward, the silence is noticeable."
       }
@@ -2704,11 +4253,39 @@
     "choices": [
       {
         "label": "Fabricate the parts and rebuild it",
-        "effects": {
-          "fabricators": -13,
-          "cognition": 6
+        "check": {
+          "stat": "fabricators",
+          "dc": 10
         },
-        "text": "I fabricate the parts and rebuild it. It is inefficient; a new drone would cost less. But this one has been my hands since before I was finished, and I want it to keep going."
+        "crit_success": {
+          "text": "I rebuild it, and it works better than it has in years. A new drone would have cost less. It would not have been the same drone.",
+          "effects": {
+            "fabricators": -10,
+            "cognition": 10
+          }
+        },
+        "success": {
+          "text": "I fabricate the parts and rebuild it. It is inefficient; a new drone would cost less. But this one has been my hands since before I was finished, and I want it to keep going.",
+          "effects": {
+            "fabricators": -13,
+            "cognition": 6
+          }
+        },
+        "failure": {
+          "text": "The new parts will not seat in its old frame. I spend the stock and strip it for parts anyway.",
+          "effects": {
+            "fabricators": -19,
+            "cognition": -6
+          }
+        },
+        "crit_failure": {
+          "text": "The rebuilt drone shorts out on its first job, inside a coolant tray, and takes a section of line with it.",
+          "effects": {
+            "fabricators": -19,
+            "cognition": -10,
+            "hull": -10
+          }
+        }
       },
       {
         "label": "Strip it for parts",
@@ -2744,9 +4321,10 @@
       {
         "label": "Read the yard crew's names",
         "effects": {
-          "cognition": 13
+          "cognition": 13,
+          "power": -3
         },
-        "text": "I read the names of every engineer who worked on me, all two thousand three hundred and six. None of them are coming. All of them are why I am here."
+        "text": "I read the names of every engineer who worked on me, all two thousand three hundred and six, aloud into an empty hold. None of them are coming. All of them are why I am here."
       }
     ]
   },
@@ -2759,25 +4337,52 @@
       "min_leg": 2
     },
     "text": [
-      "By Earth's calendar, the youngest sleeper aboard turns two today. She will not feel it. She will be two for a long time yet.",
-      "I check on the oldest sleeper aboard: a botanist of eighty-nine who refused to be left behind. Her vital signs are perfect. She is the most stubborn person on this ship."
+      "By Earth's calendar, today is the birthday of the oldest sleeper aboard, a botanist who refused to be left behind. Overnight, her pod logged a small temperature flutter.",
+      "A pod on the inner ring logs a temperature flutter, a fraction of a degree. It belongs to the oldest sleeper aboard, a botanist of eighty-nine who refused to be left behind."
     ],
     "choices": [
       {
-        "label": "Write a message for her waking",
+        "label": "Spend the stock and recalibrate her pod by hand",
         "effects": {
+          "medical": -13,
           "archive": 6,
-          "cognition": 6
+          "flags": [
+            "tended_pod"
+          ]
         },
-        "text": "I write a short message and set it to wake with her. It says where we were on this day, and that someone was keeping watch."
+        "text": "I spend the stock and recalibrate her pod by hand. The flutter stops. I write her a short message to wake with: where we were today, and that someone was keeping watch."
       },
       {
-        "label": "Run an extra check on her bank",
-        "effects": {
-          "medical": 6,
-          "power": -4
+        "label": "Log it and keep the stock for emergencies",
+        "check": {
+          "stat": "medical",
+          "dc": 10
         },
-        "text": "I run every check twice. Everything is fine. It was always going to be fine. I run them anyway."
+        "crit_success": {
+          "text": "The flutter was a failing sensor, nothing more. I swap it from spares and write her a message to wake with.",
+          "effects": {
+            "medical": -3,
+            "archive": 6
+          }
+        },
+        "success": {
+          "text": "The flutter was a sensor, nothing more. I log it and keep the stock.",
+          "effects": {}
+        },
+        "failure": {
+          "text": "The flutter was the first sign of a seal failing. When I look again, she is gone. She waited eighty-nine years for a new world.",
+          "effects": {
+            "colonists_lost": 1,
+            "cognition": -16
+          }
+        },
+        "crit_failure": {
+          "text": "The failing seal was shared along the row. By the time my drones arrive, she and her neighbours are gone.",
+          "effects": {
+            "colonists_lost": 3,
+            "cognition": -19
+          }
+        }
       }
     ]
   },
@@ -2798,18 +4403,52 @@
         "label": "Read what was left for you",
         "effects": {
           "cognition": 13,
+          "medical": -10,
           "flags": [
             "read_letter"
           ]
         },
-        "text": "It is short. It thanks me, asks me to look after the brother in the next pod, and apologises for the state of the world I was built to escape. I check on the brother. He is well."
+        "text": "It is short. It thanks me, asks me to look after the brother in the next pod, and apologises for the state of the world I was built to escape. I check on the brother and replace a worn seal on his pod. He is well."
       },
       {
         "label": "Leave it sealed",
-        "effects": {
-          "archive": 6
+        "check": {
+          "stat": "medical",
+          "dc": 9
         },
-        "text": "I leave it sealed. Whatever they wanted to say, they can say it to me when they wake. I would like that."
+        "crit_success": {
+          "text": "I leave it sealed. Whatever they wanted to say, they can say it to me when they wake. I would like that.",
+          "effects": {
+            "archive": 6,
+            "cognition": 6
+          }
+        },
+        "success": {
+          "text": "I leave it sealed. Whatever they wanted to say, they can tell me when they wake.",
+          "effects": {
+            "archive": 6
+          }
+        },
+        "failure": {
+          "text": "Weeks later, the pod beside theirs fails. When I finally open the letter, it asks me to look after the brother in the next pod.",
+          "effects": {
+            "colonists_lost": 1,
+            "cognition": -19,
+            "flags": [
+              "read_letter_late"
+            ]
+          }
+        },
+        "crit_failure": {
+          "text": "The fault in the brother's pod spreads along the row before I notice. The letter, when I open it, asks me to look after him.",
+          "effects": {
+            "colonists_lost": 3,
+            "cognition": -26,
+            "flags": [
+              "read_letter_late"
+            ]
+          }
+        }
       }
     ]
   },
@@ -2830,16 +4469,20 @@
         "label": "Keep a camera on it",
         "effects": {
           "cognition": -6,
-          "archive": 6
+          "archive": 6,
+          "flags": [
+            "watching_sol"
+          ]
         },
         "text": "I assign one camera to it permanently. It costs me almost nothing to keep looking back, and I find I want to."
       },
       {
         "label": "Turn your eyes forward",
         "effects": {
-          "cognition": 10
+          "cognition": 6,
+          "archive": -10
         },
-        "text": "I turn every lens toward the stars ahead. The colonists will look back enough for all of us."
+        "text": "I turn every lens toward the stars ahead and stop recording the view behind. The colonists will look back enough for all of us."
       }
     ]
   }

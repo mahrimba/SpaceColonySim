@@ -263,7 +263,7 @@ New events and flavour lines must use the existing fields, stats, tags and place
 
 **Effect sizes in use**
 
-These are authored values. The engine multiplies every *negative* stat change and every colonist loss by `HAZARD_SCALE` in `constants.py` (currently 1.32) before applying it, so a severe 70 lands as 92. Gains are never scaled. The scale is retuned whenever the deck grows, because adding gentle events dilutes the damaging ones.
+These are authored values. The engine multiplies every *negative* stat change and every colonist loss by `HAZARD_SCALE` in `constants.py` (currently 1.12) before applying it, so a severe 70 lands as 78. Gains are never scaled. The scale is retuned whenever the deck grows, because adding gentle events dilutes the damaging ones.
 
 | Size | Range | Example |
 | --- | --- | --- |
