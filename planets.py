@@ -75,7 +75,8 @@ class Planet:
         return [
             ("Gravity", readout.measure(self.gravity, c, " g", 0.1, 3.0, GRAVITY_WORDS)),
             ("Pressure", readout.measure(self.pressure, c, " atm", 0.0, 6.0, PRESSURE_WORDS)),
-            ("Mean surface", readout.measure(self.temperature, c, " C", -120, 160, TEMP_WORDS)),
+            ("Mean surface", readout.measure(self.temperature, c, " C", -120, 160,
+                                             TEMP_WORDS, decimals=0)),
             ("Hydrosphere", readout.measure(self.water, c, "", 0.0, 1.0, WATER_WORDS)),
             ("Radiation", readout.measure(self.radiation, c, "", 0.0, 10.0, RAD_WORDS)),
             ("Biosphere", self._biosphere_readout()),
@@ -95,6 +96,29 @@ class Planet:
         d["habitability"] = self.habitability()
         d["verdict"] = self.verdict()
         return d
+
+
+def table(worlds: list["Planet"], per_table: int = 3) -> list[str]:
+    """Render worlds as a transposed table: one column each, one row per axis.
+
+    Transposed because a row-per-world table is far too wide for a terminal
+    column once the readings go qualitative ('breathable density' is 18
+    characters). With one axis per row it fits even at the vaguest tier.
+    Each column reports at the cognition the survey was taken at.
+    """
+    if not worlds:
+        return []
+    rows: list[str] = []
+    for start in range(0, len(worlds), per_table):
+        group = worlds[start:start + per_table]
+        width = max(22, max(len(w.name) for w in group) + 2)
+        # Labelled rather than indented: a line that starts with spaces loses
+        # them to Textual's markup, which breaks the column alignment.
+        rows.append(f"{'World':<15}" + "".join(f"{w.name:<{width}}" for w in group))
+        for i, (label, _) in enumerate(group[0].dossier()):
+            cells = "".join(f"{w.dossier()[i][1]:<{width}}" for w in group)
+            rows.append(f"{label:<15}{cells}".rstrip())
+    return rows
 
 
 def _name(rng: random.Random) -> str:

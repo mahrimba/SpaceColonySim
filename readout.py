@@ -64,7 +64,7 @@ def count(value: int, cognition: float) -> str:
 
 
 def measure(value: float, cognition: float, unit: str, lo: float, hi: float,
-            words: list[str] | None = None) -> str:
+            words: list[str] | None = None, decimals: int | None = None) -> str:
     """Render an external sensor reading with a unit (gravity, temperature...).
 
     `words` is the qualitative ladder used once cognition is too low for
@@ -72,7 +72,9 @@ def measure(value: float, cognition: float, unit: str, lo: float, hi: float,
     """
     t = tier(cognition)
     if t == PRECISE:
-        return f"{value:.2f}{unit}" if abs(value) < 10 else f"{value:.0f}{unit}"
+        if decimals is None:
+            decimals = 2 if abs(value) < 10 else 0
+        return f"{value:.{decimals}f}{unit}"
     if t == APPROX:
         step = (hi - lo) / 10 or 1
         return f"~{round(value / step) * step:.1f}{unit}".replace(".0", "")

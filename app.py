@@ -13,11 +13,31 @@ from textual.containers import Vertical, VerticalScroll
 from textual.widgets import Static
 
 import constants as K
+import planets
 import resolve
 import state
 from resolve import DONE, EVENT, MAINTENANCE, Game
 
 KEYS = "123456789abcdefghij"  # option index -> keycap
+
+# Every colour the log uses, in one place. Textual renders an unknown colour
+# name as grey and raises nothing, so these are parsed in test_sim.py; a name
+# that only Rich knows (bright_blue, grey54) would otherwise ship silently.
+STYLES = {
+    "rule": "dim",
+    "leg": "b",
+    "choice": "darkgray",      # what the player picked: present, not loud
+    "table": "dim cyan",       # instrument output
+    "warn": "b yellow",
+    "warn_bad": "b red",
+    "roll": "dim",
+    "gain": "green",
+    "loss": "red",
+    "crit_success": "b green",
+    "crit_failure": "b red",
+    "success": "green",
+    "failure": "red",
+}
 
 
 class Panel(Static):
@@ -124,9 +144,24 @@ class Voyage(App):
     @staticmethod
     def _style(line: str) -> str:
         """Give the log a hierarchy: prose reads plain, mechanics stand apart."""
+        S = STYLES
         # A rule before each leg, so one leg reads as one scene.
         if line.startswith("— Leg "):
-            return "[dim]" + "─" * 48 + f"[/dim]\n[b]{line}[/b]"
+            return (f"[{S['rule']}]" + "─" * 48 + f"[/{S['rule']}]"
+                    f"\n[{S['leg']}]{line}[/{S['leg']}]")
+
+        # The option the player took, quieter than the prose around it.
+        if line.startswith(resolve.CHOICE + " "):
+            return f"[{S['choice']}]{line}[/{S['choice']}]"
+
+        # Survey data reads as instrument output, not narration.
+        if line.startswith(resolve.TABLE + " "):
+            return f"[{S['table']}]{line[2:]}[/{S['table']}]"
+
+        # Warnings: the one thing in the log that should interrupt reading.
+        if line.startswith(state.WARN + " "):
+            key = "warn_bad" if ("Failing" in line or "Critical" in line) else "warn"
+            return f"[{S[key]}]{line}[/{S[key]}]"
 
         # Stat changes: one colour per sign, so a glance says won or lost.
         if line.startswith(resolve.DELTA + " "):
@@ -136,25 +171,21 @@ class Voyage(App):
                 # body count, which carries no minus sign.
                 bad = ("lost" in token.lower()
                        or token.rsplit(" ", 1)[-1].startswith("-"))
-                colour = "red" if bad else "green"
+                colour = S["loss"] if bad else S["gain"]
                 parts.append(f"[{colour}]{token}[/{colour}]")
-            return "[dim]" + resolve.DELTA + "[/dim] " + "  ".join(parts)
-
-        # Warnings: the one thing in the log that should interrupt reading.
-        if line.startswith(state.WARN + " "):
-            colour = "b red" if "Failing" in line or "Critical" in line else "b yellow"
-            return f"[{colour}]{line}[/{colour}]"
+            return f"[{S['rule']}]{resolve.DELTA}[/{S['rule']}] " + "  ".join(parts)
 
         # Dice: dim the arithmetic, colour the verdict.
         if line.startswith("› "):
-            for verdict, colour in (("Critical success.", "b green"),
-                                    ("Critical failure.", "b red"),
-                                    ("Success.", "green"),
-                                    ("Failed.", "red")):
+            for verdict, key in (("Critical success.", "crit_success"),
+                                 ("Critical failure.", "crit_failure"),
+                                 ("Success.", "success"),
+                                 ("Failed.", "failure")):
                 if line.endswith(verdict):
                     body = line[:-len(verdict)]
-                    return f"[dim]{body}[/dim][{colour}]{verdict}[/{colour}]"
-            return f"[dim]{line}[/dim]"
+                    return (f"[{S['roll']}]{body}[/{S['roll']}]"
+                            f"[{S[verdict and key]}]{verdict}[/{S[key]}]")
+            return f"[{S['roll']}]{line}[/{S['roll']}]"
 
         return line
 
@@ -300,9 +331,9 @@ class Voyage(App):
         if not game or not game.state.candidates:
             self.show("[dim]Nothing surveyed yet.[/dim]")
             return
-        for planet in game.state.candidates:
-            self.show(f"[b]{planet.name}[/b]",
-                      *(f"  {k}: {v}" for k, v in planet.dossier()))
+        self.show("Everything I have surveyed so far:",
+                  *(f"{resolve.TABLE} {row}"
+                    for row in planets.table(game.state.candidates)))
 
     def action_back(self) -> None:
         if self.game and self.game.phase == MAINTENANCE:

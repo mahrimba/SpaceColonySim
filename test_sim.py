@@ -297,6 +297,55 @@ def test_every_stat_has_a_glyph_and_a_parsable_colour() -> None:
         Color.parse(name)  # raises on anything Textual cannot render
 
 
+def test_markup_colours_in_the_view_are_real() -> None:
+    """Textual renders an unknown colour name as grey and raises nothing, so
+    every literal colour in app.py has to be parsed here or typos ship."""
+    try:
+        from textual.color import Color
+    except ImportError:
+        print("skip markup colour check (textual not installed)")
+        return
+    import app
+
+    styles = {"b", "i", "u", "bold", "italic", "underline", "dim", "strike",
+              "reverse", "blink", "on", "not"}
+    for name, markup in app.STYLES.items():
+        for token in markup.split():
+            if token in styles:
+                continue
+            Color.parse(token)  # raises on a Rich-only or misspelled name
+
+
+def test_survey_reports_what_it_found() -> None:
+    """Sweeping must produce a readable table, at the Mind's own precision."""
+    game = resolve.Game(profile="survey", seed=12, events=EVENTS)
+    lines = game.do_maintenance("survey")
+    rows = [ln for ln in lines if ln.startswith(resolve.TABLE)]
+    assert game.state.candidates, "the sweep found nothing"
+    assert rows, "the sweep reported no table"
+    for label, _ in game.state.candidates[0].dossier():
+        assert any(label in r for r in rows), f"{label} missing from the table"
+    assert all(w.name in rows[0] for w in game.state.candidates[:3]), "no world names"
+
+    # A blind ship must not report hard numbers in that table.
+    blind = resolve.Game(profile="survey", seed=12, events=EVENTS)
+    blind.state.stats["cognition"] = 20.0
+    rows = [ln for ln in blind.do_maintenance("survey") if ln.startswith(resolve.TABLE)]
+    body = "".join(rows[1:])  # row 0 is the names, which carry digits legitimately
+    assert not any(ch.isdigit() for ch in body), f"vague survey leaked numbers: {body}"
+
+
+def test_the_log_records_the_choice() -> None:
+    """A playthrough must show what the player picked, not just what happened."""
+    game = resolve.Game(profile="survey", seed=3, events=EVENTS)
+    while game.phase != resolve.EVENT:
+        game.do_maintenance("hold")
+    label = game.choices()[0]["label"]
+    lines = game.resolve_choice(0)
+    assert lines[0] == f"{resolve.CHOICE} {label}", f"choice not logged: {lines[0]!r}"
+    assert any(ln.startswith(resolve.CHOICE) for ln in game.state.log)
+
+
 def test_app_plays_through() -> None:
     """The TUI must survive a whole voyage. Skipped when textual is absent."""
     try:

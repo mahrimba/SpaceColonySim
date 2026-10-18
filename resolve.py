@@ -13,8 +13,10 @@ import deck
 import planets
 from state import SafeDict, ShipState
 
-# Marks a line of stat changes, so a front end can style it apart from prose.
-DELTA = "·"
+# Markers let a front end style mechanics apart from prose without parsing it.
+DELTA = "·"    # a line of stat changes
+CHOICE = "»"   # the option the player took
+TABLE = "│"    # a row of survey data
 
 MAINTENANCE = "maintenance"
 EVENT = "event"
@@ -78,8 +80,7 @@ class Game:
 
         if s.flying and s.leg % K.SURVEY_EVERY == 0:
             found = s.survey(self.rng)
-            lines.append("Scheduled sweep completes: "
-                         + ", ".join(p.name for p in found) + ".")
+            lines += self._survey_report(found, "A scheduled sweep completes.")
 
         if not s.flying:
             self.phase = DONE
@@ -87,6 +88,22 @@ class Game:
             self.phase = MAINTENANCE
         for line in lines:
             s.note(line)
+        return lines
+
+    def _survey_report(self, found: list[planets.Planet], opening: str) -> list[str]:
+        """What a sweep actually tells the player: the worlds, and how well it
+        can see them. The table reads at the cognition it was taken at."""
+        s = self.state
+        if not found:
+            return [f"{opening} Nothing out here holds together into a world."]
+        count = "One world resolves" if len(found) == 1 else f"{len(found)} worlds resolve"
+        lines = [f"{opening} {count} out of the dark."]
+        lines += [f"{TABLE} {row}" for row in planets.table(found)]
+        if s.cognition < K.APPROX_ABOVE:
+            lines.append("The readings come back soft at the edges. I am reading "
+                         "them through myself, and I am not well.")
+        elif s.cognition < K.PRECISE_ABOVE:
+            lines.append("Close enough to act on. Not close enough to be sure.")
         return lines
 
     # -- maintenance (Q19) ----------------------------------------------------
@@ -133,11 +150,7 @@ class Game:
 
         elif action == "survey":
             found = s.survey(self.rng)
-            lines.append("I turn the long instruments outward: "
-                         + ", ".join(p.name for p in found) + ".")
-            if s.cognition < K.APPROX_ABOVE:
-                lines.append("The readings come back soft at the edges. I do not "
-                             "entirely trust what I am seeing.")
+            lines += self._survey_report(found, "I turn the long instruments outward.")
 
         elif action == "repair":
             assert target in REPAIRABLE, target
@@ -238,7 +251,7 @@ class Game:
         s = self.state
         assert self.phase == EVENT and self.current, "no event on the table"
         choice = self.current["choices"][index]
-        lines: list[str] = []
+        lines: list[str] = [f"{CHOICE} {choice['label']}"]
 
         if self.current.get("oneshot"):
             s.fired.add(self.current["id"])
