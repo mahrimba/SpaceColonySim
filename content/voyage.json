@@ -10,7 +10,7 @@
       ]
     },
     "text": [
-      "Pressure loss on Deck 9. I feel it before the alarms do: a small, bright coldness along my flank, widening. Something went through me while my eyes were turned elsewhere.",
+      "Pressure loss on Deck 9. I feel it before the alarms do: a small, bright coldness along my flank, widening. Something went through me while my cameras were turned elsewhere.",
       "One breach alarm, then eleven more. Deck 9 is venting into {system}, and the escaping air rings through my frame like a held note.",
       "Something no larger than a fingernail has opened me up. Hull integrity reads {hull}. The number is abstract. The cold is not."
     ],
@@ -244,7 +244,7 @@
           }
         },
         "success": {
-          "text": "I cut the colony's shelter frames into bracing and weld them along my keel. The colony will arrive without walls. But it will arrive.",
+          "text": "My drones cut the colony's shelter frames into bracing and weld them along my keel. The colony will arrive without walls. But it will arrive.",
           "effects": {
             "hull": 32,
             "habitat": -45,

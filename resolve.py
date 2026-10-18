@@ -139,14 +139,18 @@ class Game:
         skip_event = False
 
         if action == "hold":
-            lines.append("I keep my hands still and listen to the hull.")
+            lines.append("I hold my drones still and listen to the hull.")
 
         elif action == "diagnostics":
             s.adjust("power", -K.DIAGNOSTIC_POWER_COST)
             gained = s.adjust("cognition", K.DIAGNOSTIC_GAIN)
-            lines.append(f"I walk my own corridors, sector by sector. "
-                         f"{gained:+.0f} to coherence. Some of what I find, I had "
-                         "forgotten I had lost.")
+            lines.append("I run my drones through my own corridors, sector by "
+                         "sector. " + (
+                             f"{gained:+.0f} to coherence. Some of what I find, "
+                             "I had forgotten I had lost."
+                             if gained >= 0.5 else
+                             "I find nothing wrong with myself, which is its own "
+                             "kind of reassurance."))
 
         elif action == "survey":
             found = s.survey(self.rng)

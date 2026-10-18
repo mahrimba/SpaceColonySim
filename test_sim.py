@@ -297,6 +297,45 @@ def test_every_stat_has_a_glyph_and_a_parsable_colour() -> None:
         Color.parse(name)  # raises on anything Textual cannot render
 
 
+def test_the_mind_has_no_human_body() -> None:
+    """The Mind acts through drones and cameras and has no body but the ship.
+
+    'my hands', 'my eyes' and 'my skin' are deliberately allowed: the bible
+    makes drones its hands, cameras its eyes and the hull its skin. What is
+    banned is anatomy with no ship analogue, and physical work done in first
+    person without a drone doing it.
+    """
+    import re
+    from pathlib import Path
+
+    # 'I crawl' is not banned: a ship crawls while light overtakes it, which
+    # is the ship's motion, not a body's.
+    banned = re.compile(
+        r"\b(my (fingers?|face|arms?|legs?|feet|mouth|teeth|shoulders?|chest|"
+        r"stomach|knees?|hair|lungs|throat)"
+        r"|I (weld|welded|walk|walked|kneel|knelt|grip|gripped))\b",
+        re.I)
+
+    lines: list[tuple[str, str]] = []
+    for event in EVENTS:
+        lines += [(event["id"], t) for t in event["text"]]
+        for choice in event["choices"]:
+            lines.append((event["id"], choice["label"]))
+            for slot in ("crit_success", "success", "failure", "crit_failure"):
+                if slot in choice:
+                    lines.append((event["id"], choice[slot].get("text", "")))
+            lines.append((event["id"], choice.get("text", "")))
+    for pool, pool_lines in deck.load_flavour().items():
+        lines += [(f"flavour/{pool}", line) for line in pool_lines]
+    for module in ("resolve.py", "state.py"):
+        source = Path(__file__).with_name(module).read_text(encoding="utf-8")
+        lines += [(module, lit) for lit in re.findall(r'"([^"\\]+)"', source)]
+
+    bad = [(src, m.group(0), text[:70]) for src, text in lines
+           if (m := banned.search(text))]
+    assert not bad, f"the Mind grew a body: {bad}"
+
+
 def test_markup_colours_in_the_view_are_real() -> None:
     """Textual renders an unknown colour name as grey and raises nothing, so
     every literal colour in app.py has to be parsed here or typos ship."""
