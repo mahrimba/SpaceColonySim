@@ -29,7 +29,12 @@ import sim
 def synthetic_arrival(seed: int) -> dict:
     """An Act 1 handoff drawn from the spread real voyages actually produce."""
     rng = random.Random(seed)
-    planet = planets.generate(rng, set(), 100.0)
+    # A player commits to the best world they surveyed, not a random one.
+    # Best of six matches the habitability spread of real Act 1 arrivals
+    # (median ~0.45); a single draw has median ~0.15 and balanced the
+    # century against worlds nobody would settle.
+    planet = max((planets.generate(rng, set(), 100.0) for _ in range(6)),
+                 key=lambda p: p.habitability())
     # Voyages that reach a world arrive worn, not wrecked.
     stats = {name: round(min(100.0, max(5.0, rng.gauss(58, 22))), 1)
              for name in K.STATS}

@@ -34,7 +34,7 @@ EVENT_COOLDOWN = 3
 # Act 1's HAZARD_SCALE, for the century: multiplies authored damage and deaths
 # so difficulty moves with one number instead of twenty content edits.
 # Tuned against colony_sim.py's steward policy.
-COLONY_HAZARD = 1.0
+COLONY_HAZARD = 1.7
 
 # Where routine labour holds a stat on a free world, and how fast a year of it
 # closes the gap. Hostility and crowding pull the first number down.
@@ -259,9 +259,13 @@ class Century:
                 s.move_axis("power", -0.5)      # toward Authoritarian
             if s.deference < 40:
                 s.defer(-0.4)                   # independence compounds
-        if crowding > 0.9:
-            s.adjust("food", -4)
-            s.adjust("cohesion", -3)
+        # Overcrowding costs in proportion to the overshoot. A flat charge at
+        # 90% fired on a fifth of all ticks and, because capacity itself
+        # depends on food, fed a hunger spiral nothing could climb out of.
+        if crowding > 1.0:
+            over = min(1.0, crowding - 1.0)
+            s.adjust("food", -(2 + 10 * over))
+            s.adjust("cohesion", -(1 + 6 * over))
             lines.append("There are more of them than this land feeds. "
                          "It shows at every table.")
         return lines

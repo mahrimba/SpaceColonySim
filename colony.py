@@ -212,7 +212,7 @@ class ColonyState:
     # -- population (Q24: logistic, ceilinged by land and tools) --------------
 
     def capacity(self) -> int:
-        land = 0.25 + 0.75 * (self.stats["food"] / 100)
+        land = 0.45 + 0.55 * (self.stats["food"] / 100)
         tools = 0.45 + 0.55 * (self.stats["industry"] / 100)
         return int(BASE_CAPACITY * land * tools * (1.0 - 0.55 * self.hostility))
 
