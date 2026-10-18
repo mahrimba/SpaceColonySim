@@ -184,6 +184,7 @@ def test_documents_render_without_holes() -> None:
         assert lines and lines[0].strip(), f"seed {seed}: untitled document"
         body = "\n".join(lines)
         assert "{" not in body, f"seed {seed}: unfilled slot in the document"
+        assert "['" not in body, f"seed {seed}: a list of alternatives printed whole"
         assert game.state.outcome_reason in body, "the verdict is missing"
         # A history, not a list of every decision taken.
         # Minor decisions are summarised, not listed: no choice labels at all.

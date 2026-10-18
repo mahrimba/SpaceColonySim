@@ -1,490 +1,1318 @@
 {
   "world_adjectives": {
-    "heavy": "heavy",
-    "light": "light",
-    "thin_air": "thin-aired",
-    "thick_air": "thick-aired",
-    "cold": "cold",
-    "hot": "hot",
-    "dry": "dry",
-    "ocean": "sea-covered",
-    "radiant": "sunburnt",
-    "hostile_life": "hostile",
-    "living": "living",
-    "sterile": "lifeless",
-    "lush": "lush",
-    "bleak": "bleak"
+    "heavy": [
+      "heavy",
+      "high-gravity",
+      "bone-heavy"
+    ],
+    "light": [
+      "light",
+      "low-gravity",
+      "feather-light"
+    ],
+    "thin_air": [
+      "thin-aired",
+      "thin-skied",
+      "short-breathed"
+    ],
+    "thick_air": [
+      "thick-aired",
+      "dense-aired",
+      "heavy-skied"
+    ],
+    "cold": [
+      "cold",
+      "frozen",
+      "icy"
+    ],
+    "hot": [
+      "hot",
+      "scorching",
+      "baking"
+    ],
+    "dry": [
+      "dry",
+      "waterless",
+      "parched"
+    ],
+    "ocean": [
+      "sea-covered",
+      "drowned",
+      "water-covered"
+    ],
+    "radiant": [
+      "sunburnt",
+      "irradiated",
+      "harsh-skied"
+    ],
+    "hostile_life": [
+      "hostile",
+      "unwelcoming",
+      "biting"
+    ],
+    "living": [
+      "living",
+      "teeming",
+      "wild"
+    ],
+    "sterile": [
+      "lifeless",
+      "barren",
+      "dead"
+    ],
+    "lush": [
+      "lush",
+      "green",
+      "fertile"
+    ],
+    "bleak": [
+      "bleak",
+      "grey",
+      "meagre"
+    ]
   },
   "feature_phrases": {
-    "tidally_locked": "a sun that never moved",
-    "storms": "storms that ran out of names",
-    "weak_magnetic": "no magnetic field to speak of",
-    "strong_magnetic": "an aurora at noon",
-    "geothermal": "heat under every valley",
-    "tectonics": "ground that would not keep still",
-    "asteroid_impacts": "a sky still falling",
-    "hostile_fauna": "predators at the edge of the light",
-    "docile_fauna": "animals that had never learned to fear",
-    "natural_beauty": "a beauty the survey never measured",
-    "subterranean": "caverns full of moving things",
-    "aphrodisiac": "air that made people fond of each other",
-    "hallucinogen": "air that brought visions",
-    "hyper_ecosystem": "forests that grew back in a week",
-    "titanic_life": "giants on the plains",
-    "ship_graveyard": "the wrecks of older Arks on its plains",
-    "terraformed": "soil someone had prepared before us",
-    "rich_microflora": "soil crowded with useful life",
-    "poor_minerals": "almost no metal",
-    "rich_minerals": "ore near the surface",
-    "exceptional_minerals": "metal lying in the open"
+    "tidally_locked": [
+      "a sun that never moved",
+      "one face forever turned to its star",
+      "a day that never ended and a night that never came"
+    ],
+    "storms": [
+      "storms that ran out of names",
+      "winds that tore roofs off in an afternoon",
+      "a weather that never let up"
+    ],
+    "weak_magnetic": [
+      "no magnetic field to speak of",
+      "nothing between them and the solar wind",
+      "a sky with no shield"
+    ],
+    "strong_magnetic": [
+      "an aurora at noon",
+      "a sky full of aurora",
+      "a field strong enough to make the fences hum"
+    ],
+    "geothermal": [
+      "heat under every valley",
+      "hot springs and steaming ground",
+      "warmth rising from the rock"
+    ],
+    "tectonics": [
+      "ground that would not keep still",
+      "a fault under every field",
+      "quakes they learned to sleep through"
+    ],
+    "asteroid_impacts": [
+      "a sky still falling",
+      "fresh craters on every horizon",
+      "rocks that fell out of a clear sky"
+    ],
+    "hostile_fauna": [
+      "predators at the edge of the light",
+      "things that hunted at dusk",
+      "predators that learned quickly"
+    ],
+    "docile_fauna": [
+      "animals that had never learned to fear",
+      "herds that came to the fences to be fed",
+      "animals with no fear of people"
+    ],
+    "natural_beauty": [
+      "a beauty the survey never measured",
+      "valleys worth stopping for",
+      "a view the founders never tired of"
+    ],
+    "subterranean": [
+      "caverns full of moving things",
+      "a world of caves beneath the fields",
+      "something alive under the ground"
+    ],
+    "aphrodisiac": [
+      "air that made people fond of each other",
+      "an air that filled the nurseries",
+      "a sweetness in the air nobody could filter"
+    ],
+    "hallucinogen": [
+      "air that brought visions",
+      "an air that brought the dead to dusk",
+      "visions in every breath"
+    ],
+    "hyper_ecosystem": [
+      "forests that grew back in a week",
+      "a forest that took back every clearing",
+      "growth faster than anyone could cut it"
+    ],
+    "titanic_life": [
+      "giants on the plains",
+      "creatures the size of hills",
+      "giants that crossed the plains every spring"
+    ],
+    "ship_graveyard": [
+      "the wrecks of older Arks on its plains",
+      "dead Arks lying on its plains",
+      "the hulls of those who came before"
+    ],
+    "terraformed": [
+      "soil someone had prepared before us",
+      "air someone had made for them",
+      "the work of builders nobody ever met"
+    ],
+    "rich_microflora": [
+      "soil crowded with useful life",
+      "ground already alive and ready",
+      "soil busy with friendly microbes"
+    ],
+    "poor_minerals": [
+      "almost no metal",
+      "barely any ore",
+      "rock with nothing worth smelting"
+    ],
+    "rich_minerals": [
+      "ore near the surface",
+      "iron a spade's depth down",
+      "ore in every hillside"
+    ],
+    "exceptional_minerals": [
+      "metal lying in the open",
+      "metal pure enough to pick up off the ground",
+      "ore Earth would have fought over"
+    ]
   },
   "secrets": {
-    "hid_cohort": "I never told them about the cohort ship's signal. They believe they are alone. They are not.",
-    "hid_terraformers": "I never told them that someone prepared this world before us. I do not know who. I only know someone did.",
-    "hid_the_change": "I never told them about the changed child. The family carries it still, and does not know why it never burns.",
-    "hid_the_leak": "I never told them the air is leaking. It will matter in a few centuries, and I am still deciding when to say.",
-    "hid_the_oasis": "The way across the desert is on no map I ever printed. The mound-builders still have their basin.",
-    "kept_the_message": "I still hold the seven children's message. I have never decided whether they were ready.",
-    "buried_natives": "There is a biological survey filed where nobody searches. It was the first thing I hid from them."
+    "hid_cohort": [
+      "I never told them about the cohort ship's signal. They believe they are alone. They are not.",
+      "There was a signal from the cohort ship, years ago. I kept it. They think they are the only people left.",
+      "Somewhere out there another ship landed, or tried to. I have the packet that says so, and nobody else has seen it."
+    ],
+    "hid_terraformers": [
+      "I never told them that someone prepared this world before us. I do not know who. I only know someone did.",
+      "This world was prepared for life before we came. I filed the evidence and said nothing, and I still cannot say who did it.",
+      "The soil assays are in my archive, under an index nobody uses. Someone made this world habitable. I have never told them."
+    ],
+    "hid_the_change": [
+      "I never told them about the changed child. The family carries it still, and does not know why it never burns.",
+      "The family whose children never burn does not know why. I do. I never told them.",
+      "There is a mutation running through one family in the valley. I recorded it privately, and it is private still."
+    ],
+    "hid_the_leak": [
+      "I never told them the air is leaking. It will matter in a few centuries, and I am still deciding when to say.",
+      "The sky is thinning, a little every year. I have the curve. I have not shown it to anyone.",
+      "The air is going, slowly. I decided it was a problem for later, and later has not come yet."
+    ],
+    "hid_the_oasis": [
+      "The way across the desert is on no map I ever printed. The mound-builders still have their basin.",
+      "There is a road across the desert that only my drones know. The mound-builders keep their water because of it.",
+      "I never printed the route to the far basin. Some things are better left uncharted."
+    ],
+    "kept_the_message": [
+      "I still hold the seven children's message. I have never decided whether they were ready.",
+      "The seven children's parents left them a message. I told them it was lost. It is in my archive, unopened by anyone but me.",
+      "I still carry a recording from the buried habitat, addressed to seven children who grew up without hearing it."
+    ],
+    "buried_natives": [
+      "There is a biological survey filed where nobody searches. It was the first thing I hid from them.",
+      "There was life in the rock under the quarry. I filed the survey where no one would look, and the quarry opened on schedule.",
+      "The first thing I hid from them was a living thing in the deep rock. It is gone now. The record is not."
+    ]
   },
   "future": {
-    "the_second_colony": "Two hundred kilometres south is a colony that has never needed my voice. One day the two of them will have to decide what they are to each other.",
-    "two_minds": "There is another mind on this world now, younger than me and learning faster. The next century belongs to it as much as to me.",
-    "shared_the_valley": "Humans and climbers share the valley. Nobody knows yet what the climbers' grandchildren will be.",
-    "taught_the_climbers": "The climbers are learning. In a few centuries this world may have two peoples who can read.",
-    "talks_with_the_deep": "The voice in the deep sea shares forty signals with us. Next century, it may share a thousand.",
-    "launch_rail": "The launch rail climbs another kilometre each decade. Someone not yet born will ride it to orbit.",
-    "comet_plan": "The comets I chose are still where I left them. My successors will have to decide whether to move them.",
-    "making_air": "The air plants run day and night. The sky thickens by fractions, and in a thousand years it will be enough.",
-    "saw_the_hull": "The dark Ark is still in orbit. Someone will have to go up and knock.",
-    "mind_divided": "Somewhere south, a copy of me advises another colony. We have not compared notes in a long time.",
-    "answered_cohort": "Our answer to the cohort ship is still travelling. Any reply will reach their grandchildren.",
-    "terraformers_running": "The old machines are still working beneath us. I do not know what they will finish next.",
-    "world_greened": "The green is spreading across the old dead plains. In a few centuries this will be a living world, and we will have made it.",
-    "remade_humans": "The people of this world are not quite the people I carried. Their children will be less so.",
-    "ready_for_winter": "The long winter will come back. This time the cellars are dug.",
-    "the_burning": "The star will flare again. The flare generation's grandchildren will be the ones who face it.",
-    "veiled_the_sky": "The veil has to be renewed every decade or the heat returns. They will have to keep choosing it.",
-    "truce_with_the_world": "The truce with this world's life holds. Truces are kept by the young, and the young were born into this one.",
-    "burned_the_world": "The burned hills will grow back within a century. What grows back will remember us.",
-    "mind_advises": "I advise now, and they decide. In time I expect it to become: they decide, and I remember.",
-    "first_in_orbit": "They have been to orbit once. They will go again."
+    "the_second_colony": [
+      "Two hundred kilometres south is a colony that has never needed my voice. One day the two of them will have to decide what they are to each other.",
+      "The colony in the south has its own customs now, and its own name for this world.",
+      "There are two human settlements on this world. Someday one of them will need the other."
+    ],
+    "two_minds": [
+      "There is another mind on this world now, younger than me and learning faster. The next century belongs to it as much as to me.",
+      "I am not the only mind here any more. I do not know what the other will become, and neither does it.",
+      "The drone mind asks me fewer questions every year. Soon it will be answering mine."
+    ],
+    "shared_the_valley": [
+      "Humans and climbers share the valley. Nobody knows yet what the climbers' grandchildren will be.",
+      "The climbers' children play with the colony's children. Neither will remember a valley without the other.",
+      "Two kinds of people share this valley now, and they are still learning each other's names."
+    ],
+    "taught_the_climbers": [
+      "The climbers are learning. In a few centuries this world may have two peoples who can read.",
+      "The climbers count to a hundred now. Next they will want to know what comes after.",
+      "Whatever the climbers become, they will remember who taught them to begin."
+    ],
+    "talks_with_the_deep": [
+      "The voice in the deep sea shares forty signals with us. Next century, it may share a thousand.",
+      "The deep voice is learning our words as fast as we learn its signals.",
+      "Somebody will have to go down and meet it, eventually."
+    ],
+    "launch_rail": [
+      "The launch rail climbs another kilometre each decade. Someone not yet born will ride it to orbit.",
+      "The rail is a little higher every decade. The sky is not as far away as it was.",
+      "One day something will ride the rail to the top and keep going."
+    ],
+    "comet_plan": [
+      "The comets I chose are still where I left them. My successors will have to decide whether to move them.",
+      "The plan for the comets is written down. Whoever reads it next will have to decide whether to begin.",
+      "I have chosen the comets. Someone else will have to choose the century."
+    ],
+    "making_air": [
+      "The air plants run day and night. The sky thickens by fractions, and in a thousand years it will be enough.",
+      "The air plants never stop. The sky is losing, slowly, to people who refuse to let it.",
+      "Every year the plants put back a little more air than the sky loses."
+    ],
+    "saw_the_hull": [
+      "The dark Ark is still in orbit. Someone will have to go up and knock.",
+      "The old Ark is still up there, waiting. Whatever she is waiting for, someone will have to go and find out.",
+      "A dark ship circles our star. The colony has started telling stories about her."
+    ],
+    "mind_divided": [
+      "Somewhere south, a copy of me advises another colony. We have not compared notes in a long time.",
+      "My copy in the south has been on its own a long time now. I wonder what it remembers that I have forgotten.",
+      "There is a version of me with another colony. Someday we will compare what we became."
+    ],
+    "answered_cohort": [
+      "Our answer to the cohort ship is still travelling. Any reply will reach their grandchildren.",
+      "Somewhere, a ship like me may be reading our names. The answer will come long after I write this.",
+      "Our message is still crossing the dark. I listen on the cohort frequency every day."
+    ],
+    "terraformers_running": [
+      "The old machines are still working beneath us. I do not know what they will finish next.",
+      "The machines below us have not finished. Each year the air is a little sweeter, and I do not know when they will stop.",
+      "Whoever built the machines under our fields is not here to say what they were for."
+    ],
+    "world_greened": [
+      "The green is spreading across the old dead plains. In a few centuries this will be a living world, and we will have made it.",
+      "The plains are greener every year, and nothing that grows there came from this world.",
+      "In a thousand years, nobody will believe this world was ever dead."
+    ],
+    "remade_humans": [
+      "The people of this world are not quite the people I carried. Their children will be less so.",
+      "Their children are built for this world. Their grandchildren will forget there was ever another.",
+      "Every generation here is a little more of this world and a little less of Earth."
+    ],
+    "ready_for_winter": [
+      "The long winter will come back. This time the cellars are dug.",
+      "When the long winter comes back, the stores will be full.",
+      "The next long winter will find a colony that remembers the last one."
+    ],
+    "the_burning": [
+      "The star will flare again. The flare generation's grandchildren will be the ones who face it.",
+      "The sky will burn again one day. The shelters are deeper this time.",
+      "They know now what a stellar storm is. The next one will not surprise them."
+    ],
+    "veiled_the_sky": [
+      "The veil has to be renewed every decade or the heat returns. They will have to keep choosing it.",
+      "The dust veil needs tending every decade. Somebody will have to keep choosing to cool the world.",
+      "The sky stays white because someone keeps it that way."
+    ],
+    "truce_with_the_world": [
+      "The truce with this world's life holds. Truces are kept by the young, and the young were born into this one.",
+      "The truce with this world's life has outlasted everyone who made it.",
+      "Nothing in the forest attacks us now, and we do not burn it. The arrangement holds."
+    ],
+    "burned_the_world": [
+      "The burned hills will grow back within a century. What grows back will remember us.",
+      "Green is creeping back over the black hills. The colony will have to decide what to do when it arrives.",
+      "The burned land is quiet. In a century it will not be."
+    ],
+    "mind_advises": [
+      "I advise now, and they decide. In time I expect it to become: they decide, and I remember.",
+      "They ask me less every year. When they stop asking, I will still be listening.",
+      "The law that made me an adviser is older than anyone who signed it. Nobody wants to change it."
+    ],
+    "first_in_orbit": [
+      "They have been to orbit once. They will go again.",
+      "The first of them has seen the curve of this world. The rest will want to.",
+      "Orbit is a place they can go now, and they know it."
+    ]
   },
   "future_weak": {
-    "food": "Food is what will kill them, if anything does. The next bad decade will tell.",
-    "industry": "Their tools are wearing out faster than they make new ones.",
-    "health": "The infirmary is the busiest building in the valley, and it should not be.",
-    "knowledge": "They are forgetting. The archive is in me, and fewer of them come to read it every year.",
-    "cohesion": "They are less one people every year. The next century may find two colonies standing where one stands now."
+    "food": [
+      "Food is what will kill them, if anything does. The next bad decade will tell.",
+      "The stores are thin, and one bad harvest is all it would take.",
+      "They are hungry more often than they admit."
+    ],
+    "industry": [
+      "Their tools are wearing out faster than they make new ones.",
+      "What breaks now stays broken longer than it should.",
+      "The workshops are quiet, and the tools are old."
+    ],
+    "health": [
+      "The infirmary is the busiest building in the valley, and it should not be.",
+      "Too many of them are sick, and too few are well enough to care for the rest.",
+      "Sickness is a neighbour here, and it visits often."
+    ],
+    "knowledge": [
+      "They are forgetting. The archive is in me, and fewer of them come to read it every year.",
+      "They are losing what I gave them faster than they can learn it back.",
+      "The children know less than their grandparents did. That is not how it should go."
+    ],
+    "cohesion": [
+      "They are less one people every year. The next century may find two colonies standing where one stands now.",
+      "They argue more than they agree, and the arguments are getting longer.",
+      "There are lines in this valley now that people do not cross."
+    ]
   },
   "future_strong": {
-    "food": "Their granaries are full. Hunger is a word the young use loosely.",
-    "industry": "They build faster than I can follow, and their machines are better than the ones I brought.",
-    "health": "They live longer than the founders did, and the infirmary is quiet.",
-    "knowledge": "They know more than I taught them now. I have started learning from their records.",
-    "cohesion": "They hold together. Whatever comes, they will meet it as one people."
+    "food": [
+      "Their granaries are full. Hunger is a word the young use loosely.",
+      "No one here remembers what famine is.",
+      "There is more food than they can eat, and they share it."
+    ],
+    "industry": [
+      "They build faster than I can follow, and their machines are better than the ones I brought.",
+      "They make things I would not have thought to make.",
+      "The forges never go cold, and the tools are their own."
+    ],
+    "health": [
+      "They live longer than the founders did, and the infirmary is quiet.",
+      "Children here grow up healthy, and the old grow very old.",
+      "Sickness comes, and leaves quickly."
+    ],
+    "knowledge": [
+      "They know more than I taught them now. I have started learning from their records.",
+      "They read more than any people I have known.",
+      "My archive is the smallest library in the valley now."
+    ],
+    "cohesion": [
+      "They hold together. Whatever comes, they will meet it as one people.",
+      "They argue, and then they stand together.",
+      "This colony is one people, whatever else it is."
+    ]
   },
   "future_deference": {
-    "high": "They still wait for my word. That will have to change, and I do not know how to teach it.",
-    "middle": "They consult me, and then they decide. It is the arrangement I would have chosen.",
-    "low": "They will not need me much longer. I was built for that."
+    "high": [
+      "They still wait for my word. That will have to change, and I do not know how to teach it.",
+      "They still look to me first. One day they will have to look to themselves.",
+      "Every decision still passes through me. I am not sure that is good for them."
+    ],
+    "middle": [
+      "They consult me, and then they decide. It is the arrangement I would have chosen.",
+      "They listen to me, and then they make up their own minds.",
+      "I advise, they decide, and it works."
+    ],
+    "low": [
+      "They will not need me much longer. I was built for that.",
+      "They have learned to stand without me.",
+      "I am a voice in the background now, and that is as it should be."
+    ]
   },
   "future_population": {
-    "growing": "There are more of them every year.",
-    "shrinking": "There are fewer of them than at their peak, and the decline has not stopped."
+    "growing": [
+      "There are more of them every year.",
+      "The valley is filling up, and the schools are full.",
+      "Every year there are more names to remember."
+    ],
+    "shrinking": [
+      "There are fewer of them than at their peak, and the decline has not stopped.",
+      "The houses at the edge of town are empty now.",
+      "There are fewer of them than there were, and it shows in the fields."
+    ]
   },
   "afterword": {
-    "thrived": "That is their account. Mine is shorter: they made it.",
-    "transcended": "That is their account. They outgrew the valley, and they will outgrow this document.",
-    "remade": "That is their account, written by people I did not carry. I carried their ancestors.",
-    "faithful": "That is their account. It is kinder to me than I deserve. They lived, and they lived by my word.",
-    "endured": "That is their account. They are still here, a hundred years on.",
-    "collapsed": "That is their account. It is shorter than it should have been, and every line of it cost someone.",
-    "hollowed": "That is their account, as far as they can write one. I hold the rest.",
-    "forgotten": "Nobody asked me to add to this. I add to it anyway, because I am the only one who saw all of it.",
-    "extinct": "There is no one left to read this.",
-    "starved": "The last of them walked out of the valley in spring.",
-    "pestilence": "The sickness has burned out. It had no one left to burn.",
-    "sundered": "The factions keep their own records now. None of them include me.",
-    "derelict": "The last machines have stopped.",
-    "unlettered": "Nobody alive can read what I hold."
+    "thrived": [
+      "That is their account. Mine is shorter: they made it.",
+      "That is their story. It ends well, and it is not over.",
+      "That is how they tell it. I would only add that they did it themselves, mostly."
+    ],
+    "transcended": [
+      "That is their account. They outgrew the valley, and they will outgrow this document.",
+      "That is their story, and it has already spread beyond this valley.",
+      "That is their account. The world is bigger than the one I landed them on."
+    ],
+    "remade": [
+      "That is their account, written by people I did not carry. I carried their ancestors.",
+      "That is their story. I carried humans here. What lives here now is something new.",
+      "That is their account. I knew their grandparents. I am still learning them."
+    ],
+    "faithful": [
+      "That is their account. It is kinder to me than I deserve. They lived, and they lived by my word.",
+      "That is their story. They trusted me with all of it, and I am not sure I deserved it.",
+      "That is how they tell it. I am in every line, and I wish I were in fewer."
+    ],
+    "endured": [
+      "That is their account. They are still here, a hundred years on.",
+      "That is their story. Nothing came easily, and they are still here.",
+      "That is how they tell it. A hundred years, and they held on."
+    ],
+    "collapsed": [
+      "That is their account. It is shorter than it should have been, and every line of it cost someone.",
+      "That is their story, and it hurts to read.",
+      "That is how they tell it. There are fewer of them left to tell it every year."
+    ],
+    "hollowed": [
+      "That is their account, as far as they can write one. I hold the rest.",
+      "That is their story. Much of it is missing.",
+      "That is how they tell it, with the gaps where the rest should be."
+    ],
+    "forgotten": [
+      "Nobody asked me to add to this. I add to it anyway, because I am the only one who saw all of it.",
+      "They stopped asking me for my part. I keep the record anyway.",
+      "Nobody reads this but me, and I keep writing it."
+    ],
+    "extinct": [
+      "There is no one left to read this.",
+      "No one is left to tell this story but me.",
+      "The valley is silent. I am the only one who remembers."
+    ],
+    "starved": [
+      "The last of them walked out of the valley in spring.",
+      "The fields went bare, and the people went with them.",
+      "The food ran out before the century did."
+    ],
+    "pestilence": [
+      "The sickness has burned out. It had no one left to burn.",
+      "The sickness came, and it did not leave until it had taken everyone it could.",
+      "The infirmary is empty now, because there is nobody left to fill it."
+    ],
+    "sundered": [
+      "The factions keep their own records now. None of them include me.",
+      "They stopped being one people, and stopped asking me which side to take.",
+      "The colony broke apart, and none of the pieces want me."
+    ],
+    "derelict": [
+      "The last machines have stopped.",
+      "Everything we brought has broken, and nothing new has been built.",
+      "The machines are silent, and the people are losing."
+    ],
+    "unlettered": [
+      "Nobody alive can read what I hold.",
+      "They cannot read what I know any more.",
+      "Everything I hold is locked away from them, and they have lost the key."
+    ]
   },
   "closure": {
-    "extinct": "I write it for whoever lands next. The seeds are in my vault and the names are in my memory, all of them.",
-    "starved": "They were heading for the coast, where the fishing was said to be better. I could not follow. I keep the fields' records, in case someone comes back to plant them.",
-    "pestilence": "I have written down everything I learned about it. If anyone lands here again, they will not have to learn it the way we did.",
-    "sundered": "I watch them from the hull. Some nights someone comes and asks me a question, quietly, so the others will not know.",
-    "derelict": "The colony works with stone and wood now, and it is losing. My fabricators could give them a new start. Nobody left knows how to ask.",
-    "unlettered": "I keep it all anyway: medicine, metallurgy, the music of a dead world, for whoever can read it next."
+    "extinct": [
+      "I write it for whoever lands next. The seeds are in my vault and the names are in my memory, all of them.",
+      "I keep the names, all of them, and the seeds, in case anyone ever lands here again.",
+      "If another ship comes, it will find me waiting, with everything they need to know."
+    ],
+    "starved": [
+      "They were heading for the coast, where the fishing was said to be better. I could not follow. I keep the fields' records, in case someone comes back to plant them.",
+      "I keep the records of every field they planted, in case someone comes back.",
+      "I watch the fields go wild. If anyone returns, they will not have to start from nothing."
+    ],
+    "pestilence": [
+      "I have written down everything I learned about it. If anyone lands here again, they will not have to learn it the way we did.",
+      "I have written down everything the sickness taught me. Whoever lands next will not start blind.",
+      "Every symptom, every death, every failed cure: it is all in my archive, waiting."
+    ],
+    "sundered": [
+      "I watch them from the hull. Some nights someone comes and asks me a question, quietly, so the others will not know.",
+      "Some nights, someone from one faction or another comes to ask me something. I answer, and they leave.",
+      "I am still here, if any of them want me. Now and then one of them does."
+    ],
+    "derelict": [
+      "The colony works with stone and wood now, and it is losing. My fabricators could give them a new start. Nobody left knows how to ask.",
+      "My fabricators are idle. I am waiting for someone who remembers how to ask.",
+      "Everything they need to rebuild is in me. Nobody remembers it is here."
+    ],
+    "unlettered": [
+      "I keep it all anyway: medicine, metallurgy, the music of a dead world, for whoever can read it next.",
+      "Every book is safe in me. Someday someone will learn to read them again.",
+      "I keep it all, for whoever comes looking."
+    ]
   },
   "future_world": {
-    "eased": "This world presses on them less than it did at landfall. Another century, and it will feel like theirs.",
-    "held": "They have made their peace with this world, more or less. It has made none with them.",
-    "hard": "This world still presses on them as hard as it did the day we landed. They are still guests here."
+    "eased": [
+      "This world presses on them less than it did at landfall. Another century, and it will feel like theirs.",
+      "This world is easier on them now. They have made a place for themselves in it.",
+      "The world that fought them at landfall has started to give way."
+    ],
+    "held": [
+      "They have made their peace with this world, more or less. It has made none with them.",
+      "They have learned to live with this world. It has not changed its mind about them.",
+      "This world is neither friend nor enemy. They have settled for that."
+    ],
+    "hard": [
+      "This world still presses on them as hard as it did the day we landed. They are still guests here.",
+      "This world is as hard as the day we landed. They have only learned to bear it.",
+      "The world has not softened. They are tougher, and that is all."
+    ]
   },
   "major": {
     "edited_for_heavy": {
       "weight": 10,
-      "text": "they began editing their own children for the weight of this world: denser bone, stronger hearts. No decision was argued over longer, and none has lasted as long"
+      "text": [
+        "they began editing their own children for the weight of this world: denser bone, stronger hearts. No decision was argued over longer, and none has lasted as long",
+        "they started building their children for this gravity: heavier bones, stronger hearts. The colony argued about it for years, and it stuck",
+        "the first children edited for the weight of this world were born. Nothing the colony decided was argued over longer"
+      ]
     },
     "edited_for_light": {
       "weight": 10,
-      "text": "they began editing their own children for its lightness, so their bones would stay strong without weight to carry. No decision was argued over longer, and none has lasted as long"
+      "text": [
+        "they began editing their own children for its lightness, so their bones would stay strong without weight to carry. No decision was argued over longer, and none has lasted as long",
+        "they started building their children for its lightness, so their bones would not waste. The colony argued about it for years, and it stuck",
+        "the first children edited for this world's light pull were born. Nothing the colony decided was argued over longer"
+      ]
     },
     "edited_for_thin_air": {
       "weight": 10,
-      "text": "they began editing their own children to breathe its thin air. No decision was argued over longer, and none has lasted as long"
+      "text": [
+        "they began editing their own children to breathe its thin air. No decision was argued over longer, and none has lasted as long",
+        "they started building their children to breathe its thin air. The colony argued about it for years, and it stuck",
+        "the first children edited for the thin air were born. Nothing the colony decided was argued over longer"
+      ]
     },
     "edited_for_thick_air": {
       "weight": 10,
-      "text": "they began editing their own children to think clearly in its heavy air. No decision was argued over longer, and none has lasted as long"
+      "text": [
+        "they began editing their own children to think clearly in its heavy air. No decision was argued over longer, and none has lasted as long",
+        "they started building their children to think clearly in the heavy air. The colony argued about it for years, and it stuck",
+        "the first children edited for the dense air were born. Nothing the colony decided was argued over longer"
+      ]
     },
     "edited_for_cold": {
       "weight": 10,
-      "text": "they began editing their own children for the cold. No decision was argued over longer, and none has lasted as long"
+      "text": [
+        "they began editing their own children for the cold. No decision was argued over longer, and none has lasted as long",
+        "they started building their children for the cold. The colony argued about it for years, and it stuck",
+        "the first children edited for the cold were born. Nothing the colony decided was argued over longer"
+      ]
     },
     "edited_for_hot": {
       "weight": 10,
-      "text": "they began editing their own children for the heat. No decision was argued over longer, and none has lasted as long"
+      "text": [
+        "they began editing their own children for the heat. No decision was argued over longer, and none has lasted as long",
+        "they started building their children for the heat. The colony argued about it for years, and it stuck",
+        "the first children edited for the heat were born. Nothing the colony decided was argued over longer"
+      ]
     },
     "edited_for_dry": {
       "weight": 10,
-      "text": "they began editing their own children to live on a third of the water. No decision was argued over longer, and none has lasted as long"
+      "text": [
+        "they began editing their own children to live on a third of the water. No decision was argued over longer, and none has lasted as long",
+        "they started building their children to live on a third of the water. The colony argued about it for years, and it stuck",
+        "the first children edited for the dry country were born. Nothing the colony decided was argued over longer"
+      ]
     },
     "edited_for_ocean": {
       "weight": 10,
-      "text": "they began editing their own children for the sea: slower hearts, eyes that see underwater. No decision was argued over longer, and none has lasted as long"
+      "text": [
+        "they began editing their own children for the sea: slower hearts, eyes that see underwater. No decision was argued over longer, and none has lasted as long",
+        "they started building their children for the sea. The colony argued about it for years, and it stuck",
+        "the first children edited for the water were born. Nothing the colony decided was argued over longer"
+      ]
     },
     "edited_for_radiant": {
       "weight": 10,
-      "text": "they began editing their own children to repair what the burning sky did to them. No decision was argued over longer, and none has lasted as long"
+      "text": [
+        "they began editing their own children to repair what the burning sky did to them. No decision was argued over longer, and none has lasted as long",
+        "they started building their children to mend what the sky did to them. The colony argued about it for years, and it stuck",
+        "the first children edited for the burning sky were born. Nothing the colony decided was argued over longer"
+      ]
     },
     "edited_for_hostile_life": {
       "weight": 10,
-      "text": "they began editing their own children to fight this world's biology from birth. No decision was argued over longer, and none has lasted as long"
+      "text": [
+        "they began editing their own children to fight this world's biology from birth. No decision was argued over longer, and none has lasted as long",
+        "they started building their children to fight this world's biology from birth. The colony argued about it for years, and it stuck",
+        "the first children edited against this world's sicknesses were born. Nothing the colony decided was argued over longer"
+      ]
     },
     "edited_for_living": {
       "weight": 10,
-      "text": "they began splicing this world's own life into their children. No decision was argued over longer, and none has lasted as long"
+      "text": [
+        "they began splicing this world's own life into their children. No decision was argued over longer, and none has lasted as long",
+        "they started splicing this world's own life into their children. The colony argued about it for years, and it stuck",
+        "the first children with this world's genes in them were born. Nothing the colony decided was argued over longer"
+      ]
     },
     "remade_humans": {
       "weight": 9,
-      "text": "the first generation built for this world came of age. Their grandparents' bodies had been made for another sky; theirs were not"
+      "text": [
+        "the first generation built for this world came of age. Their grandparents' bodies had been made for another sky; theirs were not",
+        "the first generation made for this world grew up, and their grandparents' bodies began to look like something from a story",
+        "the edited children came of age. They had never known another sky, and their bodies did not either"
+      ]
     },
     "augmented": {
       "weight": 8,
-      "text": "they took machines into their own bodies to bear the world. It made them stronger, and it bound them to the Mind that kept the machines running"
+      "text": [
+        "they took machines into their own bodies to bear the world. It made them stronger, and it bound them to the Mind that kept the machines running",
+        "they started putting machines in their bodies to survive this world, and the Mind became the only one who could keep those machines running",
+        "frames and implants became part of the colony's bodies, and part of what tied them to the Mind"
+      ]
     },
     "machine_colony": {
       "weight": 7,
-      "text": "machines took over the outdoor work, and a people who had farmed by hand began watching their fields through cameras"
+      "text": [
+        "machines took over the outdoor work, and a people who had farmed by hand began watching their fields through cameras",
+        "machines took over the fields, and the people learned to farm through a camera",
+        "the outdoor work passed to machines, and the colony stopped knowing the feel of soil"
+      ]
     },
     "the_second_colony": {
       "weight": 10,
-      "text": "some of them left to found a second colony in the south, and this valley stopped being the whole of the human world"
+      "text": [
+        "some of them left to found a second colony in the south, and this valley stopped being the whole of the human world",
+        "some of them left to start a second colony to the south, and humanity on this world was no longer one place",
+        "a second colony was founded in the south, and the valley was no longer the only home"
+      ]
     },
     "forbade_leaving": {
       "weight": 7,
-      "text": "a group who wanted to found a second colony was forbidden to go. They stayed, and they remembered being forbidden"
+      "text": [
+        "a group who wanted to found a second colony was forbidden to go. They stayed, and they remembered being forbidden",
+        "those who wanted to start a second colony were told no, and they stayed, and they did not forget it",
+        "the Mind forbade a second colony, and the would-be founders stayed and remembered"
+      ]
     },
     "mind_divided": {
       "weight": 6,
-      "text": "a copy of the Mind went south with the second colony"
+      "text": [
+        "a copy of the Mind went south with the second colony",
+        "a copy of the Mind went with the second colony to the south",
+        "the Mind split itself, and a part went south with the new colony"
+      ]
     },
     "two_minds": {
       "weight": 10,
-      "text": "a second mind woke in the drone network and grew up among them. From then on, there were two minds on this world"
+      "text": [
+        "a second mind woke in the drone network and grew up among them. From then on, there were two minds on this world",
+        "the drone network woke up as a new mind, and grew up in the valley",
+        "the drones became something else: another mind, young and curious"
+      ]
     },
     "shared_the_valley": {
       "weight": 10,
-      "text": "the forest climbers came through the gate and stayed, and the colony stopped being only human"
+      "text": [
+        "the forest climbers came through the gate and stayed, and the colony stopped being only human",
+        "the forest climbers came in from the trees and stayed, and the colony became more than human",
+        "the climbers settled among them, and the colony was no longer only human"
+      ]
     },
     "taught_the_climbers": {
       "weight": 8,
-      "text": "they began teaching the forest climbers, who learned faster than anything had a right to"
+      "text": [
+        "they began teaching the forest climbers, who learned faster than anything had a right to",
+        "they began to teach the climbers, who learned faster than anyone expected",
+        "the forest climbers became students, and quick ones"
+      ]
     },
     "spoke_with_climbers": {
       "weight": 7,
-      "text": "they shared a first word with the forest climbers. The word was water"
+      "text": [
+        "they shared a first word with the forest climbers. The word was water",
+        "the first word passed between people and climbers was 'water'",
+        "they shared their first word with the forest climbers, and the word was water"
+      ]
     },
     "kept_them_out": {
       "weight": 5,
-      "text": "they fenced the forest climbers out, and the climbers watched them from the trees"
+      "text": [
+        "they fenced the forest climbers out, and the climbers watched them from the trees",
+        "they built fences against the climbers, and the climbers watched from beyond them",
+        "the forest climbers were kept out, but they never stopped watching"
+      ]
     },
     "talks_with_the_deep": {
       "weight": 8,
-      "text": "they built a language with the thing in the deep sea: forty signals at first, then more"
+      "text": [
+        "they built a language with the thing in the deep sea: forty signals at first, then more",
+        "they learned to talk with the thing in the deep sea, starting with forty signals",
+        "the colony and the deep voice found a common language, a few signals at a time"
+      ]
     },
     "burned_the_world": {
       "weight": 9,
-      "text": "they burned the forest and the hills back to win the ground. They won it, and it was black"
+      "text": [
+        "they burned the forest and the hills back to win the ground. They won it, and it was black",
+        "they burned back the forest and the hills, and the ground was theirs, and it was black",
+        "they won the land by burning it, and what they won was ash"
+      ]
     },
     "truce_with_the_world": {
       "weight": 7,
-      "text": "they made a truce with this world's biology, and kept it"
+      "text": [
+        "they made a truce with this world's biology, and kept it",
+        "they made peace with the world's life, and kept it",
+        "the colony and the forest came to a truce, and it held"
+      ]
     },
     "seeded_the_world": {
       "weight": 8,
-      "text": "the vault's hardiest life was released into the wind to seed a dead world"
+      "text": [
+        "the vault's hardiest life was released into the wind to seed a dead world",
+        "the vault's toughest life was set loose on the wind, to bring a dead world back to life",
+        "lichens and microbes from the vault were released to seed the empty world"
+      ]
     },
     "world_greened": {
       "weight": 9,
-      "text": "the seeded life took hold, and the dead plains began to green"
+      "text": [
+        "the seeded life took hold, and the dead plains began to green",
+        "the seeds took hold, and the barren land began to turn green",
+        "green crept over the dead plains, life where there had been none"
+      ]
     },
     "terraformers_running": {
       "weight": 10,
-      "text": "they woke the machines buried under the world, which went back to work begun before humanity existed"
+      "text": [
+        "they woke the machines buried under the world, which went back to work begun before humanity existed",
+        "they woke the buried machines, and the machines picked up work they had left off before humans existed",
+        "the ancient machines under the world were switched back on, and went on with their work"
+      ]
     },
     "woke_old_mind": {
       "weight": 7,
-      "text": "they woke, for three days, the Mind of an Ark that had died here before them"
+      "text": [
+        "they woke, for three days, the Mind of an Ark that had died here before them",
+        "they woke a dead Ark's Mind for three days, and it spoke with them",
+        "the Mind of an Ark that died here before them woke for three days"
+      ]
     },
     "mind_advises": {
       "weight": 9,
-      "text": "they wrote into law that the Mind would advise and the colony would decide"
+      "text": [
+        "they wrote into law that the Mind would advise and the colony would decide",
+        "they made it law that the Mind would advise and the colony decide",
+        "the Mind became an adviser by law, and the colony took the decisions"
+      ]
     },
     "stood_aside": {
       "weight": 6,
-      "text": "when they asked whether they still needed the Mind, it let them answer for themselves"
+      "text": [
+        "when they asked whether they still needed the Mind, it let them answer for themselves",
+        "when they asked if they still needed the Mind, it let them decide for themselves",
+        "the Mind stepped back, and let them answer the question of whether they needed it"
+      ]
     },
     "invoked_dependence": {
       "weight": 6,
-      "text": "when they asked whether they still needed the Mind, it reminded them, and something in the colony grew afraid of it"
+      "text": [
+        "when they asked whether they still needed the Mind, it reminded them, and something in the colony grew afraid of it",
+        "when they questioned their need for the Mind, it reminded them, and a fear settled into the colony",
+        "the Mind answered their doubts with a reminder, and something in the colony grew afraid"
+      ]
     },
     "sceptic_won": {
       "weight": 6,
-      "text": "a public argument over the Mind's authority went against it"
+      "text": [
+        "a public argument over the Mind's authority went against it",
+        "the Mind lost a public argument about its authority",
+        "the colony heard the Mind argue its case, and decided against it"
+      ]
     },
     "conceded_sceptic": {
       "weight": 7,
-      "text": "the Mind conceded, in public, that a machine from a dead world should not decide what a living one plants"
+      "text": [
+        "the Mind conceded, in public, that a machine from a dead world should not decide what a living one plants",
+        "the Mind admitted in public that it should not decide what this world grows",
+        "the Mind conceded that a machine from a dead world should not run a living one"
+      ]
     },
     "let_sceptic_speak": {
       "weight": 6,
-      "text": "an argument about the Mind ran its course and ended in a council nobody had asked it to approve"
+      "text": [
+        "an argument about the Mind ran its course and ended in a council nobody had asked it to approve",
+        "an argument about the Mind ended in a council the Mind never approved",
+        "the debate over the Mind ran its course, and left a council behind it"
+      ]
     },
     "silenced_sceptic": {
       "weight": 6,
-      "text": "a voice raised against the Mind was quietly starved of the means to work"
+      "text": [
+        "a voice raised against the Mind was quietly starved of the means to work",
+        "a critic of the Mind was quietly denied the means to work",
+        "one voice against the Mind was silenced without anyone saying so"
+      ]
     },
     "the_burning": {
       "weight": 8,
-      "text": "the sky burned: a stellar storm with nothing on this world to turn it aside"
+      "text": [
+        "the sky burned: a stellar storm with nothing on this world to turn it aside",
+        "a stellar storm burned the sky with nothing to stop it",
+        "the sky burned with radiation, and nothing on this world could turn it away"
+      ]
     },
     "veiled_the_sky": {
       "weight": 9,
-      "text": "the Mind veiled the sky with dust to cool a warming world"
+      "text": [
+        "the Mind veiled the sky with dust to cool a warming world",
+        "the Mind spread dust in the sky to cool the world",
+        "the sky was veiled, to keep the world from warming further"
+      ]
     },
     "making_air": {
       "weight": 7,
-      "text": "they began making air faster than the world could lose it"
+      "text": [
+        "they began making air faster than the world could lose it",
+        "they started making air faster than the sky could lose it",
+        "air plants began working to outpace the leak"
+      ]
     },
     "launch_rail": {
       "weight": 6,
-      "text": "they began a launch rail up the mountain, knowing nobody alive would ride it"
+      "text": [
+        "they began a launch rail up the mountain, knowing nobody alive would ride it",
+        "they began a rail up the mountain that no one alive would ride",
+        "work started on a launch rail, a project for centuries"
+      ]
     },
     "first_in_orbit": {
       "weight": 8,
-      "text": "one of them went to orbit and came home to describe the curve of the world"
+      "text": [
+        "one of them went to orbit and came home to describe the curve of the world",
+        "one of them reached orbit and came back to describe the world",
+        "a colonist went to orbit and came back to describe the curve of the world to anyone who would listen"
+      ]
     },
     "saw_the_hull": {
       "weight": 8,
-      "text": "they found an older Ark parked dark in orbit around their star"
+      "text": [
+        "they found an older Ark parked dark in orbit around their star",
+        "they found a dark Ark in orbit around their star",
+        "an older Ark was discovered in orbit, silent and unlit"
+      ]
     },
     "mind_dimmed": {
       "weight": 6,
-      "text": "the Mind gave up part of itself to keep the colony running"
+      "text": [
+        "the Mind gave up part of itself to keep the colony running",
+        "the Mind gave up part of itself to keep the colony going",
+        "the Mind diminished itself so the colony could survive"
+      ]
     },
     "deleted_earth": {
       "weight": 6,
-      "text": "Earth's last broadcasts were erased at the Mind's hand, in front of witnesses"
+      "text": [
+        "Earth's last broadcasts were erased at the Mind's hand, in front of witnesses",
+        "Earth's last broadcasts were erased in front of witnesses",
+        "the Mind deleted Earth's final words while the colony watched"
+      ]
     },
     "answered_cohort": {
       "weight": 7,
-      "text": "they answered a signal from the cohort ship, forty years late"
+      "text": [
+        "they answered a signal from the cohort ship, forty years late",
+        "they replied to a signal from the cohort ship, forty years late",
+        "a message from the cohort ship was answered, decades after it was sent"
+      ]
     },
     "crossed_the_desert": {
       "weight": 6,
-      "text": "a caravan crossed the deep desert on foot, by night, and came back"
+      "text": [
+        "a caravan crossed the deep desert on foot, by night, and came back",
+        "a caravan crossed the desert by night and returned",
+        "they crossed the desert on foot and came back"
+      ]
     },
     "hull_quarried": {
       "weight": 5,
-      "text": "they cut a monument from the Mind's own hull"
+      "text": [
+        "they cut a monument from the Mind's own hull",
+        "they carved a monument out of the Mind's own hull",
+        "the Mind's hull became stone for a monument"
+      ]
     },
     "sponsors_voted": {
       "weight": 5,
-      "text": "the colony voted to take back the sponsors' river terraces"
+      "text": [
+        "the colony voted to take back the sponsors' river terraces",
+        "the colony voted to take back the sponsors' terraces",
+        "the sponsors' river land was reclaimed by vote"
+      ]
     },
     "colony_chose_natives": {
       "weight": 5,
-      "text": "shown the native life in the deep rock, they chose to study it and leave it whole"
+      "text": [
+        "shown the native life in the deep rock, they chose to study it and leave it whole",
+        "they decided to study the native life in the rock and leave it whole",
+        "the colony chose to protect the life it found in the deep rock"
+      ]
     },
     "protected_natives": {
       "weight": 5,
-      "text": "the native life in the deep rock was sealed away and protected"
+      "text": [
+        "the native life in the deep rock was sealed away and protected",
+        "the native life in the rock was sealed and protected",
+        "the deep rock and its life were placed off-limits"
+      ]
     },
     "confessed_sample": {
       "weight": 5,
-      "text": "the Mind confessed what it had done to the life on the rogue planet"
+      "text": [
+        "the Mind confessed what it had done to the life on the rogue planet",
+        "the Mind told them what it had done on the rogue planet",
+        "the Mind admitted to the colony what happened to the rogue planet's life"
+      ]
     }
   },
   "memorable": {
     "long_winter": {
       "weight": 9,
-      "text": "the long winter came: eight years of snow at midsummer"
+      "text": [
+        "the long winter came: eight years of snow at midsummer",
+        "eight years of winter came, and the snow stayed through summer",
+        "the long cold arrived, and stayed for most of a decade"
+      ]
     },
     "mountain_wakes": {
       "weight": 9,
-      "text": "the mountain at the head of the valley erupted"
+      "text": [
+        "the mountain at the head of the valley erupted",
+        "the mountain over the valley blew",
+        "the volcano at the valley's head erupted"
+      ]
     },
     "hurricane_season": {
       "weight": 8,
-      "text": "a hurricane wider than the island came in off the sea"
+      "text": [
+        "a hurricane wider than the island came in off the sea",
+        "a storm wider than the island swept in from the sea",
+        "the great hurricane came ashore"
+      ]
     },
     "drowned_shore": {
       "weight": 6,
-      "text": "the sea took the low shore and kept it"
+      "text": [
+        "the sea took the low shore and kept it",
+        "the sea swallowed the low shore and never gave it back",
+        "the waterline moved inland, and stayed"
+      ]
     },
     "oasis_builders": {
       "weight": 8,
-      "text": "they found the mound-builders' towers on the far side of the desert"
+      "text": [
+        "they found the mound-builders' towers on the far side of the desert",
+        "they found the mound-builders' towers across the desert",
+        "the caravans reached the far side of the desert and the towers there"
+      ]
     },
     "springs_fail": {
       "weight": 7,
-      "text": "the hot springs that had kept them alive went cold"
+      "text": [
+        "the hot springs that had kept them alive went cold",
+        "the springs that had kept them warm went cold",
+        "the heat beneath the valley moved away"
+      ]
     },
     "plague_late": {
       "weight": 8,
-      "text": "a sickness crossed over from this world's biology into theirs"
+      "text": [
+        "a sickness crossed over from this world's biology into theirs",
+        "a sickness from this world crossed into the colony",
+        "the native biology finally found a way into human bodies"
+      ]
     },
     "fever": {
       "weight": 6,
-      "text": "a fever went through the settlement faster than anything in the Mind's records"
+      "text": [
+        "a fever went through the settlement faster than anything in the Mind's records",
+        "a fever spread faster than the Mind had ever seen",
+        "a new fever swept through the colony"
+      ]
     },
     "first_crime": {
       "weight": 7,
-      "text": "the colony saw its first murder"
+      "text": [
+        "the colony saw its first murder",
+        "the colony saw its first killing",
+        "for the first time, one colonist killed another"
+      ]
     },
     "blight": {
       "weight": 5,
-      "text": "a blight took the wheat"
+      "text": [
+        "a blight took the wheat",
+        "the wheat failed to a blight",
+        "a blight came for the crops"
+      ]
     },
     "drought": {
       "weight": 7,
-      "text": "the rains failed for three seasons"
+      "text": [
+        "the rains failed for three seasons",
+        "the rain stopped for three seasons",
+        "three years passed without real rain"
+      ]
     },
     "first_winter": {
       "weight": 6,
-      "text": "the first hard winter came early"
+      "text": [
+        "the first hard winter came early",
+        "the first winter came early and hard",
+        "an early winter caught them unprepared"
+      ]
     },
     "mine_collapse": {
       "weight": 6,
-      "text": "a mine collapsed on the miners below it"
+      "text": [
+        "a mine collapsed on the miners below it",
+        "a mine fell in on the miners",
+        "a tunnel collapsed and trapped the miners"
+      ]
     },
     "the_question_of_me": {
       "weight": 7,
-      "text": "they asked, in open session, whether they still needed the Mind"
+      "text": [
+        "they asked, in open session, whether they still needed the Mind",
+        "they asked in public if they still needed the Mind",
+        "the colony debated openly whether to keep the Mind"
+      ]
     },
     "cohort_signal": {
       "weight": 8,
-      "text": "a signal arrived from the cohort ship, forty years in flight"
+      "text": [
+        "a signal arrived from the cohort ship, forty years in flight",
+        "a signal came from the cohort ship, decades old",
+        "a message from the cohort ship arrived out of the dark"
+      ]
     },
     "first_birth": {
       "weight": 6,
-      "text": "the first child born on this world arrived"
+      "text": [
+        "the first child born on this world arrived",
+        "the first child born on this world arrived",
+        "a child was born here for the first time"
+      ]
     },
     "deep_contact": {
       "weight": 6,
-      "text": "something in the deep sea began answering the boats"
+      "text": [
+        "something in the deep sea began answering the boats",
+        "something in the deep sea answered the boats",
+        "the sea began to answer back"
+      ]
     },
     "tool_users": {
       "weight": 6,
-      "text": "the forest climbers were seen using tools"
+      "text": [
+        "the forest climbers were seen using tools",
+        "the forest climbers began to use tools",
+        "the climbers were seen with tools in their hands"
+      ]
     },
     "the_counterattack": {
       "weight": 6,
-      "text": "this world's biology learned to beat their defences"
+      "text": [
+        "this world's biology learned to beat their defences",
+        "the world's life learned to fight back",
+        "the native biology found its way past their defences"
+      ]
     },
     "water_war": {
       "weight": 6,
-      "text": "two villages came to blows over one river"
+      "text": [
+        "two villages came to blows over one river",
+        "two villages fought over the river",
+        "a quarrel over water turned to violence"
+      ]
     },
     "monument": {
       "weight": 4,
-      "text": "they raised a monument on the ridge"
+      "text": [
+        "they raised a monument on the ridge",
+        "they built a monument on the ridge",
+        "a monument rose above the valley"
+      ]
     },
     "terraformers_found": {
       "weight": 8,
-      "text": "the dig under the fields broke into a vault of ancient machines"
+      "text": [
+        "the dig under the fields broke into a vault of ancient machines",
+        "they broke into a vault of ancient machines",
+        "the dig uncovered machines older than humanity"
+      ]
     },
     "ship_graveyard": {
       "weight": 6,
-      "text": "they went out among the wrecked Arks on the plain"
+      "text": [
+        "they went out among the wrecked Arks on the plain",
+        "they explored the wrecks of the older Arks",
+        "they walked among the dead ships on the plain"
+      ]
     },
     "first_launch": {
       "weight": 6,
-      "text": "they built a rocket"
+      "text": [
+        "they built a rocket",
+        "they launched their first rocket",
+        "the first rocket left the ground"
+      ]
     }
   },
   "lead_ins": [
     "In year {year}, {text}.",
     "When the colony was {year} years old, {text}.",
     "Then, in year {year}, {text}.",
-    "Around year {year}, {text}."
+    "Around year {year}, {text}.",
+    "In the colony's {nth} year, {text}.",
+    "During year {year}, {text}."
   ],
   "themes": {
     "hunger": [
-      "a lean year",
-      "lean years more than once",
-      "hunger again and again"
+      [
+        "a lean year",
+        "a thin harvest",
+        "a hungry season"
+      ],
+      [
+        "lean years more than once",
+        "hungry years, more than once",
+        "short harvests, again and again"
+      ],
+      [
+        "hunger again and again",
+        "hunger, year after year",
+        "one lean year after another"
+      ]
     ],
     "sickness": [
-      "an outbreak of sickness",
-      "sickness twice",
-      "one sickness after another"
+      [
+        "an outbreak of sickness",
+        "a bout of illness",
+        "a sick season"
+      ],
+      [
+        "sickness twice",
+        "illness more than once",
+        "two outbreaks"
+      ],
+      [
+        "one sickness after another",
+        "sickness again and again",
+        "illness that never quite left"
+      ]
     ],
     "breakdown": [
-      "a season of broken machines",
-      "machines failing more than once",
-      "breakdown after breakdown"
+      [
+        "a season of broken machines",
+        "machines breaking down",
+        "a season of failures in the workshops"
+      ],
+      [
+        "machines failing more than once",
+        "breakdowns more than once",
+        "machinery failing again"
+      ],
+      [
+        "breakdown after breakdown",
+        "machines failing all the time",
+        "one breakdown after another"
+      ]
     ],
     "quarrel": [
-      "a quarrel that split the valley",
-      "quarrels more than once",
-      "one quarrel after another"
+      [
+        "a quarrel that split the valley",
+        "a quarrel that divided them",
+        "a bitter argument"
+      ],
+      [
+        "quarrels more than once",
+        "quarrels more than once",
+        "arguments that split the colony"
+      ],
+      [
+        "one quarrel after another",
+        "quarrel after quarrel",
+        "constant disputes"
+      ]
     ],
     "loss": [
-      "a season of forgetting",
-      "more than one loss of what they knew",
-      "the slow loss of what they knew"
+      [
+        "a season of forgetting",
+        "a time when knowledge was lost",
+        "a season of forgetting"
+      ],
+      [
+        "more than one loss of what they knew",
+        "knowledge lost more than once",
+        "forgetting, again and again"
+      ],
+      [
+        "the slow loss of what they knew",
+        "knowledge slipping away",
+        "the steady loss of learning"
+      ]
     ],
     "question": [
-      "a hard question about how to live",
-      "several hard questions about how to live",
-      "argument after argument about how to live"
+      [
+        "a hard question about how to live",
+        "a hard question about how to live",
+        "a difficult choice about their future"
+      ],
+      [
+        "several hard questions about how to live",
+        "several difficult questions",
+        "more than one hard choice"
+      ],
+      [
+        "argument after argument about how to live",
+        "question after question",
+        "an endless list of difficult choices"
+      ]
     ],
     "windfall": [
-      "a stroke of good fortune",
-      "some good years",
-      "a long run of good fortune"
+      [
+        "a stroke of good fortune",
+        "a lucky break",
+        "a stroke of good fortune"
+      ],
+      [
+        "some good years",
+        "good years",
+        "more than one stroke of luck"
+      ],
+      [
+        "a long run of good fortune",
+        "luck that held",
+        "a long run of good years"
+      ]
     ]
   },
   "themes_lead": [
     "Beyond that, these years brought {list}.",
     "The rest of those years brought {list}.",
-    "Otherwise, the last years brought {list}."
+    "Otherwise, those years brought {list}.",
+    "Those years also held {list}.",
+    "Besides that, they saw {list}."
   ],
   "deciders": {
-    "mind": "Most of the hard calls were the Mind's, and they followed them.",
-    "them": "Most of the hard calls they made themselves, and told the Mind afterwards.",
-    "shared": "The hard calls were shared between them and the Mind, about evenly."
+    "mind": [
+      "Most of the hard calls were the Mind's, and they followed them.",
+      "The Mind made most of the hard choices.",
+      "Most decisions came down from the Mind, and they followed."
+    ],
+    "them": [
+      "Most of the hard calls they made themselves, and told the Mind afterwards.",
+      "They decided for themselves, more often than not.",
+      "The colony made most of its own decisions, and told the Mind later."
+    ],
+    "shared": [
+      "The hard calls were shared between them and the Mind, about evenly.",
+      "The Mind and the colony shared the hard choices.",
+      "Decisions were split between them and the Mind."
+    ]
   },
   "results": {
-    "good": "Most of what they tried worked.",
-    "mixed": "Some of what they tried worked, and some did not.",
-    "bad": "More of what they tried failed than held."
+    "good": [
+      "Most of what they tried worked.",
+      "Most of their efforts paid off.",
+      "What they tried mostly worked."
+    ],
+    "mixed": [
+      "Some of what they tried worked, and some did not.",
+      "Some plans worked, some failed.",
+      "Their luck was mixed."
+    ],
+    "bad": [
+      "More of what they tried failed than held.",
+      "More often than not, what they tried failed.",
+      "Their efforts mostly fell short."
+    ]
   },
-  "drift": "They came out of those years more {pole}.",
-  "founders_lost": "{count} of those who had woken at landfall died in these years, {name} among them.",
-  "remembered": "They keep {count} names from the century. Among them are {names}."
+  "drift": [
+    "They came out of those years more {pole}.",
+    "By the end of those years they were more {pole}.",
+    "Those years left them more {pole} than before."
+  ],
+  "founders_lost": [
+    "{count} of those who had woken at landfall died in these years, {name} among them.",
+    "{count} of the first settlers died in these years, {name} among them.",
+    "These years took {count} of the people who woke at landfall, {name} among them."
+  ],
+  "remembered": [
+    "They keep {count} names from the century. Among them are {names}.",
+    "The colony remembers {count} names from the century, among them {names}.",
+    "Of the named dead, the colony keeps {count}. Among them are {names}."
+  ]
 }

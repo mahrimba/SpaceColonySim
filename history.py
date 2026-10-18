@@ -31,6 +31,18 @@ MAJOR_PER_ERA = 3
 FUTURE_LINES = 6
 GRADES = ("crit_success", "success", "failure", "crit_failure")
 
+# Every entry in history.json may be a list of alternatives. One is chosen per
+# document, seeded by the colony, so a Retry reads the same and another
+# colony reads differently.
+# ponytail: module-level rng, set per compose(); pass it down if two
+# documents ever need composing at once.
+_rng = random.Random(0)
+
+
+def _one(value):
+    return _rng.choice(value) if isinstance(value, list) else value
+
+
 # Endings in which the colony did not survive the century.
 DEATHS = {"extinct", "starved", "pestilence", "sundered", "derelict", "unlettered"}
 
@@ -49,7 +61,8 @@ def compose(game) -> list[str]:
         form_id = game.ROLE_DOCUMENTS.get(s.ship_role, form_id)
     form = game.documents.get(form_id, game.documents["plain"])
     ctx = SafeDict(_context(s))
-    rng = random.Random(game.seed ^ 0x415)
+    global _rng
+    rng = _rng = random.Random(game.seed ^ 0x415)
     events = {e["id"]: e for e in game.events}
 
     out = [form["title"].format_map(ctx).upper(), ""]
@@ -98,8 +111,8 @@ def _landing(s) -> list[str]:
     traits = C.world_traits(planet)
     features = C.planet_features(planet)
     words = HISTORY["world_adjectives"]
-    adjectives = [words[t] for t in traits + features if t in words]
-    phrases = [HISTORY["feature_phrases"][f] for f in features
+    adjectives = [_one(words[t]) for t in traits + features if t in words]
+    phrases = [_one(HISTORY["feature_phrases"][f]) for f in features
                if f in HISTORY["feature_phrases"]]
     line = f"They came down on {planet.get('name', 'this world')}"
     if adjectives:
@@ -153,8 +166,9 @@ def _founders_lost(s, lo: int, hi: int, index: int) -> list[str]:
     gone = [p for p in s.people if p.born < 0 and p.died is not None and lo <= p.died <= hi]
     if not gone:
         return []
-    return [HISTORY["founders_lost"].format(count=_count_word(len(gone)).capitalize(),
-                                             name=gone[0].name)]
+    line = _one(HISTORY["founders_lost"]).format(count=_count_word(len(gone)),
+                                                 name=gone[0].name)
+    return [line[0].upper() + line[1:]]
 
 
 def _major(s, entries: list[dict], rng: random.Random, lo: int, hi: int) -> list[tuple]:
@@ -172,12 +186,12 @@ def _major(s, entries: list[dict], rng: random.Random, lo: int, hi: int) -> list
             if seen_edit:
                 continue
             seen_edit = True
-        candidates.append((major[flag]["weight"], year, i, None, major[flag]["text"]))
+        candidates.append((major[flag]["weight"], year, i, None, _one(major[flag]["text"])))
     for i, entry in enumerate(entries):
         event_id = entry["event"]
         if event_id in memorable:
             candidates.append((memorable[event_id]["weight"], entry["year"], 1000 + i,
-                               event_id, memorable[event_id]["text"]))
+                               event_id, _one(memorable[event_id]["text"])))
     chosen = sorted(candidates, key=lambda c: -c[0])[:MAJOR_PER_ERA]
     chosen.sort(key=lambda c: (c[1], c[2]))
     out = []
@@ -185,7 +199,7 @@ def _major(s, entries: list[dict], rng: random.Random, lo: int, hi: int) -> list
     offset = rng.randrange(len(lead_ins))       # varied, and never twice running
     for n, (_, year, _, event_id, text) in enumerate(chosen):
         lead = lead_ins[(offset + n) % len(lead_ins)]
-        sentence = lead.format(year=year, text=text)
+        sentence = lead.format(year=year, nth=_ordinal(year), text=text)
         out.append((event_id, sentence[0].upper() + sentence[1:]))
     return out
 
@@ -216,21 +230,23 @@ def _shape(rest: list[dict], events: dict, rng: random.Random, s, index: int,
         phrases = []
         for theme, n in themes.most_common(3):
             options = HISTORY["themes"][theme]
-            phrases.append(options[min(n, 3) - 1])
-        leads = HISTORY["themes_lead"]
+            phrases.append(_one(options[min(n, 3) - 1]))
+        # One opening per era, never the same twice in a document.
+        leads = HISTORY["themes_lead"][:]
+        rng.shuffle(leads)
         lead = leads[index % len(leads)]
         out.append(lead.format(list=_join(phrases)))
     if held + failed >= 2:
         ratio = held / (held + failed)
-        out.append(HISTORY["results"]["good" if ratio > 0.65 else
-                                      "bad" if ratio < 0.4 else "mixed"])
+        out.append(_one(HISTORY["results"]["good" if ratio > 0.65 else
+                                           "bad" if ratio < 0.4 else "mixed"]))
     if mind + them >= 2:
         if mind > them * 1.8:
-            out.append(HISTORY["deciders"]["mind"])
+            out.append(_one(HISTORY["deciders"]["mind"]))
         elif them > mind * 1.8:
-            out.append(HISTORY["deciders"]["them"])
+            out.append(_one(HISTORY["deciders"]["them"]))
         else:
-            out.append(HISTORY["deciders"]["shared"])
+            out.append(_one(HISTORY["deciders"]["shared"]))
     out += _drift(s, index, lo, hi)
     return out
 
@@ -276,7 +292,7 @@ def _drift(s, index: int, lo: int, hi: int) -> list[str]:
     if abs(moved) < 15:
         return []
     low, high = C.AXES[axis]
-    return [HISTORY["drift"].format(pole=(high if moved > 0 else low).lower())]
+    return [_one(HISTORY["drift"]).format(pole=(high if moved > 0 else low).lower())]
 
 
 def _epigraph(game, form: dict, events: dict) -> list[str]:
@@ -312,7 +328,7 @@ def _remembered(s) -> list[str]:
     if not dead:
         return []
     names = _join([f"the {p.role} {p.name}" for p in dead[:3]])
-    return ["", HISTORY["remembered"].format(count=_count_word(len(dead)), names=names)]
+    return ["", _one(HISTORY["remembered"]).format(count=_count_word(len(dead)), names=names)]
 
 
 def _count_word(n: int) -> str:
@@ -328,36 +344,36 @@ def _article(word: str) -> str:
 # --- the afterword ---------------------------------------------------------------
 
 def _afterword(s) -> list[str]:
-    out = [HISTORY["afterword"].get(s.outcome, "That is their account.")]
+    out = [_one(HISTORY["afterword"].get(s.outcome, "That is their account."))]
     if s.outcome in DEATHS:
-        out.append(HISTORY["closure"].get(s.outcome, ""))
+        out.append(_one(HISTORY["closure"].get(s.outcome, "")))
         out += _secrets(s)
         return [line for line in out if line]
 
     out += _secrets(s)
-    future = [HISTORY["future"][f] for f in HISTORY["future"] if f in s.flags]
+    future = [_one(HISTORY["future"][f]) for f in HISTORY["future"] if f in s.flags]
     stats = s.stats
     weakest = min(C.COLONY_STATS, key=lambda k: stats[k])
     strongest = max(C.COLONY_STATS, key=lambda k: stats[k])
     if stats[weakest] < 35:
-        future.append(HISTORY["future_weak"][weakest])
+        future.append(_one(HISTORY["future_weak"][weakest]))
     if stats[strongest] > 65:
-        future.append(HISTORY["future_strong"][strongest])
+        future.append(_one(HISTORY["future_strong"][strongest]))
     start = 1.0 - float((s.planet or {}).get("habitability", 1.0 - s.hostility))
     eased = start - s.hostility
     world = HISTORY["future_world"]
-    future.append(world["eased"] if eased >= 0.08 else
-                  world["hard"] if s.hostility > 0.6 else world["held"])
+    future.append(_one(world["eased"] if eased >= 0.08 else
+                       world["hard"] if s.hostility > 0.6 else world["held"]))
     growing = s.population >= s.peak_population * 0.9
-    future.append(HISTORY["future_population"]["growing" if growing else "shrinking"])
+    future.append(_one(HISTORY["future_population"]["growing" if growing else "shrinking"]))
     band = "high" if s.deference > 65 else ("middle" if s.deference > 30 else "low")
-    future.append(HISTORY["future_deference"][band])
+    future.append(_one(HISTORY["future_deference"][band]))
     out += future[:FUTURE_LINES]
     return out
 
 
 def _secrets(s) -> list[str]:
-    return [line for flag, line in HISTORY["secrets"].items() if flag in s.flags][:2]
+    return [_one(line) for flag, line in HISTORY["secrets"].items() if flag in s.flags][:2]
 
 
 # --- small things ----------------------------------------------------------------
