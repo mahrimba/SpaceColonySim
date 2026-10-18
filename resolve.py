@@ -23,6 +23,10 @@ CRIT_SUCCESS, SUCCESS, FAILURE, CRIT_FAILURE = (
 EFFECT_KEYS = set(K.STATS) | {
     "colonists_lost", "colonists_lost_frac", "flags", "clear_flags", "queue", "end"}
 
+# Actions that keep the ship moving. Everything else is lingering, and
+# lingering rolls for a nick or an observation (Q19 follow-up).
+ADVANCING = {"hold", "hard_burn"}
+
 REPAIRABLE = ["hull", "power", "life_support"] + K.HOLDS
 SCRAP_TARGETS = ["hull", "power", "life_support"]
 
@@ -38,10 +42,12 @@ class Game:
         self.seed = random.randrange(1, 2**31) if seed is None else seed
         self.rng = random.Random(self.seed)
         self.events = events if events is not None else deck.load()
+        self.flavour = deck.load_flavour()
         self.state = ShipState.launch(profile)
         self.phase = MAINTENANCE
         self.current: dict | None = None
         self.current_text = ""
+        self.events_drawn = 0  # must never exceed legs flown: one event per leg
         self.state.note(f"{self.state.name} underway. Seed {self.seed}.")
         self._enter_system()
 
@@ -84,14 +90,16 @@ class Game:
         """Concrete actions available right now, as data the UI can render."""
         s = self.state
         opts: list[dict] = [{"action": "hold", "label": "Hold course (do nothing)"}]
-        opts.append({"action": "diagnostics",
-                     "label": f"Run self-diagnostics (+cognition, "
-                              f"-{K.DIAGNOSTIC_POWER_COST:.0f} power)"})
+        if s.stats["power"] > K.DIAGNOSTIC_POWER_COST:
+            opts.append({"action": "diagnostics",
+                         "label": f"Run self-diagnostics (+cognition, "
+                                  f"-{K.DIAGNOSTIC_POWER_COST:.0f} power)"})
         opts.append({"action": "survey", "label": "Sweep this system for worlds"})
-        for stat in REPAIRABLE:
-            opts.append({"action": "repair", "target": stat,
-                         "label": f"Repair {K.LABELS[stat].lower()} "
-                                  f"(-{K.REPAIR_POWER_COST:.0f} power)"})
+        if s.stats["power"] > K.REPAIR_POWER_COST:
+            for stat in REPAIRABLE:
+                opts.append({"action": "repair", "target": stat,
+                             "label": f"Repair {K.LABELS[stat].lower()} "
+                                      f"(-{K.REPAIR_POWER_COST:.0f} power)"})
         for hold in K.HOLDS:
             opts.append({"action": "cannibalize", "hold": hold,
                          "label": f"Strip {K.LABELS[hold].lower()} for parts"})
@@ -131,8 +139,9 @@ class Game:
             s.adjust("power", -K.REPAIR_POWER_COST)
             amount = K.REPAIR_BASE + s.stats["fabricators"] * K.REPAIR_PER_FABRICATOR
             gained = s.adjust(target, amount)
-            lines.append(f"Fabricators run hot for a shift. {K.LABELS[target]} "
-                         f"{gained:+.0f}.")
+            lines.append(f"Fabricators run hot for a shift. " + (
+                f"{K.LABELS[target]} {gained:+.0f}." if gained >= 0.5
+                else f"{K.LABELS[target]} was already as good as I can make it."))
 
         elif action == "cannibalize":
             assert hold in K.HOLDS, hold
@@ -151,6 +160,13 @@ class Game:
                          "we are already past it.")
         else:
             raise ValueError(f"unknown maintenance action {action!r}")
+
+        if action not in ADVANCING and s.flying:
+            roll = self.rng.random()
+            if roll < K.LINGER_HAZARD_CHANCE:
+                lines.append(s.minor_hazard(self.rng))
+            elif roll < K.LINGER_HAZARD_CHANCE + K.LINGER_FLAVOUR_CHANCE:
+                lines.append(deck.observe(self.flavour, s, self.rng))
 
         for line in lines:
             s.note(line)
@@ -192,6 +208,7 @@ class Game:
             return [line] + self._enter_system()
 
         self.current = event
+        self.events_drawn += 1
         variants = event["text"]
         self.current_text = self.rng.choice(variants).format_map(self._context())
         self.state.note(self.current_text)

@@ -36,7 +36,7 @@ def test_determinism() -> None:
 
 def test_runs_terminate_in_a_legal_state() -> None:
     """No run may end mid-air, out of range, or in an unreachable state."""
-    legal = {"colonized", "adrift", "destroyed", "extinct", "incoherent"}
+    legal = {"colonized", "adrift", "destroyed", "extinct", "incoherent", "dark"}
     for seed in range(200):
         g = sim.play(seed, profile=["survey", "ark", "longrange"][seed % 3],
                      events=EVENTS)
@@ -48,10 +48,42 @@ def test_runs_terminate_in_a_legal_state() -> None:
             assert 0.0 <= value <= 100.0, f"seed {seed}: {stat} = {value}"
         assert s.colonists_alive >= 0 and s.colonists_lost >= 0
         assert 1 <= s.leg <= sim.MAX_LEGS
+        # One event per leg. Lingering adds a nick or an observation, never
+        # a second thing to answer.
+        assert g.events_drawn <= s.leg, (
+            f"seed {seed}: {g.events_drawn} events over {s.leg} legs")
         if s.outcome == "colonized":
             assert s.chosen_planet is not None, "colonised nothing"
         else:
             assert s.chosen_planet is None, "died but kept a planet"
+
+
+def test_zero_power_ends_the_run() -> None:
+    """The reactor going out is an ending, not a penalty."""
+    g = resolve.Game(seed=1, events=EVENTS)
+    g.state.stats["power"] = 2.0
+    g.state.adjust("power", -2.0)
+    g.state._check_death()
+    assert g.state.outcome == "dark", f"power hit zero and the run continued: {g.state.outcome}"
+    assert not g.state.flying
+
+    # ...and the UI must never offer an action that spends power it lacks.
+    g2 = resolve.Game(seed=2, events=EVENTS)
+    g2.state.stats["power"] = 3.0
+    costs = {"diagnostics": K.DIAGNOSTIC_POWER_COST, "repair": K.REPAIR_POWER_COST}
+    for opt in g2.maintenance_options():
+        cost = costs.get(opt["action"], 0.0)
+        assert cost < g2.state.stats["power"], (
+            f"{opt['action']} offered at {g2.state.stats['power']} power, costs {cost}")
+
+
+def test_flavour_pool_is_wired_up() -> None:
+    """Observations must exist, and must not be keyed on tags that never occur."""
+    flavour = deck.load_flavour()
+    assert flavour["any"], "no generic observations"
+    for tag in flavour:
+        assert tag == "any" or tag in K.SYSTEM_TAGS, f"flavour keyed on unknown tag {tag}"
+        assert flavour[tag], f"empty flavour pool for {tag}"
 
 
 def test_content_is_wired_up() -> None:

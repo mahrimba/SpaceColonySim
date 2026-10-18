@@ -24,14 +24,26 @@ def competent_policy(game: Game) -> dict:
     before the tanks run dry. The baseline Q33's 60% target is measured against.
     """
     s = game.state
-    if s.cognition < 55:
+    richest = max(K.HOLDS, key=lambda h: s.stats[h])
+    power = s.stats["power"]
+    can_repair = power > K.REPAIR_POWER_COST + 6
+
+    # Zero power ends the run outright, and power buys every other repair, so
+    # a competent player defends it before anything else.
+    if power < 30:
+        if can_repair and s.stats["fabricators"] > 40:
+            return {"action": "repair", "target": "power"}
+        return {"action": "cannibalize", "hold": richest, "target": "power"}
+
+    if s.cognition < 55 and power > K.DIAGNOSTIC_POWER_COST + 10:
         return {"action": "diagnostics"}
-    worst = min(["hull", "power", "life_support"], key=lambda st: s.stats[st])
+
+    worst = min(["hull", "life_support"], key=lambda st: s.stats[st])
     if s.stats[worst] < 55:
-        if s.stats["power"] < K.REPAIR_POWER_COST + 2:
-            richest = max(K.HOLDS, key=lambda h: s.stats[h])
+        if not can_repair:
             return {"action": "cannibalize", "hold": richest, "target": worst}
         return {"action": "repair", "target": worst}
+
     if not s.candidates:
         return {"action": "survey"}
     return {"action": "hold"}

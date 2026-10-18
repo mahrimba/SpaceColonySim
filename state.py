@@ -122,18 +122,12 @@ class ShipState:
         for stat, rate in K.PASSIVE_DRAIN.items():
             self.adjust(stat, -rate)
 
-        if self.stats["power"] <= 0:
+        if 0 < self.stats["power"] <= K.POWER_WARNING:
             self.adjust("life_support", -K.POWER_BROWNOUT_DRAIN)
             self.adjust("cognition", -K.COGNITION_DRAIN_AT_BROWNOUT)
-            lines.append("Reactor is dark. Scrubbers coasting on nothing. "
-                         "I am thinking slower than I should be.")
-
-        if rng.random() < K.MINOR_HAZARD_CHANCE:
-            stat = rng.choice(["hull", "power", "cognition"] + K.HOLDS)
-            dmg = rng.uniform(*K.MINOR_HAZARD_DAMAGE)
-            self.adjust(stat, -dmg)
-            lines.append(MINOR_HAZARD_FLAVOUR.get(stat, "Something small took a bite.")
-                         .format_map(SafeDict(amount=f"{dmg:.1f}")))
+            lines.append("Reactor output is marginal. Scrubbers are coasting and "
+                         "I am thinking slower than I should be. If it goes out, "
+                         "everything goes out.")
 
         ls = self.stats["life_support"]
         if ls < K.LIFE_SUPPORT_CRITICAL:
@@ -151,6 +145,12 @@ class ShipState:
     def _check_death(self) -> None:
         if self.stats["hull"] <= 0:
             self.end("destroyed", "Hull failure. The ship came apart around its sleepers.")
+        elif self.stats["power"] <= 0:
+            # Nothing aboard works without the reactor: no scrubbers, no
+            # heaters, no thaw. Zero power is an ending, not a penalty.
+            self.end("dark", "The reactor went out. Heaters, scrubbers, pod "
+                             "controllers, me — all of it ran down together. Ten "
+                             "thousand people froze without ever waking up.")
         elif self.colonists_alive <= 0:
             self.end("extinct", "Every pod is dark. I am carrying a cemetery.")
         elif self.stats["cognition"] <= 0:
@@ -161,6 +161,15 @@ class ShipState:
             # not a world is in sight. Dry with a garden below is still dry.
             self.end("adrift", "Tanks dry. Whatever is out there, we pass it at "
                                "speed and keep going forever.")
+
+    def minor_hazard(self, rng: random.Random) -> str:
+        """An unannounced nick. Rolled when the ship lingers, not every leg."""
+        stat = rng.choice(["hull", "power", "cognition"] + K.HOLDS)
+        dmg = rng.uniform(*K.MINOR_HAZARD_DAMAGE)
+        self.adjust(stat, -dmg)
+        self._check_death()
+        return MINOR_HAZARD_FLAVOUR.get(stat, "Something small took a bite.").format_map(
+            SafeDict(amount=f"{dmg:.1f}"))
 
     # -- survey ---------------------------------------------------------------
 

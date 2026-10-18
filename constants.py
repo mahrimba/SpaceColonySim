@@ -53,8 +53,13 @@ SURVEY_EVERY = 4  # automatic survey cadence, in legs
 
 # --- passive decay (Q18) -----------------------------------------------------
 
-PASSIVE_DRAIN = {"life_support": 4.4, "power": 3.1}
-MINOR_HAZARD_CHANCE = 0.5  # chance per leg of an unannounced nick
+PASSIVE_DRAIN = {"life_support": 4.4}
+
+# Lingering in a system to work on the ship takes your eyes off the void.
+# Advancing actions (hold course, hard burn) never roll these; everything
+# else does. One real event per leg still happens either way.
+LINGER_HAZARD_CHANCE = 0.25    # something small finds you while you work
+LINGER_FLAVOUR_CHANCE = 0.45   # otherwise, odds of just an observation
 MINOR_HAZARD_DAMAGE = (3.0, 9.0)
 
 # Global severity knob: multiplies authored damage, so difficulty can be moved
@@ -78,6 +83,7 @@ APPROX_ROUND_COLONISTS = 500
 
 # --- cascades / death (Q20) --------------------------------------------------
 
+POWER_WARNING = 15.0  # below this the reactor browns out and warns you
 LIFE_SUPPORT_CRITICAL = 20.0
 LIFE_SUPPORT_LOSS_RATE = 0.04  # share of sleepers lost per leg at zero support
 POWER_BROWNOUT_DRAIN = 3.0  # extra life_support drain when power is out

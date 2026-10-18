@@ -104,7 +104,13 @@ class Voyage(App):
     # -- option plumbing ------------------------------------------------------
 
     def show(self, *lines: str) -> None:
-        self.lines.extend(lines)
+        for line in lines:
+            # A rule before each leg, so one leg reads as one scene.
+            if line.startswith("— Leg "):
+                self.lines.append("[dim]" + "─" * 48 + "[/dim]")
+                self.lines.append(f"[b]{line}[/b]")
+            else:
+                self.lines.append(line)
         self.lines.append("")
         self.query_one("#log", Static).update("\n".join(self.lines))
         self.call_after_refresh(

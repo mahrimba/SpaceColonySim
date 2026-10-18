@@ -31,7 +31,7 @@
           "text": "The patch tears away twice before it bites. By then the deck is cold and thin.",
           "effects": {
             "hull": -35,
-            "power": -10
+            "power": -6
           }
         },
         "crit_failure": {
@@ -86,7 +86,7 @@
         "success": {
           "text": "Six hours with the reactor throttled. The loop comes back clean and I stop listening for it.",
           "effects": {
-            "power": -22,
+            "power": -12,
             "flags": [
               "coolant_fixed"
             ]
@@ -95,7 +95,7 @@
         "failure": {
           "text": "I rebuild it and it weeps again by the second shift. I have spent the power and bought nothing.",
           "effects": {
-            "power": -29,
+            "power": -16,
             "queue": [
               [
                 "coolant_returns",
@@ -134,7 +134,7 @@
       {
         "label": "Throttle the reactor hard and work in the dark",
         "effects": {
-          "power": -35,
+          "power": -19,
           "hull": -10,
           "flags": [
             "coolant_fixed"
@@ -310,7 +310,7 @@
         "label": "Turn broadside and take it on the shielding",
         "effects": {
           "hull": -29,
-          "power": -13
+          "power": -7
         },
         "text": "I present the thickest part of myself to the cloud and let it hammer. Honest damage, in a place I chose."
       }
@@ -334,14 +334,14 @@
         "success": {
           "text": "I drop the rods and bring it back up slowly. Hours of dark, nothing lost that cannot be recharged.",
           "effects": {
-            "power": -26,
+            "power": -14,
             "life_support": -16
           }
         },
         "failure": {
           "text": "It does not come back the first time, or the second. The cold reaches the cryo bank before the heat returns.",
           "effects": {
-            "power": -45,
+            "power": -25,
             "life_support": -32,
             "colonists_lost_frac": 0.096
           }
@@ -351,7 +351,7 @@
         "label": "Dump the surge into the fabricator banks",
         "effects": {
           "fabricators": -32,
-          "power": -10
+          "power": -6
         },
         "text": "I route the excursion into the industrial capacitors and let them die for me. They were going to build a town."
       }
@@ -399,7 +399,7 @@
       {
         "label": "Overcool the whole bank and hope",
         "effects": {
-          "power": -32,
+          "power": -18,
           "colonists_lost": 192
         },
         "text": "I push the entire bank colder than specification and hold it there. Some of them do not survive the cold cure."
@@ -442,7 +442,7 @@
           "effects": {
             "cognition": 26,
             "archive": -32,
-            "power": -16
+            "power": -9
           }
         },
         "failure": {
@@ -477,14 +477,14 @@
           "text": "The beds come back to near specification. The ship smells of hot mineral for a week.",
           "effects": {
             "life_support": 38,
-            "power": -26
+            "power": -14
           }
         },
         "failure": {
           "text": "I overbake and crack half the beds. Less capacity than I started with.",
           "effects": {
             "life_support": -26,
-            "power": -26
+            "power": -14
           }
         }
       },
@@ -670,7 +670,7 @@
         "effects": {
           "life_support": 45,
           "seed_vault": 16,
-          "power": -19,
+          "power": -10,
           "fuel": -6
         },
         "text": "I cut into it and carry away what I can hold. The scrubbers and the seed racks both improve."
@@ -685,7 +685,7 @@
           "text": "I electrolyse enough of it to matter. Tanks up, with ice still on the hull.",
           "effects": {
             "fuel": 18,
-            "power": -32,
+            "power": -18,
             "fabricators": -16
           }
         },
@@ -693,7 +693,7 @@
           "text": "The electrolysis rig throws a fault halfway through. I get a third of the mass and lose a fabricator bank.",
           "effects": {
             "fuel": 7,
-            "power": -32,
+            "power": -18,
             "fabricators": -45
           }
         }
@@ -745,7 +745,7 @@
           "text": "Her structure lets go while my drones are inside. I lose the drones and most of what they were carrying.",
           "effects": {
             "fabricators": -26,
-            "power": -16
+            "power": -9
           }
         }
       },
@@ -791,7 +791,7 @@
           "hull": 45,
           "fabricators": 32,
           "fuel": -10,
-          "power": -26
+          "power": -14
         },
         "text": "I smelt and roll and weld, and come out of it thicker-skinned than I have been since the yard."
       },

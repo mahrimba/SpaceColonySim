@@ -1,0 +1,44 @@
+{
+  "any": [
+    "I spend the shift listening to the hull tick as it cools. Nothing in it means anything.",
+    "Ten thousand heart rates, all of them slower than mine. I read them like weather.",
+    "The work takes longer than the estimate. The work always takes longer than the estimate.",
+    "Somewhere in the archive a man is still singing. I have not played that file in four years and I do not play it now.",
+    "I run the numbers on arrival again. They are the same numbers. I run them again.",
+    "Dust on the forward optics. I clean it and it is back within the hour.",
+    "A pod in Bank F dreams, measurably. I log the waveform and do not look at it twice.",
+    "I notice that I have been talking to myself in the maintenance log. I leave the entries in.",
+    "The mission clock passes another year while my hands are inside a panel.",
+    "Nothing out here objects to what I am doing. Nothing out here notices."
+  ],
+  "gas_giant": [
+    "The giant turns below me, striped and indifferent, big enough to have weather older than the species I am carrying."
+  ],
+  "nebula": [
+    "Dust glows against the running lights. Beautiful, and quietly stripping atoms off my bow while I work."
+  ],
+  "pulsar": [
+    "The beam sweeps past again. And again. Something in me counts it without being asked."
+  ],
+  "derelict": [
+    "The dead ship keeps station off my flank while I work, patient as a pallbearer."
+  ],
+  "dead_system": [
+    "No planets worth the name, no signals, no reason for this star to have a number. I work in the quiet it offers."
+  ],
+  "asteroid_belt": [
+    "Rubble turning slowly in the dark, every piece of it a planet that failed to happen."
+  ],
+  "binary_star": [
+    "Two shadows for everything on the hull, crossing each other as the pair turns."
+  ],
+  "rogue_planet": [
+    "A world down there with no sun at all, still warm somewhere under the ice. Nobody will ever name it."
+  ],
+  "red_dwarf": [
+    "Red light through the viewports, the colour of a room where someone has already gone to sleep."
+  ],
+  "rich_system": [
+    "Metal everywhere I look, and a colony's worth of tools to cut it with, and no time."
+  ]
+}

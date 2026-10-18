@@ -26,6 +26,19 @@ def load(*files: str) -> list[dict]:
     return events
 
 
+def load_flavour(name: str = "flavour.json") -> dict[str, list[str]]:
+    """Observations for a leg where nothing happens to you."""
+    with open(CONTENT / name, encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+def observe(flavour: dict[str, list[str]], state, rng: random.Random) -> str:
+    """One observation, preferring something about the system you are sitting in."""
+    tagged = [line for tag in state.system_tags for line in flavour.get(tag, [])]
+    pool = tagged + flavour["any"] if tagged and rng.random() < 0.6 else flavour["any"]
+    return rng.choice(pool)
+
+
 def _matches(event: dict, state) -> bool:
     req = event.get("requires", {})
 
