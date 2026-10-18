@@ -12,7 +12,13 @@
       "{verdict}",
       "",
       "Signed by the standing council, and witnessed by the Mind, which asked for no clause of its own."
-    ]
+    ],
+    "eras": [
+      "Part I: The Founding",
+      "Part II: The Middle Years",
+      "Part III: The Hundredth Year"
+    ],
+    "quote": "From the Mind's record, year {year}:"
   },
   "scripture": {
     "title": "THE BOOK OF THE CROSSING, read aloud at {ship} in year {year}",
@@ -27,7 +33,13 @@
       "{verdict}",
       "",
       "Recited in full each landing-day, before the doors of {ship}, which is not a building."
-    ]
+    ],
+    "eras": [
+      "The Book of Landing",
+      "The Book of the Long Labour",
+      "The Book of the Hundredth Year"
+    ],
+    "quote": "And in the {nth} year it was written:"
   },
   "catalogue": {
     "title": "{colony} MUNICIPAL COLLECTION: permanent exhibition, year {year}",
@@ -42,7 +54,13 @@
       "{verdict}",
       "",
       "Catalogue compiled by the archivists' office. Corrections may be submitted in writing."
-    ]
+    ],
+    "eras": [
+      "Hall Two: The Founding",
+      "Hall Three: The Middle Years",
+      "Hall Four: The Present Day"
+    ],
+    "quote": "Archive extract, year {year}:"
   },
   "survival_log": {
     "title": "{colony}: RECORD KEPT AT {ship}, YEAR {year}",
@@ -57,7 +75,13 @@
       "{verdict}",
       "",
       "Kept up in the hope that somebody reads it. The machine helps with the spelling."
-    ]
+    ],
+    "eras": [
+      "Before",
+      "During",
+      "Now"
+    ],
+    "quote": "Year {year}, from the hull's log:"
   },
   "absent": {
     "title": "{colony}: AN ACCOUNT OF THE FIRST HUNDRED YEARS",
@@ -72,7 +96,13 @@
       "{verdict}",
       "",
       "Compiled by those who came after, from records nobody had been maintaining."
-    ]
+    ],
+    "eras": [
+      "The founding",
+      "The middle years",
+      "The late years"
+    ],
+    "quote": "A fragment, dated year {year}:"
   },
   "plain": {
     "title": "{colony}: THE FIRST HUNDRED YEARS",
@@ -87,6 +117,12 @@
       "{verdict}",
       "",
       "Recorded by the Mind, which was there for all of it."
-    ]
+    ],
+    "eras": [
+      "The first years",
+      "The middle years",
+      "The last years"
+    ],
+    "quote": "Year {year}:"
   }
 }

@@ -121,6 +121,8 @@ class ColonyState:
     arrival: dict = field(default_factory=dict)   # the Act 1 handoff, for the prologue
     peak_population: int = 0
     thaw_losses: int = 0
+    flag_years: dict[str, int] = field(default_factory=dict)   # when each was set
+    role_history: list[list] = field(default_factory=list)     # [year, role]
 
     # -- reading --------------------------------------------------------------
 
@@ -171,6 +173,13 @@ class ColonyState:
         before = self.axes[axis]
         self.axes[axis] = max(-100.0, min(100.0, before + delta))
         return self.axes[axis] - before
+
+    def mark(self, flags) -> None:
+        """Set flags, remembering the year each was first set."""
+        for flag in flags:
+            if flag not in self.flags:
+                self.flags.add(flag)
+                self.flag_years.setdefault(flag, self.year)
 
     def adapt(self, delta: float) -> float:
         """Move the planet's permanent pressure on the colony. Negative is
@@ -323,6 +332,8 @@ class ColonyState:
             "flags": sorted(self.flags),
             "people": [p.to_dict() for p in self.people],
             "chronicle": self.chronicle,
+            "flag_years": self.flag_years,
+            "role_history": self.role_history,
             "arrival": self.arrival,
         }
 

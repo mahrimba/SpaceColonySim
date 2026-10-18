@@ -232,6 +232,15 @@ class Voyage(App):
                             f"[{S[verdict and key]}]{verdict}[/{S[key]}]")
             return f"[{S['roll']}]{line}[/{S['roll']}]"
 
+        # The closing document: headings stand out, quoted records indent.
+        # Spaces go inside the tag; Textual's markup eats them outside it.
+        if line.isupper() and 0 < len(line) < 70:
+            return f"[{S['leg']}]{line}[/{S['leg']}]"
+        if line.startswith("  Decision: "):
+            return f"[{S['choice']}]    {line.strip()}[/{S['choice']}]"
+        if line.startswith("  "):
+            return f"[i]    {line.strip()}[/i]"
+
         return line
 
     def set_options(self, options: list[dict], prompt: str = "") -> None:

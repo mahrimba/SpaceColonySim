@@ -185,6 +185,12 @@ def test_documents_render_without_holes() -> None:
         body = "\n".join(lines)
         assert "{" not in body, f"seed {seed}: unfilled slot in the document"
         assert game.state.outcome_reason in body, "the verdict is missing"
+        # A history, not a list of every decision taken.
+        decisions = body.count("Decision: ")
+        assert decisions <= 9, f"seed {seed}: {decisions} decisions quoted"
+        assert "AFTERWORD" in lines, f"seed {seed}: no afterword"
+        after = lines[lines.index("AFTERWORD") + 2:]
+        assert len(after) >= 2, f"seed {seed}: the afterword says nothing"
         seen_forms.add(century.ROLE_DOCUMENTS.get(game.state.ship_role, "plain"))
     assert len(seen_forms) > 1, "every colony produced the same kind of document"
 

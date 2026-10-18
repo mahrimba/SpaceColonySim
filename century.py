@@ -18,6 +18,7 @@ import random
 from pathlib import Path
 
 import colony as C
+import history
 import constants as K
 from colony import ColonyState
 from resolve import CHOICE, CRIT_FAILURE, CRIT_SUCCESS, DELTA, FAILURE, SUCCESS, modifier
@@ -155,6 +156,8 @@ def draw(events: list[dict], state: ColonyState, rng: random.Random) -> dict | N
 # --- the century -------------------------------------------------------------
 
 class Century:
+    ROLE_DOCUMENTS = ROLE_DOCUMENTS
+
     def __init__(self, arrival: dict, seed: int | None = None,
                  events: list[dict] | None = None):
         self.seed = (arrival.get("seed") or random.randrange(1, 2**31)
@@ -406,18 +409,21 @@ class Century:
                 SUCCESS if grade == CRIT_SUCCESS else FAILURE) or {}
         else:
             outcome = choice
+            grade = None
 
         ctx = self._context()
         applied = self._apply(outcome, fragility=True)
-        if outcome.get("text"):
-            lines.append(outcome["text"].format_map(ctx))
+        told = outcome["text"].format_map(ctx) if outcome.get("text") else ""
+        if told:
+            lines.append(told)
         if applied:
             lines.append(f"{DELTA} " + "   ".join(applied))
         lines += self._warnings()
 
         for line in lines:
             s.note(line)
-        self._record(self.current["id"], choice["label"])
+        self._record(self.current["id"], choice["label"],
+                     situation=self.current_text, outcome=told, grade=grade)
         self._update_role()
 
         lines += self._check_end()
@@ -457,7 +463,7 @@ class Century:
                 if lost:
                     notes.append(f"{C.COLONY_GLYPHS['population']} Dead {lost:,}")
             elif key == "flags":
-                s.flags.update(value)
+                s.mark(value)
             elif key == "queue":
                 for event_id, delay in value:
                     s.schedule(event_id, delay)
@@ -475,7 +481,7 @@ class Century:
                 raise ValueError(f"unknown colony effect {key!r}")
 
         # Flags and follow-ups may also sit beside `effects` on an outcome.
-        s.flags.update(source.get("flags", []))
+        s.mark(source.get("flags", []))
         for event_id, delay in source.get("queue", []):
             s.schedule(event_id, delay)
 
@@ -512,19 +518,27 @@ class Century:
             role = "the old grove"
         if role != s.ship_role:
             previous, s.ship_role = s.ship_role, role
+            s.role_history.append([s.year, role])
             if previous != "the landing site" or s.year > 0:
                 s.note(f"They have stopped calling my hull {previous}. "
                        f"It is {role} now.")
 
     # -- chronicle and endings -------------------------------------------------
 
-    def _record(self, event_id: str | None, choice: str | None) -> None:
+    def _record(self, event_id: str | None, choice: str | None,
+                situation: str = "", outcome: str = "",
+                grade: str | None = None) -> None:
+        """What happened, kept whole: the situation, the choice, and what came
+        of it, so the history at the end can tell it rather than list it."""
         s = self.state
         s.chronicle.append({
             "year": s.year,
             "span": s.span,
             "event": event_id,
             "choice": choice,
+            "situation": situation,
+            "outcome": outcome,
+            "grade": grade,
             "population": s.population,
             "stats": {k: round(v) for k, v in s.stats.items()},
             "deference": round(s.deference),
@@ -623,54 +637,9 @@ class Century:
     # -- the document (Q27) ----------------------------------------------------
 
     def document(self) -> list[str]:
-        """The colony's own account of its century, in the voice it ended up with."""
-        s = self.state
-        ending = next((e for e in self.endings if e["id"] == s.outcome), None)
-        form_id = (ending or {}).get("document", "plain")
-        # The voice follows what they made of the hull (Q27). A scripture read
-        # at a meeting hall is nobody's history. The two endings where the Mind
-        # is gone keep their own form regardless.
-        if s.outcome not in ("forgotten", "extinct"):
-            form_id = ROLE_DOCUMENTS.get(s.ship_role, form_id)
-        template = self.documents.get(form_id, self.documents["plain"])
-        ctx = {
-            "colony": s.name,
-            "ship": s.ship_role,
-            "year": s.year,
-            "population": f"{s.population:,}",
-            "peak": f"{s.peak_population:,}",
-            "verdict": s.outcome_reason,
-            "voyage_legs": s.arrival.get("legs_flown", "?"),
-            "voyage_lost": f"{s.arrival.get('colonists_lost', 0):,}",
-            "planet": (s.planet or {}).get("name", "this world"),
-            "character": ", ".join(f"{pole.lower()}" for _, pole, _ in
-                                   s.dominant_axes(3)) or "unformed",
-        }
-        out = [template["title"].format_map(SafeDict(ctx)), ""]
-        out += [line.format_map(SafeDict(ctx)) for line in template["prologue"]]
-        out.append("")
-        out += self._chronicle_lines()
-        out.append("")
-        out += [line.format_map(SafeDict(ctx)) for line in template["closing"]]
-        return out
-
-    def _chronicle_lines(self) -> list[str]:
-        """The century as the colony remembers it: one line per thing that
-        actually happened, phrased by what they became."""
-        s = self.state
-        lines = []
-        for entry in s.chronicle:
-            if not entry["choice"]:
-                continue
-            bits = [f"Year {entry['year']}:", entry["choice"].rstrip('.') + "."]
-            if entry["dead"]:
-                bits.append("(" + ", ".join(entry["dead"]) + " died.)")
-            lines.append("  " + " ".join(bits))
-        dead = [p for p in s.people if not p.alive]
-        if dead:
-            lines.append("")
-            lines.append("  Remembered: " + ", ".join(p.name for p in dead[:12]) + ".")
-        return lines
+        """The colony's own account of its century, in the voice it ended up
+        with, and the Mind's afterword. See history.py."""
+        return history.compose(self)
 
 
 def _ending_matches(ending: dict, facts: dict, state: ColonyState) -> bool:
