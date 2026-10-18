@@ -67,6 +67,7 @@ function draw(json) {
 
   document.body.dataset.act = update.act;
   $("telemetry").innerHTML = update.rail;
+  $("vitals").innerHTML = update.vitals;
   $("cmd-planets").hidden = !update.surveyed || update.landed;
   $("cmd-cast").hidden = !update.landed;
   $("prompt").innerHTML = update.prompt;

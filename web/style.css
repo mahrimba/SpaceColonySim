@@ -225,17 +225,40 @@ kbd {
 
 @media (max-width: 52rem) {
   .shell { grid-template-columns: minmax(0, 1fr); }
+  /* The rail becomes a strip pinned to the top: the vitals always in view,
+     the full telemetry a tap away. */
   .rail {
-    position: static;
-    max-height: none;
-    padding: 1rem 0 0;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    max-height: 70dvh;
+    padding: max(0.5rem, env(safe-area-inset-top)) 0 0.5rem;
+    background: var(--ground);
     border-bottom: 1px solid var(--line);
+    transition: background-color 2.4s ease;
   }
   .rail summary {
     display: block;
     cursor: pointer;
-    padding-bottom: 0.75rem;
+    list-style: none;
+  }
+  .rail summary::-webkit-details-marker { display: none; }
+  #vitals {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.125rem 0.875rem;
+  }
+  .vital { white-space: nowrap; }
+  .more {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
     color: var(--muted);
   }
+  .more::before { content: "Show all telemetry"; }
+  .rail[open] .more::before { content: "Hide telemetry"; }
+  .rail[open] .more { margin-bottom: 0.75rem; }
+  .rail[open] #vitals { display: none; }
+  .block { scroll-margin-top: 6rem; }
   body { font-size: 1.0625rem; }
 }

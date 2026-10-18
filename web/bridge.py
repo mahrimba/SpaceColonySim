@@ -51,18 +51,30 @@ def to_html(markup: str) -> str:
     return "".join(out)
 
 
-def rail_row(markup: str) -> str:
-    """A panel row is 'label<padding>value'; the padding becomes a grid."""
-    row = markup.strip()
-    if not row:
-        return '<div class="gap"></div>'
+def _split(row: str) -> list[str]:
+    """A panel row is 'label<padding>value'."""
     parts = re.split(r"(?<=\S)\s{2,}", row, maxsplit=1)
     if len(parts) == 1:     # a label that filled its padding: the value is the tone
         parts = re.split(r"\s+(?=\[(?:green|yellow|red)\])", row, maxsplit=1)
+    return parts
+
+
+def rail_row(markup: str) -> str:
+    """One panel row for the rail; the padding becomes a grid."""
+    row = markup.strip()
+    if not row:
+        return '<div class="gap"></div>'
+    parts = _split(row)
     if len(parts) == 2:
         return (f'<div class="row"><span>{to_html(parts[0])}</span>'
                 f'<span>{to_html(parts[1])}</span></div>')
     return f'<div class="line">{to_html(row)}</div>'
+
+
+def vital(markup: str) -> str:
+    """A stat row squeezed into a chip, for the strip a phone keeps in view."""
+    parts = _split(markup.strip())
+    return f'<span class="vital">{" ".join(to_html(p) for p in parts)}</span>'
 
 
 def line_class(styled: str) -> str:
@@ -123,12 +135,14 @@ class WebSession(Session):
             self.kind = "log"
 
     def update(self) -> str:
+        rows = self.panel().split("\n")
         update = {
             "clear": self.cleared,
             "blocks": self.blocks,
             "prompt": to_html(self.prompt),
             "options": [to_html(o["label"]) for o in self.options],
-            "rail": "".join(rail_row(r) for r in self.panel().split("\n")),
+            "rail": "".join(rail_row(r) for r in rows),
+            "vitals": "".join(vital(r) for r in rows if "█" in r),
             "act": "colony" if self.century is not None else "voyage",
             "landed": self.century is not None,
             "surveyed": bool(self.game and self.game.state.candidates),
