@@ -49,5 +49,53 @@
   "Pluralist": [
     "The council has a farmer, a physician and a woman whose only stated qualification is patience.",
     "Every household sends someone to the season's planning, including the ones with nothing to plant."
+  ],
+  "world:heavy": [
+    "A child drops a cup and it shatters harder than any cup should. The parents flinch at the sound.",
+    "There are almost no stairs in the valley. Ramps everywhere, shallow and long."
+  ],
+  "world:light": [
+    "Someone has built a swing that goes higher than any on Earth could. There is a queue for it every evening.",
+    "Dust from the road settles on my cameras an hour after the cart has gone."
+  ],
+  "world:thin_air": [
+    "The pump houses run all night. I can hear them through my hull, a slow mechanical breathing.",
+    "The children race uphill and lose to the old people, who learned to pace themselves."
+  ],
+  "world:thick_air": [
+    "Voices carry across the whole valley in this air. Nobody here has a private argument.",
+    "The wind leans on the houses all afternoon like a crowd."
+  ],
+  "world:cold": [
+    "Ice on the inside of the windows again. Someone has drawn a face in it.",
+    "The fields are under snow for half the year. The colony spends that half repairing everything."
+  ],
+  "world:hot": [
+    "The town is silent at noon. The only movement is my drones, which do not mind the heat.",
+    "Someone has trained vines up the side of my hull for the shade. They are growing well."
+  ],
+  "world:dry": [
+    "Every roof has a gutter and every gutter leads to a cistern. Rain is a holiday here.",
+    "A child asks to see the sea in my archive. I show them, and they ask whether it is real."
+  ],
+  "world:ocean": [
+    "The tide leaves stranger things on the beach each season. The children collect them.",
+    "Fog off the sea every morning. My cameras see nothing until noon."
+  ],
+  "world:radiant": [
+    "The dosimeter by the school door clicks all day. The children stopped hearing it years ago.",
+    "Aurora every night, bright enough to read by. It is the same radiation that makes them sick."
+  ],
+  "world:hostile_life": [
+    "Something has grown over the eastern fence again. The burning crews go out at dawn.",
+    "The infirmary keeps a wall of specimens: everything on this world that has tried to eat us."
+  ],
+  "world:living": [
+    "Something sings in the forest every dusk. The colony has named it after a bird none of them have seen.",
+    "A herd crosses the valley at the turn of the season. The colony stops work to watch it pass."
+  ],
+  "world:sterile": [
+    "The compost heaps are the most carefully tended things in the colony.",
+    "There is a mineral crust on the north rocks that looks like moss. Everyone knows it is not."
   ]
 }

@@ -35,6 +35,7 @@ COLONY_LABELS = {
 COLONY_GLYPHS = {
     "food": "🌾", "industry": "🔨", "health": "⚕", "knowledge": "📖",
     "cohesion": "🤝", "population": "👣", "deference": "🜂",
+    "world": "🌍",
 }
 
 COLONY_COLOURS = {
@@ -171,6 +172,13 @@ class ColonyState:
         self.axes[axis] = max(-100.0, min(100.0, before + delta))
         return self.axes[axis] - before
 
+    def adapt(self, delta: float) -> float:
+        """Move the planet's permanent pressure on the colony. Negative is
+        adaptation. Never to zero: a world stays itself."""
+        before = self.hostility
+        self.hostility = max(0.05, min(1.0, before + delta))
+        return self.hostility - before
+
     def defer(self, delta: float) -> float:
         before = self.deference
         self.deference = max(0.0, min(100.0, before + delta))
@@ -179,8 +187,11 @@ class ColonyState:
     def note(self, line: str) -> None:
         self.log.append(line)
 
-    def schedule(self, event_id: str, in_ticks: int) -> None:
-        self.queue.append([len(self.chronicle) + max(1, int(in_ticks)), event_id])
+    def schedule(self, event_id: str, in_ticks: int, now: bool = False) -> None:
+        """Queue an event `in_ticks` from now. Follow-ups wait at least one
+        tick; `now` lets the founding put the world's problems first."""
+        delay = int(in_ticks) if now else max(1, int(in_ticks))
+        self.queue.append([len(self.chronicle) + delay, event_id])
 
     def due_event(self) -> str | None:
         for entry in list(self.queue):
@@ -204,10 +215,18 @@ class ColonyState:
 
     def next_span(self) -> int:
         s = self.stability()
+        span = 1
         for threshold, years in ((0.46, 10), (0.34, 5), (0.23, 2)):
             if s >= threshold:
-                return years
-        return 1
+                span = years
+                break
+        # The first years are lived one at a time, however calm (Q3): a
+        # landing does not get to skip its first decade.
+        if self.year < 3:
+            return 1
+        if self.year < 10:
+            return min(span, 2)
+        return span
 
     # -- population (Q24: logistic, ceilinged by land and tools) --------------
 
@@ -370,7 +389,8 @@ def found(arrival: dict, rng: random.Random) -> ColonyState:
         hostility=hostility,
         planet=planet,
         arrival=arrival,
-        flags={f"voyage:{f}" for f in flags},
+        flags={f"voyage:{f}" for f in flags}
+        | {f"world:{t}" for t in world_traits(planet)},
     )
 
     for flag in flags:
@@ -435,6 +455,63 @@ def _wake_the_named(state: ColonyState, arrival: dict, rng: random.Random) -> No
 def load_arrival(path: str) -> dict:
     with open(path, encoding="utf-8") as fh:
         return json.load(fh)
+
+
+# --- the world's character ---------------------------------------------------
+#
+# A planet carries readings, not tags. These turn the readings into the few
+# facts a colony lives with every day, as `world:<trait>` flags events can
+# require. Thresholds sit at roughly the worst fifth of the worlds players
+# actually settle, so a typical landing has one or two traits.
+
+WORLD_TRAITS = {
+    "heavy": lambda p: p["gravity"] >= 1.25,
+    "light": lambda p: p["gravity"] <= 0.75,
+    "thin_air": lambda p: p["pressure"] <= 0.6,
+    "thick_air": lambda p: p["pressure"] >= 1.5,
+    "cold": lambda p: p["temperature"] <= 3,
+    "hot": lambda p: p["temperature"] >= 32,
+    "dry": lambda p: p["water"] <= 0.18,
+    "ocean": lambda p: p["water"] >= 0.6,
+    "radiant": lambda p: p["radiation"] >= 3.0,
+    "hostile_life": lambda p: p["biosphere"] == "hostile",
+    "living": lambda p: p["biosphere"] == "complex",
+    "sterile": lambda p: p["biosphere"] == "none",
+}
+
+WORLD_LANDFALL = {
+    "heavy": "My hull settles onto its footings and keeps settling. Everything "
+             "here weighs more than it should, and the people stepping out of me "
+             "feel it in their knees first.",
+    "light": "We land too lightly. The first people down the ramp bounce and "
+             "laugh, and the dust they kick up hangs in the air for a minute.",
+    "thin_air": "The air outside my hatches is thin. The first people out stop "
+                "after twenty steps to breathe.",
+    "thick_air": "The air presses warm and dense against my hull and carries "
+                 "sound for kilometres. The first people out move as if wading.",
+    "cold": "Frost forms on my hull within an hour of landing. The ground the "
+            "colonists step onto is frozen solid.",
+    "hot": "My hull plates tick as they heat in the sun. By midday nobody will "
+           "go outside who does not have to.",
+    "dry": "There is no surface water within a day's walk. My tanks hold more "
+           "water than this valley has seen in a century.",
+    "ocean": "We come down on the largest island I could find. From my highest "
+             "camera, the sea fills every horizon.",
+    "radiant": "My dosimeters begin to count the moment the hatches open. The "
+               "sky here is bright in wavelengths that do people harm.",
+    "hostile_life": "Within a day, something native is growing on my landing "
+                    "struts. Within a week, it is growing on the colonists.",
+    "living": "The forest at the edge of the landing site is loud at dusk, and "
+              "none of the voices in it are ours.",
+    "sterile": "Nothing grows here. The soil my drones sample is ground rock, as "
+               "lifeless as the inside of my sealed vault.",
+}
+
+
+def world_traits(planet: dict) -> list[str]:
+    if not planet or "gravity" not in planet:
+        return []
+    return [name for name, test in WORLD_TRAITS.items() if test(planet)]
 
 
 def planet_pressure(state: ColonyState) -> str:

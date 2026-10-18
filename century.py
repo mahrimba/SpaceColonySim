@@ -175,6 +175,11 @@ class Century:
         s = self.state
         s.note(f"— Year {s.year}. Landfall.")
         s.note(C.planet_pressure(s))
+        for i, trait in enumerate(C.world_traits(s.planet)):
+            s.note(C.WORLD_LANDFALL[trait])
+            # The world is not a random event: whatever is wrong with it
+            # arrives in the first years, one problem at a time.
+            s.schedule(f"world_{trait}", i, now=True)
         if s.thaw_losses:
             s.note(f"The thaw takes {s.thaw_losses:,} of them before the first "
                    "morning. I record every name.")
@@ -202,10 +207,17 @@ class Century:
             if drawn is not None:
                 self.phase = EVENT
                 return lines + drawn
-            quiet = self.rng.choice(self.flavour["any"])
+            quiet = self.rng.choice(self._flavour_pool())
             self.state.note(quiet)
             lines.append(quiet)
             self._record(None, None)
+
+    def _flavour_pool(self) -> list[str]:
+        """Quiet years sound like this world and these people, not anywhere."""
+        s = self.state
+        keys = ["any"] + [f for f in sorted(s.flags) if f.startswith("world:")]
+        keys += [pole for _, pole, _ in s.dominant_axes(2)]
+        return [line for k in keys for line in self.flavour.get(k, [])]
 
     def _advance(self) -> list[str]:
         """One span of years: the clock, the people, and entropy."""
@@ -428,6 +440,13 @@ class Century:
             elif key == "queue":
                 for event_id, delay in value:
                     s.schedule(event_id, delay)
+            elif key == "hostility":
+                # Shown as adaptation, so the sign reads the way the player
+                # feels it: a world that eases is a gain.
+                moved = s.adapt(float(value))
+                if abs(moved) >= 0.005:
+                    notes.append(f"{C.COLONY_GLYPHS['world']} Adapted "
+                                 f"{-moved * 100:+.0f}")
             elif key == "name":
                 s.name = str(value)
                 notes.append(f"Named {value}")

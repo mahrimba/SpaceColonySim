@@ -77,7 +77,9 @@ def test_every_ending_is_reachable() -> None:
     assert any(not e.get("requires") for e in ENDINGS), "no catch-all ending"
     seen = set()
     for seed in range(400):
-        for policy in CS.POLICIES.values():
+        # Random choices count as a playstyle: some endings need a mix no
+        # single-minded policy produces.
+        for policy in (*CS.POLICIES.values(), None):
             game = CS.play(CS.synthetic_arrival(seed), seed=seed, events=EVENTS,
                            policy=policy)
             seen.add(game.state.outcome)
@@ -96,7 +98,8 @@ def test_content_is_wired_up() -> None:
     ids = {e["id"] for e in EVENTS}
     scheduled: set[str] = set()
     effect_keys = set(C.COLONY_STATS) | {
-        "population_lost", "population_lost_frac", "flags", "queue", "name"}
+        "population_lost", "population_lost_frac", "flags", "queue", "name",
+        "hostility"}
 
     for event in EVENTS:
         assert event["text"], f"{event['id']}: no text"
@@ -269,6 +272,33 @@ def test_act_one_flags_shape_the_culture() -> None:
     assert shaped.axes["status"] < 0, "honoured sponsors did not skew it elitist"
     assert shaped.axes["nature"] > 0, "killing the sample did not skew it industrial"
     assert shaped.axes["belief"] > 0, "keeping the dream did not skew it spiritual"
+
+
+def test_every_world_feels_different() -> None:
+    """Each world trait must land, read differently, and be answerable, and
+    adapting to it must actually ease the world."""
+    ids = {e["id"]: e for e in EVENTS}
+    for trait in C.WORLD_TRAITS:
+        assert trait in C.WORLD_LANDFALL, f"{trait}: no landfall line"
+        assert FLAVOUR.get(f"world:{trait}"), f"{trait}: no quiet-year flavour"
+        assert any(f"world:{trait}" in e.get("requires", {}).get("flags", [])
+                   for e in EVENTS), f"{trait}: no event answers it"
+
+    # Traits reach the colony as flags, and most real landings carry some.
+    with_traits = 0
+    for seed in range(100):
+        state = C.found(CS.synthetic_arrival(seed), random.Random(seed))
+        traits = [f for f in state.flags if f.startswith("world:")]
+        with_traits += bool(traits)
+    assert with_traits > 60, f"only {with_traits}/100 worlds had any character"
+
+    # Adapting lowers hostility, and never to nothing.
+    game = century.Century(CS.synthetic_arrival(8), seed=8, events=EVENTS)
+    before = game.state.hostility
+    game._apply({"effects": {"hostility": -0.1}})
+    assert game.state.hostility < before
+    game._apply({"effects": {"hostility": -5}})
+    assert game.state.hostility >= 0.05
 
 
 def test_named_dead_stay_dead() -> None:

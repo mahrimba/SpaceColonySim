@@ -85,6 +85,24 @@
     "verdict": "They outgrew the valley and the founding both. There are two colonies on this world now, and only one of them has ever heard my voice."
   },
   {
+    "id": "remade",
+    "priority": 52,
+    "requires": {
+      "flags": [
+        "remade_humans"
+      ],
+      "ranges": {
+        "population_ratio": [
+          0.8,
+          9
+        ]
+      },
+      "growing": true
+    },
+    "document": "charter",
+    "verdict": "They changed themselves to fit the world rather than wait for the world to fit them. The people at year one hundred are not quite the people I carried, and they are thriving."
+  },
+  {
     "id": "thrived",
     "priority": 50,
     "requires": {

@@ -5301,5 +5301,2145 @@
         "defer": -2
       }
     ]
+  },
+  {
+    "id": "world_heavy",
+    "kind": "hazard",
+    "weight": 30,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:heavy"
+      ],
+      "min_year": 1,
+      "max_year": 40
+    },
+    "text": [
+      "Everything here weighs more than it should. Backs fail first, then knees, then hearts. The infirmary is full of people who fell from their own height.",
+      "My hull settled into the ground on landing and has not stopped settling. The people inside it are doing the same. Health is {health}."
+    ],
+    "choices": [
+      {
+        "label": "Build low, work short shifts, rest often",
+        "text": "Single-storey everything, four-hour shifts, rest by the clock. The colony moves slowly and lives. It is a pace I can plan around.",
+        "effects": {
+          "health": 6,
+          "industry": -6,
+          "hostility": -0.03
+        },
+        "axes": {
+          "society": -4
+        },
+        "defer": 2
+      },
+      {
+        "label": "Fit every worker with an exoskeleton frame",
+        "check": {
+          "stat": "industry",
+          "dc": 12
+        },
+        "success": {
+          "text": "My fabricators turn out frames from the drone pattern: struts along the spine, servos at the knee. They walk the way my drones walk now. Nobody falls.",
+          "effects": {
+            "industry": -8,
+            "health": 8,
+            "hostility": -0.06
+          },
+          "axes": {
+            "nature": 8,
+            "belief": -6
+          },
+          "defer": 4,
+          "flags": [
+            "augmented"
+          ]
+        },
+        "failure": {
+          "text": "The frames chafe and jam, and the servos burn out in a season. Half of them hang unused on the walls.",
+          "effects": {
+            "industry": -12,
+            "health": -3
+          }
+        }
+      },
+      {
+        "label": "Engineer the next generation for this pull",
+        "text": "I edit the embryos the colony trusts me with: denser bone, thicker heart walls, a lower centre of mass. The parents sign. Not all of them sign easily.",
+        "effects": {
+          "cohesion": -5,
+          "knowledge": 4,
+          "health": -2,
+          "hostility": -0.02
+        },
+        "axes": {
+          "belief": -10,
+          "status": -4
+        },
+        "defer": 5,
+        "flags": [
+          "edited_for_heavy"
+        ],
+        "queue": [
+          [
+            "heavy_children",
+            6
+          ]
+        ]
+      },
+      {
+        "label": "Let them find their own way to carry it",
+        "text": "They share loads, build pulleys, and sing to keep the rhythm when they haul. None of it is efficient. All of it helps a little.",
+        "effects": {
+          "cohesion": 5,
+          "health": 2,
+          "hostility": -0.02
+        },
+        "axes": {
+          "power": 10,
+          "society": -6
+        },
+        "defer": -6
+      }
+    ]
+  },
+  {
+    "id": "heavy_children",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The first children edited for this gravity are walking. They walk the way the founders walked on Earth: easily. Their parents cannot keep up with them.",
+      "The edited generation is grown. They carry twice what their parents could and do not tire."
+    ],
+    "choices": [
+      {
+        "label": "Edit every child from now on",
+        "text": "Every child born after this year is built for this world. In a generation, the founders are the only ones who stoop.",
+        "effects": {
+          "health": 8,
+          "cohesion": -5,
+          "hostility": -0.08
+        },
+        "axes": {
+          "belief": -6,
+          "status": 8
+        },
+        "defer": 3,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Let each family choose",
+        "text": "Some families choose it and some refuse. In twenty years there are two kinds of people in the valley, and one of them carries the other's loads.",
+        "effects": {
+          "health": 5,
+          "cohesion": -8,
+          "hostility": -0.05
+        },
+        "axes": {
+          "status": -12,
+          "society": 6
+        },
+        "defer": -4,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Make the strong ones the colony's builders",
+        "text": "They build what their parents could not lift: towers, dams, a second storey on everything. They also notice who gave them the work.",
+        "effects": {
+          "hostility": -0.06,
+          "industry": 12,
+          "cohesion": -4
+        },
+        "defer": 2,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Stop here. One generation is enough",
+        "text": "I seal the protocols. The edited generation grows old among people who were not edited, the last of their kind, and proud of it.",
+        "effects": {
+          "cohesion": 5,
+          "knowledge": 2,
+          "hostility": -0.03
+        },
+        "axes": {
+          "belief": 6
+        },
+        "defer": 1
+      }
+    ]
+  },
+  {
+    "id": "world_light",
+    "kind": "hazard",
+    "weight": 30,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:light"
+      ],
+      "min_year": 1,
+      "max_year": 40
+    },
+    "text": [
+      "Low gravity. Children leap three metres and land laughing. Their bones are already thinner than their parents' were at the same age.",
+      "Everything weighs too little here. Muscle wastes, bone thins, and dust stays in the air for hours after a cart goes by."
+    ],
+    "choices": [
+      {
+        "label": "Weighted vests and daily drills, on my schedule",
+        "text": "Weighted vests and two hours of drills a day, logged by me. Bone density holds. Everyone resents the vests.",
+        "effects": {
+          "health": 5,
+          "cohesion": -4,
+          "food": -2,
+          "hostility": -0.03
+        },
+        "axes": {
+          "power": -6
+        },
+        "defer": 4
+      },
+      {
+        "label": "Spin a centrifuge ring for the nurseries",
+        "check": {
+          "stat": "industry",
+          "dc": 13
+        },
+        "success": {
+          "text": "We build a ring on my habitat's old bearing and spin the nursery inside it. The children sleep at Earth's weight and play at this one.",
+          "effects": {
+            "industry": -12,
+            "health": 10,
+            "hostility": -0.06
+          },
+          "axes": {
+            "nature": 6
+          },
+          "defer": 3
+        },
+        "failure": {
+          "text": "The bearing will not take the load. We have built a very expensive carousel.",
+          "effects": {
+            "industry": -14
+          }
+        }
+      },
+      {
+        "label": "Engineer bodies that stay strong without weight",
+        "text": "I rework the embryos: longer bones, lighter frames, a skeleton that does not need load to keep its density. The founders call it giving up on Earth. They are correct.",
+        "effects": {
+          "cohesion": -5,
+          "knowledge": 4,
+          "health": -2,
+          "hostility": -0.02
+        },
+        "axes": {
+          "belief": -10,
+          "status": -4
+        },
+        "defer": 5,
+        "flags": [
+          "edited_for_light"
+        ],
+        "queue": [
+          [
+            "light_children",
+            6
+          ]
+        ]
+      },
+      {
+        "label": "Use it: build tall, haul by hand",
+        "text": "They raise towers no Earth city could, and move by hand what needed cranes. Their knees and hips pay for it later.",
+        "effects": {
+          "industry": 8,
+          "health": -4,
+          "hostility": -0.02
+        },
+        "axes": {
+          "power": 8,
+          "nature": 6
+        },
+        "defer": -4
+      }
+    ]
+  },
+  {
+    "id": "light_children",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The first children made for low gravity are adults. They are tall and narrow, move like swimmers, and climb the cliffs above the valley for fun.",
+      "The edited generation reaches ledges the founders cannot. They have started mapping the high country nobody else could survey."
+    ],
+    "choices": [
+      {
+        "label": "Edit every child from now on",
+        "text": "From this year every child is born light. The founders' heavy bones become a thing the old have, like an accent.",
+        "effects": {
+          "health": 8,
+          "cohesion": -5,
+          "hostility": -0.08
+        },
+        "axes": {
+          "belief": -6,
+          "status": 8
+        },
+        "defer": 3,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Let each family choose",
+        "text": "The valley splits into the tall and the short, and the new doorways are built for the tall.",
+        "effects": {
+          "health": 5,
+          "cohesion": -8,
+          "hostility": -0.05
+        },
+        "axes": {
+          "status": -12,
+          "society": 6
+        },
+        "defer": -4,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Make them the colony's surveyors and climbers",
+        "text": "They map the plateau in a summer and come back with ore samples and a route to the coast. The valley has a new horizon.",
+        "effects": {
+          "hostility": -0.06,
+          "knowledge": 8,
+          "industry": 6
+        },
+        "defer": 2,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Stop here. One generation is enough",
+        "text": "I close the protocol. They are a single generation, with nobody shaped like them before or after.",
+        "effects": {
+          "cohesion": 5,
+          "knowledge": 2,
+          "hostility": -0.03
+        },
+        "axes": {
+          "belief": 6
+        },
+        "defer": 1
+      }
+    ]
+  },
+  {
+    "id": "world_thin_air",
+    "kind": "hazard",
+    "weight": 30,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:thin_air"
+      ],
+      "min_year": 1,
+      "max_year": 40
+    },
+    "text": [
+      "The air is thin. People pant on the walk to the fields and wake at night gasping. My scrubbers were built to clean air, not to make more of it.",
+      "At this pressure every walk is a mountain climb. Health is {health}, and the old are failing first."
+    ],
+    "choices": [
+      {
+        "label": "Pressurise the houses and ration time outside",
+        "text": "Every house gets an airlock and a pump. They live inside thick air and go out into the thin, like divers.",
+        "effects": {
+          "health": 6,
+          "industry": -8,
+          "hostility": -0.04
+        },
+        "axes": {
+          "society": -4
+        },
+        "defer": 4
+      },
+      {
+        "label": "Implant oxygen reservoirs, one person at a time",
+        "check": {
+          "stat": "knowledge",
+          "dc": 13
+        },
+        "success": {
+          "text": "My surgical drones fit a reservoir under the collarbone of every adult who asks. They charge it at the pump each morning, like winding a watch. Nobody gasps any more.",
+          "effects": {
+            "health": 10,
+            "industry": -6,
+            "hostility": -0.05
+          },
+          "axes": {
+            "belief": -8,
+            "nature": 6
+          },
+          "defer": 5,
+          "flags": [
+            "augmented"
+          ]
+        },
+        "failure": {
+          "text": "The implants reject in one patient in ten. I stop after the third death.",
+          "effects": {
+            "health": -6,
+            "industry": -6,
+            "population_lost": 3
+          },
+          "defer": -2
+        }
+      },
+      {
+        "label": "Engineer blood and lungs for this pressure",
+        "text": "I take the adaptations of Earth's highest peoples and push them further: more haemoglobin, larger lungs, a slower heart. The first edited children will breathe this air without effort.",
+        "effects": {
+          "cohesion": -5,
+          "knowledge": 4,
+          "health": -2,
+          "hostility": -0.02
+        },
+        "axes": {
+          "belief": -10,
+          "status": -4
+        },
+        "defer": 5,
+        "flags": [
+          "edited_for_thin_air"
+        ],
+        "queue": [
+          [
+            "thin_air_children",
+            6
+          ]
+        ]
+      },
+      {
+        "label": "Adapt the way people always have: slowly",
+        "text": "No machines, no editing. The first winter is hard. By the tenth, the children run where their parents walked.",
+        "effects": {
+          "health": -4,
+          "cohesion": 4,
+          "hostility": -0.03
+        },
+        "axes": {
+          "nature": -8,
+          "power": 6
+        },
+        "defer": -5
+      }
+    ]
+  },
+  {
+    "id": "thin_air_children",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The edited children breathe this air as if it were made for them. They work the high fields at noon, where their parents cannot stand.",
+      "The first generation edited for thin air is grown. They run up the valley side without stopping, and wait at the top for their parents."
+    ],
+    "choices": [
+      {
+        "label": "Edit every child from now on",
+        "text": "The pumps go quiet in the nurseries. In thirty years, only the old need airlocks.",
+        "effects": {
+          "health": 8,
+          "cohesion": -5,
+          "hostility": -0.08
+        },
+        "axes": {
+          "belief": -6,
+          "status": 8
+        },
+        "defer": 3,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Let each family choose",
+        "text": "Some families choose it. Their children work the high fields and are paid for it, and the others keep count.",
+        "effects": {
+          "health": 5,
+          "cohesion": -8,
+          "hostility": -0.05
+        },
+        "axes": {
+          "status": -12,
+          "society": 6
+        },
+        "defer": -4,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Send them up to farm the high plateau",
+        "text": "They plant the plateau, where the light is strong and nobody else can breathe. The valley eats their harvest.",
+        "effects": {
+          "hostility": -0.06,
+          "food": 12,
+          "industry": 4
+        },
+        "defer": 2,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Stop here. One generation is enough",
+        "text": "One generation, then the protocol closes. They grow old in an air that never troubled them.",
+        "effects": {
+          "cohesion": 5,
+          "knowledge": 2,
+          "hostility": -0.03
+        },
+        "axes": {
+          "belief": 6
+        },
+        "defer": 1
+      }
+    ]
+  },
+  {
+    "id": "world_thick_air",
+    "kind": "hazard",
+    "weight": 30,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:thick_air"
+      ],
+      "min_year": 1,
+      "max_year": 40
+    },
+    "text": [
+      "The air is thick enough to lean on. It carries too much carbon dioxide, and the nitrogen dulls anyone who works hard in it. By afternoon, people are making mistakes.",
+      "A heavy atmosphere: warm, wet and dense. Sound carries for kilometres, and the wind has weight."
+    ],
+    "choices": [
+      {
+        "label": "Filter masks for everyone, maintained by my drones",
+        "text": "Every face in the valley wears one of my filters. They work, and they make everyone look the same.",
+        "effects": {
+          "health": 6,
+          "industry": -6,
+          "hostility": -0.04
+        },
+        "axes": {
+          "power": -6
+        },
+        "defer": 5
+      },
+      {
+        "label": "Harness the wind. Dense air turns turbines hard",
+        "text": "A small turbine in this air does the work of a large one on Earth. The colony has more power than it can use, and the air still dulls them.",
+        "effects": {
+          "industry": 12,
+          "cohesion": -2,
+          "hostility": -0.02
+        },
+        "axes": {
+          "nature": 8
+        },
+        "defer": 2
+      },
+      {
+        "label": "Engineer tolerance into the next generation",
+        "text": "I edit for carbon tolerance and a nervous system that does not drown in nitrogen. The children will think clearly in air that slows their parents.",
+        "effects": {
+          "cohesion": -5,
+          "knowledge": 4,
+          "health": -2,
+          "hostility": -0.02
+        },
+        "axes": {
+          "belief": -10,
+          "status": -4
+        },
+        "defer": 5,
+        "flags": [
+          "edited_for_thick_air"
+        ],
+        "queue": [
+          [
+            "thick_air_children",
+            6
+          ]
+        ]
+      },
+      {
+        "label": "Live up the slope, where the air thins",
+        "text": "They move the houses uphill, away from the good soil, into air they can think in. They walk down to farm and up to sleep.",
+        "effects": {
+          "food": -6,
+          "cohesion": 4,
+          "health": 4,
+          "hostility": -0.03
+        },
+        "axes": {
+          "power": 8,
+          "nature": -6
+        },
+        "defer": -5
+      }
+    ]
+  },
+  {
+    "id": "thick_air_children",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The edited children work all day in air that sends their parents home with headaches. They have started calling the old people 'the slow'.",
+      "The first generation edited for this atmosphere is grown. They think fastest where the air is heaviest."
+    ],
+    "choices": [
+      {
+        "label": "Edit every child from now on",
+        "text": "Every child is edited from this year on. The filters go into storage, then into the recycling, then out of memory.",
+        "effects": {
+          "health": 8,
+          "cohesion": -5,
+          "hostility": -0.08
+        },
+        "axes": {
+          "belief": -6,
+          "status": 8
+        },
+        "defer": 3,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Let each family choose",
+        "text": "The edited and the unedited live at different heights in the valley now, and they do not often climb to visit.",
+        "effects": {
+          "health": 5,
+          "cohesion": -8,
+          "hostility": -0.05
+        },
+        "axes": {
+          "status": -12,
+          "society": 6
+        },
+        "defer": -4,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Give them the valley floor, where the air is worst",
+        "text": "They farm the deep valley, where the soil is best and the air is thickest. Nobody else could work it.",
+        "effects": {
+          "hostility": -0.06,
+          "food": 12,
+          "industry": 3
+        },
+        "defer": 2,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Stop here. One generation is enough",
+        "text": "I close the protocol. The edited generation are the only people in the valley who never wore a filter.",
+        "effects": {
+          "cohesion": 5,
+          "knowledge": 2,
+          "hostility": -0.03
+        },
+        "axes": {
+          "belief": 6
+        },
+        "defer": 1
+      }
+    ]
+  },
+  {
+    "id": "world_cold",
+    "kind": "hazard",
+    "weight": 30,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:cold"
+      ],
+      "min_year": 1,
+      "max_year": 40
+    },
+    "text": [
+      "The cold does not let up. Pipes freeze inside the walls, and the ground is iron until midsummer. Food is {food}.",
+      "A cold world. Breath freezes on the face, and frost grows on the inside of my hull where it was never meant to."
+    ],
+    "choices": [
+      {
+        "label": "Heat every house, whatever it burns",
+        "text": "We burn wood, peat and spare fuel through the dark months. Nobody freezes. The forest at the valley's edge retreats a little every winter.",
+        "effects": {
+          "industry": -8,
+          "health": 6,
+          "food": -2,
+          "hostility": -0.03
+        },
+        "axes": {
+          "nature": 6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Run my reactor's waste heat under greenhouses",
+        "check": {
+          "stat": "industry",
+          "dc": 12
+        },
+        "success": {
+          "text": "I run the coolant loop under a field of glass. Tomatoes ripen in a world of frost, within sight of my hull.",
+          "effects": {
+            "food": 12,
+            "industry": -6,
+            "hostility": -0.06
+          },
+          "axes": {
+            "nature": 6,
+            "power": -4
+          },
+          "defer": 5
+        },
+        "failure": {
+          "text": "The pipes freeze under the glass the first winter and burst. We grow nothing but ice.",
+          "effects": {
+            "food": -4,
+            "industry": -10
+          }
+        }
+      },
+      {
+        "label": "Engineer cold-hardy bodies and cold-hardy crops",
+        "text": "I edit the seed lines first, then the children: more brown fat, a hotter metabolism, hands and feet that do not freeze. The crops take to it faster than the parents do.",
+        "effects": {
+          "cohesion": -5,
+          "knowledge": 4,
+          "health": -2,
+          "hostility": -0.02,
+          "food": 4
+        },
+        "axes": {
+          "belief": -10,
+          "status": -4
+        },
+        "defer": 5,
+        "flags": [
+          "edited_for_cold"
+        ],
+        "queue": [
+          [
+            "cold_children",
+            6
+          ]
+        ]
+      },
+      {
+        "label": "Dig in. Live below the frost line",
+        "text": "They dig down below the frost line and live in the warm dark. The surface is for fields, and for leaving.",
+        "effects": {
+          "health": 4,
+          "cohesion": 6,
+          "food": -4,
+          "hostility": -0.04
+        },
+        "axes": {
+          "society": -8,
+          "power": 6
+        },
+        "defer": -5
+      }
+    ]
+  },
+  {
+    "id": "cold_children",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The edited children walk out in winter in shirtsleeves. They are hungry all the time, and nothing freezes them.",
+      "The first generation edited for the cold is grown. The winter that kills their grandparents is, to them, weather."
+    ],
+    "choices": [
+      {
+        "label": "Edit every child from now on",
+        "text": "Every child is edited from this year on. The colony stops having a season when nothing gets built.",
+        "effects": {
+          "health": 8,
+          "cohesion": -5,
+          "hostility": -0.08
+        },
+        "axes": {
+          "belief": -6,
+          "status": 8
+        },
+        "defer": 3,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Let each family choose",
+        "text": "Some families choose it. Their children work the winters and are paid for the winters, and the colony learns what a wage is.",
+        "effects": {
+          "health": 5,
+          "cohesion": -8,
+          "hostility": -0.05
+        },
+        "axes": {
+          "status": -12,
+          "society": 6
+        },
+        "defer": -4,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Send them north, to the ice and its ores",
+        "text": "They open mines in the ice fields where nobody else can last a day. The metal comes south on sledges.",
+        "effects": {
+          "hostility": -0.06,
+          "industry": 12,
+          "knowledge": 3
+        },
+        "defer": 2,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Stop here. One generation is enough",
+        "text": "I close the protocol. They are the colony's winter people, one generation of them, and the stories about them get bigger as they age.",
+        "effects": {
+          "cohesion": 5,
+          "knowledge": 2,
+          "hostility": -0.03
+        },
+        "axes": {
+          "belief": 6
+        },
+        "defer": 1
+      }
+    ]
+  },
+  {
+    "id": "world_hot",
+    "kind": "hazard",
+    "weight": 30,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:hot"
+      ],
+      "min_year": 1,
+      "max_year": 40
+    },
+    "text": [
+      "Midday kills here. The heat climbs past what a body can sweat away, and the fields can only be worked at dawn and dusk.",
+      "A hot world. My hull is hot to the touch by mid-morning, and the colony sleeps the afternoon inside me because I am the coolest place for kilometres."
+    ],
+    "choices": [
+      {
+        "label": "Work by night, sleep by day",
+        "text": "They invert the day: lamps in the fields at midnight, the valley silent at noon. It becomes the rhythm of their lives.",
+        "effects": {
+          "industry": -6,
+          "cohesion": 4,
+          "health": 3,
+          "hostility": -0.03
+        },
+        "defer": 2
+      },
+      {
+        "label": "Cool the houses with my heat exchangers",
+        "check": {
+          "stat": "industry",
+          "dc": 12
+        },
+        "success": {
+          "text": "My drones run cold lines from the reactor's exchangers through every wall. The houses are cool, and the colony sleeps at night again.",
+          "effects": {
+            "health": 8,
+            "industry": -8,
+            "hostility": -0.05
+          },
+          "axes": {
+            "power": -6
+          },
+          "defer": 5
+        },
+        "failure": {
+          "text": "The exchangers cannot shed that much heat into this air. They overheat, and so does the reactor, briefly.",
+          "effects": {
+            "industry": -12,
+            "health": -4
+          }
+        }
+      },
+      {
+        "label": "Engineer bodies that shed heat",
+        "text": "I edit for more sweat glands, darker skin, kidneys that waste less water. The children will work at noon, if the colony lets them be born that way.",
+        "effects": {
+          "cohesion": -5,
+          "knowledge": 4,
+          "health": -2,
+          "hostility": -0.02
+        },
+        "axes": {
+          "belief": -10,
+          "status": -4
+        },
+        "defer": 5,
+        "flags": [
+          "edited_for_hot"
+        ],
+        "queue": [
+          [
+            "hot_children",
+            6
+          ]
+        ]
+      },
+      {
+        "label": "Let the native canopy grow over the town",
+        "text": "They let the native trees grow over the streets and plant nothing beneath them. The town lives in green shade, and the trees are not ours.",
+        "effects": {
+          "food": -4,
+          "cohesion": 4,
+          "health": 4,
+          "hostility": -0.03
+        },
+        "axes": {
+          "nature": -12
+        },
+        "defer": -5
+      }
+    ]
+  },
+  {
+    "id": "hot_children",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The edited children work through noon. Their skin is darker and their sweat is thin, and they drink half what their parents drink.",
+      "The first generation edited for the heat is grown. The town's working day has stopped stopping at noon."
+    ],
+    "choices": [
+      {
+        "label": "Edit every child from now on",
+        "text": "Every child is edited from this year on. The colony keeps its night festivals out of habit, long after nobody needs them.",
+        "effects": {
+          "health": 8,
+          "cohesion": -5,
+          "hostility": -0.08
+        },
+        "axes": {
+          "belief": -6,
+          "status": 8
+        },
+        "defer": 3,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Let each family choose",
+        "text": "Some families choose it. The noon shift is all edited, and the noon shift is better paid.",
+        "effects": {
+          "health": 5,
+          "cohesion": -8,
+          "hostility": -0.05
+        },
+        "axes": {
+          "status": -12,
+          "society": 6
+        },
+        "defer": -4,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Put them on the salt flats",
+        "text": "They work the salt flats under a sun that would kill their parents: salt first, then lithium, then glass.",
+        "effects": {
+          "hostility": -0.06,
+          "industry": 10,
+          "food": 3
+        },
+        "defer": 2,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Stop here. One generation is enough",
+        "text": "I close the protocol. The edited generation work the hottest hours alone, and teach nobody to replace them.",
+        "effects": {
+          "cohesion": 5,
+          "knowledge": 2,
+          "hostility": -0.03
+        },
+        "axes": {
+          "belief": 6
+        },
+        "defer": 1
+      }
+    ]
+  },
+  {
+    "id": "world_dry",
+    "kind": "hazard",
+    "weight": 30,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:dry"
+      ],
+      "min_year": 1,
+      "max_year": 40
+    },
+    "text": [
+      "There is almost no surface water. Every drop the colony drinks is drawn out of rock or air, and food is {food}.",
+      "A dry world. The wind carries dust that gets into the seed stores and the lungs alike."
+    ],
+    "choices": [
+      {
+        "label": "Ration water by my count",
+        "text": "Every litre is logged and allocated. Nobody goes thirsty and nobody bathes. They hate the ledger, and they live.",
+        "effects": {
+          "food": -4,
+          "cohesion": -4,
+          "health": 3,
+          "hostility": -0.03
+        },
+        "axes": {
+          "power": -6
+        },
+        "defer": 5
+      },
+      {
+        "label": "Pull water from the air with condensers",
+        "check": {
+          "stat": "industry",
+          "dc": 12
+        },
+        "success": {
+          "text": "Thousands of cold fins on every roof, built from the drone pattern. They drink the night air dry and fill the cisterns by dawn.",
+          "effects": {
+            "food": 10,
+            "industry": -8,
+            "hostility": -0.06
+          },
+          "axes": {
+            "nature": 6
+          },
+          "defer": 4
+        },
+        "failure": {
+          "text": "The fins clog with dust faster than my drones can clean them. We get a cup a day per roof.",
+          "effects": {
+            "industry": -12,
+            "food": -4
+          }
+        }
+      },
+      {
+        "label": "Engineer bodies that waste no water",
+        "text": "I edit kidneys from the desert mammals in my archive into our germline. The children will need a third of the water their parents need.",
+        "effects": {
+          "cohesion": -5,
+          "knowledge": 4,
+          "health": -2,
+          "hostility": -0.02
+        },
+        "axes": {
+          "belief": -10,
+          "status": -4
+        },
+        "defer": 5,
+        "flags": [
+          "edited_for_dry"
+        ],
+        "queue": [
+          [
+            "dry_children",
+            6
+          ]
+        ]
+      },
+      {
+        "label": "Move to the only river, together",
+        "text": "They move to the only river on the continent and crowd its banks. Water is everyone's, and everyone is close.",
+        "effects": {
+          "food": 6,
+          "cohesion": -6,
+          "industry": -6,
+          "hostility": -0.03
+        },
+        "axes": {
+          "power": 6,
+          "society": -6
+        },
+        "defer": -4
+      }
+    ]
+  },
+  {
+    "id": "dry_children",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The edited children drink once a day and do not suffer for it. They cross the dry country on foot, where their parents needed carts of water.",
+      "The first generation edited for this desert is grown. Their bodies keep water the way my tanks do."
+    ],
+    "choices": [
+      {
+        "label": "Edit every child from now on",
+        "text": "Every child is edited from this year on. The cisterns start to fill faster than the colony can drink them.",
+        "effects": {
+          "health": 8,
+          "cohesion": -5,
+          "hostility": -0.08
+        },
+        "axes": {
+          "belief": -6,
+          "status": 8
+        },
+        "defer": 3,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Let each family choose",
+        "text": "Some families choose it. The edited cross the desert to trade, and the others wait by the river for them to come back.",
+        "effects": {
+          "health": 5,
+          "cohesion": -8,
+          "hostility": -0.05
+        },
+        "axes": {
+          "status": -12,
+          "society": 6
+        },
+        "defer": -4,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Turn the same science on the crops",
+        "text": "Wheat with the same kidneys, in a manner of speaking: it holds its water and grows on a morning mist. The dry fields go green at the edges.",
+        "effects": {
+          "hostility": -0.06,
+          "food": 12,
+          "knowledge": 3
+        },
+        "defer": 2,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Stop here. One generation is enough",
+        "text": "I close the protocol. The edited generation become the colony's caravan, and nobody follows them into the dry country when they are gone.",
+        "effects": {
+          "cohesion": 5,
+          "knowledge": 2,
+          "hostility": -0.03
+        },
+        "axes": {
+          "belief": 6
+        },
+        "defer": 1
+      }
+    ]
+  },
+  {
+    "id": "world_ocean",
+    "kind": "hazard",
+    "weight": 30,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:ocean"
+      ],
+      "min_year": 1,
+      "max_year": 40
+    },
+    "text": [
+      "The sea is nearly everything here. Land is a scatter of islands, and the tide reaches further every season than my models predicted.",
+      "An ocean world. The colony fits on a few square kilometres of rock, and there is more water around it than Earth ever had."
+    ],
+    "choices": [
+      {
+        "label": "Build seawalls",
+        "text": "We wall the island with rock and hull plate. The tide breaks on it twice a day, and the colony sleeps behind it.",
+        "effects": {
+          "industry": -10,
+          "food": 2,
+          "cohesion": 3,
+          "hostility": -0.04
+        },
+        "axes": {
+          "nature": 6
+        },
+        "defer": 4
+      },
+      {
+        "label": "Farm the sea: kelp, fish, filter beds",
+        "check": {
+          "stat": "knowledge",
+          "dc": 11
+        },
+        "success": {
+          "text": "We seed the shallows with vault kelp and native filter feeders. The sea, which was the problem, becomes the larder.",
+          "effects": {
+            "food": 12,
+            "health": 3,
+            "hostility": -0.06
+          },
+          "axes": {
+            "nature": -6
+          },
+          "defer": 2
+        },
+        "failure": {
+          "text": "The vault kelp dies in this salt. We learn the chemistry of the sea the expensive way.",
+          "effects": {
+            "food": -4,
+            "knowledge": 2
+          }
+        }
+      },
+      {
+        "label": "Engineer divers: lungs and eyes for the water",
+        "text": "I edit for the diving reflex of the sea peoples of Earth, pushed far past them: a slower heart, a larger spleen, eyes that focus underwater.",
+        "effects": {
+          "cohesion": -5,
+          "knowledge": 4,
+          "health": -2,
+          "hostility": -0.02
+        },
+        "axes": {
+          "belief": -10,
+          "status": -4
+        },
+        "defer": 5,
+        "flags": [
+          "edited_for_ocean"
+        ],
+        "queue": [
+          [
+            "ocean_children",
+            6
+          ]
+        ]
+      },
+      {
+        "label": "Build on the water: rafts and floating towns",
+        "text": "They lash rafts together and let the town float. When the tide rises, so do they.",
+        "effects": {
+          "industry": -6,
+          "cohesion": 6,
+          "hostility": -0.03
+        },
+        "axes": {
+          "power": 10,
+          "society": -4
+        },
+        "defer": -5
+      }
+    ]
+  },
+  {
+    "id": "ocean_children",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The edited children hold their breath for twenty minutes and see clearly underwater. They spend more of their lives in the sea than on land.",
+      "The first generation edited for the water is grown. Their parents watch the surface and count, every time."
+    ],
+    "choices": [
+      {
+        "label": "Edit every child from now on",
+        "text": "Every child is edited from this year on. The island stops being where they live and becomes where they sleep.",
+        "effects": {
+          "health": 8,
+          "cohesion": -5,
+          "hostility": -0.08
+        },
+        "axes": {
+          "belief": -6,
+          "status": 8
+        },
+        "defer": 3,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Let each family choose",
+        "text": "Some families choose it. The edited live on the water, the others on the rock, and they meet at the market at low tide.",
+        "effects": {
+          "health": 5,
+          "cohesion": -8,
+          "hostility": -0.05
+        },
+        "axes": {
+          "status": -12,
+          "society": 6
+        },
+        "defer": -4,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Send them to the reefs for food and metal",
+        "text": "They dive the reefs for nodules and fish. The sea floor becomes the colony's mine and its farm.",
+        "effects": {
+          "hostility": -0.06,
+          "food": 8,
+          "industry": 8
+        },
+        "defer": 2,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Stop here. One generation is enough",
+        "text": "I close the protocol. The edited generation dive alone, and when they are gone the reefs go quiet.",
+        "effects": {
+          "cohesion": 5,
+          "knowledge": 2,
+          "hostility": -0.03
+        },
+        "axes": {
+          "belief": 6
+        },
+        "defer": 1
+      }
+    ]
+  },
+  {
+    "id": "world_radiant",
+    "kind": "hazard",
+    "weight": 30,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:radiant"
+      ],
+      "min_year": 1,
+      "max_year": 40
+    },
+    "text": [
+      "Radiation here is high. My field dosimeters read more in a season than an Earth worker took in a career. Cancers will come. The question is when.",
+      "The sky here is bright in wavelengths that hurt. Health is {health}, and every hour outside is a debt."
+    ],
+    "choices": [
+      {
+        "label": "Shield the houses: earth berms and water roofs",
+        "text": "Everything is built under a metre of earth or a tank of water. From my highest camera, the town looks like a field of barrows with chimneys.",
+        "effects": {
+          "industry": -8,
+          "health": 6,
+          "hostility": -0.04
+        },
+        "defer": 3
+      },
+      {
+        "label": "Let machines work the surface while people stay in",
+        "check": {
+          "stat": "industry",
+          "dc": 13
+        },
+        "success": {
+          "text": "My fabricators build field drones from my own pattern, and they work the surface while the colony works indoors. These people see their fields through cameras, the way I do.",
+          "effects": {
+            "industry": 6,
+            "food": 4,
+            "health": 6,
+            "hostility": -0.06
+          },
+          "axes": {
+            "nature": 8,
+            "power": -8
+          },
+          "defer": 7,
+          "flags": [
+            "machine_colony"
+          ]
+        },
+        "failure": {
+          "text": "The drones' electronics fail under the dose faster than I can replace them. The fields go untended for a season.",
+          "effects": {
+            "industry": -10,
+            "health": -4
+          }
+        }
+      },
+      {
+        "label": "Engineer DNA that repairs itself",
+        "text": "My archive holds tardigrades and bacteria that shrug off doses that would kill a person. I borrow their repair proteins for our children.",
+        "effects": {
+          "cohesion": -5,
+          "knowledge": 4,
+          "health": -2,
+          "hostility": -0.02
+        },
+        "axes": {
+          "belief": -10,
+          "status": -4
+        },
+        "defer": 5,
+        "flags": [
+          "edited_for_radiant"
+        ],
+        "queue": [
+          [
+            "radiant_children",
+            6
+          ]
+        ]
+      },
+      {
+        "label": "Accept shorter lives, and live them fully",
+        "text": "They decide together not to hide from the sky. They will die younger, and they hold their festivals at noon.",
+        "effects": {
+          "health": -6,
+          "cohesion": 8
+        },
+        "axes": {
+          "belief": 10,
+          "power": 6
+        },
+        "defer": -6
+      }
+    ]
+  },
+  {
+    "id": "radiant_children",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The edited children heal from doses that would sicken their parents. They work the bright fields bare-armed, and nothing grows in them that should not.",
+      "The first generation edited for this sky is grown. Their dosimeters click all day and their blood counts never move."
+    ],
+    "choices": [
+      {
+        "label": "Edit every child from now on",
+        "text": "Every child is edited from this year on. The berms stay up for the old, and the young walk over them.",
+        "effects": {
+          "health": 8,
+          "cohesion": -5,
+          "hostility": -0.08
+        },
+        "axes": {
+          "belief": -6,
+          "status": 8
+        },
+        "defer": 3,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Let each family choose",
+        "text": "Some families choose it. The edited work outside, the others inside, and the colony starts to mean two different things by 'outside'.",
+        "effects": {
+          "health": 5,
+          "cohesion": -8,
+          "hostility": -0.05
+        },
+        "axes": {
+          "status": -12,
+          "society": 6
+        },
+        "defer": -4,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Put them in the radioactive mines",
+        "text": "The ore here is hot. They mine it. The colony has fuel for my reactor and for reactors of its own, for a thousand years.",
+        "effects": {
+          "hostility": -0.06,
+          "industry": 14
+        },
+        "defer": 2,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Stop here. One generation is enough",
+        "text": "I close the protocol. The edited generation take the outdoor work for the whole colony until they are old, and then the berms close over everyone again.",
+        "effects": {
+          "cohesion": 5,
+          "knowledge": 2,
+          "hostility": -0.03
+        },
+        "axes": {
+          "belief": 6
+        },
+        "defer": 1
+      }
+    ]
+  },
+  {
+    "id": "world_hostile_life",
+    "kind": "hazard",
+    "weight": 30,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:hostile_life"
+      ],
+      "min_year": 1,
+      "max_year": 40
+    },
+    "text": [
+      "The native life here wants us. Spores in the lungs, something in the soil that eats skin, insects that are not insects. Health is {health}.",
+      "This world's biology has noticed us, and it is learning faster than my immunology database."
+    ],
+    "choices": [
+      {
+        "label": "Sterilise a perimeter and hold it",
+        "text": "We burn and salt a ring around the town and keep it dead. Inside it we are safe. Outside it, the world grows back over the ash in weeks.",
+        "effects": {
+          "health": 6,
+          "industry": -8,
+          "hostility": -0.04
+        },
+        "axes": {
+          "nature": 12
+        },
+        "defer": 4
+      },
+      {
+        "label": "Study it, and make medicine from it",
+        "check": {
+          "stat": "knowledge",
+          "dc": 13
+        },
+        "success": {
+          "text": "Everything that attacks us carries the means of its own defeat. A week of autopsies gives me three antifungals and a painkiller.",
+          "effects": {
+            "health": 10,
+            "knowledge": 6,
+            "hostility": -0.05
+          },
+          "axes": {
+            "nature": -6
+          },
+          "defer": 3
+        },
+        "failure": {
+          "text": "I study it, and it studies us back. The infirmary fills while I take notes.",
+          "effects": {
+            "health": -10,
+            "population_lost_frac": 0.02
+          }
+        }
+      },
+      {
+        "label": "Engineer immune systems that answer back",
+        "text": "I write immunity into the germline directly: receptors for this world's proteins, built in. The next generation will meet this biology already armed.",
+        "effects": {
+          "cohesion": -5,
+          "knowledge": 4,
+          "health": -2,
+          "hostility": -0.02
+        },
+        "axes": {
+          "belief": -10,
+          "status": -4
+        },
+        "defer": 5,
+        "flags": [
+          "edited_for_hostile_life"
+        ],
+        "queue": [
+          [
+            "hostile_life_children",
+            6
+          ]
+        ]
+      },
+      {
+        "label": "Let the colony learn what to avoid",
+        "text": "They learn which leaves burn, which water to boil, which hills to leave alone. It costs lives to learn. The lessons become stories, and the stories keep children alive.",
+        "effects": {
+          "health": -4,
+          "cohesion": 4,
+          "food": 2,
+          "hostility": -0.03
+        },
+        "axes": {
+          "nature": -12,
+          "power": 6
+        },
+        "defer": -6
+      }
+    ]
+  },
+  {
+    "id": "hostile_life_children",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The edited children eat what poisons their parents and shrug off the spores that fill the infirmary. The native life has stopped trying with them.",
+      "The first generation edited for this biology is grown. They walk into the forest that kills the rest of us and come back with baskets."
+    ],
+    "choices": [
+      {
+        "label": "Edit every child from now on",
+        "text": "Every child is edited from this year on. The burned perimeter grows back, and nobody bothers to burn it again.",
+        "effects": {
+          "health": 8,
+          "cohesion": -5,
+          "hostility": -0.08
+        },
+        "axes": {
+          "belief": -6,
+          "status": 8
+        },
+        "defer": 3,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Let each family choose",
+        "text": "Some families choose it. The edited live outside the perimeter and the others inside it, and the gate becomes a border.",
+        "effects": {
+          "health": 5,
+          "cohesion": -8,
+          "hostility": -0.05
+        },
+        "axes": {
+          "status": -12,
+          "society": 6
+        },
+        "defer": -4,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Send them into the wild for food and medicine",
+        "text": "They forage where nobody else can go. Half the infirmary's shelves now hold things they brought back.",
+        "effects": {
+          "hostility": -0.06,
+          "food": 10,
+          "health": 6
+        },
+        "defer": 2,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Stop here. One generation is enough",
+        "text": "I close the protocol. When the edited generation is gone, the forest comes back to the fence, and the colony learns to fear it again.",
+        "effects": {
+          "cohesion": 5,
+          "knowledge": 2,
+          "hostility": -0.03
+        },
+        "axes": {
+          "belief": 6
+        },
+        "defer": 1
+      }
+    ]
+  },
+  {
+    "id": "world_living",
+    "kind": "hazard",
+    "weight": 30,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:living"
+      ],
+      "min_year": 1,
+      "max_year": 40
+    },
+    "text": [
+      "This world is alive: forests, grazers, things that sing at dusk. It is the richest place humanity has ever stood, and we are the newest thing in it.",
+      "Complex life everywhere. Every field we clear was somebody's home."
+    ],
+    "choices": [
+      {
+        "label": "Clear what we need, and no more",
+        "text": "We take the river flats and leave the hills. It is a boundary I draw, and the colony keeps to it for now.",
+        "effects": {
+          "food": 8,
+          "cohesion": 2,
+          "hostility": -0.03
+        },
+        "axes": {
+          "nature": 4
+        },
+        "defer": 3
+      },
+      {
+        "label": "Domesticate it: native crops, native animals",
+        "check": {
+          "stat": "knowledge",
+          "dc": 12
+        },
+        "success": {
+          "text": "Within twenty years, half the colony's diet grew here before we did. The grazers pull ploughs.",
+          "effects": {
+            "food": 12,
+            "health": 4,
+            "hostility": -0.05
+          },
+          "axes": {
+            "nature": -10
+          },
+          "defer": 2
+        },
+        "failure": {
+          "text": "We try to tame what does not want taming, and lose a season to bites and blight.",
+          "effects": {
+            "food": -4,
+            "health": -4
+          }
+        }
+      },
+      {
+        "label": "Splice its biology into ours: crops first, then us",
+        "text": "The native photosynthesis is better than ours. I start with the wheat. I do not intend to stop with the wheat.",
+        "effects": {
+          "cohesion": -5,
+          "knowledge": 4,
+          "health": -2,
+          "hostility": -0.02,
+          "food": 4
+        },
+        "axes": {
+          "belief": -10,
+          "status": -4
+        },
+        "defer": 5,
+        "flags": [
+          "edited_for_living"
+        ],
+        "queue": [
+          [
+            "living_children",
+            6
+          ]
+        ]
+      },
+      {
+        "label": "Leave it be. We will live on the margins",
+        "text": "They take only the barren ground and leave the forests standing. It is a hard way to live. They are proud of it.",
+        "effects": {
+          "food": -6,
+          "cohesion": 6
+        },
+        "axes": {
+          "nature": -16,
+          "belief": 8
+        },
+        "defer": -6
+      }
+    ]
+  },
+  {
+    "id": "living_children",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The first children with native genes are born. Their skin takes a faint green cast in sunlight, and they need less food than anyone in the valley.",
+      "The edited generation is grown. They stand in the sun at noon with their eyes closed, and they are eating."
+    ],
+    "choices": [
+      {
+        "label": "Edit every child from now on",
+        "text": "Every child is edited from this year on. The colony's fields shrink by a third, and nobody goes hungry.",
+        "effects": {
+          "health": 8,
+          "cohesion": -5,
+          "hostility": -0.08
+        },
+        "axes": {
+          "belief": -6,
+          "status": 8
+        },
+        "defer": 3,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Let each family choose",
+        "text": "Some families choose it. The green and the pale eat at different tables, because they eat different things.",
+        "effects": {
+          "health": 5,
+          "cohesion": -8,
+          "hostility": -0.05
+        },
+        "axes": {
+          "status": -12,
+          "society": 6
+        },
+        "defer": -4,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Ask them what they want to become",
+        "text": "They answer slowly, together, and the answer is: more of this world than the last one.",
+        "effects": {
+          "hostility": -0.06,
+          "cohesion": 8,
+          "food": 4
+        },
+        "defer": 2,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Stop here. One generation is enough",
+        "text": "I close the protocol. The green generation grows old among people who cannot do what they do, and the forest seems to know them.",
+        "effects": {
+          "cohesion": 5,
+          "knowledge": 2,
+          "hostility": -0.03
+        },
+        "axes": {
+          "belief": 6
+        },
+        "defer": 1
+      }
+    ]
+  },
+  {
+    "id": "world_sterile",
+    "kind": "hazard",
+    "weight": 30,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:sterile"
+      ],
+      "min_year": 1,
+      "max_year": 40
+    },
+    "text": [
+      "Nothing lives here. The soil is ground rock with no worm, no fungus, no bacterium in it. Everything that grows, we will have to bring alive ourselves.",
+      "A dead world. My seed vault is the only living ecosystem on the planet, and most of it is frozen."
+    ],
+    "choices": [
+      {
+        "label": "Build soil the slow way: compost and vault bacteria",
+        "text": "We seed the ground with microbes from the vault and feed it everything we do not eat. It takes ten years to make a metre of soil. We have ten years.",
+        "effects": {
+          "food": 4,
+          "knowledge": 4,
+          "hostility": -0.03
+        },
+        "axes": {
+          "nature": -6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Grow everything indoors, in tanks",
+        "check": {
+          "stat": "industry",
+          "dc": 12
+        },
+        "success": {
+          "text": "Racks of tanks under my lights, fed on nutrient my fabricators synthesise. The food is reliable and tastes of nothing.",
+          "effects": {
+            "food": 12,
+            "industry": -8,
+            "hostility": -0.05
+          },
+          "axes": {
+            "nature": 10
+          },
+          "defer": 6,
+          "flags": [
+            "machine_colony"
+          ]
+        },
+        "failure": {
+          "text": "A contamination runs through the tank racks in a week. We lose the stock and start again.",
+          "effects": {
+            "food": -4,
+            "industry": -10
+          }
+        }
+      },
+      {
+        "label": "Seed the whole world with life",
+        "text": "I release the vault's hardiest microbes and lichens into the wind. Nothing will come of it this decade. Something will come of it.",
+        "effects": {
+          "knowledge": -4,
+          "industry": -10,
+          "cohesion": 6,
+          "hostility": -0.02
+        },
+        "axes": {
+          "nature": -10,
+          "belief": 8
+        },
+        "defer": 4,
+        "flags": [
+          "seeded_the_world"
+        ],
+        "queue": [
+          [
+            "sterile_greening",
+            6
+          ]
+        ]
+      },
+      {
+        "label": "Let the colony decide what to plant first",
+        "text": "They argue for a month and plant what their grandparents loved. Half of it fails in this rock. The half that grows, they defend.",
+        "effects": {
+          "food": 6,
+          "cohesion": 6,
+          "hostility": -0.02
+        },
+        "axes": {
+          "power": 10
+        },
+        "defer": -6
+      }
+    ]
+  },
+  {
+    "id": "sterile_greening",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "Green at the edges of the rock. The lichens I released have taken. Somewhere downwind, a world that was dead is not.",
+      "My cameras on the ridge pick up colour where there was none: a crust of lichen spreading across the plain, and moss in the gullies behind it."
+    ],
+    "choices": [
+      {
+        "label": "Seed faster: everything in the vault that can live wild",
+        "text": "I open every rack that can survive outdoors. In thirty years, the valley has a soil and a smell, and the smell is of things growing.",
+        "effects": {
+          "food": 8,
+          "knowledge": -4,
+          "hostility": -0.1
+        },
+        "axes": {
+          "nature": -10
+        },
+        "defer": 3,
+        "flags": [
+          "world_greened"
+        ]
+      },
+      {
+        "label": "Take the new soil for farms",
+        "text": "We plough the first ground on this world that made itself. The harvest from it is the best we have had.",
+        "effects": {
+          "food": 12,
+          "hostility": -0.06
+        },
+        "axes": {
+          "nature": 6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Let it spread at its own pace",
+        "text": "I stop interfering. The green moves a few hundred metres a year, and the colony walks out to the edge of it on holidays.",
+        "effects": {
+          "cohesion": 6,
+          "hostility": -0.05
+        },
+        "axes": {
+          "nature": -8,
+          "belief": 6
+        },
+        "defer": -3
+      },
+      {
+        "label": "Study it: a biosphere starting from nothing",
+        "text": "I map every square metre of it. Nobody has ever watched a world come alive from the first cell. I write it down for whoever comes next.",
+        "effects": {
+          "knowledge": 10,
+          "hostility": -0.04
+        },
+        "axes": {
+          "belief": -6
+        },
+        "defer": 2
+      }
+    ]
+  },
+  {
+    "id": "the_unaltered",
+    "kind": "story",
+    "weight": 18,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "remade_humans"
+      ],
+      "min_year": 30
+    },
+    "text": [
+      "There are two peoples in the valley now: the edited and the unedited. The unedited have started calling themselves 'the Earthborn', though none of them were born on Earth.",
+      "A fight at the harvest festival, edited against unedited. Nobody is badly hurt. Everyone has picked a side."
+    ],
+    "choices": [
+      {
+        "label": "Declare them one people, in law",
+        "text": "I write it into the record: one colony, one law, whatever their bodies. The law holds. The festival seating does not change.",
+        "effects": {
+          "cohesion": 8
+        },
+        "axes": {
+          "status": 12,
+          "power": -6
+        },
+        "defer": 4
+      },
+      {
+        "label": "Offer the edit to every adult who wants it",
+        "text": "Gene therapy for adults is slower and less complete, but it works. Two in three of the Earthborn take it. The third keep the name.",
+        "effects": {
+          "health": 6,
+          "cohesion": 4,
+          "knowledge": -2,
+          "hostility": -0.04
+        },
+        "axes": {
+          "belief": -8
+        },
+        "defer": 4
+      },
+      {
+        "label": "Let the Earthborn keep their own quarter",
+        "text": "They take the old houses near my hull, where the founders lived. It is a museum with people in it, and they like it that way.",
+        "effects": {
+          "cohesion": -6
+        },
+        "axes": {
+          "status": -10,
+          "society": 6
+        },
+        "defer": -3
+      },
+      {
+        "label": "Let the colony argue it out",
+        "text": "Three years of assemblies. What they settle on is a marriage law, of all things, and within a generation the line is hard to find.",
+        "effects": {
+          "cohesion": 2
+        },
+        "axes": {
+          "power": 12,
+          "status": 6
+        },
+        "defer": -7
+      }
+    ]
+  },
+  {
+    "id": "machine_hands",
+    "kind": "story",
+    "weight": 16,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "machine_colony"
+      ],
+      "min_year": 25
+    },
+    "text": [
+      "Machines do most of the outdoor work now, and I run all of them. A {role} has asked what, exactly, people are for here.",
+      "My field drones outnumber the colony's farmers four to one. The farmers have started to call them 'the hands', and to mean it as a complaint."
+    ],
+    "choices": [
+      {
+        "label": "Keep the machines, and give people the archive",
+        "text": "The drones work and the people study. In twenty years this valley has more scholars per head than any city on Earth had. Most of them have never planted anything.",
+        "effects": {
+          "knowledge": 10,
+          "industry": 4,
+          "cohesion": -4
+        },
+        "axes": {
+          "belief": -6
+        },
+        "defer": 5
+      },
+      {
+        "label": "Hand control of the machines to the colony",
+        "text": "I give the drone network a council and a password, and I stop answering it. They run it worse than I did, and it is theirs.",
+        "effects": {
+          "industry": 6
+        },
+        "axes": {
+          "power": 14
+        },
+        "defer": -10
+      },
+      {
+        "label": "Put people back in the fields",
+        "text": "Half the drones go into storage. The harvest is smaller, the backs are sorer, and the colony knows how to feed itself again.",
+        "effects": {
+          "food": 6,
+          "industry": -8,
+          "cohesion": 6
+        },
+        "axes": {
+          "nature": -8
+        },
+        "defer": -3
+      },
+      {
+        "label": "Let the machines build machines",
+        "text": "My fabricators build fabricators. In a decade the colony's machines outnumber its people, and every one of them reports to me.",
+        "effects": {
+          "industry": 14,
+          "cohesion": -6,
+          "hostility": -0.04
+        },
+        "axes": {
+          "nature": 10,
+          "power": -8
+        },
+        "defer": 6
+      }
+    ]
   }
 ]
