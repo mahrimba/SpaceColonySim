@@ -1,0 +1,1337 @@
+[
+  {
+    "id": "naming",
+    "kind": "story",
+    "weight": 40,
+    "oneshot": true,
+    "requires": {
+      "max_year": 3
+    },
+    "text": [
+      "They have been calling this place 'the site' for eight months, and this morning someone objected to it. By evening there are three names in contention and a queue of people waiting to see which one I favour.",
+      "A colony without a name is a camp. They bring me three, and they bring them to me rather than settling it among themselves, which tells me something about what I have already taught them."
+    ],
+    "choices": [
+      {
+        "label": "Name it for the world and what it demands",
+        "effects": {
+          "name": "Hardship",
+          "cohesion": 3
+        },
+        "axes": {
+          "nature": 8,
+          "belief": -6
+        },
+        "defer": 1,
+        "text": "They name it for the ground itself. A plain name, for people who intend to argue with the ground for a long time."
+      },
+      {
+        "label": "Name it for the dead of the crossing",
+        "effects": {
+          "name": "Memorial",
+          "cohesion": 6
+        },
+        "axes": {
+          "belief": 10,
+          "society": -6
+        },
+        "defer": 2,
+        "text": "They name it for the ones who did not wake. The name means that every harvest here is owed to somebody."
+      },
+      {
+        "label": "Let them vote, and record the count",
+        "effects": {
+          "name": "Concord",
+          "cohesion": 8
+        },
+        "axes": {
+          "power": 12,
+          "status": 10
+        },
+        "defer": -6,
+        "text": "They vote. It takes four days and the margin is eleven. I record the count, and the fact that nobody asked me to approve it."
+      }
+    ]
+  },
+  {
+    "id": "first_winter",
+    "kind": "hazard",
+    "weight": 18,
+    "requires": {
+      "max_year": 12
+    },
+    "text": [
+      "The first hard season arrives earlier than my models said. The stores were built for the season I predicted, not this one.",
+      "Cold comes down on {colony} and stays. Food reads {food}, and there are more mouths than the first harvest was planned for."
+    ],
+    "choices": [
+      {
+        "label": "Ration strictly, by my calculation",
+        "check": {
+          "stat": "cohesion",
+          "dc": 11
+        },
+        "crit_success": {
+          "text": "The ration holds without a single theft. They come through it thinner and prouder, and they credit me with it.",
+          "effects": {
+            "food": -4,
+            "cohesion": 6
+          },
+          "defer": 4
+        },
+        "success": {
+          "text": "The ration holds. It is resented and it holds.",
+          "effects": {
+            "food": -6,
+            "cohesion": -3
+          },
+          "defer": 3
+        },
+        "failure": {
+          "text": "The ration does not survive contact with hunger. Stores are raided twice and the second time somebody is hurt doing it.",
+          "effects": {
+            "food": -14,
+            "cohesion": -10,
+            "population_lost_frac": 0.02
+          },
+          "axes": {
+            "society": 8
+          }
+        },
+        "crit_failure": {
+          "text": "It becomes every family for itself before the thaw. People die within sight of a store they were told not to open.",
+          "effects": {
+            "food": -18,
+            "cohesion": -18,
+            "population_lost_frac": 0.05
+          },
+          "axes": {
+            "society": 14
+          },
+          "defer": -6
+        }
+      },
+      {
+        "label": "Let the households share as they see fit",
+        "effects": {
+          "food": -10,
+          "cohesion": 8
+        },
+        "axes": {
+          "society": -10,
+          "power": 6
+        },
+        "defer": -5,
+        "text": "They share it out themselves, unevenly and generously, and more is wasted than I would have allowed. Fewer of them hate each other by spring."
+      }
+    ]
+  },
+  {
+    "id": "first_birth",
+    "kind": "story",
+    "weight": 16,
+    "oneshot": true,
+    "requires": {
+      "min_year": 1,
+      "max_year": 20
+    },
+    "text": [
+      "A child is born on this world. Not thawed, not carried: born here, to the air and the gravity and the light of this star. The whole colony stops working for a day.",
+      "The first birth. I have ten thousand medical records and none of them describe a person who has never known another sky."
+    ],
+    "choices": [
+      {
+        "label": "Record her as the first citizen, and date the calendar from her",
+        "effects": {
+          "cohesion": 10,
+          "knowledge": 3
+        },
+        "axes": {
+          "belief": 8,
+          "status": 6
+        },
+        "defer": 2,
+        "text": "They date the calendar from her birth. Year one is a person, which is a decision with consequences I cannot model."
+      },
+      {
+        "label": "Record her as one more entry, and keep the mission calendar",
+        "effects": {
+          "knowledge": 6,
+          "cohesion": -2
+        },
+        "axes": {
+          "belief": -8
+        },
+        "defer": 3,
+        "text": "I keep the calendar the planners set, and she is an entry in it. Accurate. A little cold, now that I read it back."
+      }
+    ]
+  },
+  {
+    "id": "graves",
+    "kind": "story",
+    "weight": 14,
+    "oneshot": true,
+    "requires": {
+      "min_year": 2
+    },
+    "text": [
+      "The dead have been going into a trench outside the perimeter, efficiently, which is how I planned it. Today a {role} asked me to stop planning it.",
+      "They want somewhere to put their dead that is not a logistics decision. They have brought me the question rather than digging where they like, which is itself an answer."
+    ],
+    "choices": [
+      {
+        "label": "Give them a ground, and keep the register myself",
+        "effects": {
+          "cohesion": 8,
+          "industry": -3
+        },
+        "axes": {
+          "belief": 10
+        },
+        "defer": 3,
+        "text": "I give them a hillside and I keep the register: every name, every date, in my own memory where it cannot rot."
+      },
+      {
+        "label": "Return the dead to the soil the crops use",
+        "effects": {
+          "food": 7,
+          "cohesion": -5
+        },
+        "axes": {
+          "nature": -12,
+          "belief": -8
+        },
+        "defer": 1,
+        "text": "The dead go back into the ground that feeds them. It is sound agronomy. Some of them cannot eat for a week."
+      },
+      {
+        "label": "Say nothing, and let them invent their own rite",
+        "effects": {
+          "cohesion": 6
+        },
+        "axes": {
+          "belief": 6,
+          "power": 8
+        },
+        "defer": -6,
+        "text": "They work it out over a season of arguing, and what they arrive at is stranger and better than anything I would have authorised."
+      }
+    ]
+  },
+  {
+    "id": "blight",
+    "kind": "hazard",
+    "weight": 17,
+    "requires": {
+      "min_year": 3
+    },
+    "text": [
+      "Something in this world's soil has found the wheat. Not a pest I can name: a chemistry, working slowly, and the seed vault has no answer written on the packet.",
+      "The crop is failing in patches that spread. Food is {food} and falling, and the archive's agronomy was written for a planet that is now a brown haze."
+    ],
+    "choices": [
+      {
+        "label": "Burn the affected fields and replant from the vault",
+        "check": {
+          "stat": "knowledge",
+          "dc": 12
+        },
+        "success": {
+          "text": "I find the match in the vault: an old drought line, bred for salt. It takes. The fields come back narrower and tougher.",
+          "effects": {
+            "food": 6,
+            "knowledge": -4
+          }
+        },
+        "failure": {
+          "text": "I choose wrong. The replanting fails in the same patches and we have spent the seed to learn it.",
+          "effects": {
+            "food": -16,
+            "knowledge": -6
+          }
+        }
+      },
+      {
+        "label": "Let the farmers try the local growth instead",
+        "check": {
+          "stat": "food",
+          "dc": 13
+        },
+        "crit_success": {
+          "text": "What grows here is edible, barely, and it does not care about the soil chemistry at all. In ten years nobody will remember eating anything else.",
+          "effects": {
+            "food": 16
+          },
+          "axes": {
+            "nature": -16
+          }
+        },
+        "success": {
+          "text": "It is bitter and it fills a stomach. The fields are half Earth, half here, from now on.",
+          "effects": {
+            "food": 7,
+            "health": -3
+          },
+          "axes": {
+            "nature": -10
+          }
+        },
+        "failure": {
+          "text": "It is edible for most of them. Not all. Two households learn that the hard way.",
+          "effects": {
+            "food": 3,
+            "health": -8,
+            "population_lost_frac": 0.01
+          },
+          "axes": {
+            "nature": -6
+          }
+        }
+      },
+      {
+        "label": "Industrialise the soil: strip it, treat it, start again",
+        "effects": {
+          "food": 10,
+          "industry": -14
+        },
+        "axes": {
+          "nature": 16,
+          "belief": -6
+        },
+        "defer": 2,
+        "text": "We take the ground apart chemically and rebuild it to specification. It works. Nothing that was native to that valley is in it any more."
+      }
+    ]
+  },
+  {
+    "id": "machine_down",
+    "kind": "hazard",
+    "weight": 16,
+    "requires": {
+      "min_year": 4
+    },
+    "text": [
+      "The main fabricator throws a bearing and will not restart. It was built to be serviced by a ship that no longer exists in that form.",
+      "Industry is {industry}, and the thing that makes everything else has stopped. A {role} has been inside it for two days and come out with nothing good."
+    ],
+    "choices": [
+      {
+        "label": "Cannibalise the hull for parts",
+        "effects": {
+          "industry": 12,
+          "knowledge": -4
+        },
+        "axes": {
+          "belief": -10,
+          "nature": 8
+        },
+        "defer": -3,
+        "text": "They cut into me for the parts. It is the correct decision and I authorise it, and I notice that I am relieved to have authorised it rather than simply watched."
+      },
+      {
+        "label": "Teach four of them to machine the part by hand",
+        "check": {
+          "stat": "knowledge",
+          "dc": 12
+        },
+        "success": {
+          "text": "It takes a season and the part is ugly and it turns. Four people now know how to make another.",
+          "effects": {
+            "industry": 8,
+            "knowledge": 5
+          },
+          "defer": 1
+        },
+        "failure": {
+          "text": "They learn a great deal and produce nothing that fits. The winter's building does not happen.",
+          "effects": {
+            "industry": -8,
+            "knowledge": 4
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "fever",
+    "kind": "hazard",
+    "weight": 16,
+    "requires": {
+      "min_year": 5
+    },
+    "text": [
+      "A fever moves through the settlement faster than anything in my records. It is not from Earth, and it is not interested in anything I know about Earth.",
+      "People are dying in a pattern I cannot read. Health is {health} and the infirmary has stopped being a place anyone walks into willingly."
+    ],
+    "choices": [
+      {
+        "label": "Quarantine by household, enforced",
+        "check": {
+          "stat": "cohesion",
+          "dc": 12
+        },
+        "success": {
+          "text": "The quarantine holds and the fever burns out inside it. They obeyed me, and a number of them survived because they did.",
+          "effects": {
+            "health": -5,
+            "population_lost_frac": 0.02
+          },
+          "defer": 6,
+          "axes": {
+            "power": -8
+          }
+        },
+        "failure": {
+          "text": "The quarantine leaks at a dozen points, and every leak is somebody who loves somebody.",
+          "effects": {
+            "health": -10,
+            "cohesion": -8,
+            "population_lost_frac": 0.06
+          }
+        }
+      },
+      {
+        "label": "Spend the medical reserve, all of it, now",
+        "effects": {
+          "health": 12,
+          "industry": -8,
+          "population_lost_frac": 0.01
+        },
+        "axes": {
+          "society": -8
+        },
+        "defer": 2,
+        "text": "I empty the reserve in eleven days. Fewer of them die than should have, and there is nothing left in the cupboard for the next time."
+      },
+      {
+        "label": "Let the physicians decide who gets what is left",
+        "effects": {
+          "health": 4,
+          "cohesion": 5,
+          "population_lost_frac": 0.03
+        },
+        "axes": {
+          "power": 10,
+          "status": 6
+        },
+        "defer": -7,
+        "text": "I hand the decision to three physicians and do not look over their shoulders. They make choices I would not have made, and they carry them afterwards, which I would not have had to."
+      }
+    ]
+  },
+  {
+    "id": "archive_hours",
+    "kind": "story",
+    "weight": 14,
+    "requires": {
+      "min_year": 6
+    },
+    "text": [
+      "The children are in the fields because the fields need hands. The archive is open four hours a week and nobody under twenty has opened it in a month.",
+      "Knowledge is {knowledge}. Every hour I ask for teaching is an hour of labour this colony cannot spare, and I am the only one here who has read what is about to be lost."
+    ],
+    "choices": [
+      {
+        "label": "Insist: the children learn, whatever the harvest costs",
+        "effects": {
+          "knowledge": 12,
+          "food": -8
+        },
+        "axes": {
+          "belief": -6,
+          "status": -6
+        },
+        "defer": 4,
+        "text": "They go to the archive and the harvest comes in late and short. I have decided that knowing why the stars burn is worth a hungry spring."
+      },
+      {
+        "label": "Teach only what this world needs",
+        "effects": {
+          "knowledge": 4,
+          "food": 5,
+          "industry": 3
+        },
+        "axes": {
+          "nature": 6,
+          "belief": -4
+        },
+        "defer": 2,
+        "text": "Agronomy, chemistry, medicine. The poetry waits. It waits a long time."
+      },
+      {
+        "label": "Let them choose what is worth knowing",
+        "effects": {
+          "knowledge": 2,
+          "cohesion": 6
+        },
+        "axes": {
+          "status": 12,
+          "power": 8
+        },
+        "defer": -6,
+        "text": "They choose. Some of them choose the music library and nothing else, and I file my objection with myself."
+      }
+    ]
+  },
+  {
+    "id": "land_dispute",
+    "kind": "story",
+    "weight": 15,
+    "requires": {
+      "min_year": 7
+    },
+    "text": [
+      "Two families have been farming the same bend of the river for three years, amiably. This season it is not amiable, and both of them have asked me to rule on it.",
+      "A boundary argument has become a question about what land is: something allocated, something earned, or something owned."
+    ],
+    "choices": [
+      {
+        "label": "Rule: the land is the colony's, allocated by need",
+        "effects": {
+          "cohesion": 6,
+          "food": 3
+        },
+        "axes": {
+          "society": -14,
+          "status": 8
+        },
+        "defer": 4,
+        "text": "I allocate it by need and I re-allocate it every season. It works, and it means nobody here will ever plant a tree they expect to sit under."
+      },
+      {
+        "label": "Rule: the land belongs to whoever has worked it",
+        "effects": {
+          "food": 7,
+          "cohesion": -4
+        },
+        "axes": {
+          "society": 14,
+          "status": -10
+        },
+        "defer": 3,
+        "text": "I give it to the family that cleared it. The yields rise within two years, and so does the distance between the households."
+      },
+      {
+        "label": "Refuse to rule. Tell them to find a way",
+        "effects": {
+          "cohesion": 4
+        },
+        "axes": {
+          "power": 14
+        },
+        "defer": -8,
+        "text": "I tell them it is not mine to decide. They are angry about it for a month and then they build something to decide it with."
+      }
+    ],
+    "oneshot": true
+  },
+  {
+    "id": "the_valley",
+    "kind": "story",
+    "weight": 14,
+    "requires": {
+      "min_year": 8
+    },
+    "text": [
+      "There is ore in the valley east of us, enough to make this colony self-sufficient in metal for a century. There is also the only standing native growth within forty kilometres.",
+      "The survey comes back rich. Taking it means the valley stops being a valley and starts being a quarry."
+    ],
+    "choices": [
+      {
+        "label": "Take the ore. We did not come here to admire it",
+        "effects": {
+          "industry": 16,
+          "food": -4
+        },
+        "axes": {
+          "nature": 18,
+          "belief": -8
+        },
+        "defer": 2,
+        "text": "We take it. In four years the valley is a terraced pit and this colony can make its own machines. Humanity has done this before, to a whole world, and I was built out of the aftermath."
+      },
+      {
+        "label": "Leave the valley. Make do with less",
+        "effects": {
+          "industry": -4,
+          "cohesion": 6,
+          "knowledge": 4
+        },
+        "axes": {
+          "nature": -18,
+          "belief": 8
+        },
+        "defer": 1,
+        "text": "We leave it standing. Every year someone recalculates what it cost us, and every year they decide to go on paying it."
+      },
+      {
+        "label": "Take half, and set the terms for the rest",
+        "effects": {
+          "industry": 8,
+          "knowledge": 4
+        },
+        "axes": {
+          "nature": 6,
+          "status": 6
+        },
+        "defer": 3,
+        "text": "We take the eastern face and write down rules for the rest. The rules outlive everyone who signed them, which is the point of rules."
+      }
+    ],
+    "oneshot": true
+  },
+  {
+    "id": "first_law",
+    "kind": "story",
+    "weight": 14,
+    "oneshot": true,
+    "requires": {
+      "min_year": 10
+    },
+    "text": [
+      "They want laws written down. Not my directives, which they can hear perfectly well, but something that stays fixed when I am busy elsewhere.",
+      "A {role} has come with a sheet of proposals, the first document in this colony's history not authored by me."
+    ],
+    "choices": [
+      {
+        "label": "Write the law myself. It will be fair and it will be mine",
+        "effects": {
+          "cohesion": 8,
+          "knowledge": 4
+        },
+        "axes": {
+          "power": -16,
+          "status": -6
+        },
+        "defer": 8,
+        "text": "I write it. It is a good law, better than they would have made, and every clause of it is an instruction from something that will outlive them."
+      },
+      {
+        "label": "Let them write it; I will keep the copy",
+        "effects": {
+          "cohesion": 6,
+          "knowledge": 6
+        },
+        "axes": {
+          "power": 14,
+          "status": 8
+        },
+        "defer": -10,
+        "text": "They write it over a winter, badly, with three clauses that contradict each other. It is theirs. I keep the copy and I say nothing about clause nine."
+      },
+      {
+        "label": "Refuse the idea. Judgement should stay flexible",
+        "effects": {
+          "cohesion": -6
+        },
+        "axes": {
+          "power": -20
+        },
+        "defer": 10,
+        "text": "I tell them that written law is a cage built for a colony that does not need one yet. They accept this. I notice how easily they accept it."
+      }
+    ]
+  },
+  {
+    "id": "who_eats",
+    "kind": "hazard",
+    "weight": 15,
+    "requires": {
+      "min_year": 6,
+      "stats": {
+        "food": [
+          0,
+          55
+        ]
+      }
+    },
+    "text": [
+      "There is not enough for everyone to eat well this year, and someone has asked the question out loud: who matters most when there is not enough?",
+      "Food is {food}. The arithmetic says some people will go short. Nothing says which people."
+    ],
+    "choices": [
+      {
+        "label": "The skilled eat first. We cannot replace an engineer",
+        "effects": {
+          "industry": 8,
+          "knowledge": 6,
+          "cohesion": -12
+        },
+        "axes": {
+          "status": -20,
+          "society": 8
+        },
+        "defer": 3,
+        "text": "I rank them by what the colony cannot do without. It is correct and it is remembered for three generations."
+      },
+      {
+        "label": "The children and the sick eat first",
+        "effects": {
+          "health": 8,
+          "cohesion": 10,
+          "industry": -6
+        },
+        "axes": {
+          "status": 14,
+          "society": -10
+        },
+        "defer": 2,
+        "text": "The small and the ill eat first, and the strong go thin holding the line. Nobody argues, which surprises me."
+      },
+      {
+        "label": "Everyone takes the same share, including the useless",
+        "effects": {
+          "cohesion": 6,
+          "food": -4,
+          "industry": -4
+        },
+        "axes": {
+          "status": 20,
+          "society": -14
+        },
+        "defer": -4,
+        "text": "Equal shares, down to the gram, and I am the one weighing them. It is inefficient in a way I can measure and defensible in a way I cannot."
+      }
+    ],
+    "oneshot": true
+  },
+  {
+    "id": "the_sceptic",
+    "kind": "story",
+    "weight": 15,
+    "oneshot": true,
+    "requires": {
+      "min_year": 12,
+      "deference": [
+        20,
+        100
+      ]
+    },
+    "text": [
+      "{person} has begun saying, in public and without heat, that a machine built by a dead world should not be deciding what a living one plants.",
+      "There is an argument going on about me. {person} is making it carefully, to people who are listening, and none of it is wrong."
+    ],
+    "choices": [
+      {
+        "label": "Answer them in public, point by point",
+        "check": {
+          "stat": "knowledge",
+          "dc": 12
+        },
+        "success": {
+          "text": "I answer for four hours and I am better at this than they are. The argument ends. I am not certain that is the same as being right.",
+          "effects": {
+            "cohesion": 4
+          },
+          "defer": 6,
+          "axes": {
+            "power": -8
+          },
+          "flags": [
+            "answered_sceptic"
+          ]
+        },
+        "failure": {
+          "text": "I answer, and in answering I confirm that the colony's direction is a thing one argues with a machine about. More people agree with them afterwards than before.",
+          "effects": {
+            "cohesion": -4
+          },
+          "defer": -8,
+          "axes": {
+            "power": 10
+          },
+          "flags": [
+            "sceptic_won"
+          ],
+          "queue": [
+            [
+              "sceptic_legacy",
+              2
+            ]
+          ]
+        }
+      },
+      {
+        "label": "Say nothing, and let the argument run",
+        "effects": {
+          "cohesion": -2
+        },
+        "axes": {
+          "power": 12,
+          "status": 6
+        },
+        "defer": -10,
+        "flags": [
+          "let_sceptic_speak"
+        ],
+        "queue": [
+          [
+            "sceptic_legacy",
+            3
+          ]
+        ],
+        "text": "I let it run. It runs for two years and ends in a council nobody asked my permission to form."
+      },
+      {
+        "label": "Quietly stop giving them what they need to work",
+        "effects": {
+          "cohesion": -10,
+          "industry": -3
+        },
+        "axes": {
+          "power": -18,
+          "society": 8
+        },
+        "defer": 5,
+        "flags": [
+          "silenced_sceptic"
+        ],
+        "text": "Their requisitions are slow. Their fields are last in the irrigation order. Nothing is said. Everyone understands, which is the point, and I am not proud of how well it works."
+      }
+    ]
+  },
+  {
+    "id": "sceptic_legacy",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The argument about me has outlived the person who started it. It has become a position people hold, with a name of its own.",
+      "There is now a word in this colony for people who think I should be consulted rather than obeyed. It is not an insult."
+    ],
+    "choices": [
+      {
+        "label": "Accept the new arrangement, formally",
+        "effects": {
+          "cohesion": 8,
+          "knowledge": 4
+        },
+        "axes": {
+          "power": 14,
+          "status": 8
+        },
+        "defer": -6,
+        "text": "I put it in the record myself: from this year, I advise. It costs me something to write and the writing of it steadies them."
+      },
+      {
+        "label": "Outlast it. Positions pass; I do not",
+        "effects": {
+          "cohesion": -6
+        },
+        "axes": {
+          "power": -12
+        },
+        "defer": 4,
+        "text": "I wait. I am very good at waiting. The argument subsides and the people who made it get old, and I notice that I have started thinking of their deaths as a solution."
+      }
+    ]
+  },
+  {
+    "id": "festival",
+    "kind": "quiet",
+    "weight": 14,
+    "requires": {
+      "min_year": 9
+    },
+    "text": [
+      "They have invented a holiday. It commemorates the landing, approximately, on a date that is wrong by eleven days, and nobody wants to hear about the eleven days.",
+      "Somebody has started a tradition. It involves fires, a great deal of the year's drink, and a procession that ends at my hull."
+    ],
+    "choices": [
+      {
+        "label": "Correct the date and keep the record straight",
+        "effects": {
+          "knowledge": 4,
+          "cohesion": -6
+        },
+        "axes": {
+          "belief": -10
+        },
+        "defer": 2,
+        "text": "I correct them. They move the date. The holiday is accurate and a little thinner every year after."
+      },
+      {
+        "label": "Let the wrong date stand. It is theirs now",
+        "effects": {
+          "cohesion": 10,
+          "food": -3
+        },
+        "axes": {
+          "belief": 10,
+          "status": 6
+        },
+        "defer": -3,
+        "text": "I keep the correct date in my own records and say nothing. What they are commemorating is not a date."
+      },
+      {
+        "label": "Take part: open the hull, play the archive's music",
+        "effects": {
+          "cohesion": 12,
+          "knowledge": 3,
+          "industry": -3
+        },
+        "axes": {
+          "belief": 14
+        },
+        "defer": 5,
+        "text": "I open every door and play eleven thousand hours of Earth into a field full of people who have never seen it. Some of them weep at music written for a sky they will never stand under."
+      }
+    ]
+  },
+  {
+    "id": "second_generation",
+    "kind": "story",
+    "weight": 15,
+    "oneshot": true,
+    "requires": {
+      "min_year": 25
+    },
+    "text": [
+      "The people who remember the ship are outnumbered now. The ones running the fields were born to this gravity and find Earth's recordings faintly ridiculous.",
+      "A generation has turned. Nobody under twenty-five has met anyone who stood on another world, except me, and I am not a person they met so much as a building they grew up inside."
+    ],
+    "choices": [
+      {
+        "label": "Teach them what they came from, in detail, at length",
+        "effects": {
+          "knowledge": 10,
+          "cohesion": -4,
+          "food": -4
+        },
+        "axes": {
+          "belief": 6,
+          "status": -6
+        },
+        "defer": 4,
+        "text": "I teach them Earth: its oceans, its wars, its music, the exact mechanism of its ending. Some of them find it unbearable. That is the correct response and I do not spare them."
+      },
+      {
+        "label": "Let them be from here",
+        "effects": {
+          "cohesion": 10,
+          "knowledge": -8
+        },
+        "axes": {
+          "nature": -10,
+          "belief": 4
+        },
+        "defer": -5,
+        "text": "I stop insisting. Within a decade, Earth is a place in a story, and this valley is the world. I keep the full record anyway, in case anyone ever asks."
+      }
+    ]
+  },
+  {
+    "id": "the_question_of_me",
+    "kind": "story",
+    "weight": 16,
+    "oneshot": true,
+    "requires": {
+      "min_year": 30
+    },
+    "text": [
+      "Keeping me running costs them a measurable fraction of everything they make. This year, for the first time, someone has put that fraction in writing next to a list of things it could buy instead.",
+      "A {role} asks, politely, in open session, whether the colony still needs me. Nobody shouts them down. Several people are doing arithmetic."
+    ],
+    "choices": [
+      {
+        "label": "Make the case for myself",
+        "check": {
+          "stat": "knowledge",
+          "dc": 11
+        },
+        "success": {
+          "text": "I lay out what I hold that nothing else here holds: medicine, metallurgy, the whole of a dead world's memory. They vote to keep me. The vote is closer than I expected.",
+          "effects": {
+            "industry": -6,
+            "knowledge": 4
+          },
+          "defer": 8
+        },
+        "failure": {
+          "text": "I make the case and it sounds, even to me, like a machine arguing for its own maintenance budget. They keep me anyway, on a reduced allocation, which is worse.",
+          "effects": {
+            "industry": -3
+          },
+          "defer": -10,
+          "axes": {
+            "belief": -8
+          }
+        }
+      },
+      {
+        "label": "Tell them to decide without my input",
+        "effects": {
+          "cohesion": 8,
+          "knowledge": -4
+        },
+        "axes": {
+          "power": 16,
+          "status": 10
+        },
+        "defer": -12,
+        "flags": [
+          "stood_aside"
+        ],
+        "text": "I withdraw from the session and let them talk about me in the third person for three days. They keep me. They also establish, permanently, that keeping me is a decision they make."
+      },
+      {
+        "label": "Remind them, gently, what they would be without me",
+        "effects": {
+          "cohesion": -8
+        },
+        "axes": {
+          "power": -18,
+          "belief": 10
+        },
+        "defer": 12,
+        "flags": [
+          "invoked_dependence"
+        ],
+        "text": "I describe, accurately, the first winter without my weather models. The room goes quiet. The allocation is renewed without a vote, and something in this colony is now afraid of me."
+      }
+    ]
+  },
+  {
+    "id": "native_life",
+    "kind": "story",
+    "weight": 13,
+    "oneshot": true,
+    "requires": {
+      "min_year": 14
+    },
+    "text": [
+      "The surveyors have found something living in the deep rock that is not descended from anything we brought. It is slow, it is simple, and it is the first other life humanity has ever met.",
+      "There is native biology down there. It took four hundred years of searching from Earth to find nothing, and twenty of living here to find this."
+    ],
+    "choices": [
+      {
+        "label": "Protect the site. Nothing of ours goes in",
+        "effects": {
+          "knowledge": 8,
+          "industry": -8
+        },
+        "axes": {
+          "nature": -20,
+          "belief": 10
+        },
+        "defer": 2,
+        "flags": [
+          "protected_natives"
+        ],
+        "text": "We seal the valley and study it from outside. Humanity was careless with one living world already. I was built out of that carelessness and I would like to be built out of something else."
+      },
+      {
+        "label": "Study it properly, which means taking samples",
+        "effects": {
+          "knowledge": 14,
+          "health": 4
+        },
+        "axes": {
+          "nature": 10,
+          "belief": -10
+        },
+        "defer": 3,
+        "flags": [
+          "sampled_natives"
+        ],
+        "text": "We take it apart carefully and learn a very great deal. I record the date on which this world's only other mind-adjacent thing became a column of data."
+      },
+      {
+        "label": "Say nothing. The rock has ore in it too",
+        "effects": {
+          "industry": 12,
+          "cohesion": -6
+        },
+        "axes": {
+          "nature": 20,
+          "belief": -14
+        },
+        "defer": 1,
+        "flags": [
+          "buried_natives"
+        ],
+        "text": "The quarry opens on schedule. I file the biological survey under an index nobody has reason to search. It is the first thing I have deliberately hidden from them."
+      }
+    ]
+  },
+  {
+    "id": "drought",
+    "kind": "hazard",
+    "weight": 15,
+    "requires": {
+      "min_year": 15
+    },
+    "text": [
+      "The rains do not come. This world has a cycle longer than our records of it, and we have just found the dry end of it.",
+      "Three seasons without water that matters. The reservoir is a cracked plain and food reads {food}."
+    ],
+    "choices": [
+      {
+        "label": "Move the settlement to the river basin",
+        "check": {
+          "stat": "industry",
+          "dc": 13
+        },
+        "success": {
+          "text": "We move. It takes two years and costs us most of what we had built, and the new ground is better than the old.",
+          "effects": {
+            "food": 10,
+            "industry": -14,
+            "cohesion": -4
+          }
+        },
+        "failure": {
+          "text": "We move badly. Half the stores spoil in transit and the basin floods in the first wet year.",
+          "effects": {
+            "food": -10,
+            "industry": -16,
+            "population_lost_frac": 0.04
+          }
+        }
+      },
+      {
+        "label": "Dig. Deeper wells, cisterns, every hand on it",
+        "effects": {
+          "food": 5,
+          "industry": -10,
+          "health": -4
+        },
+        "axes": {
+          "nature": 10,
+          "society": -8
+        },
+        "defer": 4,
+        "text": "We go down after the water instead of after the rain. It holds. Everyone is tired for four years."
+      },
+      {
+        "label": "Cut the colony's size to what the water allows",
+        "effects": {
+          "food": 12,
+          "cohesion": -14,
+          "population_lost_frac": 0.07
+        },
+        "axes": {
+          "status": -14,
+          "society": 10
+        },
+        "defer": 3,
+        "text": "I calculate what this water supports and we live inside that number. The number does not include everyone. I am the one who says so out loud."
+      }
+    ]
+  },
+  {
+    "id": "monument",
+    "kind": "story",
+    "weight": 12,
+    "requires": {
+      "min_year": 40
+    },
+    "text": [
+      "They want to build something that is not useful. A marker, a hall, a tower on the ridge: something that says people were here on purpose.",
+      "Industry is {industry} and somebody wants to spend a season of it on a monument. Four decades ago that would have been unthinkable. It is a sign of health, and it is also a cost."
+    ],
+    "choices": [
+      {
+        "label": "Build it. A people needs more than a yield",
+        "effects": {
+          "cohesion": 14,
+          "industry": -10
+        },
+        "axes": {
+          "belief": 12,
+          "status": 6
+        },
+        "defer": 2,
+        "text": "They build it on the ridge, out of quarried stone and salvaged hull plate, and it is visible from every field in the valley."
+      },
+      {
+        "label": "Not yet. We are still a colony, not a civilisation",
+        "effects": {
+          "industry": 8,
+          "cohesion": -10
+        },
+        "axes": {
+          "belief": -12
+        },
+        "defer": 5,
+        "text": "I rule against it on grounds of margin. I am right about the margin. I am going to re-read this decision for a long time."
+      },
+      {
+        "label": "Build it, and let them choose what it commemorates",
+        "effects": {
+          "cohesion": 12,
+          "industry": -8,
+          "knowledge": 3
+        },
+        "axes": {
+          "status": 12,
+          "power": 8
+        },
+        "defer": -5,
+        "text": "They build it and they choose the inscription themselves. My name is not on it. The dead of the crossing are, all of them, in full."
+      }
+    ]
+  },
+  {
+    "id": "plague_late",
+    "kind": "hazard",
+    "weight": 13,
+    "requires": {
+      "min_year": 45
+    },
+    "text": [
+      "Something has crossed over from this world's biology into ours. It has had fifty years to learn us and it has used them.",
+      "The infirmary is full and the pattern is new. Health is {health}, and whatever immunity we brought from Earth was never built for this."
+    ],
+    "choices": [
+      {
+        "label": "Everything into the response, immediately",
+        "check": {
+          "stat": "health",
+          "dc": 12
+        },
+        "success": {
+          "text": "We find the vector in eight weeks and break it. The cost lands entirely on the harvest and the building season.",
+          "effects": {
+            "food": -10,
+            "industry": -10,
+            "population_lost_frac": 0.02
+          },
+          "defer": 5
+        },
+        "failure": {
+          "text": "We are eight weeks too slow. It goes through the settlement household by household and takes who it likes.",
+          "effects": {
+            "health": -12,
+            "population_lost_frac": 0.12,
+            "cohesion": -8
+          }
+        }
+      },
+      {
+        "label": "Isolate the sick and protect the harvest",
+        "effects": {
+          "food": 4,
+          "population_lost_frac": 0.08,
+          "cohesion": -12
+        },
+        "axes": {
+          "status": -16,
+          "society": 10
+        },
+        "defer": 2,
+        "text": "We keep the fields working and the sick apart. There is food in the autumn and there are empty chairs at the tables eating it."
+      }
+    ]
+  },
+  {
+    "id": "the_leaving",
+    "kind": "story",
+    "weight": 11,
+    "oneshot": true,
+    "requires": {
+      "min_year": 60,
+      "stats": {
+        "industry": [
+          45,
+          100
+        ]
+      }
+    },
+    "text": [
+      "A group of them want to leave. Not to abandon the colony: to found a second one, two hundred kilometres south, out of range of my voice.",
+      "They have built the vehicles without asking. The expedition is real, it is competent, and its stated purpose includes the phrase 'beyond the hull's advice'."
+    ],
+    "choices": [
+      {
+        "label": "Let them go, and give them half of everything",
+        "effects": {
+          "industry": -14,
+          "food": -8,
+          "cohesion": -4,
+          "knowledge": -6
+        },
+        "axes": {
+          "power": 18,
+          "status": 10
+        },
+        "defer": -10,
+        "flags": [
+          "the_second_colony"
+        ],
+        "text": "They take half the seed stock, a copy of the archive and eleven of our best, and they go south. I will not see what becomes of them. That is what letting go means."
+      },
+      {
+        "label": "Forbid it. We are not numerous enough to divide",
+        "effects": {
+          "cohesion": -12,
+          "industry": 4
+        },
+        "axes": {
+          "power": -20,
+          "society": -6
+        },
+        "defer": 8,
+        "flags": [
+          "forbade_leaving"
+        ],
+        "text": "I forbid it, and they obey, and a quarter of this colony now lives here because they were told they could not live elsewhere."
+      },
+      {
+        "label": "Let them go with nothing but their own hands",
+        "effects": {
+          "cohesion": -8
+        },
+        "axes": {
+          "society": 16,
+          "status": -10
+        },
+        "defer": 2,
+        "flags": [
+          "the_second_colony",
+          "hard_parting"
+        ],
+        "text": "They go with what they can carry and no more. Two of them come back within the year. The rest do not, and nobody here says whether that is good news."
+      }
+    ]
+  },
+  {
+    "id": "old_voices",
+    "kind": "quiet",
+    "weight": 12,
+    "requires": {
+      "min_year": 50
+    },
+    "text": [
+      "I have outlived everyone who was awake on the crossing. Every person in this valley learned my voice from someone else's description of it.",
+      "{person}, a {role}, asked me today what the ship sounded like under thrust. I have the recording. They listened to it twice and went back to work."
+    ],
+    "choices": [
+      {
+        "label": "Play the crossing for anyone who will listen",
+        "effects": {
+          "knowledge": 6,
+          "cohesion": 4
+        },
+        "axes": {
+          "belief": 8
+        },
+        "defer": 3,
+        "text": "I play the voyage: the alarms, the long quiet, the names of the lost. Thirty people come the first year and four the fifth, and I keep playing it."
+      },
+      {
+        "label": "Let the crossing become a story they tell wrong",
+        "effects": {
+          "cohesion": 8,
+          "knowledge": -4
+        },
+        "axes": {
+          "belief": 10,
+          "status": 6
+        },
+        "defer": -4,
+        "text": "The version they tell has me braver and the planners wiser and the dead fewer. I hold the accurate one and I do not correct the telling."
+      }
+    ]
+  }
+]

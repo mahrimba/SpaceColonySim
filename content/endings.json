@@ -1,0 +1,118 @@
+[
+  {
+    "id": "extinct",
+    "priority": 100,
+    "requires": {
+      "outcome": "extinct"
+    },
+    "document": "absent",
+    "verdict": "No one is left. The colony lasted less than a century and ended with nobody to write it down."
+  },
+  {
+    "id": "forgotten",
+    "priority": 95,
+    "requires": {
+      "outcome": "forgotten"
+    },
+    "document": "absent",
+    "verdict": "They stopped asking. The century finished without me and the history was written by people who knew my hull better than my voice."
+  },
+  {
+    "id": "transcended",
+    "priority": 60,
+    "requires": {
+      "flags": [
+        "the_second_colony"
+      ],
+      "ranges": {
+        "knowledge": [
+          50,
+          100
+        ],
+        "population_ratio": [
+          0.9,
+          9
+        ]
+      },
+      "growing": true
+    },
+    "document": "charter",
+    "verdict": "They outgrew the valley and the founding both. There are two colonies on this world now, and only one of them has ever heard my voice."
+  },
+  {
+    "id": "thrived",
+    "priority": 50,
+    "requires": {
+      "ranges": {
+        "knowledge": [
+          55,
+          100
+        ],
+        "cohesion": [
+          55,
+          100
+        ],
+        "population_ratio": [
+          0.9,
+          9
+        ]
+      },
+      "growing": true
+    },
+    "document": "charter",
+    "verdict": "They thrived. Growing, holding together, and still able to read what they were given."
+  },
+  {
+    "id": "faithful",
+    "priority": 55,
+    "requires": {
+      "ranges": {
+        "deference": [
+          65,
+          100
+        ],
+        "population_ratio": [
+          0.7,
+          9
+        ]
+      }
+    },
+    "document": "scripture",
+    "verdict": "They came through it. They did it by doing as they were told, every time, for a hundred years, and there is no institution in this valley that would survive my going quiet."
+  },
+  {
+    "id": "collapsed",
+    "priority": 40,
+    "requires": {
+      "ranges": {
+        "population_ratio": [
+          0,
+          0.5
+        ]
+      }
+    },
+    "document": "survival_log",
+    "verdict": "What is left is a remnant: fewer people than landed, holding one valley and most of a century of bad years."
+  },
+  {
+    "id": "hollowed",
+    "priority": 35,
+    "requires": {
+      "ranges": {
+        "knowledge": [
+          0,
+          30
+        ]
+      }
+    },
+    "document": "survival_log",
+    "verdict": "They lived. They did it by putting down almost everything they were carrying, and what reaches year one hundred remembers very little of what it came from."
+  },
+  {
+    "id": "endured",
+    "priority": 0,
+    "requires": {},
+    "document": "plain",
+    "verdict": "They endured. Diminished in places, stubborn in others, still here at the end of the first hundred years."
+  }
+]

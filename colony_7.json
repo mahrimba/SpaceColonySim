@@ -1,0 +1,556 @@
+{
+  "colony": "Hardship",
+  "year": 100,
+  "outcome": "faithful",
+  "outcome_reason": "They came through it. They did it by doing as they were told, every time, for a hundred years, and there is no institution in this valley that would survive my going quiet.",
+  "population": 11976,
+  "peak_population": 11976,
+  "stats": {
+    "food": 93.5,
+    "industry": 0.0,
+    "health": 51.15,
+    "knowledge": 63.84,
+    "cohesion": 99.0
+  },
+  "deference": 100.0,
+  "axes": {
+    "society": 0.0,
+    "nature": -4.0,
+    "belief": 26.0,
+    "power": -59.0,
+    "status": 12.0
+  },
+  "ship_role": "the temple",
+  "flags": [
+    "protected_natives",
+    "voyage:broke_mandate"
+  ],
+  "people": [
+    {
+      "name": "Ingrid Lindqvist",
+      "origin": "sleeper",
+      "born": -50,
+      "died": 40,
+      "role": "archivist",
+      "traits": [
+        "exacting",
+        "generous"
+      ],
+      "stance": 1,
+      "axes": {
+        "society": 0,
+        "nature": 24,
+        "belief": -52,
+        "power": 22,
+        "status": 6
+      }
+    },
+    {
+      "name": "Salim Rasmussen",
+      "origin": "sleeper",
+      "born": -46,
+      "died": 30,
+      "role": "surveyor",
+      "traits": [
+        "gentle",
+        "brilliant"
+      ],
+      "stance": 1,
+      "axes": {
+        "society": 45,
+        "nature": -8,
+        "belief": -6,
+        "power": -21,
+        "status": -5
+      }
+    },
+    {
+      "name": "Ingrid Ferreira",
+      "origin": "sleeper",
+      "born": -47,
+      "died": 40,
+      "role": "physician",
+      "traits": [
+        "patient",
+        "devout"
+      ],
+      "stance": 1,
+      "axes": {
+        "society": 19,
+        "nature": 22,
+        "belief": -6,
+        "power": -4,
+        "status": 16
+      }
+    },
+    {
+      "name": "Jiro Ferreira",
+      "origin": "sleeper",
+      "born": -29,
+      "died": 40,
+      "role": "physician",
+      "traits": [
+        "exacting",
+        "reckless"
+      ],
+      "stance": 1,
+      "axes": {
+        "society": -5,
+        "nature": -15,
+        "belief": 19,
+        "power": -32,
+        "status": 4
+      }
+    },
+    {
+      "name": "Noor Aziz",
+      "origin": "colony-born",
+      "born": -7,
+      "died": 60,
+      "role": "archivist",
+      "traits": [
+        "brilliant",
+        "gentle"
+      ],
+      "stance": 2,
+      "axes": {
+        "society": -4,
+        "nature": 2,
+        "belief": 30,
+        "power": 29,
+        "status": -12
+      }
+    },
+    {
+      "name": "Tomás Mbeki",
+      "origin": "colony-born",
+      "born": 13,
+      "died": 80,
+      "role": "surveyor",
+      "traits": [
+        "patient",
+        "brilliant"
+      ],
+      "stance": 2,
+      "axes": {
+        "society": 6,
+        "nature": 14,
+        "belief": -11,
+        "power": 6,
+        "status": -15
+      }
+    },
+    {
+      "name": "Mirela Silva",
+      "origin": "colony-born",
+      "born": 15,
+      "died": 80,
+      "role": "farmer",
+      "traits": [
+        "stubborn",
+        "patient"
+      ],
+      "stance": 1,
+      "axes": {
+        "society": 9,
+        "nature": 29,
+        "belief": 0,
+        "power": -11,
+        "status": -59
+      }
+    },
+    {
+      "name": "Aleksy Lindqvist",
+      "origin": "colony-born",
+      "born": 12,
+      "died": 70,
+      "role": "speaker",
+      "traits": [
+        "bitter",
+        "brilliant"
+      ],
+      "stance": 2,
+      "axes": {
+        "society": 1,
+        "nature": 8,
+        "belief": 18,
+        "power": -18,
+        "status": 21
+      }
+    },
+    {
+      "name": "Ingrid Silva",
+      "origin": "colony-born",
+      "born": 26,
+      "died": null,
+      "role": "speaker",
+      "traits": [
+        "generous",
+        "reckless"
+      ],
+      "stance": 0,
+      "axes": {
+        "society": -32,
+        "nature": -4,
+        "belief": 3,
+        "power": 10,
+        "status": 24
+      }
+    },
+    {
+      "name": "Beatriz Blomgren",
+      "origin": "colony-born",
+      "born": 37,
+      "died": null,
+      "role": "farmer",
+      "traits": [
+        "exacting",
+        "ambitious"
+      ],
+      "stance": 1,
+      "axes": {
+        "society": 10,
+        "nature": 10,
+        "belief": 11,
+        "power": -77,
+        "status": 0
+      }
+    },
+    {
+      "name": "Salim Nakamura",
+      "origin": "colony-born",
+      "born": 48,
+      "died": null,
+      "role": "physician",
+      "traits": [
+        "sceptical",
+        "bitter"
+      ],
+      "stance": 1,
+      "axes": {
+        "society": 2,
+        "nature": 7,
+        "belief": 71,
+        "power": -14,
+        "status": 3
+      }
+    },
+    {
+      "name": "Imani Castellanos",
+      "origin": "colony-born",
+      "born": 43,
+      "died": null,
+      "role": "speaker",
+      "traits": [
+        "gentle",
+        "tired"
+      ],
+      "stance": 0,
+      "axes": {
+        "society": -14,
+        "nature": -13,
+        "belief": -12,
+        "power": -73,
+        "status": 34
+      }
+    }
+  ],
+  "chronicle": [
+    {
+      "year": 0,
+      "span": 1,
+      "event": "naming",
+      "choice": "Name it for the world and what it demands",
+      "population": 5867,
+      "stats": {
+        "food": 72,
+        "industry": 44,
+        "health": 88,
+        "knowledge": 85,
+        "cohesion": 53
+      },
+      "deference": 87,
+      "axes": {
+        "society": 0,
+        "nature": 8,
+        "belief": -6,
+        "power": 15,
+        "status": 0
+      },
+      "ship_role": "the meeting hall",
+      "dead": []
+    },
+    {
+      "year": 10,
+      "span": 10,
+      "event": "blight",
+      "choice": "Burn the affected fields and replant from the vault",
+      "population": 6546,
+      "stats": {
+        "food": 100,
+        "industry": 28,
+        "health": 85,
+        "knowledge": 77,
+        "cohesion": 53
+      },
+      "deference": 88,
+      "axes": {
+        "society": 0,
+        "nature": 8,
+        "belief": -6,
+        "power": 10,
+        "status": 0
+      },
+      "ship_role": "the meeting hall",
+      "dead": []
+    },
+    {
+      "year": 20,
+      "span": 10,
+      "event": "first_birth",
+      "choice": "Record her as the first citizen, and date the calendar from her",
+      "population": 7450,
+      "stats": {
+        "food": 100,
+        "industry": 12,
+        "health": 82,
+        "knowledge": 77,
+        "cohesion": 63
+      },
+      "deference": 91,
+      "axes": {
+        "society": 0,
+        "nature": 8,
+        "belief": 2,
+        "power": 5,
+        "status": 6
+      },
+      "ship_role": "the landing site",
+      "dead": []
+    },
+    {
+      "year": 30,
+      "span": 10,
+      "event": "first_law",
+      "choice": "Write the law myself. It will be fair and it will be mine",
+      "population": 8277,
+      "stats": {
+        "food": 100,
+        "industry": 0,
+        "health": 79,
+        "knowledge": 78,
+        "cohesion": 71
+      },
+      "deference": 100,
+      "axes": {
+        "society": 0,
+        "nature": 8,
+        "belief": 2,
+        "power": -16,
+        "status": 0
+      },
+      "ship_role": "the landing site",
+      "dead": [
+        "Salim Rasmussen"
+      ]
+    },
+    {
+      "year": 40,
+      "span": 10,
+      "event": "machine_down",
+      "choice": "Cannibalise the hull for parts",
+      "population": 8977,
+      "stats": {
+        "food": 100,
+        "industry": 12,
+        "health": 76,
+        "knowledge": 70,
+        "cohesion": 71
+      },
+      "deference": 97,
+      "axes": {
+        "society": 0,
+        "nature": 16,
+        "belief": -8,
+        "power": -21,
+        "status": 0
+      },
+      "ship_role": "the landing site",
+      "dead": [
+        "Ingrid Lindqvist",
+        "Ingrid Ferreira",
+        "Jiro Ferreira"
+      ]
+    },
+    {
+      "year": 50,
+      "span": 10,
+      "event": "monument",
+      "choice": "Build it. A people needs more than a yield",
+      "population": 9773,
+      "stats": {
+        "food": 100,
+        "industry": 0,
+        "health": 73,
+        "knowledge": 67,
+        "cohesion": 85
+      },
+      "deference": 100,
+      "axes": {
+        "society": 0,
+        "nature": 16,
+        "belief": 4,
+        "power": -26,
+        "status": 6
+      },
+      "ship_role": "the works",
+      "dead": []
+    },
+    {
+      "year": 60,
+      "span": 10,
+      "event": "fever",
+      "choice": "Quarantine by household, enforced",
+      "population": 10098,
+      "stats": {
+        "food": 100,
+        "industry": 0,
+        "health": 63,
+        "knowledge": 64,
+        "cohesion": 85
+      },
+      "deference": 100,
+      "axes": {
+        "society": 0,
+        "nature": 16,
+        "belief": 4,
+        "power": -39,
+        "status": 6
+      },
+      "ship_role": "the works",
+      "dead": [
+        "Noor Aziz"
+      ]
+    },
+    {
+      "year": 70,
+      "span": 10,
+      "event": "the_question_of_me",
+      "choice": "Make the case for myself",
+      "population": 10640,
+      "stats": {
+        "food": 100,
+        "industry": 0,
+        "health": 60,
+        "knowledge": 65,
+        "cohesion": 85
+      },
+      "deference": 100,
+      "axes": {
+        "society": 0,
+        "nature": 16,
+        "belief": 4,
+        "power": -44,
+        "status": 6
+      },
+      "ship_role": "the works",
+      "dead": [
+        "Aleksy Lindqvist"
+      ]
+    },
+    {
+      "year": 80,
+      "span": 10,
+      "event": "monument",
+      "choice": "Build it. A people needs more than a yield",
+      "population": 11133,
+      "stats": {
+        "food": 100,
+        "industry": 0,
+        "health": 57,
+        "knowledge": 62,
+        "cohesion": 99
+      },
+      "deference": 100,
+      "axes": {
+        "society": 0,
+        "nature": 16,
+        "belief": 16,
+        "power": -49,
+        "status": 12
+      },
+      "ship_role": "the works",
+      "dead": [
+        "Tomás Mbeki",
+        "Mirela Silva"
+      ]
+    },
+    {
+      "year": 90,
+      "span": 10,
+      "event": "native_life",
+      "choice": "Protect the site. Nothing of ours goes in",
+      "population": 11578,
+      "stats": {
+        "food": 100,
+        "industry": 0,
+        "health": 54,
+        "knowledge": 67,
+        "cohesion": 99
+      },
+      "deference": 100,
+      "axes": {
+        "society": 0,
+        "nature": -4,
+        "belief": 26,
+        "power": -54,
+        "status": 12
+      },
+      "ship_role": "the works",
+      "dead": []
+    }
+  ],
+  "arrival": {
+    "profile": "synthetic",
+    "ship": "synthetic hull",
+    "legs_flown": 13,
+    "outcome": "colonized",
+    "stats": {
+      "hull": 53.3,
+      "power": 50.3,
+      "life_support": 61.4,
+      "cognition": 77.5,
+      "fuel": 35.9,
+      "seed_vault": 63.3,
+      "fabricators": 48.0,
+      "habitat": 63.2,
+      "medical": 88.5,
+      "archive": 85.3
+    },
+    "colonists_alive": 7181,
+    "colonists_lost": 858,
+    "flags": [
+      "broke_mandate"
+    ],
+    "notables": [
+      "Ingrid Lindqvist",
+      "Salim Rasmussen",
+      "Ingrid Ferreira"
+    ],
+    "mourned": [],
+    "planet": {
+      "name": "Barnard Lyrae 2b",
+      "gravity": 0.88,
+      "pressure": 1.02,
+      "temperature": -0.2,
+      "water": 0.27,
+      "biosphere": "none",
+      "radiation": 1.0,
+      "surveyed_at_cognition": 100.0,
+      "notes": [],
+      "habitability": 0.635,
+      "verdict": "a garden"
+    },
+    "seed": 7
+  }
+}

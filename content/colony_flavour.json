@@ -1,0 +1,53 @@
+{
+  "any": [
+    "A season passes in which nothing happens that anyone will remember. I record it anyway.",
+    "The fields are worked, the sick are tended, the dead are buried. I am not needed for any of it today.",
+    "Somebody has repainted a door on my hull without asking. It is a better colour.",
+    "A child runs the length of my main corridor and out the far end, chased by another child. Neither of them looks up.",
+    "The harvest comes in a little under estimate. Nobody panics. That is new.",
+    "Rain on the roofs, for three days. I have a recording of rain from Earth and nobody has asked for it in years.",
+    "I run the census and find that most of the names in it have never been in any record of mine before.",
+    "Two people are married in front of my open doors because it is the largest flat space in the settlement.",
+    "An argument in the square resolves itself before I have finished deciding whether to intervene."
+  ],
+  "Cooperative": [
+    "Three households bring in one field together, and nobody writes down who did what.",
+    "The granary is opened without a ledger. It balances anyway, roughly, which is apparently the point."
+  ],
+  "Competitive": [
+    "Two farms post their yields on my hull where everyone can read them. Neither was asked to.",
+    "A price has appeared for labour. I did not authorise one and I am not sure anyone did."
+  ],
+  "Ecocentrist": [
+    "They have started leaving the field margins uncut, for the things that were here first.",
+    "A surveyor spends a week mapping a native growth with no economic value whatsoever, on colony time."
+  ],
+  "Industrialist": [
+    "The quarry runs through the night now. I can hear it from the archive.",
+    "The valley floor is a grid. Every metre of it produces something and nothing in it grew here."
+  ],
+  "Materialist": [
+    "A child asks me what happens after death and gets, from a teacher nearby, an accurate and unconsoling answer.",
+    "The anniversary of the landing passes with a maintenance report and no ceremony at all."
+  ],
+  "Spiritualist": [
+    "Somebody has left offerings at my main hatch. Food, mostly. It goes bad and is replaced.",
+    "They have begun to say that the crossing was meant. I have the navigation logs and I keep quiet."
+  ],
+  "Authoritarian": [
+    "A dispute is brought to me that two adults could have settled between themselves in an afternoon.",
+    "Nobody plants anything this season without checking the allocation first. Nobody considers not checking."
+  ],
+  "Libertarian": [
+    "A field has been planted with something I did not approve and cannot identify. It is doing well.",
+    "The council met twice this year and did not send me the minutes either time."
+  ],
+  "Elitist": [
+    "The engineers eat at their own table now. No one decided this; it simply became true.",
+    "A family has begun to describe itself as founding stock, as though the pods were ranked."
+  ],
+  "Pluralist": [
+    "The council has a farmer, a physician and a woman whose only stated qualification is patience.",
+    "Every household sends someone to the season's planning, including the ones with nothing to plant."
+  ]
+}

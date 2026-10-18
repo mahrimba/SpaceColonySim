@@ -12,6 +12,8 @@ from textual.app import App, ComposeResult
 from textual.containers import Vertical, VerticalScroll
 from textual.widgets import Static
 
+import century as CY
+import colony as C
 import constants as K
 import planets
 import resolve
@@ -44,6 +46,38 @@ class Panel(Static):
     """Persistent telemetry. Precision is the ship's problem, not the UI's."""
 
     last = ""  # plain text of the most recent render, for the smoke test
+
+    def render_colony(self, century_game) -> None:
+        s = century_game.state
+        rows = [f"[b]{s.name}[/b]", f"[dim]{s.ship_role}[/dim]", ""]
+        rows.append(f"Year [b]{s.year}[/b]" + (f"  [dim](+{s.span})[/dim]"
+                                               if s.span > 1 else ""))
+        rows.append("")
+        rows.append(f"[white]█ [/white]{'People':<13}{s.say_population()}")
+        for stat in C.COLONY_STATS:
+            colour = C.COLONY_COLOURS[stat]
+            value = s.stats[stat]
+            tone = "green" if value > 60 else ("yellow" if value > 30 else "red")
+            rows.append(f"[{colour}]█ [/{colour}]{C.COLONY_LABELS[stat]:<13}"
+                        f"[{tone}]{s.say(stat)}[/{tone}]")
+        rows.append("")
+        tone = "green" if s.deference > 60 else ("yellow" if s.deference > 25 else "red")
+        rows.append(f"[cyan]█ [/cyan]{'Deference':<13}[{tone}]{s.deference:.0f}%[/{tone}]")
+
+        shown = [(a, v) for a, v in s.axes.items() if abs(v) >= 10]
+        if shown:
+            rows.append("")
+            rows.append("[dim]WHAT THEY ARE[/dim]")
+            for axis, value in shown:
+                low, high = C.AXES[axis]
+                pos = int(round((value + 100) / 200 * 8))
+                bar = "─" * pos + "●" + "─" * (8 - pos)
+                pole = high if value > 0 else low
+                rows.append(f"[dim]{bar}[/dim] {pole}")
+        rows.append("")
+        rows.append(f"  [dim]{len(s.living())} named alive — press c[/dim]")
+        self.last = "\n".join(rows)
+        self.update(self.last)
 
     def render_state(self, game: Game | None) -> None:
         if game is None:
@@ -102,11 +136,13 @@ class Voyage(App):
                border-top: solid $accent; }
     """
     BINDINGS = [("q", "quit", "Quit"), ("p", "planets", "Planet dossiers"),
-                ("m", "back", "Back")]
+                ("c", "cast", "Who is alive"), ("m", "back", "Back")]
 
-    def __init__(self, seed: int | None = None):
+    def __init__(self, seed: int | None = None, arrival: dict | None = None):
         super().__init__()
         self.seed = seed
+        self.arrival = arrival
+        self.century: CY.Century | None = None
         self.game: Game | None = None
         self.options: list[dict] = []
         self.lines: list[str] = []
@@ -129,7 +165,10 @@ class Voyage(App):
                   "",
                   "[dim]Number keys choose. p reads the surveyed worlds. "
                   "m steps back. q quits.[/dim]")
-        self.offer_profiles()
+        if self.arrival is not None:
+            self.begin_century(self.arrival)
+        else:
+            self.offer_profiles()
 
     # -- option plumbing ------------------------------------------------------
 
@@ -169,7 +208,8 @@ class Voyage(App):
             for token in line[2:].split("   "):
                 # Losses read red whether they are a negative number or a
                 # body count, which carries no minus sign.
-                bad = ("lost" in token.lower()
+                lowered = token.lower()
+                bad = ("lost" in lowered or "dead" in lowered
                        or token.rsplit(" ", 1)[-1].startswith("-"))
                 colour = S["loss"] if bad else S["gain"]
                 parts.append(f"[{colour}]{token}[/{colour}]")
@@ -195,7 +235,11 @@ class Voyage(App):
         for i, opt in enumerate(options):
             body.append(f"[b cyan]{KEYS[i]}) [/b cyan]{opt['label']}")
         self.query_one("#choices", Static).update("\n".join(body))
-        self.query_one("#panel", Panel).render_state(self.game)
+        panel = self.query_one("#panel", Panel)
+        if self.century is not None:
+            panel.render_colony(self.century)
+        else:
+            panel.render_state(self.game)
 
     def on_key(self, event) -> None:
         if event.key not in KEYS:
@@ -345,17 +389,78 @@ class Voyage(App):
         path = f"arrival_{game.seed}.json"
         game.state.dump(path)
         self.show("", "[b]— END OF VOYAGE —[/b]", *game.report(), "",
-                  f"[dim]State written to {path}. Act 2 — the first century of "
-                  "the colony — is not built yet; this file is what it will "
-                  "read.[/dim]")
+                  f"[dim]State written to {path}.[/dim]")
+        options = []
+        if game.state.outcome == "colonized":
+            options.append({"label": "[b]Begin the first century[/b]",
+                            "do": lambda: self.begin_century(game.state.to_dict())})
+        options.append({"label": "Quit", "do": self.exit})
+        self.set_options(options, "")
+
+    # -- act two ---------------------------------------------------------------
+
+    def begin_century(self, arrival: dict) -> None:
+        self.century = CY.Century(arrival, seed=self.seed)
+        self.lines.append("")
+        self.show("[b]— THE FIRST CENTURY —[/b]", *self.century.state.log)
+        self.refresh_century()
+
+    def refresh_century(self) -> None:
+        c = self.century
+        assert c
+        if c.phase == CY.DONE:
+            self.finish_century()
+        elif c.phase == CY.DIRECTIVE:
+            options = [{"label": d["label"], "do": (lambda i=d["id"]: self.direct(i))}
+                       for d in c.directive_options()]
+            self.set_options(options, f"Year {c.state.year} — one word from me.")
+        else:
+            options = [{"label": c.choice_label(ch), "do": (lambda i=i: self.decide(i))}
+                       for i, ch in enumerate(c.choices())]
+            self.set_options(options, "")
+
+    def direct(self, directive_id: str) -> None:
+        self.show(*self.century.do_directive(directive_id))
+        self.refresh_century()
+
+    def decide(self, index: int) -> None:
+        self.show(*self.century.resolve_choice(index))
+        self.refresh_century()
+
+    def finish_century(self) -> None:
+        c = self.century
+        assert c
+        path = f"colony_{c.seed}.json"
+        with open(path, "w", encoding="utf-8") as fh:
+            import json
+            json.dump(c.state.to_dict(), fh, indent=2, ensure_ascii=False)
+        self.show("", "[b]— THE HUNDREDTH YEAR —[/b]", "")
+        self.show(*c.document())
+        self.show("", f"[dim]Chronicle written to {path}.[/dim]")
         self.set_options([{"label": "Quit", "do": self.exit}], "")
+
+    def action_cast(self) -> None:
+        c = self.century
+        if not c:
+            self.show("[dim]Nobody is awake yet.[/dim]")
+            return
+        self.show("Alive, and known to me:",
+                  *(f"{resolve.TABLE} {p.describe(c.state.year)}"
+                    for p in c.state.living()))
 
 
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--seed", type=int)
+    ap.add_argument("--arrival", help="skip the voyage: play the century from "
+                                      "an arrival_<seed>.json")
     args = ap.parse_args()
-    Voyage(seed=args.seed).run()
+    arrival = None
+    if args.arrival:
+        import json
+        with open(args.arrival, encoding="utf-8") as fh:
+            arrival = json.load(fh)
+    Voyage(seed=args.seed, arrival=arrival).run()
 
 
 if __name__ == "__main__":

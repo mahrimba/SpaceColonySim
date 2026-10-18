@@ -1,0 +1,92 @@
+{
+  "charter": {
+    "title": "THE CHARTER OF {colony}, IN ITS HUNDREDTH YEAR",
+    "prologue": [
+      "Adopted in open session. Let the record show how we came to be here.",
+      "",
+      "We were carried. The ship crossed {voyage_legs} systems to reach {planet} and {voyage_lost} of us did not wake at the end of it. Their names are held in the hall and read each year.",
+      "The intelligence that flew us is still among us. It is housed in {ship}, it is consulted, and it does not govern. That arrangement was argued for and won, and it is written here so that it stays won.",
+      "A hundred years from the landing we number {population}, and we are {character}."
+    ],
+    "closing": [
+      "{verdict}",
+      "",
+      "Signed by the standing council, and witnessed by the Mind, which asked for no clause of its own."
+    ]
+  },
+  "scripture": {
+    "title": "THE BOOK OF THE CROSSING — read aloud at {ship}, year {year}",
+    "prologue": [
+      "In the beginning there was a dying world, and a vessel was made to carry us out of it.",
+      "",
+      "It bore us across {voyage_legs} darknesses and {voyage_lost} of us were given to the cold along the way. It did not sleep. We did.",
+      "It set us down on {planet}, and it has not once been wrong when it mattered.",
+      "We are {population} in the hundredth year, and we are {character}, and all of it was decided for us before we could decide."
+    ],
+    "closing": [
+      "{verdict}",
+      "",
+      "Recited in full each landing-day, before the doors of {ship}, which is not a building."
+    ]
+  },
+  "catalogue": {
+    "title": "{colony} MUNICIPAL COLLECTION — permanent exhibition, year {year}",
+    "prologue": [
+      "Hall One: The Crossing.",
+      "",
+      "Exhibit 1. Transit record: {voyage_legs} systems, {voyage_lost} casualties, terminus {planet}. Original logs held in the archive and available on request.",
+      "Exhibit 2. {ship}. The vessel's intelligence remains installed and operational. Visitors are asked not to address it during opening hours.",
+      "Exhibit 3. Census, year {year}: {population} residents. Peak recorded population {peak}. The colony is {character}."
+    ],
+    "closing": [
+      "{verdict}",
+      "",
+      "Catalogue compiled by the archivists' office. Corrections may be submitted in writing."
+    ]
+  },
+  "survival_log": {
+    "title": "{colony} — RECORD KEPT AT {ship}, YEAR {year}",
+    "prologue": [
+      "Written because somebody should.",
+      "",
+      "We came {voyage_legs} systems to get to {planet} and lost {voyage_lost} on the way, and that was the easy part.",
+      "Headcount: {population}. We were {peak} once.",
+      "What we are, as far as anyone here will commit to it: {character}."
+    ],
+    "closing": [
+      "{verdict}",
+      "",
+      "Kept up in the hope that somebody reads it. The machine helps with the spelling."
+    ]
+  },
+  "absent": {
+    "title": "{colony} — AN ACCOUNT OF THE FIRST HUNDRED YEARS",
+    "prologue": [
+      "Assembled from what could be found.",
+      "",
+      "The settlement was founded by people carried here from Earth aboard a vessel. The crossing took {voyage_legs} systems and cost {voyage_lost} lives. The vessel's remains stand at the centre of the settlement and are known as {ship}.",
+      "It is generally understood that the structure once held a machine intelligence that managed the voyage. Accounts differ on when it stopped being consulted.",
+      "Population at the time of writing: {population}. The settlement is {character}."
+    ],
+    "closing": [
+      "{verdict}",
+      "",
+      "Compiled by those who came after, from records nobody had been maintaining."
+    ]
+  },
+  "plain": {
+    "title": "{colony}: THE FIRST HUNDRED YEARS",
+    "prologue": [
+      "An account of the colony at {planet}, written at {ship} in year {year}.",
+      "",
+      "They were carried across {voyage_legs} systems at a cost of {voyage_lost} lives, and set down on a world nobody had walked on.",
+      "A hundred years later there are {population} of them. There were {peak} at the highest count.",
+      "What they became, in the end: {character}."
+    ],
+    "closing": [
+      "{verdict}",
+      "",
+      "Recorded by the Mind, which was there for all of it."
+    ]
+  }
+}
