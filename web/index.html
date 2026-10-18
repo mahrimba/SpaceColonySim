@@ -1,0 +1,45 @@
+<!doctype html>
+<!-- The browser front end. It runs the same Python engine as app.py, under
+     Pyodide, so it must be served over HTTP from the repository root:
+
+         python -m http.server        # then open http://localhost:8000/web/
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Space Colony Sim</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.27.2/full/pyodide.js"></script>
+<script src="main.js" defer></script>
+</head>
+<body data-act="voyage">
+<div class="shell">
+  <details class="rail" id="rail" open>
+    <summary>Telemetry</summary>
+    <div id="telemetry" aria-live="polite"></div>
+    <div class="commands">
+      <button type="button" id="cmd-planets" data-command="planets" hidden><kbd>p</kbd> Surveyed worlds</button>
+      <button type="button" id="cmd-cast" data-command="cast" hidden><kbd>c</kbd> Who is alive</button>
+    </div>
+  </details>
+
+  <main>
+    <div id="log" class="log">
+      <section class="block boot" id="boot">
+        <p>Waking the Mind.</p>
+        <p class="mech" id="boot-status">Loading the engine. The first visit takes a few seconds.</p>
+      </section>
+    </div>
+    <div class="dock">
+      <p class="prompt" id="prompt"></p>
+      <ol class="choices" id="choices"></ol>
+    </div>
+  </main>
+</div>
+</body>
+</html>

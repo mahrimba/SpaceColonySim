@@ -338,13 +338,13 @@ def test_the_mind_has_no_human_body() -> None:
 
 def test_markup_colours_in_the_view_are_real() -> None:
     """Textual renders an unknown colour name as grey and raises nothing, so
-    every literal colour in app.py has to be parsed here or typos ship."""
+    every literal colour in session.py has to be parsed here or typos ship."""
     try:
         from textual.color import Color
     except ImportError:
         print("skip markup colour check (textual not installed)")
         return
-    import app
+    import session as app
 
     styles = {"b", "i", "u", "bold", "italic", "underline", "dim", "strike",
               "reverse", "blink", "on", "not"}
@@ -411,6 +411,33 @@ def test_app_plays_through() -> None:
             await pilot.press("p")  # dossier view must not explode either
 
     asyncio.run(drive())
+
+
+def test_web_bridge_plays_through() -> None:
+    """The browser's bridge must turn every line into HTML, with no markup
+    left over, and survive a voyage and its century."""
+    import json
+    import re
+    import sys
+    import tempfile
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).parent / "web"))
+    import bridge
+
+    assert bridge.to_html("[b cyan]1) [/b cyan]a [Hull check, DC 12, +3]") == (
+        '<span class="b accent">1) </span>a [Hull check, DC 12, +3]')
+    update = json.loads(bridge.boot(tempfile.mkdtemp()))
+    for _ in range(3000):
+        labels = update["options"]
+        if "Retry" in labels[0] and update["landed"]:
+            break
+        pick = next((i for i, l in enumerate(labels)
+                     if "commit" in l or "first century" in l or "New game" in l), 0)
+        update = json.loads(bridge.choose(pick))
+        for block in update["blocks"]:
+            for _, line in block["lines"]:
+                assert not re.search(r"\[/?[a-z]", line), f"markup leaked: {line}"
+    assert update["landed"] and "Retry" in update["options"][0], "never reached the end"
 
 
 if __name__ == "__main__":
