@@ -326,6 +326,29 @@ def test_every_planet_modifier_is_felt() -> None:
     assert offsets["food"] > 0 and offsets["industry"] < 0
 
 
+def test_signature_events_always_come() -> None:
+    """A world with a signature combination gets that story every time,
+    unless the colony dies first."""
+    import planets
+    sig = [e for e in EVENTS if e.get("signature")]
+    assert sig, "no signature events"
+    for event in sig:
+        flags = event["requires"]["flags"]
+        assert len(flags) >= 2 and all(f.startswith("world:") for f in flags)
+    checked = 0
+    for seed in range(400):
+        arrival = CS.synthetic_arrival(seed)
+        game = CS.play(arrival, seed=seed, events=EVENTS)
+        drawn = {i for _, i in game.draw_history}
+        for event in sig:
+            if all(f in game.state.flags for f in event["requires"]["flags"]):
+                if game.state.year < century.CENTURY and game.state.outcome in DEATHS:
+                    continue
+                checked += 1
+                assert event["id"] in drawn, f"seed {seed}: {event['id']} never came"
+    assert checked > 0
+
+
 def test_named_dead_stay_dead() -> None:
     """Act 2 inherits Act 1's rule: the Mind does not resurrect anyone."""
     arrival = CS.synthetic_arrival(4)

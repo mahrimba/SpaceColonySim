@@ -189,6 +189,13 @@ class Century:
             s.note(C.FEATURE_LANDFALL[feature])
             # Features surface after the world's hard facts, a few years apart.
             s.schedule(f"feature_{feature}", traits + 1 + 2 * i, now=True)
+        # Signature events belong to a combination of conditions: a cold world
+        # with hot springs, an ocean world with storms. A world that has the
+        # combination always gets its story; it waits for its min_year.
+        for event in self.events:
+            if event.get("signature") and all(
+                    f in s.flags for f in event.get("requires", {}).get("flags", [])):
+                s.schedule(event["id"], 4, now=True)
         if s.thaw_losses:
             s.note(f"The thaw takes {s.thaw_losses:,} of them before the first "
                    "morning. I record every name.")

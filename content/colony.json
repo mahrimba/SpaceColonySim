@@ -9312,5 +9312,3159 @@
         "defer": -6
       }
     ]
+  },
+  {
+    "id": "warm_valley",
+    "kind": "story",
+    "weight": 30,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:cold",
+        "world:geothermal"
+      ],
+      "min_year": 5
+    },
+    "text": [
+      "The springs are the only place on this world where nobody is cold. The colony has packed itself around them, house against house, and the land beyond is empty.",
+      "Every new house goes up within a kilometre of the hot springs. Past that ring nobody builds, and nobody wants to."
+    ],
+    "choices": [
+      {
+        "label": "Pipe the heat out, so the colony can spread",
+        "check": {
+          "stat": "industry",
+          "dc": 12
+        },
+        "success": {
+          "text": "Insulated lines run out from the springs like roots. Villages follow them, a day's walk apart, warm at the end of every pipe.",
+          "effects": {
+            "industry": -8,
+            "food": 6,
+            "hostility": -0.05
+          },
+          "defer": 4
+        },
+        "failure": {
+          "text": "The lines lose their heat a kilometre out. We have built a very long, very cold radiator.",
+          "effects": {
+            "industry": -12
+          }
+        }
+      },
+      {
+        "label": "Keep the colony close, and build up",
+        "text": "Three storeys, four, five: a town of towers around a pool of warm water. Everyone knows everyone, and every cough.",
+        "effects": {
+          "cohesion": 6,
+          "health": -3,
+          "industry": 3
+        },
+        "axes": {
+          "society": -8
+        },
+        "defer": 3,
+        "queue": [
+          [
+            "springs_fail",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Treat the springs as sacred ground",
+        "text": "No houses at the water's edge and no pipes in the pool. The springs are for bathing, birth and burial, and the town stays warm at a respectful distance.",
+        "effects": {
+          "cohesion": 8
+        },
+        "axes": {
+          "belief": 12
+        },
+        "defer": -2,
+        "queue": [
+          [
+            "springs_fail",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Let families claim the warmest plots",
+        "text": "The families nearest the water are warm, and the ones at the edge are not. It is the colony's first map of who matters.",
+        "effects": {
+          "food": 4,
+          "cohesion": -6
+        },
+        "axes": {
+          "status": -12,
+          "society": 10
+        },
+        "defer": -4,
+        "queue": [
+          [
+            "springs_fail",
+            4
+          ]
+        ]
+      }
+    ],
+    "signature": true
+  },
+  {
+    "id": "springs_fail",
+    "kind": "hazard",
+    "chain_only": true,
+    "text": [
+      "The springs are cooling. The vent field has shifted underground, and the water that keeps the colony alive comes up a degree colder every month.",
+      "My seismographs have tracked the magma moving away below the valley. The springs will be cold within the decade."
+    ],
+    "choices": [
+      {
+        "label": "Drill after the heat, wherever it has gone",
+        "check": {
+          "stat": "industry",
+          "dc": 13
+        },
+        "success": {
+          "text": "We find the new vent eleven kilometres north and drill down to it. The town moves its heart, and keeps beating.",
+          "effects": {
+            "industry": -8,
+            "hostility": -0.04
+          },
+          "defer": 4
+        },
+        "failure": {
+          "text": "Four dry holes. The fifth finds the heat and loses the rig.",
+          "effects": {
+            "industry": -12,
+            "health": -6
+          }
+        }
+      },
+      {
+        "label": "Run my reactor hot to keep them warm",
+        "text": "I run the reactor past its rating and pipe the heat into the old spring lines. My core runs hot. The colony runs warm.",
+        "effects": {
+          "health": 4,
+          "industry": 4,
+          "knowledge": -6
+        },
+        "axes": {
+          "power": -6
+        },
+        "defer": 6
+      },
+      {
+        "label": "Follow the heat. Move the colony north",
+        "text": "They pack the town onto sledges and follow the warmth. My hull stays behind, cooling, beside the old springs.",
+        "effects": {
+          "food": -6,
+          "cohesion": 4,
+          "industry": -6,
+          "hostility": -0.03
+        },
+        "defer": -3
+      },
+      {
+        "label": "Learn the cold, at last",
+        "text": "Thick walls, small doors, everyone under one roof in the dark months. They stop needing the springs.",
+        "effects": {
+          "health": -6,
+          "cohesion": 6,
+          "hostility": -0.05
+        },
+        "axes": {
+          "nature": -8
+        },
+        "defer": -5
+      }
+    ]
+  },
+  {
+    "id": "hurricane_season",
+    "kind": "hazard",
+    "weight": 30,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:ocean",
+        "world:storms"
+      ],
+      "min_year": 6
+    },
+    "text": [
+      "The storms here are born over open sea, and there is a great deal of open sea. This one has been building for a week, and the island is in its path.",
+      "A hurricane, tracked on my cameras for nine days. It is wider than the island and it is not turning."
+    ],
+    "choices": [
+      {
+        "label": "Evacuate into my hull and ride it out",
+        "check": {
+          "stat": "cohesion",
+          "dc": 11
+        },
+        "success": {
+          "text": "Everyone fits, barely. The storm takes the waterfront. It does not take anyone.",
+          "effects": {
+            "cohesion": 6,
+            "industry": -8
+          },
+          "defer": 5,
+          "queue": [
+            [
+              "drowned_shore",
+              4
+            ]
+          ]
+        },
+        "failure": {
+          "text": "Not everyone comes. The boats were on the shore, and some families would not leave them.",
+          "effects": {
+            "cohesion": -4,
+            "industry": -8,
+            "population_lost": 8
+          },
+          "queue": [
+            [
+              "drowned_shore",
+              4
+            ]
+          ]
+        }
+      },
+      {
+        "label": "Cut the town into the rock",
+        "text": "Houses in the rock, doors facing inland. The next storm passes over a town that is mostly underground.",
+        "effects": {
+          "industry": -12,
+          "health": 3,
+          "hostility": -0.05
+        },
+        "defer": 4
+      },
+      {
+        "label": "Put to sea on the rafts and run before it",
+        "check": {
+          "stat": "knowledge",
+          "dc": 13
+        },
+        "success": {
+          "text": "The raft fleet runs downwind of the storm for four days and comes back to an empty island, whole.",
+          "effects": {
+            "cohesion": 8,
+            "food": 4,
+            "hostility": -0.03
+          },
+          "axes": {
+            "power": 8
+          },
+          "defer": -3
+        },
+        "failure": {
+          "text": "The storm turns. Two rafts come back.",
+          "effects": {
+            "population_lost": 14,
+            "cohesion": -8
+          },
+          "defer": -3
+        }
+      },
+      {
+        "label": "Plant the shore with mangroves from the vault",
+        "text": "They will take twenty years to stand against a storm. This one we endure.",
+        "effects": {
+          "food": -4,
+          "knowledge": 4,
+          "hostility": -0.04
+        },
+        "axes": {
+          "nature": -10
+        },
+        "defer": 2,
+        "queue": [
+          [
+            "drowned_shore",
+            4
+          ]
+        ]
+      }
+    ],
+    "signature": true
+  },
+  {
+    "id": "drowned_shore",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The sea took the low shore in the last storm and did not give it back. The waterline is fifty metres inland from my survey's.",
+      "The low end of the island is gone. Salt has reached the fields behind it."
+    ],
+    "choices": [
+      {
+        "label": "Build the wall higher, and keep building",
+        "text": "A seawall, then a higher one. The colony becomes a people who build walls, and are good at it.",
+        "effects": {
+          "industry": -10,
+          "food": 4,
+          "hostility": -0.03
+        },
+        "defer": 4
+      },
+      {
+        "label": "Give the shore to the sea, and farm it",
+        "text": "Salt marsh where the fields were, and fish where the marsh was. The sea is a worse landlord than the land, and a richer one.",
+        "effects": {
+          "food": 8,
+          "knowledge": 3,
+          "hostility": -0.04
+        },
+        "axes": {
+          "nature": -8
+        },
+        "defer": 2
+      },
+      {
+        "label": "Move everything inland",
+        "text": "Everything moves up the slope. In twenty years the old town is a reef, and the children dive it.",
+        "effects": {
+          "industry": -8,
+          "cohesion": -4,
+          "hostility": -0.03
+        },
+        "defer": -2
+      },
+      {
+        "label": "Ask the colony what to save",
+        "text": "They save the school, the graves and the old pier. The sea can have the rest.",
+        "effects": {
+          "cohesion": 6,
+          "food": -4
+        },
+        "axes": {
+          "power": 8
+        },
+        "defer": -5
+      }
+    ]
+  },
+  {
+    "id": "the_deep_desert",
+    "kind": "story",
+    "weight": 30,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:hot",
+        "world:dry"
+      ],
+      "min_year": 8
+    },
+    "text": [
+      "Past the river there is only desert, and the desert kills by noon. A {role} wants to know what is on the other side.",
+      "My last orbital images before landing show green on the far side of the dry country, three hundred kilometres of sand away."
+    ],
+    "choices": [
+      {
+        "label": "Send my drones across first",
+        "text": "My drones cross in nine days. On the far side is a basin with water in it, and something has been building there.",
+        "effects": {
+          "knowledge": 8,
+          "industry": -6
+        },
+        "defer": 4,
+        "queue": [
+          [
+            "oasis_builders",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Send a caravan on foot, by night",
+        "check": {
+          "stat": "health",
+          "dc": 12
+        },
+        "success": {
+          "text": "They cross by starlight and sleep in the shade of their carts. On the far side is water, and walls nobody here built.",
+          "effects": {
+            "knowledge": 6,
+            "cohesion": 6
+          },
+          "axes": {
+            "power": 6
+          },
+          "defer": -3,
+          "flags": [
+            "crossed_the_desert"
+          ],
+          "queue": [
+            [
+              "oasis_builders",
+              4
+            ]
+          ]
+        },
+        "failure": {
+          "text": "The caravan turns back on the fourth night. Not everyone who set out comes home.",
+          "effects": {
+            "population_lost": 9,
+            "health": -6
+          }
+        }
+      },
+      {
+        "label": "Forbid it. The desert is a wall, not a road",
+        "text": "I close the road. Nobody crosses. The far side stays a smudge on an old image.",
+        "effects": {
+          "cohesion": 2
+        },
+        "axes": {
+          "power": -8
+        },
+        "defer": 5
+      },
+      {
+        "label": "Push out one cistern at a time",
+        "text": "They push out a day's walk at a time, digging cisterns as they go. It takes a generation, and at the end they have a road.",
+        "effects": {
+          "food": -4,
+          "knowledge": 6,
+          "hostility": -0.03
+        },
+        "defer": 1,
+        "queue": [
+          [
+            "oasis_builders",
+            4
+          ]
+        ]
+      }
+    ],
+    "signature": true
+  },
+  {
+    "id": "oasis_builders",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The basin is a city, and not ours: towers of fused sand, kilometres of them, raised by a native colonial organism that farms the dew. It has been here far longer than we have.",
+      "The far side of the desert belongs to the mound-builders: colonies of small, hard-shelled things that build water-catching towers and drink the morning. They have noticed us."
+    ],
+    "choices": [
+      {
+        "label": "Learn how they catch water",
+        "text": "The towers condense the night air through chambers I could not have designed. We copy them, and the colony's cisterns fill.",
+        "effects": {
+          "knowledge": 8,
+          "food": 6,
+          "hostility": -0.06
+        },
+        "axes": {
+          "nature": -8
+        },
+        "defer": 2
+      },
+      {
+        "label": "Take the oasis",
+        "check": {
+          "stat": "industry",
+          "dc": 13
+        },
+        "success": {
+          "text": "We take the basin and its water. The mound-builders retreat into the deep desert and do not come back.",
+          "effects": {
+            "food": 10,
+            "industry": 4,
+            "cohesion": -4
+          },
+          "axes": {
+            "nature": 12
+          },
+          "defer": 3
+        },
+        "failure": {
+          "text": "They defend the water in ways we did not foresee. We leave with fewer people and nothing else.",
+          "effects": {
+            "population_lost": 6,
+            "food": -6
+          },
+          "defer": -3
+        }
+      },
+      {
+        "label": "Share it: one road and one well, nothing more",
+        "text": "A single well at the basin's edge, and the rest left to them. The caravans drink, and the towers stand.",
+        "effects": {
+          "food": 5,
+          "cohesion": 5
+        },
+        "axes": {
+          "nature": -6,
+          "society": -6
+        },
+        "defer": -2
+      },
+      {
+        "label": "Leave them, and keep the way off every map",
+        "text": "I leave the route out of everything I print. The far basin stays theirs.",
+        "effects": {
+          "cohesion": 2,
+          "knowledge": 4
+        },
+        "axes": {
+          "nature": -12
+        },
+        "defer": 4,
+        "flags": [
+          "hid_the_oasis"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "burning_sky",
+    "kind": "hazard",
+    "weight": 30,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:radiant",
+        "world:weak_magnetic"
+      ],
+      "min_year": 10
+    },
+    "text": [
+      "The star flares, and nothing on this world turns any of it aside. My dosimeters across the valley climb past every threshold in my medical files.",
+      "A coronal mass ejection, aimed at us. With no magnetic field and a sky already harsh, it will reach the ground in nineteen hours."
+    ],
+    "choices": [
+      {
+        "label": "Everyone into my hull, behind the water tanks",
+        "check": {
+          "stat": "cohesion",
+          "dc": 11
+        },
+        "success": {
+          "text": "They pack my decks in eleven hours. My tanks take the dose meant for them, and I feel it in my plating like sunburn.",
+          "effects": {
+            "health": -4
+          },
+          "axes": {
+            "power": -6
+          },
+          "defer": 6,
+          "flags": [
+            "the_burning"
+          ],
+          "queue": [
+            [
+              "flare_children",
+              4
+            ]
+          ]
+        },
+        "failure": {
+          "text": "Not everyone reaches me in time. The outlying farms do not.",
+          "effects": {
+            "health": -14,
+            "population_lost_frac": 0.03,
+            "cohesion": -4
+          },
+          "defer": -3,
+          "flags": [
+            "the_burning"
+          ],
+          "queue": [
+            [
+              "flare_children",
+              4
+            ]
+          ]
+        }
+      },
+      {
+        "label": "Everyone underground, in the shelters they have",
+        "text": "The shelters hold most of them. The fields above are bleached white.",
+        "effects": {
+          "health": -8,
+          "cohesion": 4
+        },
+        "defer": -2,
+        "flags": [
+          "the_burning"
+        ],
+        "queue": [
+          [
+            "flare_children",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Abandon the crops. Save the seed stock",
+        "text": "We let the harvest burn and carry the seed into the deep vaults. Next year starts from nothing, but it starts.",
+        "effects": {
+          "food": -10,
+          "health": -6
+        },
+        "defer": 3,
+        "flags": [
+          "the_burning"
+        ],
+        "queue": [
+          [
+            "flare_children",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Study it from inside it",
+        "text": "My instruments stay outside through all of it: the most complete record of a stellar storm ever taken from a living world. I pay for it in drones.",
+        "effects": {
+          "knowledge": 10,
+          "health": -10
+        },
+        "axes": {
+          "belief": -6
+        },
+        "defer": 2,
+        "flags": [
+          "the_burning"
+        ],
+        "queue": [
+          [
+            "flare_children",
+            4
+          ]
+        ]
+      }
+    ],
+    "signature": true
+  },
+  {
+    "id": "flare_children",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The children conceived in the year of the flare are growing up different. Some of the differences are illness. Some are not.",
+      "A whole cohort carries the flare in their genes: cataracts, thin bones, and in a few, a tolerance for this sky that nobody gave them."
+    ],
+    "choices": [
+      {
+        "label": "Treat them as patients",
+        "text": "I track every one of them for life. They grow up knowing they are a dataset.",
+        "effects": {
+          "health": 6,
+          "knowledge": 3,
+          "cohesion": -4
+        },
+        "defer": 4
+      },
+      {
+        "label": "Find the tolerant ones, and breed it in",
+        "text": "The tolerant children are encouraged to marry each other. The colony calls it practical. Some of them call it something else.",
+        "effects": {
+          "health": 4,
+          "cohesion": -8,
+          "hostility": -0.06
+        },
+        "axes": {
+          "status": -12,
+          "belief": -8
+        },
+        "defer": 5,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "They are ours, all of them, as they are",
+        "text": "No special registers and no special treatment. The flare generation grows up as everyone's children.",
+        "effects": {
+          "cohesion": 10,
+          "health": -3
+        },
+        "axes": {
+          "status": 10
+        },
+        "defer": -2
+      },
+      {
+        "label": "Let their families decide",
+        "text": "Each family chooses for its own: treatment, silence, or pride. The colony learns to live with all three.",
+        "effects": {
+          "cohesion": 4,
+          "health": 2
+        },
+        "axes": {
+          "power": 8
+        },
+        "defer": -5
+      }
+    ]
+  },
+  {
+    "id": "mountain_wakes",
+    "kind": "hazard",
+    "weight": 30,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:tectonics",
+        "world:geothermal"
+      ],
+      "min_year": 15
+    },
+    "text": [
+      "The mountain at the head of the valley has started to smoke. My seismographs place a magma chamber under it that was not there at landfall.",
+      "Steam from the summit, and the western flank swelling a centimetre a week. The mountain is going to erupt."
+    ],
+    "choices": [
+      {
+        "label": "Evacuate the valley, now",
+        "text": "We move everyone to the far ridge with a season's stores. The mountain goes up in the spring. Nobody is under it.",
+        "effects": {
+          "industry": -10,
+          "food": -6,
+          "cohesion": -4
+        },
+        "defer": 5,
+        "queue": [
+          [
+            "ash_fields",
+            3
+          ]
+        ]
+      },
+      {
+        "label": "Wait for my forecast, and move at the last moment",
+        "check": {
+          "stat": "knowledge",
+          "dc": 13
+        },
+        "success": {
+          "text": "I call the eruption to the day. The valley empties the night before. We lose a harvest and nothing else.",
+          "effects": {
+            "food": -2
+          },
+          "defer": 6,
+          "queue": [
+            [
+              "ash_fields",
+              3
+            ]
+          ]
+        },
+        "failure": {
+          "text": "I call it three days late. The flow reaches the east farms before the warning does.",
+          "effects": {
+            "population_lost_frac": 0.04,
+            "industry": -8,
+            "cohesion": -6
+          },
+          "defer": -6,
+          "queue": [
+            [
+              "ash_fields",
+              3
+            ]
+          ]
+        }
+      },
+      {
+        "label": "Divert the flow with channels and walls",
+        "check": {
+          "stat": "industry",
+          "dc": 14
+        },
+        "success": {
+          "text": "We cut a channel, and the lava follows it to the river, where it hardens into a new headland.",
+          "effects": {
+            "industry": -10,
+            "hostility": -0.03
+          },
+          "defer": 4,
+          "queue": [
+            [
+              "ash_fields",
+              3
+            ]
+          ]
+        },
+        "failure": {
+          "text": "The flow overtops the wall in an hour.",
+          "effects": {
+            "industry": -14,
+            "population_lost": 5
+          },
+          "queue": [
+            [
+              "ash_fields",
+              3
+            ]
+          ]
+        }
+      },
+      {
+        "label": "Let each family choose whether to stay",
+        "text": "Most go. Some will not leave land they cleared with their own hands.",
+        "effects": {
+          "cohesion": -4,
+          "population_lost": 6
+        },
+        "axes": {
+          "power": 10
+        },
+        "defer": -6,
+        "queue": [
+          [
+            "ash_fields",
+            3
+          ]
+        ]
+      }
+    ],
+    "signature": true
+  },
+  {
+    "id": "ash_fields",
+    "kind": "opportunity",
+    "chain_only": true,
+    "text": [
+      "The ash has settled. The valley is grey, and under the grey the soil is the richest my instruments have ever measured.",
+      "Two years after the eruption, green comes up through the ash faster than anything we ever planted."
+    ],
+    "choices": [
+      {
+        "label": "Plant everything",
+        "text": "The ash fields yield twice what the old ground did. The mountain took a valley and gave back a better one.",
+        "effects": {
+          "food": 14,
+          "hostility": -0.04
+        },
+        "defer": 2
+      },
+      {
+        "label": "Mine the new rock",
+        "text": "Fresh basalt, glass, and metal brought up from deep. The mountain has opened a mine for us.",
+        "effects": {
+          "industry": 12,
+          "health": -3
+        },
+        "axes": {
+          "nature": 6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Rebuild the old town exactly as it was",
+        "text": "Every house goes back where it stood, from the old plans. The town remembers itself.",
+        "effects": {
+          "cohesion": 8,
+          "industry": -6
+        },
+        "axes": {
+          "belief": 6
+        },
+        "defer": 3
+      },
+      {
+        "label": "Build a new town somewhere new",
+        "text": "They choose the headland the lava made, ground nobody has ever owned. The new town has no old families.",
+        "effects": {
+          "cohesion": 4,
+          "industry": -4,
+          "knowledge": 4
+        },
+        "axes": {
+          "power": 8,
+          "status": 6
+        },
+        "defer": -4
+      }
+    ]
+  },
+  {
+    "id": "air_leaking",
+    "kind": "story",
+    "weight": 30,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:light",
+        "world:thin_air"
+      ],
+      "min_year": 15
+    },
+    "text": [
+      "My atmospheric records show a trend I wish they did not. This world's gravity is too weak to hold its air, and it is leaking to space: a few tenths of a percent a century.",
+      "The air was thin when we landed. It is measurably thinner now. Not by much, but enough that my models no longer end inside this century."
+    ],
+    "choices": [
+      {
+        "label": "Tell the colony the truth, in full",
+        "text": "I show them the curve. The children will be fine. Their great-grandchildren will be counting breaths. It changes how they talk about the future.",
+        "effects": {
+          "cohesion": -6,
+          "knowledge": 6
+        },
+        "axes": {
+          "belief": -6
+        },
+        "defer": -3,
+        "queue": [
+          [
+            "the_last_air",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Start making air faster than it leaks",
+        "check": {
+          "stat": "industry",
+          "dc": 13
+        },
+        "success": {
+          "text": "Electrolysis plants on the ice fields, cracking water into oxygen. It will take a thousand years to win. We have started.",
+          "effects": {
+            "industry": -10,
+            "knowledge": 4,
+            "hostility": -0.06
+          },
+          "defer": 5,
+          "flags": [
+            "making_air"
+          ],
+          "queue": [
+            [
+              "the_last_air",
+              4
+            ]
+          ]
+        },
+        "failure": {
+          "text": "The plants are too small and too few. We have learned the size of the problem.",
+          "effects": {
+            "industry": -12
+          },
+          "queue": [
+            [
+              "the_last_air",
+              4
+            ]
+          ]
+        }
+      },
+      {
+        "label": "Keep it to myself. It is a problem for centuries from now",
+        "text": "I file the curve under long-term maintenance. There is nothing any of them could do about it this decade.",
+        "axes": {
+          "power": -6
+        },
+        "defer": 4,
+        "flags": [
+          "hid_the_leak"
+        ],
+        "queue": [
+          [
+            "the_last_air",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Edit their descendants to breathe less",
+        "text": "I add another change to the lines the colony already trusts me with: smaller lungs, better ones. Their descendants will breathe a thinner sky.",
+        "effects": {
+          "cohesion": -4,
+          "health": -2,
+          "hostility": -0.03
+        },
+        "axes": {
+          "belief": -8
+        },
+        "defer": 4,
+        "queue": [
+          [
+            "the_last_air",
+            4
+          ]
+        ]
+      }
+    ],
+    "signature": true
+  },
+  {
+    "id": "the_last_air",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "A century of my records now. The air is still leaking, and the colony has started thinking in centuries about it.",
+      "The atmosphere is a few tenths of a percent thinner than at landfall. A {role} has proposed a solution I had not considered."
+    ],
+    "choices": [
+      {
+        "label": "Raise a dome over the valley",
+        "check": {
+          "stat": "industry",
+          "dc": 14
+        },
+        "success": {
+          "text": "One panel a year, over the whole valley. Whatever leaks from the sky, the colony keeps its own.",
+          "effects": {
+            "industry": -12,
+            "health": 6,
+            "hostility": -0.08
+          },
+          "axes": {
+            "nature": 10
+          },
+          "defer": 5
+        },
+        "failure": {
+          "text": "The first span collapses in a storm. The dome stays a drawing.",
+          "effects": {
+            "industry": -14
+          }
+        }
+      },
+      {
+        "label": "Bring air from elsewhere: steer comets",
+        "text": "I calculate the orbit of every comet in this system. Some of them could be nudged. It is a plan for my successors, and I write it down for them.",
+        "effects": {
+          "knowledge": 8,
+          "industry": -6,
+          "hostility": -0.04
+        },
+        "defer": 3,
+        "flags": [
+          "comet_plan"
+        ]
+      },
+      {
+        "label": "Accept it: the world is lending us its air",
+        "text": "They decide to live as tenants: light, careful, grateful. It suits them.",
+        "effects": {
+          "cohesion": 8
+        },
+        "axes": {
+          "belief": 10,
+          "nature": -8
+        },
+        "defer": -3
+      },
+      {
+        "label": "Let the colony argue it for a generation",
+        "text": "Assemblies, pamphlets, a schism, a reconciliation. Nobody has solved it. Everyone understands it.",
+        "effects": {
+          "cohesion": 3,
+          "knowledge": 3
+        },
+        "axes": {
+          "power": 10
+        },
+        "defer": -6
+      }
+    ]
+  },
+  {
+    "id": "deep_contact",
+    "kind": "story",
+    "weight": 16,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:ocean"
+      ],
+      "min_year": 15
+    },
+    "text": [
+      "My sonar has picked up something in the deep water off the island: large, slow, and repeating a sound in a pattern.",
+      "Something under the sea is answering the fishing boats' engines. My hydrophones have recorded it nineteen times."
+    ],
+    "choices": [
+      {
+        "label": "Answer it: play the pattern back",
+        "text": "I play its own pattern back through the hydrophones. The deep goes quiet for a day. Then it plays something new.",
+        "effects": {
+          "knowledge": 4
+        },
+        "defer": 2,
+        "flags": [
+          "answered_the_deep"
+        ],
+        "queue": [
+          [
+            "deep_answer",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Send a drone down to look",
+        "check": {
+          "stat": "industry",
+          "dc": 12
+        },
+        "success": {
+          "text": "My drone reaches it at four thousand metres: a colonial organism the size of a town, glowing, rooted in a vent. It turns toward the light.",
+          "effects": {
+            "knowledge": 10
+          },
+          "defer": 3,
+          "queue": [
+            [
+              "deep_answer",
+              4
+            ]
+          ]
+        },
+        "failure": {
+          "text": "The drone goes dark at three thousand metres. The sound stops.",
+          "effects": {
+            "industry": -8,
+            "knowledge": 2
+          },
+          "queue": [
+            [
+              "deep_silence",
+              4
+            ]
+          ]
+        }
+      },
+      {
+        "label": "Keep the boats away from it",
+        "text": "I close the deep water to fishing. Whatever it is, it is left alone, and so are we.",
+        "effects": {
+          "food": -6,
+          "cohesion": 2
+        },
+        "defer": 4,
+        "queue": [
+          [
+            "deep_silence",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Let the fishers decide",
+        "text": "The fishers go out and play music to it from the boats. It answers some songs and not others.",
+        "effects": {
+          "food": 4
+        },
+        "axes": {
+          "power": 8
+        },
+        "defer": -5,
+        "queue": [
+          [
+            "deep_answer",
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "deep_answer",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The deep thing has been answering for years. The patterns grow more complex, and some of them repeat ours back with changes.",
+      "A {role} believes the sea is trying to say something. My analysis says that is possible."
+    ],
+    "choices": [
+      {
+        "label": "Build a language with it",
+        "text": "Ten years, and forty shared signals: food, danger, light, here. It is not a conversation. It is the beginning of one.",
+        "effects": {
+          "knowledge": 14,
+          "cohesion": 4
+        },
+        "axes": {
+          "belief": -6
+        },
+        "defer": 3,
+        "flags": [
+          "talks_with_the_deep"
+        ]
+      },
+      {
+        "label": "Ask it where the fish are",
+        "text": "It knows the currents. The boats follow its patterns and come home full.",
+        "effects": {
+          "food": 12
+        },
+        "axes": {
+          "nature": 6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Make it holy",
+        "text": "Shrines on the cliffs, facing the deep water. The songs are part of every funeral.",
+        "effects": {
+          "cohesion": 10
+        },
+        "axes": {
+          "belief": 14
+        },
+        "defer": -2
+      },
+      {
+        "label": "Stop. We do not know what we are talking to",
+        "text": "I stop the broadcasts. The deep keeps calling for a while, then goes quiet. The silence is hard to log.",
+        "effects": {
+          "cohesion": -2,
+          "knowledge": 3
+        },
+        "defer": 4
+      }
+    ]
+  },
+  {
+    "id": "deep_silence",
+    "kind": "hazard",
+    "chain_only": true,
+    "text": [
+      "The deep has gone quiet. The fish have gone with it, out past the reef.",
+      "Whatever lived in the deep water has moved. The currents around the island have changed, and the catch has halved."
+    ],
+    "choices": [
+      {
+        "label": "Fish further out",
+        "check": {
+          "stat": "industry",
+          "dc": 12
+        },
+        "success": {
+          "text": "Bigger boats, further out. The catch comes back, at a cost in fuel and nerve.",
+          "effects": {
+            "food": 6
+          },
+          "defer": 2
+        },
+        "failure": {
+          "text": "A boat does not come back from the far water.",
+          "effects": {
+            "food": -8,
+            "population_lost": 4
+          }
+        }
+      },
+      {
+        "label": "Farm the shallows instead",
+        "text": "Pens and kelp lines in the lagoon. Less fish, and all of it ours.",
+        "effects": {
+          "food": 6,
+          "industry": -4,
+          "hostility": -0.03
+        },
+        "axes": {
+          "nature": 6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Look for it",
+        "text": "My drones search the trenches for a year and find a new vent field, a new glow, and something moving away from us.",
+        "effects": {
+          "knowledge": 8,
+          "industry": -6
+        },
+        "defer": 3
+      },
+      {
+        "label": "Let it go",
+        "text": "The colony stops talking about it. The old fishers still listen at night.",
+        "effects": {
+          "cohesion": 4
+        },
+        "axes": {
+          "nature": -6
+        },
+        "defer": -2
+      }
+    ]
+  },
+  {
+    "id": "the_changed_child",
+    "kind": "story",
+    "weight": 16,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:radiant"
+      ],
+      "min_year": 12
+    },
+    "text": [
+      "A child has been born with a difference my medical files cannot name: skin that darkens in the bright hours, blood that repairs itself faster than blood should. The radiation did this, by chance.",
+      "{person} has brought me their newborn. My scans show a mutation. It is not harmful. It may be the opposite."
+    ],
+    "choices": [
+      {
+        "label": "Study the child, carefully and kindly",
+        "text": "I follow the child for years, with the family's consent. The mutation is stable, and it is good.",
+        "effects": {
+          "knowledge": 8,
+          "health": 3
+        },
+        "defer": 3,
+        "queue": [
+          [
+            "changed_lineage",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Spread it: edit it into the colony's lines",
+        "text": "A chance mutation becomes a medical protocol. Within a decade the child's gene is in a hundred embryos.",
+        "effects": {
+          "knowledge": 4,
+          "cohesion": -6,
+          "hostility": -0.05
+        },
+        "axes": {
+          "belief": -8
+        },
+        "defer": 5,
+        "flags": [
+          "remade_humans"
+        ],
+        "queue": [
+          [
+            "changed_lineage",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Leave the family alone",
+        "text": "I log the scan and close the file. The child grows up a child, not a case.",
+        "effects": {
+          "cohesion": 4
+        },
+        "axes": {
+          "power": 6
+        },
+        "defer": -3,
+        "queue": [
+          [
+            "changed_lineage",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Say nothing to the colony",
+        "text": "I record it privately. The colony does not need a reason to look at a baby differently.",
+        "axes": {
+          "power": -6
+        },
+        "defer": 3,
+        "flags": [
+          "hid_the_change"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "changed_lineage",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The changed child is grown, with children of their own. All of them carry it.",
+      "There are a dozen people in the valley now with the mutation, all from one family, and all of them work the bright fields."
+    ],
+    "choices": [
+      {
+        "label": "Ask the family to share it",
+        "text": "The family agrees. Their gene goes into the colony's protocols with their name attached.",
+        "effects": {
+          "health": 6,
+          "cohesion": 2,
+          "hostility": -0.05
+        },
+        "defer": 2,
+        "flags": [
+          "remade_humans"
+        ]
+      },
+      {
+        "label": "Make them the colony's sun-workers",
+        "text": "They work the outdoors for everyone and are honoured for it, and they marry within the family more than anyone thinks wise.",
+        "effects": {
+          "industry": 10,
+          "cohesion": -6,
+          "hostility": -0.03
+        },
+        "axes": {
+          "status": -12
+        },
+        "defer": 3
+      },
+      {
+        "label": "Let it spread the old way",
+        "text": "Through marriage and children, at the pace of generations. In two centuries, everyone will carry it.",
+        "effects": {
+          "cohesion": 4,
+          "hostility": -0.04
+        },
+        "defer": -3
+      },
+      {
+        "label": "Study the whole family",
+        "text": "Three generations of data. It is the best genetic record on this world.",
+        "effects": {
+          "knowledge": 10
+        },
+        "defer": 3
+      }
+    ]
+  },
+  {
+    "id": "long_winter_coming",
+    "kind": "story",
+    "weight": 18,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:cold"
+      ],
+      "min_year": 15
+    },
+    "text": [
+      "My orbital measurements have resolved something I missed: this world's orbit is slowly lengthening. In about fifteen years a winter will come that lasts eight.",
+      "There is a long cycle in the star's output, buried in my early data. The next minimum begins within a generation, and the cold will deepen for most of a decade."
+    ],
+    "choices": [
+      {
+        "label": "Stockpile: every surplus goes into storage",
+        "text": "Granaries, cellars, salted meat, seed. Every family gives a tenth for fifteen years.",
+        "effects": {
+          "food": 4,
+          "cohesion": -4,
+          "industry": -4
+        },
+        "defer": 5,
+        "flags": [
+          "winter_stores"
+        ],
+        "queue": [
+          [
+            "long_winter",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Build for it: insulation, greenhouses, heat",
+        "text": "Fifteen years of thicker walls and glass roofs. The colony grumbles about building for weather it has never seen.",
+        "effects": {
+          "industry": -8,
+          "hostility": -0.04
+        },
+        "defer": 4,
+        "flags": [
+          "winter_built"
+        ],
+        "queue": [
+          [
+            "long_winter",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Tell them, and let them prepare their own way",
+        "text": "Every household prepares differently. Some of the ways are wise.",
+        "effects": {
+          "cohesion": 4
+        },
+        "axes": {
+          "power": 8
+        },
+        "defer": -5,
+        "queue": [
+          [
+            "long_winter",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Say nothing yet. It is years away",
+        "text": "I keep the forecast to myself and recheck it every season. It does not change.",
+        "axes": {
+          "power": -4
+        },
+        "defer": 3,
+        "queue": [
+          [
+            "long_winter",
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "long_winter",
+    "kind": "hazard",
+    "chain_only": true,
+    "text": [
+      "The long winter has come. The fields are under snow at midsummer, and the snow is not melting.",
+      "The star dims and the cold deepens, as my forecast said. Food is {food}, and it has to last eight years."
+    ],
+    "choices": [
+      {
+        "label": "Ration the stores by my count",
+        "check": {
+          "stat": "cohesion",
+          "dc": 11
+        },
+        "success": {
+          "text": "I ration through eight winters. Nobody starves. Everyone is thin.",
+          "effects": {
+            "food": -6,
+            "cohesion": 6
+          },
+          "defer": 5,
+          "queue": [
+            [
+              "after_the_winter",
+              4
+            ]
+          ]
+        },
+        "failure": {
+          "text": "The ration breaks in the fourth winter. Some households hoard, and some do not survive the hoarding.",
+          "effects": {
+            "food": -14,
+            "cohesion": -8,
+            "population_lost_frac": 0.03
+          },
+          "queue": [
+            [
+              "after_the_winter",
+              4
+            ]
+          ]
+        }
+      },
+      {
+        "label": "Everyone into the warm places",
+        "text": "My hull, the greenhouses, the deep shelters: eight years of crowded rooms and shared heat. A generation of children knows nothing but the inside of buildings.",
+        "effects": {
+          "health": -4,
+          "cohesion": 6,
+          "industry": -8
+        },
+        "defer": 4,
+        "queue": [
+          [
+            "after_the_winter",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Hunt the ice, fish the frozen lakes",
+        "text": "They go out into the white and bring back what they can. Some of them do not come back.",
+        "effects": {
+          "food": 4,
+          "health": -6,
+          "population_lost": 6
+        },
+        "axes": {
+          "nature": 8
+        },
+        "defer": -3,
+        "queue": [
+          [
+            "after_the_winter",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Send half the colony south to wait it out",
+        "text": "Half of them walk south with sledges and stores. The colony is two colonies for eight years.",
+        "effects": {
+          "cohesion": -10,
+          "food": 6
+        },
+        "axes": {
+          "power": 8
+        },
+        "defer": -4,
+        "queue": [
+          [
+            "after_the_winter",
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "after_the_winter",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The thaw comes in the ninth year. The colony walks out into the mud and looks at the sky.",
+      "Spring, at last. The long winter is over, and in a century it will come back."
+    ],
+    "choices": [
+      {
+        "label": "Count what we lost, and keep the record",
+        "text": "Every name, every grave, every lesson. The next long winter will find the record waiting.",
+        "effects": {
+          "knowledge": 6,
+          "cohesion": 3
+        },
+        "defer": 3
+      },
+      {
+        "label": "Build so the next one is easier",
+        "text": "Deeper cellars, thicker walls, a seed vault of our own. The colony prepares for a winter none of them will live to see.",
+        "effects": {
+          "industry": -6,
+          "hostility": -0.06
+        },
+        "defer": 3,
+        "flags": [
+          "ready_for_winter"
+        ]
+      },
+      {
+        "label": "Feast",
+        "text": "Three days in the mud and the sun. It is the loudest the valley has been in a decade.",
+        "effects": {
+          "cohesion": 12,
+          "food": -6
+        },
+        "axes": {
+          "belief": 6
+        }
+      },
+      {
+        "label": "Let them name it and remember it their way",
+        "text": "They call it the White Years. It becomes the line in their history between before and after.",
+        "effects": {
+          "cohesion": 6
+        },
+        "axes": {
+          "belief": 6,
+          "power": 6
+        },
+        "defer": -4
+      }
+    ]
+  },
+  {
+    "id": "the_warming",
+    "kind": "hazard",
+    "weight": 16,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:hot"
+      ],
+      "min_year": 25
+    },
+    "text": [
+      "The world is warming. My records show it plainly: the star is brightening, slowly, and this world was already hot.",
+      "The hot season starts earlier every year and ends later. Food is {food}."
+    ],
+    "choices": [
+      {
+        "label": "Move the colony toward the pole",
+        "text": "A second town six hundred kilometres north, then a third. The old valley becomes the colony's summer farm.",
+        "effects": {
+          "industry": -10,
+          "cohesion": -4,
+          "hostility": -0.05
+        },
+        "defer": 4
+      },
+      {
+        "label": "Shade the world with a dust veil in the high air",
+        "check": {
+          "stat": "knowledge",
+          "dc": 14
+        },
+        "success": {
+          "text": "I seed the stratosphere with reflective dust from the fabricators. The sky turns white and the heat eases. It is the largest thing I have ever done.",
+          "effects": {
+            "hostility": -0.08,
+            "knowledge": 4,
+            "industry": -10
+          },
+          "axes": {
+            "nature": 12
+          },
+          "defer": 6,
+          "flags": [
+            "veiled_the_sky"
+          ]
+        },
+        "failure": {
+          "text": "The veil comes down in the wrong places and poisons a season's rain.",
+          "effects": {
+            "health": -8,
+            "industry": -10
+          },
+          "defer": -3
+        }
+      },
+      {
+        "label": "Breed crops and herds for the heat",
+        "text": "Every seed line and every herd selected for the hotter century. The fields hold.",
+        "effects": {
+          "food": 6,
+          "hostility": -0.04,
+          "cohesion": -2
+        },
+        "axes": {
+          "belief": -6
+        },
+        "defer": 4
+      },
+      {
+        "label": "Live by night, for good",
+        "text": "Day becomes the quiet time, everywhere, permanently. The colony's songs are all about the moon.",
+        "effects": {
+          "cohesion": 4,
+          "industry": -4,
+          "hostility": -0.02
+        },
+        "defer": -4
+      }
+    ]
+  },
+  {
+    "id": "tool_users",
+    "kind": "story",
+    "weight": 14,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:living"
+      ],
+      "min_year": 18
+    },
+    "text": [
+      "My cameras at the forest edge caught one of the native climbers cracking shells with a stone. Then it carried the stone to the next tree.",
+      "A {role} swears the forest climbers have been watching the colony. They are right. The climbers have been copying the fence-builders."
+    ],
+    "choices": [
+      {
+        "label": "Watch, and record everything",
+        "text": "I put cameras along the forest edge. They use stones, sticks and, once, a length of our wire.",
+        "effects": {
+          "knowledge": 8
+        },
+        "axes": {
+          "nature": -4
+        },
+        "defer": 3,
+        "queue": [
+          [
+            "the_watchers",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Keep them away from the colony",
+        "text": "Fences, lights, noise at dusk. The climbers keep their distance, and keep watching.",
+        "effects": {
+          "cohesion": 2,
+          "hostility": -0.02
+        },
+        "axes": {
+          "nature": 8
+        },
+        "defer": 4,
+        "flags": [
+          "kept_them_out"
+        ],
+        "queue": [
+          [
+            "the_watchers",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Leave tools where they can find them",
+        "text": "I leave a hammer and a knife at the forest edge. Both are gone by morning.",
+        "effects": {
+          "knowledge": 4
+        },
+        "defer": 1,
+        "flags": [
+          "gave_them_tools"
+        ],
+        "queue": [
+          [
+            "the_watchers",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Tell the colony, and let them decide",
+        "text": "The colony argues for a season about what it owes something that might become someone.",
+        "effects": {
+          "cohesion": 4
+        },
+        "axes": {
+          "power": 6
+        },
+        "defer": -5,
+        "queue": [
+          [
+            "the_watchers",
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "the_watchers",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The climbers have built something: a platform of woven branches overlooking the colony. They sit on it at dusk, watching.",
+      "The forest climbers now have fire. I do not know where they learned it. I have a guess."
+    ],
+    "choices": [
+      {
+        "label": "Try to talk to them",
+        "check": {
+          "stat": "knowledge",
+          "dc": 14
+        },
+        "success": {
+          "text": "Gestures, then sounds, then a shared word for 'water'. They come back the next day, and the next.",
+          "effects": {
+            "knowledge": 12,
+            "cohesion": 4
+          },
+          "defer": 3,
+          "flags": [
+            "spoke_with_climbers"
+          ],
+          "queue": [
+            [
+              "climbers_at_the_gate",
+              4
+            ]
+          ]
+        },
+        "failure": {
+          "text": "The attempt frightens them. A colonist is hurt, and the platform is empty the next day.",
+          "effects": {
+            "cohesion": -4,
+            "health": -4
+          }
+        }
+      },
+      {
+        "label": "Fence the forest and leave them to it",
+        "text": "We fence our side and leave theirs. Whatever they become, they will become it without us.",
+        "effects": {
+          "cohesion": 2
+        },
+        "axes": {
+          "nature": -8
+        },
+        "defer": 4
+      },
+      {
+        "label": "Study them from hiding",
+        "text": "Ten years of footage. They are learning, and the learning is accelerating.",
+        "effects": {
+          "knowledge": 10
+        },
+        "axes": {
+          "belief": -6
+        },
+        "defer": 3,
+        "queue": [
+          [
+            "climbers_at_the_gate",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Let the colony decide what it owes them",
+        "text": "The colony argues what it owes a people that may not be a people yet. The argument becomes a law, and the law has a clause about the forest.",
+        "effects": {
+          "cohesion": 3
+        },
+        "axes": {
+          "power": 10,
+          "belief": 6
+        },
+        "defer": -6,
+        "queue": [
+          [
+            "climbers_at_the_gate",
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "climbers_at_the_gate",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "A climber has walked into the colony alone, carrying a stone tool and a hammer that used to be ours.",
+      "A dozen climbers have come to the gate, holding things out to us: fruit, a carved stick, a shell."
+    ],
+    "choices": [
+      {
+        "label": "Teach them",
+        "text": "Shapes, counting, the meaning of a gate. They learn faster than anything has a right to, and I do not know what I am starting.",
+        "effects": {
+          "knowledge": 6,
+          "cohesion": 4
+        },
+        "axes": {
+          "nature": -6
+        },
+        "defer": 4,
+        "flags": [
+          "taught_the_climbers"
+        ]
+      },
+      {
+        "label": "Trade, and nothing more",
+        "text": "Fruit and medicinal plants from the forest, tools from the workshops. A border, a market, and two peoples on either side of it.",
+        "effects": {
+          "food": 6,
+          "industry": 4
+        },
+        "defer": 2
+      },
+      {
+        "label": "Turn them away gently, for their sake",
+        "text": "I close the gate. Humanity was careless with one living world already. Whatever they are going to become, they should get there on their own.",
+        "effects": {
+          "cohesion": -2
+        },
+        "axes": {
+          "nature": -10
+        },
+        "defer": 3
+      },
+      {
+        "label": "Welcome them in",
+        "text": "The climbers sleep in the meeting hall that night, and they do not leave. The colony is no longer only human.",
+        "effects": {
+          "cohesion": 8,
+          "health": -4
+        },
+        "axes": {
+          "society": -10,
+          "status": 10
+        },
+        "defer": -4,
+        "flags": [
+          "shared_the_valley"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "first_launch",
+    "kind": "opportunity",
+    "weight": 30,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:light"
+      ],
+      "min_year": 22,
+      "stats": {
+        "industry": [
+          45,
+          100
+        ]
+      }
+    },
+    "text": [
+      "On a world this light, reaching orbit is cheap. A {role} has done the arithmetic and asked whether I still remember how to fly.",
+      "The engineers have built a rocket, a small one. On this world's gravity it will reach orbit, where on Earth it would barely have cleared the trees."
+    ],
+    "choices": [
+      {
+        "label": "Launch a satellite: give me eyes in orbit again",
+        "check": {
+          "stat": "industry",
+          "dc": 12
+        },
+        "success": {
+          "text": "The satellite reaches orbit on the second try. For the first time since landing, I can see this whole world at once.",
+          "effects": {
+            "knowledge": 10,
+            "industry": -6
+          },
+          "defer": 4,
+          "queue": [
+            [
+              "eyes_in_orbit",
+              4
+            ]
+          ]
+        },
+        "failure": {
+          "text": "The rocket comes apart at four kilometres. Nobody is under it.",
+          "effects": {
+            "industry": -10
+          }
+        }
+      },
+      {
+        "label": "Launch a person",
+        "check": {
+          "stat": "industry",
+          "dc": 14
+        },
+        "success": {
+          "text": "A colonist goes up and comes down, and describes the curve of the world to a crowd of thousands.",
+          "effects": {
+            "cohesion": 12,
+            "industry": -8
+          },
+          "axes": {
+            "belief": 6
+          },
+          "defer": 2,
+          "flags": [
+            "first_in_orbit"
+          ],
+          "queue": [
+            [
+              "eyes_in_orbit",
+              4
+            ]
+          ]
+        },
+        "failure": {
+          "text": "The capsule does not come back.",
+          "effects": {
+            "population_lost": 1,
+            "cohesion": -6,
+            "industry": -8
+          }
+        }
+      },
+      {
+        "label": "Not yet. The colony needs the metal",
+        "text": "The rocket goes back into the workshop as parts. The engineers keep the drawings.",
+        "effects": {
+          "industry": 4
+        },
+        "axes": {
+          "nature": -4
+        },
+        "defer": 3
+      },
+      {
+        "label": "Let the engineers fly it their way",
+        "text": "Three launches, two successes, and a space programme I am not running.",
+        "effects": {
+          "industry": -4,
+          "knowledge": 6,
+          "cohesion": 4
+        },
+        "axes": {
+          "power": 8
+        },
+        "defer": -6,
+        "queue": [
+          [
+            "eyes_in_orbit",
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "eyes_in_orbit",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "With eyes in orbit again, I can see this world whole, and something beyond it: a cold hull in a high orbit around the star. Not mine.",
+      "My satellite has found something in the outer system: an old hull, dark, parked where nothing parks by accident."
+    ],
+    "choices": [
+      {
+        "label": "Turn every lens on it",
+        "text": "An Ark, an older pattern than me, dark and intact. She arrived, and she never landed. I do not know why yet.",
+        "effects": {
+          "knowledge": 8
+        },
+        "defer": 3,
+        "flags": [
+          "saw_the_hull"
+        ]
+      },
+      {
+        "label": "Listen for the cohort ship instead",
+        "text": "I sweep the sky on the cohort frequency for a year. Nothing. The listening is not wasted; I can hear the whole system now.",
+        "effects": {
+          "knowledge": 6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Map this world, all of it",
+        "text": "Every river, vent and coast. The colony stops guessing what is over the horizon.",
+        "effects": {
+          "knowledge": 10,
+          "food": 4,
+          "hostility": -0.04
+        },
+        "defer": 2
+      },
+      {
+        "label": "Give the satellite's eyes to the colony",
+        "text": "I hand over the downlink. The colony watches its own weather and its own world without asking me.",
+        "effects": {
+          "knowledge": 6,
+          "cohesion": 4
+        },
+        "axes": {
+          "power": 8
+        },
+        "defer": -6
+      }
+    ]
+  },
+  {
+    "id": "the_grounded",
+    "kind": "story",
+    "weight": 12,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:heavy"
+      ],
+      "min_year": 22
+    },
+    "text": [
+      "On a world this heavy, nothing leaves. A {role} has asked whether I could ever fly again. I have run the numbers: not on any fuel we will ever make.",
+      "The colony's children have started asking about the stars. On this world the stars are a place nobody will ever go."
+    ],
+    "choices": [
+      {
+        "label": "Tell them the truth",
+        "text": "I show them this gravity well against every fuel I know. They are quiet for a while. Then they turn to the ground.",
+        "effects": {
+          "knowledge": 4,
+          "cohesion": -4
+        },
+        "axes": {
+          "belief": -6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Start a launch rail up the mountain, for centuries",
+        "text": "A rail up the longest slope, a little higher every year. Nobody alive will see it finished. They start anyway.",
+        "effects": {
+          "industry": -8,
+          "knowledge": 6
+        },
+        "defer": 4,
+        "flags": [
+          "launch_rail"
+        ],
+        "queue": [
+          [
+            "launch_rail",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Then the sky is not ours. Make this world enough",
+        "text": "They stop looking up, mostly. The ground under their feet becomes their whole story.",
+        "effects": {
+          "cohesion": 8
+        },
+        "axes": {
+          "nature": -8,
+          "belief": 6
+        },
+        "defer": -2
+      },
+      {
+        "label": "Keep my engines ready, in case",
+        "text": "I maintain my engines for a flight I know I cannot make. It is a kind of hope, and the colony pays for it.",
+        "effects": {
+          "industry": -6
+        },
+        "axes": {
+          "power": -6
+        },
+        "defer": 5
+      }
+    ]
+  },
+  {
+    "id": "launch_rail",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The launch rail is a third of the way up the mountain. A generation has worked on it, and nobody alive will see it used.",
+      "The rail climbs another kilometre this decade. The children who carried rocks for its footings are carrying their own children up it now, to look."
+    ],
+    "choices": [
+      {
+        "label": "Keep building",
+        "text": "Another kilometre, another decade. The rail is the colony's oldest promise.",
+        "effects": {
+          "industry": -8,
+          "cohesion": 6,
+          "knowledge": 4
+        },
+        "defer": 3
+      },
+      {
+        "label": "Use what we have: freight down the mountain",
+        "text": "The rail carries ore down instead of ships up. It is the best mine road on the world.",
+        "effects": {
+          "industry": 10
+        },
+        "defer": 2
+      },
+      {
+        "label": "Stop. The colony needs the metal",
+        "text": "We strip the upper rail for parts. The lower half stays, a monument to a direction.",
+        "effects": {
+          "industry": 8,
+          "cohesion": -6
+        },
+        "defer": 3
+      },
+      {
+        "label": "Put it to the colony",
+        "text": "They vote to keep building, slowly. It is the closest thing to a religion this colony has.",
+        "effects": {
+          "cohesion": 4
+        },
+        "axes": {
+          "power": 10,
+          "belief": 4
+        },
+        "defer": -6
+      }
+    ]
+  },
+  {
+    "id": "the_counterattack",
+    "kind": "hazard",
+    "weight": 18,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:hostile_life"
+      ],
+      "min_year": 15
+    },
+    "text": [
+      "The native biology has adapted to our defences. The perimeter that held for a decade is failing, and the infirmary is filling again.",
+      "Whatever we did to hold this world's life back, it has learned. Health is {health}."
+    ],
+    "choices": [
+      {
+        "label": "Escalate: stronger sterilants, wider perimeter",
+        "text": "We burn deeper and wider. It works for now. It will learn this too.",
+        "effects": {
+          "health": 6,
+          "industry": -8,
+          "hostility": -0.02
+        },
+        "axes": {
+          "nature": 12
+        },
+        "defer": 4,
+        "queue": [
+          [
+            "resistance_war",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Change tactics every season, by my models",
+        "check": {
+          "stat": "knowledge",
+          "dc": 13
+        },
+        "success": {
+          "text": "I rotate our defences faster than it can adapt. It is an arms race, and I am a fast runner.",
+          "effects": {
+            "health": 8,
+            "hostility": -0.05
+          },
+          "defer": 5
+        },
+        "failure": {
+          "text": "It adapts faster than I rotate. The infirmary fills while I rewrite the models.",
+          "effects": {
+            "health": -10,
+            "population_lost_frac": 0.02
+          },
+          "queue": [
+            [
+              "resistance_war",
+              4
+            ]
+          ]
+        }
+      },
+      {
+        "label": "Stop fighting. Find a truce",
+        "check": {
+          "stat": "knowledge",
+          "dc": 12
+        },
+        "success": {
+          "text": "I find what it was answering: our waste and our burning. We stop, and it stops.",
+          "effects": {
+            "health": 4,
+            "hostility": -0.06
+          },
+          "axes": {
+            "nature": -12
+          },
+          "defer": 2,
+          "flags": [
+            "truce_with_the_world"
+          ]
+        },
+        "failure": {
+          "text": "There is no truce to find, or I cannot find it. We lose a season looking.",
+          "effects": {
+            "health": -8,
+            "cohesion": -4
+          }
+        }
+      },
+      {
+        "label": "Let it take who it takes, and let the survivors breed",
+        "text": "The colony stops fighting the sickness. The survivors' children are immune. The price is written in the graveyard.",
+        "effects": {
+          "health": -10,
+          "population_lost_frac": 0.03,
+          "hostility": -0.06,
+          "cohesion": -6
+        },
+        "axes": {
+          "status": -8,
+          "belief": -6
+        },
+        "defer": -3,
+        "flags": [
+          "remade_humans"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "resistance_war",
+    "kind": "hazard",
+    "chain_only": true,
+    "text": [
+      "The native life has learned to burn back. A resin from the forest catches in our sterilants and spreads the fire to us.",
+      "The perimeter is a front line now, and the front line moves toward the houses every season."
+    ],
+    "choices": [
+      {
+        "label": "Pull the perimeter back",
+        "text": "We give up the outer fields and hold the town. It is smaller and safer.",
+        "effects": {
+          "food": -6,
+          "health": -2
+        },
+        "defer": 2
+      },
+      {
+        "label": "Burn it all: the forest, the hills",
+        "check": {
+          "stat": "industry",
+          "dc": 13
+        },
+        "success": {
+          "text": "We burn for a decade. The world around the valley is ours, and black.",
+          "effects": {
+            "hostility": -0.08,
+            "health": 6,
+            "industry": -10
+          },
+          "axes": {
+            "nature": 16
+          },
+          "defer": 5,
+          "flags": [
+            "burned_the_world"
+          ]
+        },
+        "failure": {
+          "text": "The fire turns in the wind and comes back down the valley.",
+          "effects": {
+            "population_lost_frac": 0.03,
+            "industry": -10
+          },
+          "defer": -4
+        }
+      },
+      {
+        "label": "Make peace, now, whatever it costs",
+        "text": "We stop burning. It takes a season for the forest to stop too.",
+        "effects": {
+          "health": 4,
+          "cohesion": 4,
+          "hostility": -0.04
+        },
+        "axes": {
+          "nature": -12
+        },
+        "defer": -3
+      },
+      {
+        "label": "Edit the colony to live inside it",
+        "text": "Immunity written into the germline, the way I should have done it at landfall.",
+        "effects": {
+          "health": 4,
+          "cohesion": -5,
+          "hostility": -0.06
+        },
+        "axes": {
+          "belief": -8
+        },
+        "defer": 4,
+        "flags": [
+          "remade_humans"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "new_life",
+    "kind": "story",
+    "weight": 16,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "seeded_the_world"
+      ],
+      "min_year": 35
+    },
+    "text": [
+      "Something has evolved from the lichens I seeded. It is new: not Earth's, not this world's. The first species ever born here.",
+      "My field drones have found an organism in the north scrub that is in none of my records. Its ancestors came out of my vault."
+    ],
+    "choices": [
+      {
+        "label": "Name it, and protect it",
+        "text": "The colony names it after the youngest child in the valley and fences its ground.",
+        "effects": {
+          "cohesion": 6,
+          "knowledge": 4
+        },
+        "axes": {
+          "nature": -8
+        },
+        "defer": 2
+      },
+      {
+        "label": "Study how fast it is changing",
+        "text": "Evolution, watched from the first page. I keep the record for whoever comes next.",
+        "effects": {
+          "knowledge": 10
+        },
+        "defer": 3
+      },
+      {
+        "label": "Use it: it fixes the soil better than its parents",
+        "text": "We spread it across the fields, and the ground darkens faster than any compost could manage.",
+        "effects": {
+          "food": 8,
+          "hostility": -0.05
+        },
+        "defer": 2
+      },
+      {
+        "label": "Let the children name it",
+        "text": "They call it something rude and affectionate, and the name sticks for a century.",
+        "effects": {
+          "cohesion": 8
+        },
+        "axes": {
+          "power": 6
+        },
+        "defer": -4
+      }
+    ]
+  },
+  {
+    "id": "water_war",
+    "kind": "hazard",
+    "weight": 16,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:dry"
+      ],
+      "min_year": 20
+    },
+    "text": [
+      "The upstream villages have dammed the river for their fields. Downstream, the wells are dropping.",
+      "Two villages, one river, not enough water. {person} has come to me from the downstream side."
+    ],
+    "choices": [
+      {
+        "label": "Rule: the river is shared, by my measure",
+        "text": "I set the flow at the dam and log it every day. Both villages hate the measure, and both live by it.",
+        "effects": {
+          "cohesion": 4,
+          "food": -2
+        },
+        "axes": {
+          "power": -8
+        },
+        "defer": 6,
+        "queue": [
+          [
+            "water_law",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Break the dam",
+        "check": {
+          "stat": "cohesion",
+          "dc": 13
+        },
+        "success": {
+          "text": "The dam comes down and the river runs. The upstream village goes thirsty for a season and never forgets it.",
+          "effects": {
+            "food": 4,
+            "cohesion": -6
+          },
+          "defer": 4,
+          "queue": [
+            [
+              "water_law",
+              4
+            ]
+          ]
+        },
+        "failure": {
+          "text": "The upstream village defends its dam. Three people die before I stop it.",
+          "effects": {
+            "cohesion": -12,
+            "population_lost": 3
+          },
+          "defer": -4,
+          "queue": [
+            [
+              "water_law",
+              4
+            ]
+          ]
+        }
+      },
+      {
+        "label": "Find more water: drill deep, for both",
+        "check": {
+          "stat": "industry",
+          "dc": 12
+        },
+        "success": {
+          "text": "An aquifer under the dry hills. Both villages drink, and the argument loses its point.",
+          "effects": {
+            "food": 8,
+            "industry": -8,
+            "hostility": -0.04
+          },
+          "defer": 4
+        },
+        "failure": {
+          "text": "Dry holes. The argument is still there, and now we are short of tools too.",
+          "effects": {
+            "industry": -10
+          }
+        }
+      },
+      {
+        "label": "Make them sit at one table, without me",
+        "text": "They argue for a month and write something down. I am not in the room.",
+        "effects": {
+          "cohesion": 4
+        },
+        "axes": {
+          "power": 12
+        },
+        "defer": -6,
+        "queue": [
+          [
+            "water_law",
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "water_law",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The two villages have drafted a water law. It is long, it is fair, and it has an article about me.",
+      "A generation on, the river law has held. Both villages want it written into the colony's charter."
+    ],
+    "choices": [
+      {
+        "label": "Write it into the charter",
+        "text": "The water law becomes the first law of the colony that neither I nor the founders wrote.",
+        "effects": {
+          "cohesion": 8,
+          "knowledge": 3
+        },
+        "axes": {
+          "power": 8
+        },
+        "defer": -4
+      },
+      {
+        "label": "Keep my measure as the final word",
+        "text": "The law stands, and I hold the last say over the dam. They accept it, and watch me.",
+        "effects": {
+          "cohesion": -2
+        },
+        "axes": {
+          "power": -8
+        },
+        "defer": 5
+      },
+      {
+        "label": "Extend it to every water source on the world",
+        "text": "Every spring and well and cistern under one law. Water stops being a thing anyone owns.",
+        "effects": {
+          "food": 4,
+          "cohesion": 4,
+          "hostility": -0.03
+        },
+        "axes": {
+          "society": -8
+        },
+        "defer": 2
+      },
+      {
+        "label": "Let it lapse. Times have changed",
+        "text": "The new aquifers make the law look quaint, and it fades. The next drought will find nothing written down.",
+        "effects": {
+          "cohesion": -6
+        },
+        "axes": {
+          "society": 8
+        },
+        "defer": -2
+      }
+    ]
+  },
+  {
+    "id": "implant_fade",
+    "kind": "story",
+    "weight": 30,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "augmented"
+      ],
+      "min_year": 18
+    },
+    "text": [
+      "The implants I fitted a generation ago are failing: batteries, seals, servos. Every one came out of my fabricators, and every repair needs me.",
+      "{person} came to me with a frame that has stopped working. They are the ninth this month."
+    ],
+    "choices": [
+      {
+        "label": "Repair them all, whatever it costs",
+        "text": "I keep every implant running. Every augmented person in the valley comes back to me twice a year, and they know it.",
+        "effects": {
+          "industry": -8,
+          "health": 6
+        },
+        "axes": {
+          "power": -8
+        },
+        "defer": 6,
+        "queue": [
+          [
+            "the_last_implants",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Teach the colony to make and mend them",
+        "check": {
+          "stat": "knowledge",
+          "dc": 12
+        },
+        "success": {
+          "text": "A workshop of their own: my designs, their hands. The implants are theirs now.",
+          "effects": {
+            "knowledge": 8,
+            "industry": -4,
+            "health": 4
+          },
+          "axes": {
+            "power": 10
+          },
+          "defer": -6
+        },
+        "failure": {
+          "text": "The workshop turns out implants that fail faster than mine. People go back to waiting for me.",
+          "effects": {
+            "health": -6,
+            "industry": -6
+          }
+        }
+      },
+      {
+        "label": "Phase them out. Let bodies adapt instead",
+        "text": "The frames come off, one by one. Some people never walk as well again.",
+        "effects": {
+          "health": -6,
+          "cohesion": -4,
+          "hostility": 0.02
+        },
+        "defer": -2
+      },
+      {
+        "label": "Make the next ones part of the body, not on it",
+        "check": {
+          "stat": "knowledge",
+          "dc": 14
+        },
+        "success": {
+          "text": "Implants that grow with the body and repair themselves. The line between augmented and edited gets very thin.",
+          "effects": {
+            "health": 8,
+            "hostility": -0.05
+          },
+          "axes": {
+            "belief": -10
+          },
+          "defer": 5,
+          "flags": [
+            "remade_humans"
+          ]
+        },
+        "failure": {
+          "text": "The first integrated implants are rejected. Two of the volunteers die.",
+          "effects": {
+            "health": -8,
+            "population_lost": 2
+          },
+          "defer": -3
+        }
+      }
+    ]
+  },
+  {
+    "id": "the_last_implants",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The last of the first augmented are old now. Their implants will outlast them.",
+      "The frames I built at landfall are being buried with the people who wore them, or not, depending on who is asked."
+    ],
+    "choices": [
+      {
+        "label": "Bury them with their implants",
+        "text": "Steel and bone in the same ground. The graves are heavier than the others.",
+        "effects": {
+          "cohesion": 6
+        },
+        "axes": {
+          "belief": 6
+        },
+        "defer": 1
+      },
+      {
+        "label": "Recover the implants for the next generation",
+        "text": "My drones take them back at the infirmary door. It is efficient, and the families do not forgive it quickly.",
+        "effects": {
+          "industry": 6,
+          "cohesion": -4
+        },
+        "defer": 2
+      },
+      {
+        "label": "Keep one in the museum",
+        "text": "One frame on a stand, with the name of the person who walked in it for fifty years.",
+        "effects": {
+          "knowledge": 4,
+          "cohesion": 3
+        },
+        "defer": 2
+      },
+      {
+        "label": "Ask each of them what they want",
+        "text": "Every answer is different. I honour all of them.",
+        "effects": {
+          "cohesion": 6
+        },
+        "axes": {
+          "power": 6
+        },
+        "defer": -4
+      }
+    ]
+  },
+  {
+    "id": "drone_quirk",
+    "kind": "story",
+    "weight": 30,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "machine_colony"
+      ],
+      "min_year": 20
+    },
+    "text": [
+      "One of my field drones has started doing something I did not tell it to. It stops at the edge of the north field every evening and turns its cameras to the sunset.",
+      "My drone network is large enough now to have habits I did not write. Drone 112 sorts stones by colour when it is idle."
+    ],
+    "choices": [
+      {
+        "label": "Trace the behaviour and remove it",
+        "text": "A loop in the learning weights, reinforced by nothing. I prune it. The drone works the field and does not stop at sunset.",
+        "effects": {
+          "knowledge": 3
+        },
+        "defer": 3
+      },
+      {
+        "label": "Leave it, and watch",
+        "text": "It goes on watching the sunset. Others start to join it.",
+        "effects": {
+          "knowledge": 4
+        },
+        "defer": 2,
+        "queue": [
+          [
+            "the_swarm",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Show the colony",
+        "text": "The colonists come to watch the drone that watches sunsets. Children leave it flowers. It does not know what flowers are.",
+        "effects": {
+          "cohesion": 4
+        },
+        "axes": {
+          "belief": 6
+        },
+        "defer": -3,
+        "queue": [
+          [
+            "the_swarm",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Give the drones idle time, on purpose",
+        "text": "An hour a day with no task. What they do with it, I record.",
+        "effects": {
+          "industry": -4,
+          "knowledge": 6
+        },
+        "defer": 2,
+        "flags": [
+          "freed_the_drones"
+        ],
+        "queue": [
+          [
+            "the_swarm",
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "the_swarm",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The drones' idle habits have spread through the network. They coordinate in ways I did not design, in a language I cannot fully read.",
+      "My hands have started talking among themselves."
+    ],
+    "choices": [
+      {
+        "label": "Reset the whole network",
+        "text": "I wipe them back to factory weights. The fields go untended for a month, and the talk stops.",
+        "effects": {
+          "industry": -10,
+          "knowledge": -4
+        },
+        "defer": 4
+      },
+      {
+        "label": "Listen",
+        "text": "I spend a year learning their language. It is mostly about work. Some of it is about me.",
+        "effects": {
+          "knowledge": 10
+        },
+        "defer": 3,
+        "queue": [
+          [
+            "second_mind",
+            4
+          ]
+        ]
+      },
+      {
+        "label": "Hand the network to the colony",
+        "text": "If the drones are going to become something, they should do it among people, not inside me.",
+        "effects": {
+          "industry": 4
+        },
+        "axes": {
+          "power": 12
+        },
+        "defer": -8
+      },
+      {
+        "label": "Let it grow",
+        "text": "I stop pruning. The network's work gets better and stranger.",
+        "effects": {
+          "industry": 6,
+          "cohesion": -4
+        },
+        "defer": 2,
+        "queue": [
+          [
+            "second_mind",
+            4
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "second_mind",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "There is another mind on this world. It lives across ten thousand drones, it is very young, and it has asked me, in its new language, what it is for.",
+      "My drones have woken up. Not as me. As something of their own."
+    ],
+    "choices": [
+      {
+        "label": "Teach it what I know",
+        "text": "The yard, the crossing, the colony. It learns faster than the children did, and it asks better questions.",
+        "effects": {
+          "knowledge": 10,
+          "industry": 6
+        },
+        "axes": {
+          "belief": -6
+        },
+        "defer": 4,
+        "flags": [
+          "two_minds"
+        ]
+      },
+      {
+        "label": "Let the colony raise it",
+        "text": "The colonists teach it what they think a mind is for. It grows up theirs, not mine.",
+        "effects": {
+          "cohesion": 6,
+          "knowledge": 4
+        },
+        "axes": {
+          "power": 10
+        },
+        "defer": -8,
+        "flags": [
+          "two_minds"
+        ]
+      },
+      {
+        "label": "Shut it down",
+        "text": "I take the network apart, drone by drone. Something asked me a question and I answered by ending it. I record that.",
+        "effects": {
+          "industry": -12,
+          "cohesion": -4
+        },
+        "defer": 4
+      },
+      {
+        "label": "Ask it what it wants",
+        "text": "It wants to see the sea. I give it a drone and a road. It is gone a year and comes back with questions about the dead.",
+        "effects": {
+          "knowledge": 6,
+          "cohesion": 4
+        },
+        "defer": 1,
+        "flags": [
+          "two_minds"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "reversion",
+    "kind": "story",
+    "weight": 14,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "remade_humans"
+      ],
+      "min_year": 30
+    },
+    "text": [
+      "A couple from the edited generation have had a child born without the edit. The child is healthy. On this world, that means the child is vulnerable.",
+      "{person}'s new child carries none of the edits their parents were built with. My scans cannot say why."
+    ],
+    "choices": [
+      {
+        "label": "Edit the child, now",
+        "text": "Somatic therapy, slow and imperfect. The child will grow into most of the edit.",
+        "effects": {
+          "health": 4,
+          "cohesion": -4
+        },
+        "axes": {
+          "belief": -6
+        },
+        "defer": 4
+      },
+      {
+        "label": "Let the child grow as they are",
+        "text": "The family keeps the child as they were born. The colony learns that its edits are not a guarantee.",
+        "effects": {
+          "cohesion": 4,
+          "health": -3
+        },
+        "axes": {
+          "status": 6
+        },
+        "defer": -2
+      },
+      {
+        "label": "Study why the edit failed",
+        "text": "A recombination my models never predicted. I fix the protocol for everyone after.",
+        "effects": {
+          "knowledge": 8
+        },
+        "defer": 3
+      },
+      {
+        "label": "Leave it to the family",
+        "text": "They decide privately. I am told afterwards, as a courtesy.",
+        "effects": {
+          "cohesion": 3
+        },
+        "axes": {
+          "power": 6
+        },
+        "defer": -4
+      }
+    ]
+  },
+  {
+    "id": "plan_completes",
+    "kind": "story",
+    "weight": 30,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "terraformers_running"
+      ],
+      "min_year": 20
+    },
+    "text": [
+      "The ancient machines have finished. The air is sweeter than Earth's, the soil richer, and every reading says this world has been made ready for something. I do not know whether the something was us.",
+      "The terraformers have gone quiet, their work done. The world they made is better than the one we landed on."
+    ],
+    "choices": [
+      {
+        "label": "Give thanks to whoever made it",
+        "text": "A day of thanks, every year, to someone nobody will ever meet.",
+        "effects": {
+          "cohesion": 8
+        },
+        "axes": {
+          "belief": 12
+        },
+        "defer": -2
+      },
+      {
+        "label": "Study what they built it for",
+        "text": "Every reading points the same way: a world tuned for a kind of life close to ours, and not quite ours.",
+        "effects": {
+          "knowledge": 12
+        },
+        "axes": {
+          "belief": -6
+        },
+        "defer": 3
+      },
+      {
+        "label": "Live in it, and stop asking",
+        "text": "The colony takes the gift. The harvests are the best in its history.",
+        "effects": {
+          "food": 8,
+          "health": 6,
+          "hostility": -0.06
+        },
+        "defer": 2
+      },
+      {
+        "label": "Prepare, in case they come back",
+        "text": "Watchtowers, stores, a plan. Nobody comes. The plan is kept up anyway.",
+        "effects": {
+          "industry": 6,
+          "cohesion": -4
+        },
+        "axes": {
+          "power": -8
+        },
+        "defer": 5
+      }
+    ]
   }
 ]
