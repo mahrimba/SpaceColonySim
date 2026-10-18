@@ -50,7 +50,11 @@ class Panel(Static):
 
     def render_colony(self, century_game) -> None:
         s = century_game.state
-        rows = [f"[b]{s.name}[/b]", f"[dim]{s.ship_role}[/dim]", ""]
+        rows = [f"[b]{s.name}[/b]", f"[dim]{s.ship_role}[/dim]"]
+        features = [planets.MODIFIERS[m].name for m in C.planet_features(s.planet)]
+        if features:
+            rows.append(f"[dim]{', '.join(features)}[/dim]")
+        rows.append("")
         rows.append(f"Year [b]{s.year}[/b]" + (f"  [dim](+{s.span})[/dim]"
                                                if s.span > 1 else ""))
         rows.append("")

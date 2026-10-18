@@ -250,6 +250,8 @@ class ColonyState:
             else:
                 headroom = 1 - self.population / cap
                 rate = 0.022 * (0.35 + 0.65 * food) * (0.35 + 0.65 * health) * headroom
+                if rate > 0 and "world:aphrodisiac" in self.flags:
+                    rate *= 1.3              # the air does what the air does
                 rate = max(-0.05, rate)      # overshoot starves back, slowly
             self.population = max(0, min(int(cap * 1.4),
                                          int(self.population * (1 + rate))))
@@ -390,7 +392,7 @@ def found(arrival: dict, rng: random.Random) -> ColonyState:
         planet=planet,
         arrival=arrival,
         flags={f"voyage:{f}" for f in flags}
-        | {f"world:{t}" for t in world_traits(planet)},
+        | {f"world:{t}" for t in world_traits(planet) + planet_features(planet)},
     )
 
     for flag in flags:
@@ -506,6 +508,109 @@ WORLD_LANDFALL = {
     "sterile": "Nothing grows here. The soil my drones sample is ground rock, as "
                "lifeless as the inside of my sealed vault.",
 }
+
+
+# Planet modifiers (planets.MODIFIERS): what the survey called a feature,
+# met on the ground. Each shifts what routine labour holds a stat at, for the
+# whole century, and the stranger ones lean the culture a little every year.
+
+FEATURE_LANDFALL = {
+    "tidally_locked": "One face of this world never turns from its sun, and the "
+                      "other never sees it. We land in the twilight band between, "
+                      "where the light never moves.",
+    "storms": "The wind tests my hull before the ramps are down. My weather "
+              "models give this world's storms names, and run out of names.",
+    "weak_magnetic": "My magnetometers barely register a field. Nothing turns the "
+                     "solar wind aside here; it reaches the ground.",
+    "strong_magnetic": "A powerful magnetic field wraps this world. My compasses "
+                       "agree with each other for the first time since launch, "
+                       "and the aurora is visible at noon.",
+    "geothermal": "Steam rises from the ground a kilometre from where I land. This "
+                  "world is warm underneath, and generous with it.",
+    "tectonics": "The ground trembles twice before the thaw is finished. My "
+                 "seismographs have not stopped writing since.",
+    "asteroid_impacts": "Fresh craters ring the landing site, some of them only "
+                        "years old. This world's sky is not finished falling.",
+    "hostile_fauna": "Something large circles the landing site at night. My "
+                     "cameras catch eyes at the edge of the floodlights.",
+    "docile_fauna": "Native animals come to the edge of the landing site and "
+                    "watch the colonists with no fear at all.",
+    "natural_beauty": "The valley I have chosen is beautiful in ways my survey "
+                      "did not measure. The colonists stop on the ramp to look.",
+    "subterranean": "My ground radar finds caverns under the landing site, and "
+                    "something moving in them.",
+    "aphrodisiac": "Something in the air here acts on human hormones. My medical "
+                   "sensors flag it within a day, and the colonists notice it "
+                   "within two.",
+    "hallucinogen": "Trace compounds in the air act on human perception. The "
+                    "first night, three colonists report the sky singing.",
+    "hyper_ecosystem": "Life here grows faster than anything in my archive. A "
+                       "cleared field is green again in a week.",
+    "titanic_life": "Something the size of a hill moves across the plain beyond "
+                    "the river. It is alive. It takes all afternoon to pass.",
+    "ship_graveyard": "My descent radar paints hulls on the plain: dozens of "
+                      "them, broken, older than me. We land among the dead.",
+    "terraformed": "The air is too good. The soil chemistry is too convenient. "
+                   "Somebody made this world habitable, a very long time ago.",
+    "lush": "The ground around my landing struts is green before the hatches "
+            "open.",
+    "bleak": "The land is grey and thin. What grows here grows reluctantly.",
+    "rich_microflora": "My soil samples are crowded with microbes, most of them "
+                       "harmless and all of them busy. The ground is ready.",
+    "poor_minerals": "My mapping drones find little worth digging. Every tool "
+                     "this colony makes will be made from scrap.",
+    "rich_minerals": "My mapping drones find ore close to the surface, more than "
+                     "the colony will need for generations.",
+    "exceptional_minerals": "The ore here is extraordinary: veins of metal at the "
+                            "surface, almost pure. Earth went to war over less.",
+}
+
+# Points added to (or taken from) the level routine labour sustains, per stat.
+FEATURE_ROUTINE = {
+    "tidally_locked": {"food": -4},
+    "storms": {"industry": 3, "health": -2, "cohesion": -2},
+    "weak_magnetic": {"health": -3, "knowledge": 3},
+    "strong_magnetic": {"industry": 3},
+    "geothermal": {"industry": 5, "food": 2},
+    "tectonics": {"knowledge": 3, "cohesion": -2},
+    "asteroid_impacts": {"industry": 3, "cohesion": -1},
+    "hostile_fauna": {"health": -3, "knowledge": 2, "cohesion": 2},
+    "docile_fauna": {"food": 3, "cohesion": 3},
+    "natural_beauty": {"cohesion": 5},
+    "subterranean": {"industry": 3, "knowledge": 2},
+    "aphrodisiac": {"cohesion": 2},
+    "hallucinogen": {"industry": -2, "cohesion": 3},
+    "hyper_ecosystem": {"food": 8, "industry": -5},
+    "titanic_life": {"knowledge": 3},
+    "ship_graveyard": {"industry": 4},
+    "terraformed": {"food": 3, "health": 2},
+    "lush": {"food": 6},
+    "bleak": {"food": -5},
+    "rich_microflora": {"food": 3, "health": 3},
+    "poor_minerals": {"industry": -5},
+    "rich_minerals": {"industry": 5},
+    "exceptional_minerals": {"industry": 9},
+}
+
+# Axis points per year: the world itself has opinions.
+FEATURE_AXES = {
+    "hallucinogen": {"belief": 0.3},
+    "hyper_ecosystem": {"nature": -0.3},
+    "terraformed": {"belief": 0.2},
+}
+
+
+def planet_features(planet: dict) -> list[str]:
+    return [m for m in (planet or {}).get("modifiers", []) if m in FEATURE_LANDFALL]
+
+
+def routine_offsets(flags: set[str]) -> dict[str, float]:
+    out = {stat: 0.0 for stat in COLONY_STATS}
+    for feature, shift in FEATURE_ROUTINE.items():
+        if f"world:{feature}" in flags:
+            for stat, value in shift.items():
+                out[stat] += value
+    return out
 
 
 def world_traits(planet: dict) -> list[str]:

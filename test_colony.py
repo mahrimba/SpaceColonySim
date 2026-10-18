@@ -301,6 +301,31 @@ def test_every_world_feels_different() -> None:
     assert game.state.hostility >= 0.05
 
 
+def test_every_planet_modifier_is_felt() -> None:
+    """A modifier the survey reports must matter on the ground: a landfall
+    line, a lasting shift in routine labour, a quiet-year line, an event."""
+    import planets
+    for mod in planets.MODIFIERS:
+        assert mod in C.FEATURE_LANDFALL, f"{mod}: no landfall line"
+        assert C.FEATURE_ROUTINE.get(mod), f"{mod}: changes nothing in routine"
+        assert FLAVOUR.get(f"world:{mod}"), f"{mod}: no quiet-year flavour"
+        assert any(f"world:{mod}" in e.get("requires", {}).get("flags", [])
+                   for e in EVENTS), f"{mod}: no event"
+
+    # Rarer modifiers really are rarer, across many generated worlds.
+    seen = {m: 0 for m in planets.MODIFIERS}
+    for seed in range(3000):
+        for m in planets.generate(random.Random(seed), set(), 100.0).modifiers:
+            seen[m] += 1
+    assert seen["terraformed"] < seen["natural_beauty"] < seen["tectonics"]
+    assert seen["exceptional_minerals"] < seen["rich_minerals"]
+
+    # A feature that shifts routine labour shows up in where a stat settles.
+    flags = {"world:lush", "world:poor_minerals"}
+    offsets = C.routine_offsets(flags)
+    assert offsets["food"] > 0 and offsets["industry"] < 0
+
+
 def test_named_dead_stay_dead() -> None:
     """Act 2 inherits Act 1's rule: the Mind does not resurrect anyone."""
     arrival = CS.synthetic_arrival(4)

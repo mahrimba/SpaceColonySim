@@ -33,6 +33,7 @@ class Planet:
     radiation: float        # 0-10 arbitrary dose index
     surveyed_at_cognition: float = 100.0
     notes: list[str] = field(default_factory=list)
+    modifiers: list[str] = field(default_factory=list)
 
     # -- derived, never displayed as a number ---------------------------------
 
@@ -55,6 +56,8 @@ class Planet:
             * {"none": 0.75, "microbial": 1.0, "complex": 0.9, "hostile": 0.55}[
                 self.biosphere]
         )
+        for mod in self.modifiers:
+            product *= MODIFIERS[mod].habitability
         return round(min(1.0, product) ** 0.5, 3)
 
     def verdict(self) -> str:
@@ -80,7 +83,24 @@ class Planet:
             ("Hydrosphere", readout.measure(self.water, c, "", 0.0, 1.0, WATER_WORDS)),
             ("Radiation", readout.measure(self.radiation, c, "", 0.0, 10.0, RAD_WORDS)),
             ("Biosphere", self._biosphere_readout()),
+            ("Features", self._features_readout()),
         ]
+
+    def _features_readout(self) -> str:
+        """Odd worlds read as odd before they read as anything specific: at
+        middling precision the rarer features blur into 'anomalous readings'."""
+        if not self.modifiers:
+            return "none noted"
+        t = readout.tier(self.surveyed_at_cognition)
+        if t == readout.PRECISE:
+            return ", ".join(MODIFIERS[m].name for m in self.modifiers)
+        if t == readout.APPROX:
+            names = [MODIFIERS[m].name for m in self.modifiers
+                     if MODIFIERS[m].weight >= 5]
+            if len(names) < len(self.modifiers):
+                names.append("anomalous readings")
+            return ", ".join(names)
+        return "unresolved"
 
     def _biosphere_readout(self) -> str:
         t = readout.tier(self.surveyed_at_cognition)
@@ -111,7 +131,8 @@ def table(worlds: list["Planet"], per_table: int = 3) -> list[str]:
     rows: list[str] = []
     for start in range(0, len(worlds), per_table):
         group = worlds[start:start + per_table]
-        width = max(22, max(len(w.name) for w in group) + 2)
+        width = max(22, max(len(cell) for w in group
+                            for cell in [w.name, *(v for _, v in w.dossier())]) + 2)
         # Labelled rather than indented: a line that starts with spaces loses
         # them to Textual's markup, which breaks the column alignment.
         rows.append(f"{'World':<15}" + "".join(f"{w.name:<{width}}" for w in group))
@@ -170,7 +191,7 @@ def generate(rng: random.Random, tags: set[str], cognition: float) -> Planet:
             weights=[30, 40, 18 if water > 0.2 else 4, 12 if water > 0.15 else 3],
         )[0]
 
-    return Planet(
+    planet = Planet(
         name=_name(rng),
         gravity=gravity,
         pressure=pressure,
@@ -180,3 +201,127 @@ def generate(rng: random.Random, tags: set[str], cognition: float) -> Planet:
         radiation=radiation,
         surveyed_at_cognition=cognition,
     )
+    planet.modifiers = roll_modifiers(rng, planet, tags)
+    if "strong_magnetic" in planet.modifiers:
+        planet.radiation = round(max(0.0, planet.radiation - 1.5), 1)
+    if "weak_magnetic" in planet.modifiers:
+        planet.radiation = round(min(10.0, planet.radiation + 1.0), 1)
+    return planet
+
+
+# --- planet modifiers ---------------------------------------------------------
+#
+# After Stellaris's planet modifiers, cut to the ones that mean something to a
+# colony with no economy but food, tools, health, knowledge and each other.
+# Weights set rarity (10 common, 4 uncommon, 1.5 rare, 0.4 very rare; doubled
+# for the ones that need complex life, which is itself uncommon) and are
+# multiplied by the world's conditions, Stellaris-style: geothermal likes
+# heavy worlds, fauna needs a biosphere, and so on. `habitability` multiplies
+# the world's habitability product, so a modifier is felt in both acts.
+
+@dataclass(frozen=True)
+class Modifier:
+    name: str
+    weight: float
+    habitability: float = 1.0
+    group: str = "random"           # random (up to two), flora or minerals (one each)
+
+
+MODIFIERS = {
+    # random: common
+    "tidally_locked": Modifier("Tidally locked", 10, 0.90),
+    "storms": Modifier("Hazardous weather", 10, 0.92),
+    "weak_magnetic": Modifier("Weak magnetic field", 8, 0.95),
+    "strong_magnetic": Modifier("Strong magnetic field", 8, 1.0),
+    "geothermal": Modifier("Abundant geothermal activity", 8, 1.0),
+    "tectonics": Modifier("Unstable tectonics", 8, 0.90),
+    "asteroid_impacts": Modifier("Asteroid impacts", 6, 0.95),
+    "hostile_fauna": Modifier("Hostile fauna", 16, 0.90),
+    # random: uncommon
+    "docile_fauna": Modifier("Docile fauna", 8, 1.10),
+    "natural_beauty": Modifier("Natural beauty", 4, 1.0),
+    "subterranean": Modifier("Subterranean wildlife", 4, 1.0),
+    "aphrodisiac": Modifier("Atmospheric aphrodisiac", 3, 1.05),
+    "hallucinogen": Modifier("Atmospheric hallucinogen", 3, 1.0),
+    # random: rare and very rare
+    "hyper_ecosystem": Modifier("Hyper ecosystem", 3, 1.15),
+    "titanic_life": Modifier("Titanic life", 3, 1.0),
+    "ship_graveyard": Modifier("Ship graveyard", 1.0, 1.0),
+    "terraformed": Modifier("Previously terraformed", 0.4, 1.20),
+    # flora
+    "lush": Modifier("Lush", 10, 1.10, "flora"),
+    "bleak": Modifier("Bleak", 7, 0.92, "flora"),
+    "rich_microflora": Modifier("Rich microflora", 5, 1.05, "flora"),
+    # minerals
+    "poor_minerals": Modifier("Poor minerals", 12, 1.0, "minerals"),
+    "rich_minerals": Modifier("Rich minerals", 10, 1.0, "minerals"),
+    "exceptional_minerals": Modifier("Exceptional minerals", 2, 1.0, "minerals"),
+}
+
+# Chance of no modifier at all from each one-of group.
+GROUP_NONE = {"flora": 25.0, "minerals": 25.0}
+RANDOM_COUNT = ((0, 45), (1, 40), (2, 15))
+
+
+def _conditions(mod: str, p: Planet, tags: set[str], have: list[str]) -> float:
+    """Stellaris-style weight multipliers. Zero means impossible here."""
+    heavy, light = p.gravity >= 1.25, p.gravity <= 0.75
+    alive = p.biosphere != "none"
+    complex_life = p.biosphere in ("complex", "hostile")
+    breathable = 0.4 <= p.pressure <= 3.0
+    x = 1.0
+    if mod == "tidally_locked":
+        x *= 3 if "red_dwarf" in tags else 1
+    elif mod == "storms":
+        x *= 0 if p.pressure < 0.3 else (2 if p.pressure > 1.5 else 1)
+    elif mod == "weak_magnetic":
+        x *= (2 if light else 1) * (0 if {"strong_magnetic", "geothermal"} & set(have) else 1)
+    elif mod == "strong_magnetic":
+        x *= (2 if heavy else 1) * (0 if {"weak_magnetic", "geothermal"} & set(have) else 1)
+    elif mod == "geothermal":
+        x *= (2 if heavy else 1) * (0 if {"weak_magnetic", "strong_magnetic"} & set(have) else 1)
+    elif mod == "tectonics":
+        x *= 4 if heavy else 1
+    elif mod == "asteroid_impacts":
+        x *= 2 if "asteroid_belt" in tags else 1
+    elif mod in ("hostile_fauna", "docile_fauna", "hyper_ecosystem", "titanic_life"):
+        x *= 1 if complex_life else 0
+        if mod == "hostile_fauna":
+            x *= (2 if heavy else 1) * (0 if {"docile_fauna", "titanic_life"} & set(have) else 1)
+        if mod == "docile_fauna":
+            x *= (0 if p.biosphere == "hostile" else 1) * (0 if "hostile_fauna" in have else 1)
+        if mod == "titanic_life":
+            x *= (2 if heavy else 1) * (0 if "hostile_fauna" in have else 1)
+    elif mod == "subterranean":
+        x *= (2 if light else 1) * (1 if alive else 0)
+    elif mod in ("aphrodisiac", "hallucinogen"):
+        x *= 1 if (alive and breathable) else 0
+    elif mod in ("lush", "rich_microflora"):
+        x *= (1 if alive else 0) * (2 if light and mod == "lush" else 1)
+    elif mod == "bleak":
+        x *= 2 if p.biosphere == "none" else 1
+    elif mod == "poor_minerals":
+        x *= 4 if light else 1
+    elif mod in ("rich_minerals", "exceptional_minerals"):
+        x *= 4 if heavy else 1
+    return x
+
+
+def roll_modifiers(rng: random.Random, p: Planet, tags: set[str]) -> list[str]:
+    have: list[str] = []
+    for group in ("flora", "minerals"):
+        pool = {m: d.weight * _conditions(m, p, tags, have)
+                for m, d in MODIFIERS.items() if d.group == group}
+        pool = {m: w for m, w in pool.items() if w > 0}
+        pick = rng.choices([None, *pool], weights=[GROUP_NONE[group], *pool.values()])[0]
+        if pick:
+            have.append(pick)
+    count = rng.choices([n for n, _ in RANDOM_COUNT], weights=[w for _, w in RANDOM_COUNT])[0]
+    for _ in range(count):
+        pool = {m: d.weight * _conditions(m, p, tags, have)
+                for m, d in MODIFIERS.items() if d.group == "random" and m not in have}
+        pool = {m: w for m, w in pool.items() if w > 0}
+        if not pool:
+            break
+        have.append(rng.choices(list(pool), weights=list(pool.values()))[0])
+    return have

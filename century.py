@@ -34,7 +34,7 @@ EVENT_COOLDOWN = 3
 # Act 1's HAZARD_SCALE, for the century: multiplies authored damage and deaths
 # so difficulty moves with one number instead of twenty content edits.
 # Tuned against colony_sim.py's steward policy.
-COLONY_HAZARD = 1.7
+COLONY_HAZARD = 1.9
 
 # Where routine labour holds a stat on a free world, and how fast a year of it
 # closes the gap. Hostility and crowding pull the first number down.
@@ -139,6 +139,10 @@ def draw(events: list[dict], state: ColonyState, rng: random.Random) -> dict | N
         event = by_id.get(due)
         if event and _matches(event, state, scheduled=True):
             return event
+        if event and state.year < event.get("requires", {}).get("min_year", 0):
+            # Arrived early, not wrongly: hold it until its time comes.
+            state.schedule(due, 1)
+            break
     pool = available(events, state)
     if not pool:
         pool = [e for e in events
@@ -180,6 +184,11 @@ class Century:
             # The world is not a random event: whatever is wrong with it
             # arrives in the first years, one problem at a time.
             s.schedule(f"world_{trait}", i, now=True)
+        traits = len(C.world_traits(s.planet))
+        for i, feature in enumerate(C.planet_features(s.planet)):
+            s.note(C.FEATURE_LANDFALL[feature])
+            # Features surface after the world's hard facts, a few years apart.
+            s.schedule(f"feature_{feature}", traits + 1 + 2 * i, now=True)
         if s.thaw_losses:
             s.note(f"The thaw takes {s.thaw_losses:,} of them before the first "
                    "morning. I record every name.")
@@ -256,6 +265,7 @@ class Century:
         # Practice at self-rule is worth something concrete: a colony used to
         # deciding things fixes its own worst problem itself, while a colony
         # that waits to be told simply waits (Q7).
+        offsets = C.routine_offsets(s.flags)
         initiative = (100 - s.deference) / 100
         for _ in range(s.span):
             worst = min(C.COLONY_STATS, key=lambda k: s.stats[k])
@@ -265,8 +275,12 @@ class Century:
                 # out, but a colony that got somewhere does not lose it just by
                 # working. Otherwise every gain the player wins evaporates and
                 # the century has no shape.
-                gap = workaday - s.stats[stat]
+                gap = workaday + offsets[stat] - s.stats[stat]
                 s.adjust(stat, (DRIFT_RATE if gap > 0 else DECAY_RATE) * gap)
+            for feature, lean in C.FEATURE_AXES.items():
+                if f"world:{feature}" in s.flags:
+                    for axis, delta in lean.items():
+                        s.move_axis(axis, delta)
             if s.deference > 60:
                 s.move_axis("power", -0.5)      # toward Authoritarian
             if s.deference < 40:

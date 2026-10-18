@@ -97,5 +97,74 @@
   "world:sterile": [
     "The compost heaps are the most carefully tended things in the colony.",
     "There is a mineral crust on the north rocks that looks like moss. Everyone knows it is not."
+  ],
+  "world:tidally_locked": [
+    "The light at the terminator never moves. The colony tells time by my clocks and nothing else."
+  ],
+  "world:storms": [
+    "Another storm warning. The children have a game for it now, and they win it every time."
+  ],
+  "world:weak_magnetic": [
+    "A solar storm overnight. My dosimeters log it; the colony sleeps underground and does not hear it pass."
+  ],
+  "world:strong_magnetic": [
+    "The aurora is green tonight, and so bright the night shift works without lamps."
+  ],
+  "world:geothermal": [
+    "Steam drifts across the town from the springs every cold morning. It smells faintly of sulphur, and of home."
+  ],
+  "world:tectonics": [
+    "A small quake at dinner. Nobody puts down their spoon."
+  ],
+  "world:asteroid_impacts": [
+    "A bright streak across the evening sky. My trackers put it two hundred kilometres away, harmless."
+  ],
+  "world:hostile_fauna": [
+    "Something tested the eastern fence again last night. The lights held."
+  ],
+  "world:docile_fauna": [
+    "A native grazer has wandered into the schoolyard. The children are feeding it lunch."
+  ],
+  "world:natural_beauty": [
+    "Fog in the valley at dawn, and the peaks above it lit pink. Half the colony stops to look."
+  ],
+  "world:subterranean": [
+    "Warm air rises from the cave mouths at night. My thermal cameras see the hills breathing."
+  ],
+  "world:aphrodisiac": [
+    "Three weddings this season, and a fourth announced. The registry is the busiest office in the colony."
+  ],
+  "world:hallucinogen": [
+    "Someone reports the river singing again. Someone else says it was always singing."
+  ],
+  "world:hyper_ecosystem": [
+    "The road crew cuts the same stretch of track for the third time this month."
+  ],
+  "world:titanic_life": [
+    "The ground trembles at dusk with something's footsteps, slow and far away."
+  ],
+  "world:ship_graveyard": [
+    "Wind through the open hulls on the plain makes a sound like a long, low chord."
+  ],
+  "world:terraformed": [
+    "My drones find another of the old markers in the north field, in the same pattern as the others."
+  ],
+  "world:lush": [
+    "The orchards are heavy again. The children eat fruit straight off the trees."
+  ],
+  "world:bleak": [
+    "Grey fields under a grey sky. The farmers go out anyway."
+  ],
+  "world:rich_microflora": [
+    "The compost heaps steam all winter. Things rot fast here, and grow faster."
+  ],
+  "world:poor_minerals": [
+    "A broken hinge is carried to the smithy like a patient to the infirmary."
+  ],
+  "world:rich_minerals": [
+    "Smoke from the smelters, all day. The colony's sound is hammering."
+  ],
+  "world:exceptional_minerals": [
+    "Children pick up bright metal from the stream bed and trade it like marbles."
   ]
 }

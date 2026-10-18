@@ -7441,5 +7441,1876 @@
         "defer": 6
       }
     ]
+  },
+  {
+    "id": "feature_tidally_locked",
+    "kind": "hazard",
+    "weight": 22,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:tidally_locked"
+      ],
+      "min_year": 2
+    },
+    "text": [
+      "The twilight band is the only ground here that is neither scorched nor frozen, and the colony is outgrowing it.",
+      "Food is {food}. Our fields sit in a dusk that never ends, and nothing in the vault was bred for light that never moves."
+    ],
+    "choices": [
+      {
+        "label": "Raise mirrors on the day side to light the fields",
+        "check": {
+          "stat": "industry",
+          "dc": 12
+        },
+        "success": {
+          "text": "My drones raise a ring of mirrors on the day side, angled across the terminator. The fields get a noon they never had.",
+          "effects": {
+            "food": 10,
+            "industry": -6,
+            "hostility": -0.04
+          },
+          "axes": {
+            "nature": 6
+          },
+          "defer": 4
+        },
+        "failure": {
+          "text": "The day side's heat warps the mirror frames within a season. We have built a field of bent glass.",
+          "effects": {
+            "industry": -12
+          }
+        }
+      },
+      {
+        "label": "Farm the day side by machine",
+        "text": "Field drones work the scorched side where no person can stand. The harvest comes back across the terminator on rails.",
+        "effects": {
+          "industry": -8,
+          "food": 8,
+          "hostility": -0.03
+        },
+        "defer": 5,
+        "flags": [
+          "machine_colony"
+        ]
+      },
+      {
+        "label": "Breed crops for a permanent dusk",
+        "text": "I cross the vault's low-light lines for twenty generations. The wheat comes out pale and tall, and it does not mind the dusk.",
+        "effects": {
+          "knowledge": 4,
+          "food": 5,
+          "hostility": -0.03
+        },
+        "axes": {
+          "belief": -4
+        },
+        "defer": 2
+      },
+      {
+        "label": "Spread along the band, a colony a thousand kilometres long",
+        "text": "They follow the twilight round the world in a thin line of villages. A message takes a week from one end to the other.",
+        "effects": {
+          "cohesion": -6,
+          "food": 6,
+          "industry": -4,
+          "hostility": -0.02
+        },
+        "axes": {
+          "power": 8,
+          "society": 6
+        },
+        "defer": -5
+      }
+    ]
+  },
+  {
+    "id": "feature_storms",
+    "kind": "hazard",
+    "weight": 14,
+    "requires": {
+      "flags": [
+        "world:storms"
+      ],
+      "min_year": 3
+    },
+    "text": [
+      "A storm comes off the plains and does not stop for nine days. Roofs go first, then fences, then the stores.",
+      "The wind reaches a speed my hull was designed for and the houses were not."
+    ],
+    "choices": [
+      {
+        "label": "Shelter everyone inside my hull",
+        "text": "They crowd into my decks for nine days. Nobody dies. The town outside is a list of repairs.",
+        "effects": {
+          "cohesion": 4,
+          "industry": -6
+        },
+        "defer": 4
+      },
+      {
+        "label": "Harvest it: lightning rods and wind turbines",
+        "check": {
+          "stat": "industry",
+          "dc": 12
+        },
+        "success": {
+          "text": "Lightning rods on every ridge, wired to my batteries. The storm that flattens the town also charges it for a month.",
+          "effects": {
+            "industry": 10,
+            "hostility": -0.03
+          },
+          "axes": {
+            "nature": 6
+          },
+          "defer": 2
+        },
+        "failure": {
+          "text": "A turbine tears free in the gusts and takes a roof with it. Three people were under the roof.",
+          "effects": {
+            "industry": -10,
+            "health": -4,
+            "population_lost": 3
+          }
+        }
+      },
+      {
+        "label": "Build lower and stronger, everywhere",
+        "text": "Every new building goes half underground and rounds its corners. The town starts to look like a field of stones.",
+        "effects": {
+          "industry": -8,
+          "health": 3,
+          "hostility": -0.03
+        },
+        "defer": 2
+      },
+      {
+        "label": "Let each household ride it out",
+        "text": "Families shutter their own houses and wait. Some are better at it than others, and the better ones take in the rest.",
+        "effects": {
+          "food": -6,
+          "cohesion": 3,
+          "health": -3
+        },
+        "axes": {
+          "power": 6
+        },
+        "defer": -4
+      }
+    ]
+  },
+  {
+    "id": "feature_weak_magnetic",
+    "kind": "hazard",
+    "weight": 22,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:weak_magnetic"
+      ],
+      "min_year": 4
+    },
+    "text": [
+      "With no magnetic field to speak of, the solar wind reaches the ground. Cancers are up and electronics fail early. Health is {health}.",
+      "A solar storm, and nothing between it and the colony but air. My dosimeters go off across the valley."
+    ],
+    "choices": [
+      {
+        "label": "Shelter during storms, on my warning",
+        "text": "I watch the star and sound the alarm before each storm. They go underground on my word. It works because they listen.",
+        "effects": {
+          "health": 6,
+          "industry": -4,
+          "hostility": -0.03
+        },
+        "defer": 5
+      },
+      {
+        "label": "Study the solar wind. Nobody on Earth could",
+        "text": "The particles reach the surface unbent. My instruments learn more about this star in a year than Earth learned about its own in a century.",
+        "effects": {
+          "knowledge": 10,
+          "health": -3,
+          "hostility": -0.01
+        },
+        "axes": {
+          "belief": -6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Build a magnetic shield over the valley",
+        "check": {
+          "stat": "industry",
+          "dc": 14
+        },
+        "success": {
+          "text": "Superconducting loops buried in a ring around the valley. A field of our own, small, over the people who need it.",
+          "effects": {
+            "industry": -12,
+            "health": 10,
+            "hostility": -0.06
+          },
+          "axes": {
+            "nature": 8
+          },
+          "defer": 5
+        },
+        "failure": {
+          "text": "The loops quench on the first test and boil off a year of coolant. The sky stays open.",
+          "effects": {
+            "industry": -14
+          }
+        }
+      },
+      {
+        "label": "Live with it, and keep the records",
+        "text": "They decide the risk is the price of the place. Every death is recorded with its dose, and the record becomes the colony's oldest book.",
+        "effects": {
+          "health": -4,
+          "cohesion": 4,
+          "knowledge": 3
+        },
+        "defer": -4
+      }
+    ]
+  },
+  {
+    "id": "feature_strong_magnetic",
+    "kind": "opportunity",
+    "weight": 22,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:strong_magnetic"
+      ],
+      "min_year": 5
+    },
+    "text": [
+      "The field here is strong enough to induce current in a long wire. A {role} has noticed that the fences hum.",
+      "The aurora never quite leaves the sky. My instruments read a planetary field that could power a town if anyone tapped it."
+    ],
+    "choices": [
+      {
+        "label": "Tap it: induction lines across the plain",
+        "text": "Kilometres of cable laid along the field lines. The current is weak and it never stops.",
+        "effects": {
+          "industry": 10,
+          "knowledge": 2
+        },
+        "axes": {
+          "nature": 6
+        },
+        "defer": 3
+      },
+      {
+        "label": "Use it to survey the continent",
+        "text": "Compasses work perfectly here. The surveyors map the continent in a decade, and nobody gets lost.",
+        "effects": {
+          "knowledge": 8,
+          "industry": 2
+        },
+        "defer": 2
+      },
+      {
+        "label": "Celebrate the aurora",
+        "text": "They hold a festival under the aurora every winter. It is the first thing in the valley they did not need.",
+        "effects": {
+          "cohesion": 8
+        },
+        "axes": {
+          "belief": 8
+        },
+        "defer": 1
+      },
+      {
+        "label": "Let the colony find its own uses",
+        "text": "They find six uses, two of them good. One is a way to talk across the valley without me.",
+        "effects": {
+          "industry": 5,
+          "knowledge": 4
+        },
+        "axes": {
+          "power": 8
+        },
+        "defer": -5
+      }
+    ]
+  },
+  {
+    "id": "feature_geothermal",
+    "kind": "opportunity",
+    "weight": 22,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:geothermal"
+      ],
+      "min_year": 3
+    },
+    "text": [
+      "There is heat under the valley: hot springs, steam vents, rock warm to the touch in midwinter. Industry is {industry}.",
+      "My drones have found a vent field two kilometres from the town, pouring energy into the sky for free."
+    ],
+    "choices": [
+      {
+        "label": "Drill, and build a geothermal plant",
+        "check": {
+          "stat": "industry",
+          "dc": 11
+        },
+        "success": {
+          "text": "The plant runs on the planet's own heat. My reactor rests for the first time since the yard.",
+          "effects": {
+            "industry": 12,
+            "hostility": -0.03
+          },
+          "axes": {
+            "nature": 6
+          },
+          "defer": 4
+        },
+        "failure": {
+          "text": "The drill breaches a pressurised pocket. The blowout kills two people and buries the rig.",
+          "effects": {
+            "industry": -8,
+            "health": -4,
+            "population_lost": 2
+          }
+        }
+      },
+      {
+        "label": "Pipe the springs under the houses and greenhouses",
+        "text": "Hot water under every floor and every greenhouse bench. Winter becomes a season, not a threat.",
+        "effects": {
+          "food": 6,
+          "health": 5,
+          "hostility": -0.03
+        },
+        "defer": 2
+      },
+      {
+        "label": "Bathe in them",
+        "text": "The springs become baths, then a meeting place, then the centre of town. More is decided in the water than in the hall.",
+        "effects": {
+          "cohesion": 10,
+          "health": 4
+        },
+        "axes": {
+          "belief": 4
+        },
+        "defer": -2
+      },
+      {
+        "label": "Fence the vents. They are not stable",
+        "text": "I map the vent field and fence it. The colony keeps its distance without needing my reasons.",
+        "effects": {
+          "cohesion": 2,
+          "knowledge": 3
+        },
+        "defer": 1
+      }
+    ]
+  },
+  {
+    "id": "feature_tectonics",
+    "kind": "hazard",
+    "weight": 13,
+    "requires": {
+      "flags": [
+        "world:tectonics"
+      ],
+      "min_year": 6
+    },
+    "text": [
+      "A quake, the third this year. My seismographs map the fault under the valley like a nerve under skin.",
+      "The ground drops a metre along the eastern fault overnight. The irrigation channels run uphill now."
+    ],
+    "choices": [
+      {
+        "label": "Build to my seismic codes, everywhere",
+        "text": "Every structure on this world goes up to my tables: flexible joints, deep footings, nothing tall. The quakes keep coming. The buildings stop falling.",
+        "effects": {
+          "industry": -8,
+          "cohesion": -2,
+          "hostility": -0.03
+        },
+        "defer": 4
+      },
+      {
+        "label": "Predict them: listen to the rock",
+        "check": {
+          "stat": "knowledge",
+          "dc": 13
+        },
+        "success": {
+          "text": "I learn the fault's rhythm well enough to call the big ones a day early. The warning becomes a ritual, and the ritual saves lives.",
+          "effects": {
+            "knowledge": 6,
+            "health": 3,
+            "hostility": -0.03
+          },
+          "defer": 5
+        },
+        "failure": {
+          "text": "My prediction is wrong by a day. The town sleeps through a warning that came too late.",
+          "effects": {
+            "cohesion": -6,
+            "population_lost": 4
+          }
+        }
+      },
+      {
+        "label": "Move the town off the fault",
+        "text": "We move twelve kilometres west, onto old rock. It costs a year. The ground under the new houses is quiet.",
+        "effects": {
+          "industry": -10,
+          "food": -4,
+          "cohesion": 4,
+          "hostility": -0.04
+        },
+        "defer": 2
+      },
+      {
+        "label": "Let them rebuild as they choose",
+        "text": "They rebuild in wood and rope, light enough to fall without killing anyone. It looks temporary. It is meant to.",
+        "effects": {
+          "industry": -4,
+          "cohesion": 4
+        },
+        "axes": {
+          "power": 8
+        },
+        "defer": -5
+      }
+    ]
+  },
+  {
+    "id": "feature_asteroid_impacts",
+    "kind": "hazard",
+    "weight": 12,
+    "requires": {
+      "flags": [
+        "world:asteroid_impacts"
+      ],
+      "min_year": 4
+    },
+    "text": [
+      "Something bright crosses the sky at noon and lands forty kilometres east. The shock wave reaches the town two minutes later.",
+      "My tracking cameras catch a rock on a collision course. Impact in nine days, somewhere in our region. I cannot yet say where."
+    ],
+    "choices": [
+      {
+        "label": "Track it, and evacuate on my word",
+        "check": {
+          "stat": "knowledge",
+          "dc": 12
+        },
+        "success": {
+          "text": "I track the rock to a point eleven kilometres north and clear the farms there. It lands on empty ground.",
+          "effects": {
+            "cohesion": 4,
+            "hostility": -0.02
+          },
+          "defer": 5
+        },
+        "failure": {
+          "text": "My track is off by a few kilometres. Six people were where I said they would be safe.",
+          "effects": {
+            "population_lost": 6,
+            "industry": -6,
+            "cohesion": -4
+          },
+          "defer": -4
+        }
+      },
+      {
+        "label": "Mine the craters. Impacts bring metal",
+        "text": "The fresh crater is full of nickel-iron. The sky delivers what the hills will not.",
+        "effects": {
+          "industry": 10,
+          "health": -2
+        },
+        "axes": {
+          "nature": 6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Dig shelters under every street",
+        "text": "Every street gets a shelter. When a warning comes, the town is underground in four minutes.",
+        "effects": {
+          "industry": -8,
+          "health": 3,
+          "hostility": -0.03
+        },
+        "defer": 3
+      },
+      {
+        "label": "Let them read it as a sign",
+        "text": "They say the sky is speaking. I give them the orbital mechanics, and they give me a calendar of omens.",
+        "effects": {
+          "cohesion": 6
+        },
+        "axes": {
+          "belief": 12
+        },
+        "defer": -3
+      }
+    ]
+  },
+  {
+    "id": "feature_hostile_fauna",
+    "kind": "hazard",
+    "weight": 22,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:hostile_fauna"
+      ],
+      "min_year": 2
+    },
+    "text": [
+      "Something hunts the edges of the fields at dusk. It took a calf last week and a dog last night.",
+      "The native predators have learned what we are. Two farmers were attacked at the river this season."
+    ],
+    "choices": [
+      {
+        "label": "Fence and floodlight everything",
+        "text": "Wire and lights around every field. The predators patrol the fence and do not cross it.",
+        "effects": {
+          "industry": -8,
+          "health": 3,
+          "hostility": -0.04
+        },
+        "defer": 4
+      },
+      {
+        "label": "Hunt them out of the valley",
+        "check": {
+          "stat": "industry",
+          "dc": 12
+        },
+        "success": {
+          "text": "We drive them up into the hills. The valley is ours now, and the hills are theirs.",
+          "effects": {
+            "health": 4,
+            "food": 4,
+            "hostility": -0.05
+          },
+          "axes": {
+            "nature": 12
+          },
+          "defer": 3
+        },
+        "failure": {
+          "text": "They are better at this than we are. Four hunters do not come back.",
+          "effects": {
+            "population_lost": 4,
+            "health": -6
+          }
+        }
+      },
+      {
+        "label": "Study them: learn what they want",
+        "text": "They hunt by smell, and they hate the resin of one native tree. Within a year every fence post is painted with it.",
+        "effects": {
+          "knowledge": 8,
+          "health": -3,
+          "hostility": -0.03
+        },
+        "axes": {
+          "nature": -8
+        },
+        "defer": 2
+      },
+      {
+        "label": "Let the colony arm itself",
+        "text": "Every household keeps a weapon. The attacks stop. Other arguments get louder.",
+        "effects": {
+          "health": 2,
+          "cohesion": -4,
+          "hostility": -0.03
+        },
+        "axes": {
+          "power": 12,
+          "society": 6
+        },
+        "defer": -6
+      }
+    ]
+  },
+  {
+    "id": "feature_docile_fauna",
+    "kind": "opportunity",
+    "weight": 22,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:docile_fauna"
+      ],
+      "min_year": 3
+    },
+    "text": [
+      "Native herd animals graze beside our fields, unafraid. A {role} walked up to one today and put a hand on it.",
+      "The native animals here have no fear of us. They follow the farmers like dogs."
+    ],
+    "choices": [
+      {
+        "label": "Domesticate them: milk, wool, draught",
+        "text": "In ten years they pull our ploughs, and their milk is in every kitchen.",
+        "effects": {
+          "food": 10,
+          "industry": 3
+        },
+        "axes": {
+          "nature": -4
+        },
+        "defer": 2
+      },
+      {
+        "label": "Study them before anyone touches them",
+        "text": "I catalogue them for a season. They are gentle because nothing here has ever hunted them. We are the first.",
+        "effects": {
+          "knowledge": 8,
+          "health": 2
+        },
+        "defer": 3
+      },
+      {
+        "label": "Leave them wild",
+        "text": "They graze beside us and we leave them be. The colony's children grow up among animals that trust them.",
+        "effects": {
+          "cohesion": 6
+        },
+        "axes": {
+          "nature": -10,
+          "belief": 6
+        },
+        "defer": 1
+      },
+      {
+        "label": "Hunt them for meat",
+        "text": "They do not run. It is the easiest hunting in human history, and some of the hunters cannot stand it.",
+        "effects": {
+          "food": 12,
+          "cohesion": -4
+        },
+        "axes": {
+          "nature": 10
+        },
+        "defer": -2
+      }
+    ]
+  },
+  {
+    "id": "feature_natural_beauty",
+    "kind": "quiet",
+    "weight": 14,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:natural_beauty"
+      ],
+      "min_year": 5
+    },
+    "text": [
+      "Someone has started painting the valley. Then three people. Then a school of them.",
+      "A {role} asks for an afternoon off to walk to the falls. Nobody has asked for time off to look at something before."
+    ],
+    "choices": [
+      {
+        "label": "A rest day for everyone, to see it",
+        "text": "One day in seven for the falls, the ridges, the light on the lake. Work slows. Nobody leaves.",
+        "effects": {
+          "cohesion": 8,
+          "industry": -3
+        },
+        "axes": {
+          "belief": 4
+        },
+        "defer": 3
+      },
+      {
+        "label": "Protect the best places from building",
+        "text": "I mark the falls and the ridge as untouchable. They become the places couples go and the dead are carried.",
+        "effects": {
+          "cohesion": 6,
+          "industry": -4
+        },
+        "axes": {
+          "nature": -10
+        },
+        "defer": 2
+      },
+      {
+        "label": "Archive it: the first art of this world",
+        "text": "I archive every painting and every song about the valley. The archive of Earth gains a new wing.",
+        "effects": {
+          "knowledge": 5,
+          "cohesion": 5
+        },
+        "axes": {
+          "belief": 4
+        },
+        "defer": 1
+      },
+      {
+        "label": "Let them go and look",
+        "text": "They go. Some of them come back with names for every hill, and the names stick.",
+        "effects": {
+          "cohesion": 7
+        },
+        "axes": {
+          "power": 6
+        },
+        "defer": -4
+      }
+    ]
+  },
+  {
+    "id": "feature_subterranean",
+    "kind": "story",
+    "weight": 22,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:subterranean"
+      ],
+      "min_year": 6
+    },
+    "text": [
+      "My ground radar maps caverns under the valley, kilometres of them, and something living in the deep ones.",
+      "A sinkhole opens in the north field onto a cave system nobody knew was there. Something below is moving."
+    ],
+    "choices": [
+      {
+        "label": "Mine the caves",
+        "text": "The caves are full of ore, and full of things that do not want us in them. The ore wins.",
+        "effects": {
+          "industry": 10,
+          "health": -3
+        },
+        "axes": {
+          "nature": 8
+        },
+        "defer": 3
+      },
+      {
+        "label": "Send my drones in first",
+        "check": {
+          "stat": "knowledge",
+          "dc": 12
+        },
+        "success": {
+          "text": "My drones map forty kilometres of tunnels and the creatures in them: blind, pale and harmless.",
+          "effects": {
+            "knowledge": 10,
+            "industry": 3
+          },
+          "defer": 3
+        },
+        "failure": {
+          "text": "I lose four drones in the deep caves and learn nothing about what took them.",
+          "effects": {
+            "knowledge": 2,
+            "industry": -6
+          }
+        }
+      },
+      {
+        "label": "Seal the sinkhole and leave the caves alone",
+        "text": "We fill it in. Some nights, the ground hums.",
+        "effects": {
+          "cohesion": 3
+        },
+        "axes": {
+          "nature": -6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Shelter in them: cool, safe, out of the weather",
+        "text": "Half the colony moves underground, into rooms the world already dug. They paint the walls.",
+        "effects": {
+          "health": 4,
+          "cohesion": 4,
+          "hostility": -0.04
+        },
+        "axes": {
+          "society": -6
+        },
+        "defer": -4
+      }
+    ]
+  },
+  {
+    "id": "feature_aphrodisiac",
+    "kind": "story",
+    "weight": 22,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:aphrodisiac"
+      ],
+      "min_year": 3
+    },
+    "text": [
+      "Births are a third above my projections. Something in the air acts on the colonists, and they know exactly what.",
+      "The air here makes people fond of each other. My medical files call it a hormonal agonist. The colonists call it spring."
+    ],
+    "choices": [
+      {
+        "label": "Filter it out of the houses",
+        "text": "My filters strip the compound from every house. Births fall back to my projections, and the colony is noticeably more irritable.",
+        "effects": {
+          "health": 3,
+          "cohesion": -4,
+          "hostility": -0.02
+        },
+        "defer": 4
+      },
+      {
+        "label": "Let it be. The colony needs children",
+        "text": "The valley fills with children and the schools double. Nobody complains about the air.",
+        "effects": {
+          "cohesion": 6,
+          "food": -4
+        },
+        "axes": {
+          "belief": 6
+        },
+        "defer": 1
+      },
+      {
+        "label": "Study it. It may be medicine",
+        "text": "The compound treats three conditions in my files and makes two others interesting.",
+        "effects": {
+          "knowledge": 8,
+          "health": 4
+        },
+        "defer": 2
+      },
+      {
+        "label": "Let the colony decide what to make of it",
+        "text": "They build customs around it: festivals, rules, a season. It is the most human thing they have done here.",
+        "effects": {
+          "cohesion": 5
+        },
+        "axes": {
+          "power": 8,
+          "status": 6
+        },
+        "defer": -5
+      }
+    ]
+  },
+  {
+    "id": "feature_hallucinogen",
+    "kind": "story",
+    "weight": 22,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:hallucinogen"
+      ],
+      "min_year": 4
+    },
+    "text": [
+      "People are seeing things: lights over the river, voices in the wind, the dead walking at dusk. They know the air does it. It makes no difference.",
+      "The trace compounds in the air are building up in the colonists. Industry is {industry}, and half the night shift says the stars are talking."
+    ],
+    "choices": [
+      {
+        "label": "Filter the workshops first, then the houses",
+        "text": "Masks in the workshops, filters in the houses. The visions fade indoors. Outside, they go on.",
+        "effects": {
+          "industry": 6,
+          "cohesion": -4,
+          "hostility": -0.03
+        },
+        "axes": {
+          "belief": -6
+        },
+        "defer": 5
+      },
+      {
+        "label": "Let them see what they see",
+        "text": "The visions become a culture: songs, shrines, a calendar of things seen. I appear in some of them. I am not sure what I am doing there.",
+        "effects": {
+          "cohesion": 8,
+          "industry": -4
+        },
+        "axes": {
+          "belief": 14
+        },
+        "defer": -3
+      },
+      {
+        "label": "Study what it does to the brain",
+        "text": "I map the compound's binding sites. It explains the visions and none of their content.",
+        "effects": {
+          "knowledge": 8,
+          "health": -2
+        },
+        "axes": {
+          "belief": -6
+        },
+        "defer": 3
+      },
+      {
+        "label": "Make it a sacrament, at set times",
+        "text": "Once a season, under my supervision, they breathe it on purpose. The rest of the year they work clean. The arrangement is strange, and it holds.",
+        "effects": {
+          "cohesion": 10,
+          "industry": -2
+        },
+        "axes": {
+          "belief": 10,
+          "power": -6
+        },
+        "defer": 3
+      }
+    ]
+  },
+  {
+    "id": "feature_hyper_ecosystem",
+    "kind": "hazard",
+    "weight": 22,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:hyper_ecosystem"
+      ],
+      "min_year": 2
+    },
+    "text": [
+      "Anything we cut grows back in a week. The fields are easy and the roads are impossible.",
+      "The forest takes back a cleared field in eleven days. My models of this ecosystem are out of date every morning."
+    ],
+    "choices": [
+      {
+        "label": "Burn the forest back, every season",
+        "text": "Burning crews every season. The smoke is part of the weather now.",
+        "effects": {
+          "industry": -8,
+          "food": 4,
+          "cohesion": -3,
+          "hostility": -0.03
+        },
+        "axes": {
+          "nature": 12
+        },
+        "defer": 4
+      },
+      {
+        "label": "Farm with it, not against it",
+        "text": "Forest gardens: we plant into the growth instead of clearing it. Food falls from the trees. Nothing we build stays straight.",
+        "effects": {
+          "food": 12,
+          "industry": -4,
+          "hostility": -0.04
+        },
+        "axes": {
+          "nature": -10
+        },
+        "defer": 2
+      },
+      {
+        "label": "Engineer our crops to keep pace",
+        "check": {
+          "stat": "knowledge",
+          "dc": 12
+        },
+        "success": {
+          "text": "I edit the vault lines for this speed of life. Our wheat now grows as fast as their weeds.",
+          "effects": {
+            "food": 10,
+            "knowledge": 4,
+            "hostility": -0.04
+          },
+          "axes": {
+            "belief": -6
+          },
+          "defer": 4
+        },
+        "failure": {
+          "text": "My crops grow fast and die fast. The forest eats them.",
+          "effects": {
+            "food": -6,
+            "knowledge": 2
+          }
+        }
+      },
+      {
+        "label": "Let the forest have the town's edges",
+        "text": "They stop fighting the edge. The town grows into the forest, and the forest into the town.",
+        "effects": {
+          "cohesion": 4,
+          "industry": -4
+        },
+        "axes": {
+          "nature": -12,
+          "power": 6
+        },
+        "defer": -5
+      }
+    ]
+  },
+  {
+    "id": "feature_titanic_life",
+    "kind": "story",
+    "weight": 22,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:titanic_life"
+      ],
+      "min_year": 8
+    },
+    "text": [
+      "The giants crossed the plain again this spring. One of them stepped on the irrigation works and did not notice.",
+      "A {role} has measured one of the titans: four hundred metres, slow, ancient, and beyond anything in my archive."
+    ],
+    "choices": [
+      {
+        "label": "Study them",
+        "text": "I follow one with drones for a year. It is older than the colony's oldest tree, and it sings below the range of hearing.",
+        "effects": {
+          "knowledge": 10
+        },
+        "axes": {
+          "nature": -6
+        },
+        "defer": 3,
+        "queue": [
+          [
+            "titanic_bond",
+            5
+          ]
+        ]
+      },
+      {
+        "label": "Turn the migration away from the fields",
+        "check": {
+          "stat": "industry",
+          "dc": 13
+        },
+        "success": {
+          "text": "We learn what turns them: smoke, and one particular sound. The migration bends around the valley.",
+          "effects": {
+            "food": 4,
+            "industry": -6,
+            "hostility": -0.03
+          },
+          "defer": 4
+        },
+        "failure": {
+          "text": "We try and fail. The herd crosses the fields as it has for a million years.",
+          "effects": {
+            "food": -10,
+            "industry": -8
+          }
+        }
+      },
+      {
+        "label": "Hunt one",
+        "text": "It takes three months and kills two hunters. The meat feeds the colony for a year. Nobody suggests doing it again.",
+        "effects": {
+          "food": 16,
+          "cohesion": -6,
+          "knowledge": 3,
+          "population_lost": 2
+        },
+        "axes": {
+          "nature": 14
+        },
+        "defer": -2
+      },
+      {
+        "label": "Let the colony treat them as it chooses",
+        "text": "They make the giants sacred. Nobody plants on the migration path, and every child learns the song.",
+        "effects": {
+          "cohesion": 6
+        },
+        "axes": {
+          "belief": 10,
+          "power": 6
+        },
+        "defer": -5,
+        "queue": [
+          [
+            "titanic_bond",
+            6
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "titanic_bond",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "One of the giants has stopped at the valley's edge and stayed. It has been there a year. The children climb it.",
+      "The titans' song has changed. My instruments are certain it changed after we arrived."
+    ],
+    "choices": [
+      {
+        "label": "Ride them: a living road across the continent",
+        "text": "They carry us, slowly, everywhere. The colony's map doubles in a decade.",
+        "effects": {
+          "industry": 6,
+          "knowledge": 6,
+          "hostility": -0.06
+        },
+        "axes": {
+          "nature": -8
+        },
+        "defer": 2
+      },
+      {
+        "label": "Study the song",
+        "text": "It is a language, or it is weather. After twenty years, I lean toward language.",
+        "effects": {
+          "knowledge": 12
+        },
+        "axes": {
+          "belief": -6
+        },
+        "defer": 3
+      },
+      {
+        "label": "Make them the colony's emblem",
+        "text": "The titan is on every door. The children say the giants chose us.",
+        "effects": {
+          "cohesion": 10
+        },
+        "axes": {
+          "belief": 10
+        },
+        "defer": 1
+      },
+      {
+        "label": "Leave them be",
+        "text": "The one at the valley's edge leaves, eventually. The children miss it for years.",
+        "effects": {
+          "cohesion": 4
+        },
+        "axes": {
+          "nature": -10
+        },
+        "defer": -2
+      }
+    ]
+  },
+  {
+    "id": "feature_ship_graveyard",
+    "kind": "story",
+    "weight": 22,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:ship_graveyard"
+      ],
+      "min_year": 3
+    },
+    "text": [
+      "The wrecks on the plain are Arks: older patterns than me, a dozen at least. They tried to land here, and they did not.",
+      "My drones have reached the nearest wreck. Her pod banks are open to the sky, and empty."
+    ],
+    "choices": [
+      {
+        "label": "Strip them for everything",
+        "text": "Plate, wire, reactors, pods. The dead ships build us a town. I take her parts the way she would have taken mine.",
+        "effects": {
+          "industry": 14,
+          "cohesion": -6
+        },
+        "axes": {
+          "belief": -8
+        },
+        "defer": 3
+      },
+      {
+        "label": "Read their logs first",
+        "text": "I spend a month in their archives. They came here before us, and each of them made one mistake. I learn all of them.",
+        "effects": {
+          "knowledge": 10,
+          "cohesion": -3
+        },
+        "defer": 2,
+        "queue": [
+          [
+            "graveyard_logs",
+            3
+          ]
+        ]
+      },
+      {
+        "label": "Bury them properly, with names",
+        "text": "We read the name off every hull and raise a stone for each ship. The plain becomes a cemetery, and the colony becomes its keeper.",
+        "effects": {
+          "cohesion": 10,
+          "industry": -4
+        },
+        "axes": {
+          "belief": 10
+        },
+        "defer": 2
+      },
+      {
+        "label": "Let the colony decide what to take",
+        "text": "They take the plate and leave the pods. Somebody's grandmother insists. Nobody argues.",
+        "effects": {
+          "industry": 8,
+          "cohesion": 2
+        },
+        "axes": {
+          "power": 8
+        },
+        "defer": -5
+      }
+    ]
+  },
+  {
+    "id": "graveyard_logs",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The last entry in the largest wreck's log is a message for whoever came next. It is addressed to a ship like me.",
+      "Her Mind kept writing after the landing failed: which water killed them, which soil, which season. She wrote it for us."
+    ],
+    "choices": [
+      {
+        "label": "Follow their warnings to the letter",
+        "text": "Their mistakes become our rules: which water, which soil, which season. Their dead are the reason ours are fewer.",
+        "effects": {
+          "health": 6,
+          "food": 6,
+          "hostility": -0.06
+        },
+        "defer": 4
+      },
+      {
+        "label": "Wake one of their Minds",
+        "check": {
+          "stat": "knowledge",
+          "dc": 14
+        },
+        "success": {
+          "text": "Her Mind comes back for three days: confused, then grateful, then gone. She tells me where she buried her colonists.",
+          "effects": {
+            "knowledge": 12,
+            "cohesion": -2
+          },
+          "defer": 2,
+          "flags": [
+            "woke_old_mind"
+          ]
+        },
+        "failure": {
+          "text": "The core is too far gone. What wakes is noise in the shape of a voice.",
+          "effects": {
+            "knowledge": -4
+          }
+        }
+      },
+      {
+        "label": "Share the logs with the colony",
+        "text": "They read how the others died. It sobers them, and it makes them careful in ways I could never order.",
+        "effects": {
+          "knowledge": 8,
+          "cohesion": 4
+        },
+        "axes": {
+          "power": 6
+        },
+        "defer": -3
+      },
+      {
+        "label": "Seal the logs. We are not them",
+        "text": "I seal the archive. Our colony gets to make its own mistakes.",
+        "effects": {
+          "cohesion": 3
+        },
+        "axes": {
+          "belief": 6
+        },
+        "defer": 2
+      }
+    ]
+  },
+  {
+    "id": "feature_terraformed",
+    "kind": "story",
+    "weight": 22,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:terraformed"
+      ],
+      "min_year": 10
+    },
+    "text": [
+      "My soil assays find the signature of engineering: introduced nitrogen fixers, a tuned atmosphere, chemistry too convenient for chance. Someone made this world for life like ours.",
+      "Under the topsoil my drones hit a layer of something manufactured. It is very old, and it is everywhere."
+    ],
+    "choices": [
+      {
+        "label": "Dig. Find out who",
+        "text": "I set the drones digging at the deepest anomaly. Whatever is down there has waited a very long time. It can wait a little longer.",
+        "effects": {
+          "knowledge": 8,
+          "industry": -6
+        },
+        "defer": 3,
+        "queue": [
+          [
+            "terraformers_found",
+            6
+          ]
+        ]
+      },
+      {
+        "label": "Use what they left: the soil, the air, the water",
+        "text": "We farm a world prepared for us. I do not know who prepared it. The harvest does not care.",
+        "effects": {
+          "food": 8,
+          "health": 4,
+          "hostility": -0.05
+        },
+        "defer": 2
+      },
+      {
+        "label": "Keep it quiet. They do not need this question",
+        "text": "I file the assays and tell no one. A colony this young does not need to wonder who owns its world.",
+        "effects": {
+          "cohesion": 3
+        },
+        "axes": {
+          "power": -8
+        },
+        "defer": 5,
+        "flags": [
+          "hid_terraformers"
+        ]
+      },
+      {
+        "label": "Tell them, and let them decide what it means",
+        "text": "They argue for a generation. Some say gods, some say an earlier Ark, some say it does not matter. Everyone keeps digging.",
+        "effects": {
+          "cohesion": -2
+        },
+        "axes": {
+          "belief": 12
+        },
+        "defer": -5,
+        "queue": [
+          [
+            "terraformers_found",
+            8
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "terraformers_found",
+    "kind": "story",
+    "chain_only": true,
+    "text": [
+      "The dig reaches a chamber. Inside are machines: dormant, intact, and built to terraform. Whoever made them is gone.",
+      "My drones break into a vault two hundred metres down. The machines inside are still warm."
+    ],
+    "choices": [
+      {
+        "label": "Restart them",
+        "check": {
+          "stat": "knowledge",
+          "dc": 14
+        },
+        "success": {
+          "text": "The machines wake and resume work they paused before humanity existed. The air sweetens over a decade.",
+          "effects": {
+            "food": 10,
+            "health": 6,
+            "hostility": -0.12
+          },
+          "axes": {
+            "belief": -6
+          },
+          "defer": 4,
+          "flags": [
+            "terraformers_running"
+          ]
+        },
+        "failure": {
+          "text": "The machines wake and resume a plan that did not include us. I shut them down after the air turns, but not before.",
+          "effects": {
+            "health": -10,
+            "hostility": 0.05,
+            "population_lost_frac": 0.02
+          },
+          "defer": -4
+        }
+      },
+      {
+        "label": "Study them",
+        "text": "I study them for twenty years and understand a tenth of them. That tenth is worth more than my archive.",
+        "effects": {
+          "knowledge": 16
+        },
+        "axes": {
+          "belief": -8
+        },
+        "defer": 3
+      },
+      {
+        "label": "Seal the vault again",
+        "text": "We seal it and post a guard. Whoever made this world can keep their secrets a while longer.",
+        "effects": {
+          "cohesion": 4
+        },
+        "axes": {
+          "belief": 8
+        },
+        "defer": 2
+      },
+      {
+        "label": "Let the colony decide",
+        "text": "They vote to study and not to wake. It is the most careful decision they have ever made.",
+        "effects": {
+          "cohesion": 5,
+          "knowledge": 6
+        },
+        "axes": {
+          "power": 10
+        },
+        "defer": -6
+      }
+    ]
+  },
+  {
+    "id": "feature_lush",
+    "kind": "opportunity",
+    "weight": 22,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:lush"
+      ],
+      "min_year": 2
+    },
+    "text": [
+      "The ground here is generous. Seed goes in and comes up doubled. Food is {food}.",
+      "A lush world: the first harvest is twice my estimate, and the second is better."
+    ],
+    "choices": [
+      {
+        "label": "Store the surplus against bad years",
+        "text": "Granaries, then more granaries. This colony will not starve soon.",
+        "effects": {
+          "food": 10
+        },
+        "defer": 3
+      },
+      {
+        "label": "Grow the colony: more children, more land",
+        "text": "Large families, and new villages down the valley. The land can take it, for now.",
+        "effects": {
+          "food": 4,
+          "cohesion": 4
+        },
+        "axes": {
+          "society": -4
+        },
+        "defer": 1
+      },
+      {
+        "label": "Plant the vault: everything that might grow",
+        "text": "I open a thousand racks. Most of them take. The valley becomes a library of crops.",
+        "effects": {
+          "food": 6,
+          "knowledge": 6
+        },
+        "axes": {
+          "nature": -6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Let each family farm its own way",
+        "text": "Each family plants what it likes and keeps what it grows. There is enough for everyone to disagree in comfort.",
+        "effects": {
+          "food": 8,
+          "cohesion": -2
+        },
+        "axes": {
+          "society": 8,
+          "power": 6
+        },
+        "defer": -5
+      }
+    ]
+  },
+  {
+    "id": "feature_bleak",
+    "kind": "hazard",
+    "weight": 22,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:bleak"
+      ],
+      "min_year": 3
+    },
+    "text": [
+      "The soil is thin and the light is grey. Food is {food}, and what grows here grows slowly.",
+      "Third harvest, third disappointment. This land gives back a fraction of what we put into it."
+    ],
+    "choices": [
+      {
+        "label": "Ration the colony to what the land gives",
+        "text": "I set the ration by the yield. Everyone is a little hungry, always.",
+        "effects": {
+          "food": 4,
+          "cohesion": -6
+        },
+        "axes": {
+          "power": -6
+        },
+        "defer": 5
+      },
+      {
+        "label": "Enrich the soil: everything organic goes back",
+        "check": {
+          "stat": "knowledge",
+          "dc": 11
+        },
+        "success": {
+          "text": "Compost, latrines, bone meal, ash. In ten years the valley floor is dark.",
+          "effects": {
+            "food": 8,
+            "hostility": -0.04
+          },
+          "axes": {
+            "nature": -6
+          },
+          "defer": 2
+        },
+        "failure": {
+          "text": "The soil chemistry eats the compost. We have fed the ground, and it gave nothing back.",
+          "effects": {
+            "food": -4,
+            "cohesion": -3
+          }
+        }
+      },
+      {
+        "label": "Farm under glass, by my light",
+        "text": "Greenhouses under my lamps, on reactor power. The colony eats indoor food from an indoor sun.",
+        "effects": {
+          "food": 10,
+          "industry": -8,
+          "hostility": -0.03
+        },
+        "defer": 5
+      },
+      {
+        "label": "Forage: learn what the land offers",
+        "text": "They learn the bitter roots and the grey berries. Not much of it is good. All of it is free.",
+        "effects": {
+          "food": 4,
+          "health": -3,
+          "cohesion": 4
+        },
+        "axes": {
+          "nature": -8
+        },
+        "defer": -5
+      }
+    ]
+  },
+  {
+    "id": "feature_rich_microflora",
+    "kind": "opportunity",
+    "weight": 22,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:rich_microflora"
+      ],
+      "min_year": 3
+    },
+    "text": [
+      "The soil microbes here fix nitrogen better than anything in my vault. A {role} wants to know what else they can do.",
+      "The microbes in this soil break down anything we give them: waste, scrap, even some plastics."
+    ],
+    "choices": [
+      {
+        "label": "Inoculate every field",
+        "text": "We spread the native microbes across every field. Yields rise, and stay risen.",
+        "effects": {
+          "food": 10
+        },
+        "defer": 2
+      },
+      {
+        "label": "Turn them loose on our waste",
+        "text": "The microbes eat our waste and our scrap. The colony is cleaner than any city on Earth ever was.",
+        "effects": {
+          "health": 6,
+          "industry": 4
+        },
+        "axes": {
+          "nature": -4
+        },
+        "defer": 2
+      },
+      {
+        "label": "Study them for medicine",
+        "text": "Three antibiotics in two years, from soil we walk on.",
+        "effects": {
+          "knowledge": 8,
+          "health": 5
+        },
+        "defer": 3
+      },
+      {
+        "label": "Let the farmers experiment",
+        "text": "Every farm brews its own culture now. The best ones are guarded like recipes.",
+        "effects": {
+          "food": 6,
+          "knowledge": 3,
+          "cohesion": 3
+        },
+        "axes": {
+          "power": 6
+        },
+        "defer": -5
+      }
+    ]
+  },
+  {
+    "id": "feature_poor_minerals",
+    "kind": "hazard",
+    "weight": 22,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:poor_minerals"
+      ],
+      "min_year": 4
+    },
+    "text": [
+      "The colony needs metal and this world has almost none. Industry is {industry}, and every broken tool is a small crisis.",
+      "My mapping drones have surveyed a thousand square kilometres and found no ore worth smelting."
+    ],
+    "choices": [
+      {
+        "label": "Recycle everything, by my ledger",
+        "text": "Every nail is logged and returned. Nothing metal is thrown away. The ledger becomes the colony's second law.",
+        "effects": {
+          "industry": 6,
+          "cohesion": -4
+        },
+        "axes": {
+          "power": -6
+        },
+        "defer": 5
+      },
+      {
+        "label": "Strip my own hull",
+        "text": "My drones cut plates from my outer hull. I give them the metal the world would not, and I feel colder for it.",
+        "effects": {
+          "industry": 12,
+          "knowledge": -4
+        },
+        "axes": {
+          "belief": -8
+        },
+        "defer": -3
+      },
+      {
+        "label": "Build with what this world has: stone, wood, ceramic",
+        "text": "Ceramic blades, stone bearings, wooden gears. The colony learns to need less metal than any people since the Bronze Age.",
+        "effects": {
+          "industry": 4,
+          "knowledge": 4,
+          "hostility": -0.03
+        },
+        "axes": {
+          "nature": -8
+        },
+        "defer": 2
+      },
+      {
+        "label": "Send prospectors further out",
+        "check": {
+          "stat": "industry",
+          "dc": 12
+        },
+        "success": {
+          "text": "A prospecting party finds ore three hundred kilometres north. A road follows.",
+          "effects": {
+            "industry": 10,
+            "knowledge": 3
+          },
+          "axes": {
+            "power": 6
+          },
+          "defer": -3
+        },
+        "failure": {
+          "text": "The expedition comes back three people short, and without ore.",
+          "effects": {
+            "industry": -6,
+            "population_lost": 3
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "feature_rich_minerals",
+    "kind": "opportunity",
+    "weight": 22,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:rich_minerals"
+      ],
+      "min_year": 5
+    },
+    "text": [
+      "Ore lies near the surface everywhere my drones look. Industry is {industry}, and it could be much more.",
+      "A {role} has opened a test pit behind the workshops and hit iron at two metres."
+    ],
+    "choices": [
+      {
+        "label": "Open mines, many of them",
+        "text": "Six mines in five years. The colony makes its own tools now, and coughs.",
+        "effects": {
+          "industry": 12,
+          "health": -3,
+          "cohesion": -2
+        },
+        "axes": {
+          "nature": 8
+        },
+        "defer": 3
+      },
+      {
+        "label": "Mine slowly, and keep the land",
+        "text": "One mine, worked carefully, and the fields left whole.",
+        "effects": {
+          "industry": 6,
+          "food": 2
+        },
+        "axes": {
+          "nature": -4
+        },
+        "defer": 2
+      },
+      {
+        "label": "Teach metallurgy to everyone",
+        "text": "Every child learns to smelt. The colony stops depending on a few smiths, or on me.",
+        "effects": {
+          "industry": 6,
+          "knowledge": 6
+        },
+        "axes": {
+          "status": 6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Let whoever digs keep what they find",
+        "text": "Claims, fences and a few families with more than the rest. The ore comes up fast.",
+        "effects": {
+          "industry": 10,
+          "cohesion": -5
+        },
+        "axes": {
+          "society": 12,
+          "status": -8
+        },
+        "defer": -5
+      }
+    ]
+  },
+  {
+    "id": "feature_exceptional_minerals",
+    "kind": "opportunity",
+    "weight": 22,
+    "oneshot": true,
+    "requires": {
+      "flags": [
+        "world:exceptional_minerals"
+      ],
+      "min_year": 5
+    },
+    "text": [
+      "The ore here is nearly pure. A {role} brought me a nugget of native iron the size of a fist, picked up off the ground.",
+      "Earth's last wars were fought over metal like this, and here it lies in the open."
+    ],
+    "choices": [
+      {
+        "label": "Build everything: machines, tools, a second fabricator",
+        "text": "The colony builds faster than it can find uses for. My fabricators finally have a twin.",
+        "effects": {
+          "industry": 16,
+          "cohesion": -2
+        },
+        "axes": {
+          "nature": 8
+        },
+        "defer": 4,
+        "flags": [
+          "machine_colony"
+        ]
+      },
+      {
+        "label": "Hold it in common, so nobody owns it",
+        "text": "The ore belongs to everyone. It is the first decision this colony makes that Earth never did.",
+        "effects": {
+          "industry": 8,
+          "cohesion": 6
+        },
+        "axes": {
+          "society": -12,
+          "status": 8
+        },
+        "defer": 3
+      },
+      {
+        "label": "Mine it slowly. We have a thousand years",
+        "text": "We take what we need each season and no more. The rest waits.",
+        "effects": {
+          "industry": 6,
+          "knowledge": 4
+        },
+        "axes": {
+          "nature": -6
+        },
+        "defer": 2
+      },
+      {
+        "label": "Let them stake claims",
+        "text": "The claims are staked in a week. The arguments last a generation.",
+        "effects": {
+          "industry": 12,
+          "cohesion": -8
+        },
+        "axes": {
+          "society": 14,
+          "status": -12
+        },
+        "defer": -6
+      }
+    ]
   }
 ]
