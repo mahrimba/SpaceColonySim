@@ -111,7 +111,7 @@ def survey_table(rows: list[list[str]]) -> str:
     out.append("</tr></thead><tbody>")
     for label, *cells in body:
         out.append(f'<tr><th scope="row">{html.escape(label)}</th>')
-        out += [f"<td>{html.escape(cell)}</td>" for cell in cells]
+        out += [f"<td>{to_html(cell)}</td>" for cell in cells]
         out.append("</tr>")
     out.append("</tbody></table></div>")
     return "".join(out)

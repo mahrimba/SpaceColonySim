@@ -374,6 +374,19 @@ def test_survey_reports_what_it_found() -> None:
     assert not any(ch.isdigit() for ch in body), f"vague survey leaked numbers: {body}"
 
 
+def test_survey_colours_readings_by_distance_from_earth() -> None:
+    """Earth's own numbers read green, far off either way reads red, and a
+    survey too vague for numbers is too vague to colour."""
+    earth = planets.Planet("Earth", 1.0, 1.0, 14.0, 0.71, "microbial", 0.5)
+    assert all(v.startswith("[green]") for _, v, _ in earth.toned_dossier()[:6])
+    for extreme in (planets.Planet("Hot", 2.5, 4.0, 120.0, 0.0, "hostile", 9.0),
+                    planets.Planet("Cold", 0.1, 0.0, -110.0, 0.0, "hostile", 9.0)):
+        tones = [v for _, v, _ in extreme.toned_dossier()[:5]]
+        assert all(v.startswith("[red]") for v in tones), tones
+    earth.surveyed_at_cognition = 20.0
+    assert not any("[" in v for _, v, _ in earth.toned_dossier())
+
+
 def test_the_log_records_the_choice() -> None:
     """A playthrough must show what the player picked, not just what happened."""
     game = resolve.Game(profile="survey", seed=3, events=EVENTS)

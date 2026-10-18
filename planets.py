@@ -44,21 +44,49 @@ class Planet:
         is not half-habitable, it is lethal. The square root keeps the usable
         range legible without forgiving a failed axis.
         """
-        def band(value, ideal, tolerance):
-            return max(0.0, 1.0 - abs(value - ideal) / tolerance)
-
-        product = (
-            band(self.gravity, 1.0, 0.85)
-            * band(self.pressure, 1.0, 1.4)
-            * band(self.temperature, 14.0, 55.0)
-            * min(1.0, self.water * 4.0)
-            * max(0.0, 1.0 - self.radiation / 7.0)
-            * {"none": 0.75, "microbial": 1.0, "complex": 0.9, "hostile": 0.55}[
-                self.biosphere]
-        )
+        product = 1.0
+        for fit in self.fits().values():
+            product *= fit
         for mod in self.modifiers:
             product *= MODIFIERS[mod].habitability
         return round(min(1.0, product) ** 0.5, 3)
+
+    def fits(self) -> dict[str, float]:
+        """How close each reading is to what people can live with, 0..1 (1 is
+        Earth's), keyed by dossier label. The terms of habitability()."""
+        def band(value, ideal, tolerance):
+            return max(0.0, 1.0 - abs(value - ideal) / tolerance)
+
+        return {
+            "Gravity": band(self.gravity, 1.0, 0.85),
+            "Pressure": band(self.pressure, 1.0, 1.4),
+            "Mean surface": band(self.temperature, 14.0, 55.0),
+            "Hydrosphere": min(1.0, self.water * 4.0),
+            "Radiation": max(0.0, 1.0 - self.radiation / 7.0),
+            "Biosphere": {"none": 0.75, "microbial": 1.0, "complex": 0.9,
+                          "hostile": 0.55}[self.biosphere],
+        }
+
+    def toned_dossier(self) -> list[tuple[str, str, int]]:
+        """The dossier with a colour per reading: green near Earth's, yellow,
+        then red as it strays either way. Features colour one by one, by
+        whether each helps or hurts. A survey too vague for numbers is too
+        vague to judge, so it stays uncoloured."""
+        judged = readout.tier(self.surveyed_at_cognition) != readout.VAGUE
+        fits = self.fits()
+        out = []
+        for label, value in self.dossier():
+            plain = len(value)
+            if not judged:
+                pass
+            elif label in fits:
+                fit = fits[label]
+                tone = "green" if fit >= 0.8 else ("yellow" if fit >= 0.4 else "red")
+                value = f"[{tone}]{value}[/{tone}]"
+            elif label == "Features":
+                value = ", ".join(_tone_feature(name) for name in value.split(", "))
+            out.append((label, value, plain))
+        return out
 
     def verdict(self) -> str:
         """Coarse word for the arrival report only."""
@@ -118,6 +146,14 @@ class Planet:
         return d
 
 
+def _tone_feature(name: str) -> str:
+    mod = next((m for m in MODIFIERS.values() if m.name == name), None)
+    if mod is None or mod.habitability == 1.0:
+        return name
+    tone = "green" if mod.habitability > 1.0 else "red"
+    return f"[{tone}]{name}[/{tone}]"
+
+
 def table(worlds: list["Planet"], per_table: int = 3) -> list[str]:
     """Render worlds as a transposed table: one column each, one row per axis.
 
@@ -136,8 +172,10 @@ def table(worlds: list["Planet"], per_table: int = 3) -> list[str]:
         # Labelled rather than indented: a line that starts with spaces loses
         # them to Textual's markup, which breaks the column alignment.
         rows.append(f"{'World':<15}" + "".join(f"{w.name:<{width}}" for w in group))
+        # Colour markup takes no room on screen, so pad by the plain length.
+        toned = [w.toned_dossier() for w in group]
         for i, (label, _) in enumerate(group[0].dossier()):
-            cells = "".join(f"{w.dossier()[i][1]:<{width}}" for w in group)
+            cells = "".join(d[i][1] + " " * (width - d[i][2]) for d in toned)
             rows.append(f"{label:<15}{cells}".rstrip())
     return rows
 
