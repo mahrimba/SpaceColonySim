@@ -57,7 +57,8 @@ function draw(json) {
     const section = place(log, block.kind);
     for (const [kind, html] of block.lines) {
       if (!html) continue;
-      const p = document.createElement(kind === "heading" ? "h2" : "p");
+      const p = document.createElement(
+        kind === "heading" ? "h2" : kind === "survey" ? "div" : "p");
       if (kind) p.className = kind;
       p.innerHTML = html;
       section.append(p);

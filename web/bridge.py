@@ -95,6 +95,28 @@ def line_class(styled: str) -> str:
     return ""
 
 
+def survey_cells(styled: str) -> list[str]:
+    """One row of planets.table, unpadded. Its columns sit two or more
+    spaces apart; no reading contains two spaces of its own."""
+    opening, closing = f"[{STYLES['table']}]", f"[/{STYLES['table']}]"
+    row = styled.removeprefix(opening).removesuffix(closing).strip()
+    return re.split(r"\s{2,}", row)
+
+
+def survey_table(rows: list[list[str]]) -> str:
+    """Worlds across, readings down, as the terminal table has them."""
+    head, *body = rows
+    out = ['<div class="survey"><table><thead><tr><td></td>']
+    out += [f'<th scope="col">{html.escape(name)}</th>' for name in head[1:]]
+    out.append("</tr></thead><tbody>")
+    for label, *cells in body:
+        out.append(f'<tr><th scope="row">{html.escape(label)}</th>')
+        out += [f"<td>{html.escape(cell)}</td>" for cell in cells]
+        out.append("</tr>")
+    out.append("</tbody></table></div>")
+    return "".join(out)
+
+
 class WebSession(Session):
     HELP = ("Number keys or a click choose. p reads the surveyed worlds, "
             "c lists who is alive once we land.")
@@ -109,10 +131,20 @@ class WebSession(Session):
 
     def _take(self, lines: list[str]) -> None:
         rule = '<span class="dim">' + "─" * 48 + "</span>\n"
-        self.blocks.append({"kind": self.kind,
-                            "lines": [[line_class(line),
-                                       to_html(line).replace(rule, '<hr class="leg">')]
-                                      for line in lines]})
+        out: list[list[str]] = []
+        for line in lines:
+            kind = line_class(line)
+            # A survey arrives as padded text rows; the page gets a real table.
+            if kind == "table" and survey_cells(line)[0] == "World":
+                out.append(["survey", []])
+            if kind == "table" and out and out[-1][0] == "survey":
+                out[-1][1].append(survey_cells(line))
+                continue
+            out.append([kind, to_html(line).replace(rule, '<hr class="leg">')])
+        for entry in out:
+            if entry[0] == "survey":
+                entry[1] = survey_table(entry[1])
+        self.blocks.append({"kind": self.kind, "lines": out})
 
     def _wipe(self) -> None:
         self.blocks.clear()
