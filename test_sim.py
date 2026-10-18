@@ -236,6 +236,52 @@ def test_threshold_warnings_fire_once_and_rearm() -> None:
     assert len(s.threshold_warnings()) == 1, "did not re-arm after recovering"
 
 
+def test_no_line_hard_codes_a_headcount() -> None:
+    """The sleeper count depends on the hull (8k/10k/14k), so no line may name it."""
+    import json
+    import re
+
+    texts: list[tuple[str, str]] = []
+    for event in EVENTS:
+        for t in event["text"]:
+            texts.append((event["id"], t))
+        for choice in event["choices"]:
+            for slot in ("crit_success", "success", "failure", "crit_failure"):
+                if slot in choice:
+                    texts.append((event["id"], choice[slot].get("text", "")))
+            texts.append((event["id"], choice.get("text", "")))
+    for pool, lines in deck.load_flavour().items():
+        texts += [(f"flavour/{pool}", line) for line in lines]
+
+    people = r"(people|sleepers?|bodies|colonists?|hearts?|shapes|lives|souls|names)"
+    bad = [(src, t) for src, t in texts
+           if re.search(rf"(ten thousand|10,000)\s+\w*\s*{people}", t, re.I)]
+    assert not bad, f"hard-coded headcount in {[b[0] for b in bad]}"
+
+
+def test_the_dead_are_not_named_again() -> None:
+    """A sleeper mourned by name must not turn up alive later."""
+    s = state.ShipState.launch("survey")
+    rng = random.Random(0)
+    names = {s.colonist(rng, reuse=0.0) for _ in range(12)}
+    for name in list(names)[:6]:
+        s.mourn(name)
+    for _ in range(400):
+        assert s.colonist(rng, reuse=1.0) not in s.mourned, "the Mind resurrected someone"
+
+    # ...and it happens for real: some runs mourn, none re-mention.
+    mourning_runs = 0
+    for seed in range(120):
+        g = sim.play(seed, events=EVENTS)
+        if not g.state.mourned:
+            continue
+        mourning_runs += 1
+        for dead in g.state.mourned:
+            mentions = [line for line in g.state.log if dead in line]
+            assert len(mentions) == 1, f"seed {seed}: {dead} named {len(mentions)} times"
+    assert mourning_runs > 0, "no run mourned anyone; this check proved nothing"
+
+
 def test_every_stat_has_a_glyph_and_a_parsable_colour() -> None:
     """A colour name Textual cannot parse renders grey with no error, so the
     only way to catch a typo is to parse them here."""

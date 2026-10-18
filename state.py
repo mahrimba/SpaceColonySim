@@ -35,6 +35,7 @@ class ShipState:
     system_tags: set[str] = field(default_factory=set)
     candidates: list[planets.Planet] = field(default_factory=list)
     notables: list[str] = field(default_factory=list)
+    mourned: set[str] = field(default_factory=set)   # named sleepers who died
     log: list[str] = field(default_factory=list)
     outcome: str | None = None       # None while flying
     outcome_reason: str = ""
@@ -109,10 +110,19 @@ class ShipState:
 
     # -- people ---------------------------------------------------------------
 
+    def mourn(self, name: str) -> None:
+        """Record that a named sleeper died, so the Mind stops speaking of them."""
+        self.mourned.add(name)
+
     def colonist(self, rng: random.Random, reuse: float = 0.35) -> str:
-        """A name for a sleeper an event needs. Sometimes recalls an old one."""
-        if self.notables and rng.random() < reuse:
-            return rng.choice(self.notables)
+        """A name for a sleeper an event needs. Sometimes recalls an old one.
+
+        Never one of the dead: the Mind keeps a list of those, and an event
+        that mourns someone by name must not meet them alive three legs later.
+        """
+        living = [n for n in self.notables if n not in self.mourned]
+        if living and rng.random() < reuse:
+            return rng.choice(living)
         name = f"{rng.choice(K.COLONIST_FIRST)} {rng.choice(K.COLONIST_LAST)}"
         self.notables.append(name)
         return name
@@ -151,8 +161,8 @@ class ShipState:
             # Nothing aboard works without the reactor: no scrubbers, no
             # heaters, no thaw. Zero power is an ending, not a penalty.
             self.end("dark", "The reactor went out. Heaters, scrubbers, pod "
-                             "controllers, me — all of it ran down together. Ten "
-                             "thousand people froze without ever waking up.")
+                             "controllers, me — all of it ran down together. "
+                             "Everyone aboard froze without ever waking up.")
         elif self.colonists_alive <= 0:
             self.end("extinct", "Every pod is dark. I am carrying a cemetery.")
         elif self.stats["cognition"] <= 0:
@@ -223,6 +233,7 @@ class ShipState:
             "colonists_lost": self.colonists_lost,
             "flags": sorted(self.flags),
             "notables": self.notables,
+            "mourned": sorted(self.mourned),
             "planet": self.chosen_planet.to_dict() if self.chosen_planet else None,
             "log": self.log,
         }

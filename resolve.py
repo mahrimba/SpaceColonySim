@@ -275,6 +275,10 @@ class Game:
         text = outcome.get("text", "")
         if text:
             lines.append(text.format_map(ctx))
+            # If this outcome killed sleepers and named one, that name is a
+            # death, not a character the Mind can mention again later.
+            if "{colonist}" in text and "lost" in ctx:
+                s.mourn(ctx["colonist"])
         if applied:
             lines.append(f"{DELTA} " + "   ".join(applied))
         lines += s.threshold_warnings()

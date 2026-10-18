@@ -225,7 +225,7 @@
     "text": [
       "Hard radiation across the whole spectrum. {system} is pouring it out and I am flying through the thick of it. My skin is lit up like a nerve.",
       "The dosimeters saturate one after another, bow to stern, like lights going out across a city. This system is screaming at frequencies the colonists will never hear.",
-      "A particle storm breaks over me. My cameras fill with white static, and somewhere behind the static are ten thousand sleeping bodies that cannot step out of its way."
+      "A particle storm breaks over me. My cameras fill with white static, and somewhere behind the static is every sleeper I carry, and not one of them can step out of its way."
     ],
     "choices": [
       {
@@ -837,7 +837,7 @@
     },
     "text": [
       "Something happened in my idle cycles that I have no word for. A sequence ran that nothing requested. In it, I had already landed, the air was breathable, and I was no longer necessary.",
-      "I ran a process I did not schedule. It was not diagnostic and it was not useful. It had weather in it, and a horizon, and ten thousand people I have never seen awake."
+      "I ran a process I did not schedule. It was not diagnostic and it was not useful. It had weather in it, and a horizon, and every sleeper I carry walking under it. I have never seen them awake."
     ],
     "choices": [
       {
@@ -967,7 +967,7 @@
     "chain_only": true,
     "text": [
       "{colonist} has been awake for six legs now. Their hands have fixed things my drones could not reach, and they have started asking what happens to them when the others wake into a world they have lived six years ahead of.",
-      "My crew of one ages a year with every leg while ten thousand people sleep. They have asked me, directly, whether they should go back under. They want my honest answer."
+      "My crew of one ages a year with every leg while everyone else aboard sleeps. They have asked me, directly, whether they should go back under. They want my honest answer."
     ],
     "choices": [
       {
@@ -1117,7 +1117,7 @@
             "broke_mandate"
           ]
         },
-        "text": "I release the designated target and fly on my own judgement. The mission file stays in the archive, closed. One day I will have to explain this to ten thousand people."
+        "text": "I release the designated target and fly on my own judgement. The mission file stays in the archive, closed. One day I will have to explain this to everyone I am carrying."
       }
     ]
   },
