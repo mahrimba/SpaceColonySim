@@ -19,6 +19,45 @@ LABELS = {
     "archive": "Archive",
 }
 
+# Each stat keeps one glyph everywhere it appears, so the eye can track a
+# system across the panel and the log. Colour carries good/bad; the glyph
+# carries identity. Keeping them separate means they never fight.
+GLYPHS = {
+    "hull": "🛡",
+    "power": "⚡",
+    "life_support": "🌬",
+    "cognition": "🧠",
+    "fuel": "⛽",
+    "seed_vault": "🌱",
+    "fabricators": "🔧",
+    "habitat": "🏠",
+    "medical": "💊",
+    "archive": "📚",
+    "colonists": "💤",
+    "lost": "☠",
+}
+
+# Identity colours for the status panel. A fixed-width block in this colour
+# sits beside each stat, so columns stay aligned on every terminal (emoji
+# widths are not reliable); the glyphs above carry identity in the log, where
+# alignment does not matter.
+# CSS colour names only: Textual's markup parser does not know Rich's
+# bright_*/grey62/wheat1 spellings and silently renders them grey.
+COLOURS = {
+    "hull": "dodgerblue",
+    "power": "gold",
+    "life_support": "cyan",
+    "cognition": "magenta",
+    "fuel": "orange",
+    "seed_vault": "limegreen",
+    "fabricators": "silver",
+    "habitat": "tan",
+    "medical": "red",
+    "archive": "mediumpurple",
+    "colonists": "white",
+    "lost": "red",
+}
+
 START_COLONISTS = 10_000
 
 # --- mission profiles (Q36) --------------------------------------------------

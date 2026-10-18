@@ -38,20 +38,29 @@ class Panel(Static):
             rows.append(f"[dim]{tags}[/dim]")
         rows.append("")
         for stat in K.SYSTEMS:
-            rows.append(f"{K.LABELS[stat]:<13}{self._bar(s, stat)}")
+            rows.append(self._row(s, stat))
         rows.append("")
         rows.append("[dim]HOLDS[/dim]")
         for hold in K.HOLDS:
-            rows.append(f"{K.LABELS[hold]:<13}{self._bar(s, hold)}")
+            rows.append(self._row(s, hold))
         rows.append("")
-        rows.append(f"Sleepers     {s.say_count(s.colonists_alive)}")
+        rows.append(f"[white]█ [/white]{'Sleepers':<13}"
+                    f"{s.say_count(s.colonists_alive)}")
         if s.colonists_lost:
-            rows.append(f"[red]Lost         {s.say_count(s.colonists_lost)}[/red]")
+            rows.append(f"[red]█ {'Lost':<13}"
+                        f"{s.say_count(s.colonists_lost)}[/red]")
         rows.append("")
-        rows.append(f"Range        {s.legs_of_fuel():.0f} legs")
-        rows.append(f"Candidates   {len(s.candidates)}")
+        rows.append(f"  {'Range':<13}{s.legs_of_fuel():.0f} legs")
+        rows.append(f"  {'Candidates':<13}{len(s.candidates)}")
+        rows.append("")
         self.last = "\n".join(rows)
         self.update(self.last)
+
+    def _row(self, state, stat: str) -> str:
+        """Identity colour in the block, condition colour in the number."""
+        colour = K.COLOURS[stat]
+        return (f"[{colour}]█ [/{colour}]{K.LABELS[stat]:<13}"
+                f"{self._bar(state, stat)}")
 
     def _bar(self, state, stat: str) -> str:
         value = state.stats[stat]
@@ -105,16 +114,43 @@ class Voyage(App):
 
     def show(self, *lines: str) -> None:
         for line in lines:
-            # A rule before each leg, so one leg reads as one scene.
-            if line.startswith("— Leg "):
-                self.lines.append("[dim]" + "─" * 48 + "[/dim]")
-                self.lines.append(f"[b]{line}[/b]")
-            else:
-                self.lines.append(line)
+            self.lines.append(self._style(line))
         self.lines.append("")
         self.query_one("#log", Static).update("\n".join(self.lines))
         self.call_after_refresh(
             self.query_one("#logbox", VerticalScroll).scroll_end, animate=False)
+
+    @staticmethod
+    def _style(line: str) -> str:
+        """Give the log a hierarchy: prose reads plain, mechanics stand apart."""
+        # A rule before each leg, so one leg reads as one scene.
+        if line.startswith("— Leg "):
+            return "[dim]" + "─" * 48 + f"[/dim]\n[b]{line}[/b]"
+
+        # Stat changes: one colour per sign, so a glance says won or lost.
+        if line.startswith(resolve.DELTA + " "):
+            parts = []
+            for token in line[2:].split("   "):
+                # Losses read red whether they are a negative number or a
+                # body count, which carries no minus sign.
+                bad = ("lost" in token.lower()
+                       or token.rsplit(" ", 1)[-1].startswith("-"))
+                colour = "red" if bad else "green"
+                parts.append(f"[{colour}]{token}[/{colour}]")
+            return "[dim]" + resolve.DELTA + "[/dim] " + "  ".join(parts)
+
+        # Dice: dim the arithmetic, colour the verdict.
+        if line.startswith("› "):
+            for verdict, colour in (("Critical success.", "b green"),
+                                    ("Critical failure.", "b red"),
+                                    ("Success.", "green"),
+                                    ("Failed.", "red")):
+                if line.endswith(verdict):
+                    body = line[:-len(verdict)]
+                    return f"[dim]{body}[/dim][{colour}]{verdict}[/{colour}]"
+            return f"[dim]{line}[/dim]"
+
+        return line
 
     def set_options(self, options: list[dict], prompt: str = "") -> None:
         self.options = options

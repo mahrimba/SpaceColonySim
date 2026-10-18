@@ -190,6 +190,21 @@ def test_arrival_rate_near_target() -> None:
     assert 0.45 <= arrived <= 0.75, f"arrival rate is {arrived:.1%}, retune constants"
 
 
+def test_every_stat_has_a_glyph_and_a_parsable_colour() -> None:
+    """A colour name Textual cannot parse renders grey with no error, so the
+    only way to catch a typo is to parse them here."""
+    for stat in K.STATS + ["colonists", "lost"]:
+        assert stat in K.GLYPHS, f"{stat} has no glyph"
+        assert stat in K.COLOURS, f"{stat} has no colour"
+    try:
+        from textual.color import Color
+    except ImportError:
+        print("skip colour parsing (textual not installed)")
+        return
+    for stat, name in K.COLOURS.items():
+        Color.parse(name)  # raises on anything Textual cannot render
+
+
 def test_app_plays_through() -> None:
     """The TUI must survive a whole voyage. Skipped when textual is absent."""
     try:

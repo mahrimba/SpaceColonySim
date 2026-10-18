@@ -13,6 +13,9 @@ import deck
 import planets
 from state import SafeDict, ShipState
 
+# Marks a line of stat changes, so a front end can style it apart from prose.
+DELTA = "·"
+
 MAINTENANCE = "maintenance"
 EVENT = "event"
 DONE = "done"
@@ -268,7 +271,7 @@ class Game:
         if text:
             lines.append(text.format_map(ctx))
         if applied:
-            lines.append("  " + "  ".join(applied))
+            lines.append(f"{DELTA} " + "   ".join(applied))
 
         for line in lines:
             s.note(line)
@@ -292,17 +295,17 @@ class Game:
                     amount *= K.HAZARD_SCALE
                 delta = s.adjust(key, amount)
                 if abs(delta) >= 0.5:
-                    notes.append(f"{K.LABELS[key]} {delta:+.0f}")
+                    notes.append(f"{K.GLYPHS[key]} {K.LABELS[key]} {delta:+.0f}")
             elif key == "colonists_lost":
                 lost = s.kill(int(value) * K.HAZARD_SCALE)
                 ctx["lost"] = s.say_count(lost)
                 if lost:
-                    notes.append(f"Sleepers lost {s.say_count(lost)}")
+                    notes.append(f"{K.GLYPHS['lost']} Sleepers lost {s.say_count(lost)}")
             elif key == "colonists_lost_frac":
                 lost = s.kill(s.colonists_alive * float(value) * K.HAZARD_SCALE)
                 ctx["lost"] = s.say_count(lost)
                 if lost:
-                    notes.append(f"Sleepers lost {s.say_count(lost)}")
+                    notes.append(f"{K.GLYPHS['lost']} Sleepers lost {s.say_count(lost)}")
             elif key == "flags":
                 s.flags.update(value)
             elif key == "clear_flags":
