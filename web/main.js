@@ -40,7 +40,9 @@ async function boot() {
 async function install(dir, base, names) {
   py.FS.mkdirTree(dir);
   await Promise.all(names.map(async (name) => {
-    const response = await fetch(base + name);
+    // Always ask whether a file changed: a stale engine file next to a fresh
+    // one is a bug report nobody can reproduce.
+    const response = await fetch(base + name, { cache: "no-cache" });
     if (!response.ok) throw new Error(`${base}${name} answered ${response.status}`);
     py.FS.writeFile(`${dir}/${name}`, await response.text());
   }));

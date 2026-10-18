@@ -1,16 +1,17 @@
-/* Two skies. The voyage is cryo-navy; at landfall the page turns to loam.
-   The closing document is the one object set on paper. */
+/* Two skies. The voyage is black and starred; at landfall the stars fade
+   and the page turns to loam. The closing document is the one object set
+   on paper. */
 
 :root {
-  --ground: #17223b;
-  --raised: #1e2b48;
+  --ground: #000;
+  --raised: #0e131d;
   --ink: #e3ebf1;
   --muted: #8a99b2;
   --accent: #9dcbea;
   --good: #8fd3a4;
   --bad: #f08a7e;
   --warn: #e8c95f;
-  --line: #2c3b5c;
+  --line: #26303f;
   --paper: #dce2e4;
   --paper-ink: #1d2832;
 
@@ -41,8 +42,31 @@ body {
   transition: background-color 2.4s ease, color 2.4s ease;
 }
 
+/* Faint stars, fixed behind the log. Each layer tiles at its own odd size
+   so the field never visibly repeats. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgb(255 255 255 / 0.55) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 63% 41%, rgb(255 255 255 / 0.35) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 37% 77%, rgb(220 230 255 / 0.45) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 88% 9%, rgb(255 255 255 / 0.3) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 24% 56%, rgb(255 240 220 / 0.4) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 71% 85%, rgb(255 255 255 / 0.25) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 49% 23%, rgb(200 220 255 / 0.6) 0 1.2px, transparent 2px),
+    radial-gradient(circle at 93% 64%, rgb(255 255 255 / 0.3) 0 1px, transparent 1.5px);
+  background-size: 317px 283px, 409px 367px, 251px 433px, 523px 199px,
+                   379px 311px, 461px 257px, 787px 619px, 229px 347px;
+  transition: opacity 2.4s ease;
+}
+body[data-act="colony"]::before { opacity: 0; }
+
 @media (prefers-reduced-motion: reduce) {
-  body { transition: none; }
+  body, body::before { transition: none; }
 }
 
 .shell {
