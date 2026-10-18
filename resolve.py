@@ -51,6 +51,7 @@ class Game:
         self.current: dict | None = None
         self.current_text = ""
         self.events_drawn = 0  # must never exceed legs flown: one event per leg
+        self.draw_history: list[tuple[int, str]] = []
         self.state.note(f"{self.state.name} underway. Seed {self.seed}.")
         self._enter_system()
 
@@ -73,6 +74,7 @@ class Game:
 
         lines = [f"— Leg {s.leg}. {s.system_name}: {', '.join(sorted(tags)).replace('_', ' ')}."]
         lines += s.passive_tick(self.rng)
+        lines += s.threshold_warnings()
 
         if s.flying and s.leg % K.SURVEY_EVERY == 0:
             found = s.survey(self.rng)
@@ -171,6 +173,7 @@ class Game:
             elif roll < K.LINGER_HAZARD_CHANCE + K.LINGER_FLAVOUR_CHANCE:
                 lines.append(deck.observe(self.flavour, s, self.rng))
 
+        lines += s.threshold_warnings()
         for line in lines:
             s.note(line)
         s._check_death()
@@ -212,6 +215,8 @@ class Game:
 
         self.current = event
         self.events_drawn += 1
+        self.state.recent[event["id"]] = self.state.leg
+        self.draw_history.append((self.state.leg, event["id"]))
         variants = event["text"]
         self.current_text = self.rng.choice(variants).format_map(self._context())
         self.state.note(self.current_text)
@@ -272,6 +277,7 @@ class Game:
             lines.append(text.format_map(ctx))
         if applied:
             lines.append(f"{DELTA} " + "   ".join(applied))
+        lines += s.threshold_warnings()
 
         for line in lines:
             s.note(line)

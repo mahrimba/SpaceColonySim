@@ -14,6 +14,7 @@ from textual.widgets import Static
 
 import constants as K
 import resolve
+import state
 from resolve import DONE, EVENT, MAINTENANCE, Game
 
 KEYS = "123456789abcdefghij"  # option index -> keycap
@@ -138,6 +139,11 @@ class Voyage(App):
                 colour = "red" if bad else "green"
                 parts.append(f"[{colour}]{token}[/{colour}]")
             return "[dim]" + resolve.DELTA + "[/dim] " + "  ".join(parts)
+
+        # Warnings: the one thing in the log that should interrupt reading.
+        if line.startswith(state.WARN + " "):
+            colour = "b red" if "Failing" in line or "Critical" in line else "b yellow"
+            return f"[{colour}]{line}[/{colour}]"
 
         # Dice: dim the arithmetic, colour the verdict.
         if line.startswith("› "):

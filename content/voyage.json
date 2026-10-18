@@ -69,7 +69,8 @@
     "weight": 12,
     "requires": {
       "not_flags": [
-        "coolant_fixed"
+        "coolant_fixed",
+        "coolant_ignored"
       ]
     },
     "text": [
@@ -167,7 +168,12 @@
           }
         }
       }
-    ]
+    ],
+    "requires": {
+      "not_flags": [
+        "coolant_fixed"
+      ]
+    }
   },
   {
     "id": "hull_fatigue_chain",
@@ -197,7 +203,12 @@
         },
         "text": "I reduce every load I can and keep flying. The cracks do not stop. They only slow."
       }
-    ]
+    ],
+    "requires": {
+      "flags": [
+        "deck9_open"
+      ]
+    }
   },
   {
     "id": "radiation_storm",

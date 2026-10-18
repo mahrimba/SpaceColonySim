@@ -29,6 +29,8 @@ class ShipState:
     flags: set[str] = field(default_factory=set)
     fired: set[str] = field(default_factory=set)      # one-shot events spent
     queue: list[list] = field(default_factory=list)   # [leg_due, event_id]
+    recent: dict[str, int] = field(default_factory=dict)  # event id -> leg drawn
+    warned: dict[str, float] = field(default_factory=dict)  # stat -> level said
     system_name: str = ""
     system_tags: set[str] = field(default_factory=set)
     candidates: list[planets.Planet] = field(default_factory=list)
@@ -162,6 +164,34 @@ class ShipState:
             self.end("adrift", "Tanks dry. Whatever is out there, we pass it at "
                                "speed and keep going forever.")
 
+    def threshold_warnings(self) -> list[str]:
+        """Say so the first time a stat drops through a line, once per crossing.
+
+        Re-arms when the stat climbs back above that line, so a system you
+        repair and lose again warns you twice.
+        """
+        lines: list[str] = []
+        for stat in K.STATS:
+            value = self.stats[stat]
+            crossed = [t for t in K.WARN_THRESHOLDS if value < t]
+            lowest = min(crossed) if crossed else None
+            said = self.warned.get(stat)
+
+            if lowest is None:
+                self.warned.pop(stat, None)       # fully recovered
+                continue
+            if said is not None and lowest >= said:
+                if value >= said:
+                    self.warned[stat] = lowest    # recovered a level, re-arm
+                continue
+
+            self.warned[stat] = lowest
+            lines.append(
+                f"{WARN} {K.WARN_SEVERITY[lowest]} — "
+                + K.WARNINGS[stat].format(value=self.say(stat))
+            )
+        return lines
+
     def minor_hazard(self, rng: random.Random) -> str:
         """An unannounced nick. Rolled when the ship lingers, not every leg."""
         stat = rng.choice(["hull", "power", "cognition"] + K.HOLDS)
@@ -201,6 +231,8 @@ class ShipState:
         with open(path, "w", encoding="utf-8") as fh:
             json.dump(self.to_dict(), fh, indent=2, ensure_ascii=False)
 
+
+WARN = "⚠"
 
 MINOR_HAZARD_FLAVOUR = {
     "hull": "A micrometeoroid finds plating. {amount} points of skin, gone quietly.",

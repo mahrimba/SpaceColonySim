@@ -15,6 +15,7 @@ import planets
 import readout
 import resolve
 import sim
+import state
 
 EVENTS = deck.load()
 SCRIPT = [0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0]
@@ -188,6 +189,51 @@ def test_arrival_rate_near_target() -> None:
     arrived = sum(sim.play(seed, events=EVENTS).state.outcome == "colonized"
                   for seed in range(250)) / 250
     assert 0.45 <= arrived <= 0.75, f"arrival rate is {arrived:.1%}, retune constants"
+
+
+def test_events_do_not_repeat_inside_the_cooldown() -> None:
+    """The same crisis must not arrive three legs running."""
+    for seed in range(120):
+        g = sim.play(seed, events=EVENTS)
+        last: dict[str, int] = {}
+        for leg, event_id in g.draw_history:
+            previous = last.get(event_id)
+            assert previous is None or leg - previous >= K.EVENT_COOLDOWN, (
+                f"seed {seed}: {event_id} repeated at legs {previous} and {leg}")
+            last[event_id] = leg
+
+
+def test_scheduled_follow_up_dies_with_its_premise() -> None:
+    """A queued chain event whose premise you already resolved must not fire."""
+    g = resolve.Game(seed=4, events=EVENTS)
+    g.state.flags.add("coolant_fixed")          # you repaired the loop properly
+    g.state.schedule("coolant_returns", 1)
+    g.state.leg += 1
+    drawn = deck.draw(EVENTS, g.state, g.rng)
+    assert drawn is None or drawn["id"] != "coolant_returns", (
+        "the repaired coolant line failed anyway")
+    assert not g.state.queue, "stale queue entry was left behind"
+
+    # ...but it does fire while the premise still stands.
+    g2 = resolve.Game(seed=4, events=EVENTS)
+    g2.state.schedule("coolant_returns", 1)
+    g2.state.leg += 1
+    assert deck.draw(EVENTS, g2.state, g2.rng)["id"] == "coolant_returns"
+
+
+def test_threshold_warnings_fire_once_and_rearm() -> None:
+    """One line per crossing, and again if you lose the ground you regained."""
+    s = state.ShipState.launch("survey")
+    s.stats["hull"] = 47.0
+    assert len(s.threshold_warnings()) == 1, "no warning on crossing 50"
+    s.stats["hull"] = 44.0
+    assert s.threshold_warnings() == [], "warned twice for the same level"
+    s.stats["hull"] = 28.0
+    assert "Critical" in s.threshold_warnings()[0]
+    s.stats["hull"] = 70.0
+    assert s.threshold_warnings() == [], "recovery is not an event"
+    s.stats["hull"] = 48.0
+    assert len(s.threshold_warnings()) == 1, "did not re-arm after recovering"
 
 
 def test_every_stat_has_a_glyph_and_a_parsable_colour() -> None:

@@ -120,6 +120,36 @@ APPROX_ABOVE = 50.0
 APPROX_ROUND_STAT = 10
 APPROX_ROUND_COLONISTS = 500
 
+# --- warnings and repetition ------------------------------------------------
+
+# A stat crossing one of these downward says so once, and re-arms if it
+# recovers above the line.
+WARN_THRESHOLDS = (50.0, 30.0, 25.0)
+WARN_SEVERITY = {50.0: "Warning", 30.0: "Critical", 25.0: "Failing"}
+
+WARNINGS = {
+    "hull": "Hull integrity {value}. Every patch I lay now goes over another patch.",
+    "power": "Reactor output {value}. If it reaches zero, everything aboard stops "
+             "at once and stays stopped.",
+    "life_support": "Scrubber capacity {value}. The pods are warming faster than "
+                    "I can hold them.",
+    "cognition": "Coherence {value}. I am losing the thread of what I am for.",
+    "fuel": "Reaction mass {value}. Stopping is beginning to cost more than I have.",
+    "seed_vault": "Seed stock {value}. Whatever they plant down there will be a "
+                  "narrower harvest.",
+    "fabricators": "Fabricator capacity {value}. Repairs take longer now and hold "
+                   "worse.",
+    "habitat": "Shelter stock {value}. They will arrive to fewer walls than they "
+               "were promised.",
+    "medical": "Medical stores {value}. The thaw will cost more lives than it "
+               "should have.",
+    "archive": "Archive integrity {value}. Pieces of what they were are going quiet.",
+}
+
+# An event cannot be drawn again this soon. Stops the same crisis arriving
+# three legs running while the deck is small.
+EVENT_COOLDOWN = 5
+
 # --- cascades / death (Q20) --------------------------------------------------
 
 POWER_WARNING = 15.0  # below this the reactor browns out and warns you
