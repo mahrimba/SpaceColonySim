@@ -129,7 +129,11 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "c" && !$("cmd-cast").hidden) command("cast");
 });
 
-// On a phone the rail starts folded away; the story needs the width.
-if (matchMedia("(max-width: 52rem)").matches) $("rail").open = false;
+// On a narrow screen the rail folds into the vitals strip; on a wide one it
+// must be open, since its toggle is hidden there. Follows resizes and zoom.
+const narrow = matchMedia("(max-width: 52rem)");
+const fit = () => { $("rail").open = !narrow.matches; };
+narrow.addEventListener("change", fit);
+fit();
 
 boot();
