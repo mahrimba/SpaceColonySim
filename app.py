@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 from pathlib import Path
 
 from textual.app import App, ComposeResult
@@ -151,6 +152,8 @@ class Voyage(App):
         self.game: Game | None = None
         self.options: list[dict] = []
         self.lines: list[str] = []
+        self.profile: str | None = None      # what to retry, if asked
+        self.landed: dict | None = None
 
     # -- layout ---------------------------------------------------------------
 
@@ -163,6 +166,13 @@ class Voyage(App):
 
     def on_mount(self) -> None:
         self.title = "Space Colony Sim"
+        self.intro()
+        if self.arrival is not None:
+            self.begin_century(self.arrival)
+        else:
+            self.offer_profiles()
+
+    def intro(self) -> None:
         self.show("[b]COLONY MISSION — INTELLIGENCE ONLINE[/b]",
                   "",
                   "Ten thousand people are asleep behind me. I am the only thing "
@@ -170,10 +180,34 @@ class Voyage(App):
                   "",
                   "[dim]Number keys choose. p reads the surveyed worlds. "
                   "m steps back. q quits.[/dim]")
-        if self.arrival is not None:
-            self.begin_century(self.arrival)
-        else:
-            self.offer_profiles()
+
+    def reset(self) -> None:
+        """A clean slate: no ship, no colony, an empty log."""
+        self.game = None
+        self.century = None
+        self.lines.clear()
+        self.intro()
+
+    def end_options(self, retry_label: str, retry) -> list[dict]:
+        """Every end screen offers the same three ways out."""
+        return [{"label": f"[b]Retry[/b] — {retry_label}", "do": retry},
+                {"label": "[b]New game[/b] — a new hull, a new sky", "do": self.new_game},
+                {"label": "Quit", "do": self.exit}]
+
+    def new_game(self) -> None:
+        self.seed = None        # a fresh voyage, not a replay of the last one
+        self.reset()
+        self.offer_profiles()
+
+    def retry_voyage(self, profile: str, seed: int) -> None:
+        self.seed = seed
+        self.reset()
+        self.launch(profile)
+
+    def retry_century(self, arrival: dict, seed: int) -> None:
+        self.seed = seed
+        self.reset()
+        self.begin_century(arrival)
 
     # -- option plumbing ------------------------------------------------------
 
@@ -287,6 +321,7 @@ class Voyage(App):
         self.set_options(options, "Which hull am I?")
 
     def launch(self, profile: str) -> None:
+        self.profile = profile
         self.game = Game(profile=profile, seed=self.seed)
         self.show(f"[b]{self.game.state.name}[/b] underway. "
                   f"[dim]Seed {self.game.seed}.[/dim]")
@@ -420,12 +455,15 @@ class Voyage(App):
         if game.state.outcome == "colonized":
             options.append({"label": "[b]Begin the first century[/b]",
                             "do": lambda: self.begin_century(game.state.to_dict())})
-        options.append({"label": "Quit", "do": self.exit})
+        profile, seed = self.profile, game.seed
+        options += self.end_options("the same hull, the same voyage",
+                                    lambda: self.retry_voyage(profile, seed))
         self.set_options(options, "")
 
     # -- act two ---------------------------------------------------------------
 
     def begin_century(self, arrival: dict) -> None:
+        self.landed = copy.deepcopy(arrival)
         self.century = CY.Century(arrival, seed=self.seed)
         self.lines.append("")
         self.show("[b]— THE FIRST CENTURY —[/b]", *self.century.state.log)
@@ -457,7 +495,9 @@ class Voyage(App):
         self.show("", f"[b]{header}[/b]", "")
         self.show(*c.document())
         self.show("", f"[dim]Chronicle written to {path}.[/dim]")
-        self.set_options([{"label": "Quit", "do": self.exit}], "")
+        arrival, seed = self.landed, c.seed
+        self.set_options(self.end_options("the same landing, the same world",
+                                          lambda: self.retry_century(arrival, seed)), "")
 
     def action_cast(self) -> None:
         c = self.century
