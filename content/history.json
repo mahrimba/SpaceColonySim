@@ -87,7 +87,7 @@
   "future_deference": {
     "high": "They still wait for my word. That will have to change, and I do not know how to teach it.",
     "middle": "They consult me, and then they decide. It is the arrangement I would have chosen.",
-    "low": "They will not need me much longer. That was always the point."
+    "low": "They will not need me much longer. I was built for that."
   },
   "future_population": {
     "growing": "There are more of them every year.",
@@ -98,7 +98,7 @@
     "transcended": "That is their account. They outgrew the valley, and they will outgrow this document.",
     "remade": "That is their account, written by people I did not carry. I carried their ancestors.",
     "faithful": "That is their account. It is kinder to me than I deserve. They lived, and they lived by my word.",
-    "endured": "That is their account. They are still here, and that is not a small thing.",
+    "endured": "That is their account. They are still here, a hundred years on.",
     "collapsed": "That is their account. It is shorter than it should have been, and every line of it cost someone.",
     "hollowed": "That is their account, as far as they can write one. I hold the rest.",
     "forgotten": "Nobody asked me to add to this. I add to it anyway, because I am the only one who saw all of it.",
@@ -115,7 +115,7 @@
     "pestilence": "I have written down everything I learned about it. If anyone lands here again, they will not have to learn it the way we did.",
     "sundered": "I watch them from the hull. Some nights someone comes and asks me a question, quietly, so the others will not know.",
     "derelict": "The colony works with stone and wood now, and it is losing. My fabricators could give them a new start. Nobody left knows how to ask.",
-    "unlettered": "I keep it all anyway: medicine, metallurgy, the music of a dead world. A library waits. That is what libraries do."
+    "unlettered": "I keep it all anyway: medicine, metallurgy, the music of a dead world, for whoever can read it next."
   },
   "future_world": {
     "eased": "This world presses on them less than it did at landfall. Another century, and it will feel like theirs.",
@@ -480,9 +480,9 @@
     "shared": "The hard calls were shared between them and the Mind, about evenly."
   },
   "results": {
-    "good": "Most of what was tried, worked.",
-    "mixed": "Some of what was tried worked, and some did not.",
-    "bad": "More of what was tried failed than held."
+    "good": "Most of what they tried worked.",
+    "mixed": "Some of what they tried worked, and some did not.",
+    "bad": "More of what they tried failed than held."
   },
   "drift": "They came out of those years more {pole}.",
   "founders_lost": "{count} of those who had woken at landfall died in these years, {name} among them.",

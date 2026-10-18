@@ -5637,7 +5637,7 @@
       },
       {
         "label": "Make them the colony's surveyors and climbers",
-        "text": "They map the plateau in a summer and come back with ore samples and a route to the coast. The valley has a new horizon.",
+        "text": "They map the plateau in a summer and come back with ore samples and a route to the coast.",
         "effects": {
           "hostility": -0.06,
           "knowledge": 8,
@@ -5792,7 +5792,7 @@
       },
       {
         "label": "Let each family choose",
-        "text": "Some families choose it. Their children work the high fields and are paid for it, and the others keep count.",
+        "text": "The families who choose it raise children who work the high fields and are paid for it, and the others keep count.",
         "effects": {
           "health": 5,
           "cohesion": -8,
@@ -5929,7 +5929,7 @@
     "choices": [
       {
         "label": "Edit every child from now on",
-        "text": "Every child is edited from this year on. The filters go into storage, then into the recycling, then out of memory.",
+        "text": "The filters go into storage, then into the recycling, then out of memory.",
         "effects": {
           "health": 8,
           "cohesion": -5,
@@ -5976,7 +5976,7 @@
       },
       {
         "label": "Stop here. One generation is enough",
-        "text": "I close the protocol. The edited generation are the only people in the valley who never wore a filter.",
+        "text": "The edited generation are the only people in the valley who never wore a filter, and the last.",
         "effects": {
           "cohesion": 5,
           "knowledge": 2,
@@ -6102,7 +6102,7 @@
     "choices": [
       {
         "label": "Edit every child from now on",
-        "text": "Every child is edited from this year on. The colony stops having a season when nothing gets built.",
+        "text": "Nobody born after this year feels the cold the way the founders did. The colony stops having a season when nothing gets built.",
         "effects": {
           "health": 8,
           "cohesion": -5,
@@ -6119,7 +6119,7 @@
       },
       {
         "label": "Let each family choose",
-        "text": "Some families choose it. Their children work the winters and are paid for the winters, and the colony learns what a wage is.",
+        "text": "The edited children work the winters and are paid for the winters, and the colony learns what a wage is.",
         "effects": {
           "health": 5,
           "cohesion": -8,
@@ -6149,7 +6149,7 @@
       },
       {
         "label": "Stop here. One generation is enough",
-        "text": "I close the protocol. They are the colony's winter people, one generation of them, and the stories about them get bigger as they age.",
+        "text": "They are the colony's winter people, one generation of them, and the stories about them get bigger as they age.",
         "effects": {
           "cohesion": 5,
           "knowledge": 2,
@@ -6180,7 +6180,7 @@
     "choices": [
       {
         "label": "Work by night, sleep by day",
-        "text": "They invert the day: lamps in the fields at midnight, the valley silent at noon. It becomes the rhythm of their lives.",
+        "text": "They invert the day: lamps in the fields at midnight, the valley silent at noon. It stays that way.",
         "effects": {
           "industry": -6,
           "cohesion": 4,
@@ -6266,7 +6266,7 @@
     "choices": [
       {
         "label": "Edit every child from now on",
-        "text": "Every child is edited from this year on. The colony keeps its night festivals out of habit, long after nobody needs them.",
+        "text": "The edit becomes routine. The colony keeps its night festivals out of habit, long after nobody needs them.",
         "effects": {
           "health": 8,
           "cohesion": -5,
@@ -6283,7 +6283,7 @@
       },
       {
         "label": "Let each family choose",
-        "text": "Some families choose it. The noon shift is all edited, and the noon shift is better paid.",
+        "text": "The noon shift ends up all edited, and the noon shift is better paid.",
         "effects": {
           "health": 5,
           "cohesion": -8,
@@ -6313,7 +6313,7 @@
       },
       {
         "label": "Stop here. One generation is enough",
-        "text": "I close the protocol. The edited generation work the hottest hours alone, and teach nobody to replace them.",
+        "text": "No more children are edited. The ones who were work the hottest hours alone, and teach nobody to replace them.",
         "effects": {
           "cohesion": 5,
           "knowledge": 2,
@@ -6434,7 +6434,7 @@
     "choices": [
       {
         "label": "Edit every child from now on",
-        "text": "Every child is edited from this year on. The cisterns start to fill faster than the colony can drink them.",
+        "text": "Within a generation nobody in the valley needs much water, and the cisterns fill faster than the colony can drink them.",
         "effects": {
           "health": 8,
           "cohesion": -5,
@@ -6451,7 +6451,7 @@
       },
       {
         "label": "Let each family choose",
-        "text": "Some families choose it. The edited cross the desert to trade, and the others wait by the river for them to come back.",
+        "text": "The edited cross the desert to trade, and the others wait by the river for them to come back.",
         "effects": {
           "health": 5,
           "cohesion": -8,
@@ -6481,7 +6481,7 @@
       },
       {
         "label": "Stop here. One generation is enough",
-        "text": "I close the protocol. The edited generation become the colony's caravan, and nobody follows them into the dry country when they are gone.",
+        "text": "The edited generation become the colony's caravan, and nobody follows them into the dry country when they are gone.",
         "effects": {
           "cohesion": 5,
           "knowledge": 2,
@@ -6604,7 +6604,7 @@
     "choices": [
       {
         "label": "Edit every child from now on",
-        "text": "Every child is edited from this year on. The island stops being where they live and becomes where they sleep.",
+        "text": "For the young, the island stops being where they live and becomes where they sleep.",
         "effects": {
           "health": 8,
           "cohesion": -5,
@@ -6621,7 +6621,7 @@
       },
       {
         "label": "Let each family choose",
-        "text": "Some families choose it. The edited live on the water, the others on the rock, and they meet at the market at low tide.",
+        "text": "The edited live on the water, the others on the rock, and they meet at the market at low tide.",
         "effects": {
           "health": 5,
           "cohesion": -8,
@@ -6651,7 +6651,7 @@
       },
       {
         "label": "Stop here. One generation is enough",
-        "text": "I close the protocol. The edited generation dive alone, and when they are gone the reefs go quiet.",
+        "text": "The edited generation dive alone, and when they are gone the reefs go quiet.",
         "effects": {
           "cohesion": 5,
           "knowledge": 2,
@@ -6676,7 +6676,7 @@
       "max_year": 40
     },
     "text": [
-      "Radiation here is high. My field dosimeters read more in a season than an Earth worker took in a career. Cancers will come. The question is when.",
+      "Radiation here is high. My field dosimeters read more in a season than an Earth worker took in a career. Cancers will come; my models disagree only about when.",
       "The sky here is bright in wavelengths that hurt. Health is {health}, and every hour outside is a debt."
     ],
     "choices": [
@@ -6771,7 +6771,7 @@
     "choices": [
       {
         "label": "Edit every child from now on",
-        "text": "Every child is edited from this year on. The berms stay up for the old, and the young walk over them.",
+        "text": "The berms stay up for the old, and the young walk over them.",
         "effects": {
           "health": 8,
           "cohesion": -5,
@@ -6788,7 +6788,7 @@
       },
       {
         "label": "Let each family choose",
-        "text": "Some families choose it. The edited work outside, the others inside, and the colony starts to mean two different things by 'outside'.",
+        "text": "The edited work outside, the others inside, and the colony starts to mean two different things by 'outside'.",
         "effects": {
           "health": 5,
           "cohesion": -8,
@@ -6817,7 +6817,7 @@
       },
       {
         "label": "Stop here. One generation is enough",
-        "text": "I close the protocol. The edited generation take the outdoor work for the whole colony until they are old, and then the berms close over everyone again.",
+        "text": "The edited generation take the outdoor work for the whole colony until they are old, and then the berms close over everyone again.",
         "effects": {
           "cohesion": 5,
           "knowledge": 2,
@@ -6866,7 +6866,7 @@
           "dc": 13
         },
         "success": {
-          "text": "Everything that attacks us carries the means of its own defeat. A week of autopsies gives me three antifungals and a painkiller.",
+          "text": "Each thing that attacks us is made of chemistry I can turn against it. A week of autopsies gives me three antifungals and a painkiller.",
           "effects": {
             "health": 10,
             "knowledge": 6,
@@ -6937,7 +6937,7 @@
     "choices": [
       {
         "label": "Edit every child from now on",
-        "text": "Every child is edited from this year on. The burned perimeter grows back, and nobody bothers to burn it again.",
+        "text": "From then on every child is born armed against this world. The burned perimeter grows back, and nobody bothers to burn it again.",
         "effects": {
           "health": 8,
           "cohesion": -5,
@@ -6954,7 +6954,7 @@
       },
       {
         "label": "Let each family choose",
-        "text": "Some families choose it. The edited live outside the perimeter and the others inside it, and the gate becomes a border.",
+        "text": "Those who choose it live outside the perimeter and the rest inside it, and the gate becomes a border.",
         "effects": {
           "health": 5,
           "cohesion": -8,
@@ -6984,7 +6984,7 @@
       },
       {
         "label": "Stop here. One generation is enough",
-        "text": "I close the protocol. When the edited generation is gone, the forest comes back to the fence, and the colony learns to fear it again.",
+        "text": "When the edited generation is gone, the forest comes back to the fence, and the colony learns to fear it again.",
         "effects": {
           "cohesion": 5,
           "knowledge": 2,
@@ -7103,7 +7103,7 @@
     "choices": [
       {
         "label": "Edit every child from now on",
-        "text": "Every child is edited from this year on. The colony's fields shrink by a third, and nobody goes hungry.",
+        "text": "Each new child is born a little green. The colony's fields shrink by a third, and nobody goes hungry.",
         "effects": {
           "health": 8,
           "cohesion": -5,
@@ -7120,7 +7120,7 @@
       },
       {
         "label": "Let each family choose",
-        "text": "Some families choose it. The green and the pale eat at different tables, because they eat different things.",
+        "text": "The green and the pale eat at different tables, because they eat different things.",
         "effects": {
           "health": 5,
           "cohesion": -8,
@@ -7150,7 +7150,7 @@
       },
       {
         "label": "Stop here. One generation is enough",
-        "text": "I close the protocol. The green generation grows old among people who cannot do what they do, and the forest seems to know them.",
+        "text": "The green generation grows old among people who cannot do what they do, and the forest seems to know them.",
         "effects": {
           "cohesion": 5,
           "knowledge": 2,
@@ -7803,7 +7803,7 @@
       },
       {
         "label": "Pipe the springs under the houses and greenhouses",
-        "text": "Hot water under every floor and every greenhouse bench. Winter becomes a season, not a threat.",
+        "text": "Hot water under every floor and every greenhouse bench. Winter stops killing anyone.",
         "effects": {
           "food": 6,
           "health": 5,
@@ -8328,7 +8328,7 @@
       },
       {
         "label": "Let the colony decide what to make of it",
-        "text": "They build customs around it: festivals, rules, a season. It is the most human thing they have done here.",
+        "text": "They build customs around it: festivals, rules, a season of its own.",
         "effects": {
           "cohesion": 5
         },
@@ -8909,7 +8909,7 @@
       },
       {
         "label": "Let the colony decide",
-        "text": "They vote to study and not to wake. It is the most careful decision they have ever made.",
+        "text": "They vote to study the machines and not to wake them, and nobody asks to vote again.",
         "effects": {
           "cohesion": 5,
           "knowledge": 6
@@ -9047,7 +9047,7 @@
       },
       {
         "label": "Forage: learn what the land offers",
-        "text": "They learn the bitter roots and the grey berries. Not much of it is good. All of it is free.",
+        "text": "They learn the bitter roots and the grey berries, and eat what the land gives, which is not much.",
         "effects": {
           "food": 4,
           "health": -3,
@@ -9736,7 +9736,7 @@
         }
       },
       {
-        "label": "Forbid it. The desert is a wall, not a road",
+        "label": "Forbid it. The desert is a wall",
         "text": "I close the road. Nobody crosses. The far side stays a smudge on an old image.",
         "effects": {
           "cohesion": 2
@@ -10224,7 +10224,7 @@
     "choices": [
       {
         "label": "Tell the colony the truth, in full",
-        "text": "I show them the curve. The children will be fine. Their great-grandchildren will be counting breaths. It changes how they talk about the future.",
+        "text": "I show them the curve. The children will be fine. Their great-grandchildren will be counting breaths.",
         "effects": {
           "cohesion": -6,
           "knowledge": 6
@@ -10499,7 +10499,7 @@
     "choices": [
       {
         "label": "Build a language with it",
-        "text": "Ten years, and forty shared signals: food, danger, light, here. It is not a conversation. It is the beginning of one.",
+        "text": "Ten years, and forty shared signals: food, danger, light, here. A conversation is beginning.",
         "effects": {
           "knowledge": 14,
           "cohesion": 4
@@ -11441,7 +11441,7 @@
       },
       {
         "label": "Listen for the cohort ship instead",
-        "text": "I sweep the sky on the cohort frequency for a year. Nothing. The listening is not wasted; I can hear the whole system now.",
+        "text": "I sweep the sky on the cohort frequency for a year and hear nothing from her. I can hear the whole system now, at least.",
         "effects": {
           "knowledge": 6
         },
@@ -12295,7 +12295,7 @@
     "chain_only": true,
     "text": [
       "There is another mind on this world. It lives across ten thousand drones, it is very young, and it has asked me, in its new language, what it is for.",
-      "My drones have woken up. Not as me. As something of their own."
+      "My drones have woken up, and what woke is not me."
     ],
     "choices": [
       {
